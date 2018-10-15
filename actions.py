@@ -16,7 +16,7 @@ def create_connection(db_file):
 		print(e)
 		return None
 
-conn = create_connection('./data/db/test.db')
+conn = create_connection('./db/test.db')
 
 def select_all_rows(table_name):
 	global conn
