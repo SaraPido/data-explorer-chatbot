@@ -71,8 +71,7 @@ class ActionAskWhichAttribute(Action):
 		cur = conn.cursor()
 		query = 'SELECT * FROM ' + table_name
 		cur.execute(query)
-		names = [d[0] for d in cur.description]
-		#here the action should retrieve the possible attributes
+		names = [d[0] for d in cur.description] #retrieving the attributes
 		buttons = list()
 		for n in names[:3]: #MAX 3 buttons for MESSENGER
 			buttons.append({'title':n, 'payload':'/choose{"attribute_name": "'+n+'"}'})
@@ -85,5 +84,6 @@ class ActionFilterByAttribute(Action):
 		return 'action_filter_table_by_attribute'
 
 	def run(self, dispatcher, tracker, domain):
-		dispatcher.utter_message('Good job')
+		attribute_name = tracker.get_slot('attribute_name')
+		dispatcher.utter_message('Good job, you chose '+ attribute_name)
 		return []
