@@ -39,8 +39,8 @@ class ActionViewAllTables(Action):
 		response = 'Which table to you want to look at?\n'
 		#here the action should retrieve the NAMES of the tables
 		buttons = [
-			{'title':'', 'payload':'/choose{"table_name": "Projects"}'},
-			{'title':'', 'payload':'/choose{"table_name": "Tasks"}'}
+			{'title':'Projects', 'payload':'/choose{"table_name": "Projects"}'},
+			{'title':'Tasks', 'payload':'/choose{"table_name": "Tasks"}'}
 		]
 		dispatcher.utter_button_message(response, buttons)
 		return []
