@@ -76,13 +76,16 @@ class ActionAskWhichAttribute(Action):
 		buttons = list()
 		for n in names:
 			buttons.append({'title':n, 'payload':'/choose{"attribute_name": "'+n+'"}'})
-		dispatcher.utter_button_message(response, buttons)
+		dispatcher.utter_message(response)
+		buttons_list = [buttons[i:i+3] for i in range(0,len(buttons),3)] #max 3 buttons at a time
+		for b_element in buttons_list:
+			dispatcher.utter_button_message('',b_element)
 		return []
 
 class ActionFilterByAttribute(Action):
 
 	def name(self):
-		return 'action_filter_by_attribute'
+		return 'action_filter_table_by_attribute'
 
 	def run(self, dispatcher, tracker, domain):
 		dispatcher.utter_message('Good job')
