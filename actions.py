@@ -66,7 +66,7 @@ class ActionAskWhichAttribute(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		table_name = tracker.get_slot('table_name')
-		response = 'So you want to filter the results of '+table_name+'. By which attribute?'
+		response = 'So you want to filter the results of '+table_name+'. By which attribute? ONLY 3 will be displayed because of Messenger... '
 		global conn
 		cur = conn.cursor()
 		query = 'SELECT * FROM ' + table_name
@@ -74,12 +74,9 @@ class ActionAskWhichAttribute(Action):
 		names = [d[0] for d in cur.description]
 		#here the action should retrieve the possible attributes
 		buttons = list()
-		for n in names:
+		for n in names[:3]: #MAX 3 buttons for MESSENGER
 			buttons.append({'title':n, 'payload':'/choose{"attribute_name": "'+n+'"}'})
-		dispatcher.utter_message(response)
-		buttons_list = [buttons[i:i+3] for i in range(0,len(buttons),3)] #max 3 buttons at a time
-		for b_element in buttons_list:
-			dispatcher.utter_button_message('',b_element)
+		dispatcher.utter_button_message(response,buttons)
 		return []
 
 class ActionFilterByAttribute(Action):
