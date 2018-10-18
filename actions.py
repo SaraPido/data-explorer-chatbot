@@ -36,7 +36,7 @@ class ActionViewAllTables(Action):
 		return 'action_view_all_tables'
 
 	def run(self, dispatcher, tracker, domain):
-		response = 'Which table to you want to look at?\n'
+		response = 'Which table to you want to look at?'
 		#here the action should retrieve the NAMES of the tables
 		buttons = [
 			{'title':'Projects', 'payload':'/choose{"table_name": "Projects"}'},
@@ -52,9 +52,38 @@ class ActionViewSpecificTable(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		table_name = tracker.get_slot('table_name')
-		response = 'Here all the rows of the table '+ table_name +':\n'
-		rows = select_all_rows(table_name)
+		response = 'Here all the rows of the table '+ table_name +':'
+		rows = list(select_all_rows(table_name))
 		for row in rows:
-			response = response + str(row) + '\n'
+			response = response + '\n' + str(row)
 		dispatcher.utter_message(response)
+		return []
+
+class ActionAskWhichAttribute(Action):
+
+	def name(self):
+		return 'action_ask_which_attribute'
+
+	def run(self, dispatcher, tracker, domain):
+		table_name = tracker.get_slot('table_name')
+		response = 'So you want to filter the results of '+table_name+'. By which attribute?'
+		global conn
+		cur = conn.cursor()
+		query = 'SELECT * FROM ' + table_name
+		cur.execute(query)
+		names = [d[0] for d in cur.description]
+		#here the action should retrieve the possible attributes
+		buttons = list()
+		for n in names:
+			buttons.append({'title':n, 'payload':'/choose{"attribute_name": "'+n+'"}'})
+		dispatcher.utter_button_message(response, buttons)
+		return []
+
+class ActionFilterByAttribute(Action):
+
+	def name(self):
+		return 'action_filter_by_attribute'
+
+	def run(self, dispatcher, tracker, domain):
+		dispatcher.utter_message('Good job')
 		return []
