@@ -1,3 +1,7 @@
+'''
+In order to start the actions server:
+python -m rasa_core_sdk.endpoint --actions actions -p 5055
+'''
 
 from __future__ import absolute_import
 from __future__ import division
@@ -26,6 +30,21 @@ def select_all_rows(table_name):
 	rows = cur.fetchall()
 	return rows
 
+class ActionViewAllTables(Action):
+
+	def name(self):
+		return 'action_view_all_tables'
+
+	def run(self, dispatcher, tracker, domain):
+		response = 'Which table to you want to look at?\n'
+		#here the action should retrieve the NAMES of the tables
+		buttons = [
+			{'title':'', 'payload':'/choose{"table_name": "Projects"}'},
+			{'title':'', 'payload':'/choose{"table_name": "Tasks"}'}
+		]
+		dispatcher.utter_button_message(response, buttons)
+		return []
+
 class ActionViewSpecificTable(Action):
 
 	def name(self):
@@ -33,7 +52,7 @@ class ActionViewSpecificTable(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		table_name = tracker.get_slot('table_name')
-		response = 'Here all the rows of the table '+ table_name +': ...\n'
+		response = 'Here all the rows of the table '+ table_name +':\n'
 		rows = select_all_rows(table_name)
 		for row in rows:
 			response = response + str(row) + '\n'
