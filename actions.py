@@ -66,7 +66,7 @@ class ActionAskWhichAttribute(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		table_name = tracker.get_slot('table_name')
-		response = 'So you want to filter the results of '+table_name+'. By which attribute? ONLY 3 will be displayed because of Messenger... '
+		response = 'So you want to filter the results of '+table_name+'. By which attribute?'
 		global conn
 		cur = conn.cursor()
 		query = 'SELECT * FROM ' + table_name
