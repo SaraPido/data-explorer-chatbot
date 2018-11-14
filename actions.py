@@ -10,20 +10,17 @@ from __future__ import unicode_literals
 from rasa_core_sdk import Action
 from rasa_core_sdk.events import SlotSet
 
-class ActionGetLessonsOfTeacherName(Action):
+import mysql.connector
 
-	def name(self):
-		return 'action_get_lessons_of_teacher_name'
+cnx = mysql.connector.connect(user='rasa', password='rasa', host='127.0.0.1', database='rasa_db')
 
-	def run(self, dispatcher, tracker, domain):
-		return [
-			SlotSet("teacher_id", 27),
-			SlotSet("lesson_list", [
-				{'id':0,'name':'Maths'},
-				{'id':1,'name':'Italian'},
-				{'id':2,'name':'I do not know'},
-			])
-		]
+def select(query):
+	global cnx
+	cursor = cnx.cursor()
+	cursor.execute(query)
+	return cursor.fetchall()
+
+#cnx.close()
 
 
 class ActionValidateTeacherName(Action):
@@ -33,8 +30,14 @@ class ActionValidateTeacherName(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		teacher_name = tracker.get_slot('teacher_name')
-		if teacher_name.lower() == 'nicola': #just to make an example
-			return [SlotSet("found_name", teacher_name)]
+		query = "SELECT id, name, surname FROM Teacher WHERE name = '"+teacher_name+"'"
+		rows = select(query)
+		if len(rows)==1:
+			row = rows[0]
+			return [
+				SlotSet("teacher_id", row[0]),
+				SlotSet("found_name", teacher_name)
+			]
 		print('I received invalid name: '+teacher_name)
 		return []
 
@@ -47,28 +50,68 @@ class ActionValidateLessonName(Action):
 		lesson_name = tracker.get_slot('lesson_name')
 		lesson_list = tracker.get_slot('lesson_list')
 		if lesson_list!=None and any(l['name'] == lesson_name for l in lesson_list):
-			return [SlotSet("found_name", lesson_name)]
+			return [
+				SlotSet("lesson_id", 21),
+				SlotSet("found_name", lesson_name)
+			]
 		return []
+
+
+class ActionGetLessonsOfTeacherName(Action):
+
+	def name(self):
+		return 'action_get_lessons_of_teacher_name'
+
+	def run(self, dispatcher, tracker, domain):
+
+		teacher_id = tracker.get_slot('teacher_id')
+		query = "SELECT * FROM Lesson WHERE teacher_id = '"+str(teacher_id)+"'"
+		rows = select(query)
+
+		#from a list of tuples to a list of dictionaries
+		lesson_list = list(map(lambda r: {'id':r[0], 'name':r[1]} , rows))
+		print(str(lesson_list))
+
+		return [SlotSet("lesson_list", lesson_list)]
+
+class ActionGetTimetablesOfLessonName(Action):
+
+	def name(self):
+		return 'action_get_timetables_of_lesson_name'
+
+	def run(self, dispatcher, tracker, domain):
+
+		## here it should get the lesson_id from the tracker
+		## and then perform the query
+
+		return [
+			SlotSet("timetable_list", [
+				{'id':19,'day':'Monday', 'from':'11.30', 'to':'12.30'},
+				{'id':20,'day':'Wednesday', 'from':'10.30', 'to':'11.30'},
+				{'id':21,'day':'Thursday', 'from':'08.30', 'to':'10.00'},
+			])
+		]
+
+class ActionGetClassOfLessonName(Action):
+
+	def name(self):
+		return 'action_get_class_of_lesson_name'
+
+	def run(self, dispatcher, tracker, domain):
+
+		## here it should get the lesson_id from the tracker
+		## and then perform the query
+
+		return [
+			SlotSet("class_id",2),
+			SlotSet("class_name", "2^A")
+		]
 
 class ActionResetFoundName(Action):
 	def name(self):
 		return 'action_reset_found_name'
 	def run(self, dispatcher, tracker, domain):
 		return [SlotSet("found_name", None)]
-
-
-class ActionGetButtonsOfLessonList(Action):
-
-	def name(self):
-		return 'action_get_buttons_of_lesson_list'
-
-	def run(self, dispatcher, tracker, domain):
-		lesson_list = tracker.get_slot('lesson_list')
-		create_button = lambda e: {'title':e['name'], 'payload':'/choose{"lesson_name": "'+e['name']+'"}'}
-		buttons = list(map(create_button, lesson_list))
-		dispatcher.utter_button_message('',buttons)
-		return []
-
 
 
 
