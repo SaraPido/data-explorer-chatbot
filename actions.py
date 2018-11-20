@@ -11,6 +11,9 @@ from rasa_core_sdk import Action
 from rasa_core_sdk.events import SlotSet
 from rasa_core_sdk.forms import FormAction
 
+
+''' DATABSE HANDLERS '''
+
 import mysql.connector
 
 cnx = mysql.connector.connect(user='rasa', password='rasa', host='127.0.0.1', database='rasa_db')
@@ -23,17 +26,27 @@ def select(query):
 
 #cnx.close()
 
+
+''' CONTEXT LIST HANDLERS '''
+
 def get_element_from_context_list(element_name, context_list):
 	element = next(filter(lambda el: el['type']==element_name, context_list), None)
 	if element!= None:
 		return element['value']
-	else: return None
-
+	else:
+		return None
 
 def add_element_to_context_list(element, element_name, context_list):
 	context_list.append({'type':element_name, 'value':element})
 	print('\n *** Element '+element_name+' has been added to the context_list ***')
 	print_context_list(context_list)
+
+def pop_element_and_leaves_from_context_list(element_name, context_list):
+	size = len(context_list)
+	index = next((i for i,v in enumerate(context_list) if v['type']==element_name), size)
+	del context_list[index:]
+	if index!= size:
+		print('\n *** Element '+element_name+' and its leaves has been deleted from the context_list *** \n')
 
 def print_context_list(lis):
 	sep = ' * '
@@ -46,12 +59,10 @@ def print_context_list(lis):
 				print(sep + '- ' + str(obj))
 	print()
 
-def pop_element_and_leaves_from_context_list(element_name, context_list):
-	size = len(context_list)
-	index = next((i for i,v in enumerate(context_list) if v['type']==element_name), size)
-	del context_list[index:]
-	if index!= size:
-		print('\n *** Element '+element_name+' and its leaves has been deleted from the context_list *** \n')
+
+''' ACTIONS '''
+
+''' Validate '''
 
 class ActionValidateTeacherName(Action):
 
@@ -60,33 +71,49 @@ class ActionValidateTeacherName(Action):
 
 	def run(self, dispatcher, tracker, domain):
 
-		teacher_name = tracker.get_slot('teacher_name')
+		context_list = tracker.get_slot('context_list')
 
-		query = "SELECT id, name, surname FROM Teacher WHERE name = '"+teacher_name+"'"
-		rows = select(query)
+		teacher_name = next(tracker.get_latest_entity_values('teacher_name'), None)
 
-		if len(rows)==1:
-			row = rows[0]
+		if teacher_name!=None:
+			query = "SELECT id, name, surname FROM Teacher WHERE name = '"+teacher_name+"'"
+			rows = select(query)
 
-			#TESTING, now i am APPENDING the teacher in ANY case
-			context_list = tracker.get_slot('context_list')
-			# do I really need this one? Isn't it already initialized in rasa core?
-			if context_list == None: context_list = list()
+			if len(rows)==1:
+				row = rows[0]
 
-			## TEST: now I just want to empty the context_list if there is already a teacher
-			## because I assume I am "exiting" the contest
-			pop_element_and_leaves_from_context_list('teacher',context_list)
+				#TESTING, now i am APPENDING the teacher in ANY case
+				## TEST: now I just want to empty the context_list if there is already a teacher
+				## because I assume I am "exiting" the contest
+				pop_element_and_leaves_from_context_list('teacher',context_list)
+				add_element_to_context_list({'id':row[0], 'name':row[1], 'surname':row[2]},'teacher', context_list)
 
-			add_element_to_context_list({'id':row[0], 'name':row[1], 'surname':row[2]},'teacher', context_list)
+				return [
+					SlotSet('found_name', True),
+					SlotSet('context_list', context_list)
+				]
 
-			return [
-				SlotSet('found_name', teacher_name),
-				SlotSet('context_list', context_list)
-			]
+			else:
+				print('I received invalid name: '+teacher_name)
 
-		print('I received invalid name: '+teacher_name)
+		else:
 
-		return [SlotSet('found_name', None)]
+			print('\n ** NO entity teacher_name has been extracted :( **\n')
+
+			teacher = get_element_from_context_list('teacher', context_list)
+			if teacher!=None:
+
+				pop_element_and_leaves_from_context_list('teacher',context_list)
+				add_element_to_context_list('teacher', teacher, context_list)
+
+
+				return [
+					SlotSet('teacher_name', teacher['name']),
+					SlotSet('found_name', True),
+					SlotSet('context_list', context_list)
+				]
+
+		return [SlotSet('found_name', False)]
 
 
 class ActionValidateLessonName(Action):
@@ -95,25 +122,47 @@ class ActionValidateLessonName(Action):
 		return 'action_validate_lesson_name'
 
 	def run(self, dispatcher, tracker, domain):
-		lesson_name = tracker.get_slot('lesson_name')
+
+		lesson_name = next(tracker.get_latest_entity_values('lesson_name'), None)
 
 		context_list = tracker.get_slot('context_list')
-		lesson_list = get_element_from_context_list('lesson_list', context_list)
 
-		if lesson_list!=None:
-			lesson = next(filter(lambda l: l['name']==lesson_name, lesson_list), None)
+		if lesson_name!=None:
+			lesson_list = get_element_from_context_list('lesson_list', context_list)
+
+			if lesson_list!=None:
+				lesson = next(filter(lambda l: l['name']==lesson_name, lesson_list), None)
+				if lesson!=None:
+
+					pop_element_and_leaves_from_context_list('lesson',context_list)
+					add_element_to_context_list(lesson,'lesson', context_list)
+
+					return [
+						SlotSet("found_name", True),
+						SlotSet('context_list', context_list)
+					]
+		else:
+
+			lesson = get_element_from_context_list('lesson', context_list)
+
+			print_context_list(context_list)
 			if lesson!=None:
 
 				pop_element_and_leaves_from_context_list('lesson',context_list)
 				add_element_to_context_list(lesson,'lesson', context_list)
 
+				print('\nI will return found_name == True...\n')
+
 				return [
-					SlotSet('context_list', context_list),
-					SlotSet("found_name", lesson_name)
+					SlotSet("lesson_name", lesson['name']),
+					SlotSet('found_name', True),
+					SlotSet('context_list', context_list)
 				]
 
-		return [SlotSet('found_name', None)]
+		return [SlotSet('found_name', False)]
 
+
+''' Getters '''
 
 class ActionGetLessonsOfTeacherName(Action):
 
@@ -135,6 +184,10 @@ class ActionGetLessonsOfTeacherName(Action):
 		pop_element_and_leaves_from_context_list('lesson_list',context_list)
 
 		add_element_to_context_list(lesson_list, 'lesson_list', context_list)
+
+		#What if only one lesson is returned? can i jump the step of the list? let us see..
+		if len(lesson_list) == 1:
+			add_element_to_context_list(lesson_list[0], 'lesson', context_list)
 
 		return [
 			SlotSet('context_list',context_list),
@@ -183,46 +236,14 @@ class ActionGetClassOfLessonName(Action):
 		L.id = '"+str(lesson_id)+"' AND L.class_id = C.id"
 
 		rows = select(query)
+		r = rows[0]
+		clazz = {'id':r[0], 'name':r[1]}
 
-		row = rows[0]
+		pop_element_and_leaves_from_context_list('class',context_list)
+		add_element_to_context_list(clazz,'class',context_list)
+
+
 		return [
-			SlotSet("class_id", row[0]),
-			SlotSet("class_name", row[1])
+			SlotSet("context_list", context_list),
+			SlotSet("class_name", clazz['name'])
 		]
-
-
-class ActionResetFoundName(Action):
-	def name(self):
-		return 'action_reset_found_name'
-	def run(self, dispatcher, tracker, domain):
-		return [SlotSet("found_name", None)]
-
-
-
-'''
-
-The forms can be used to ask the user slots he did not fill
-The problem is that maybe there is the need to define actions to handle the case,
-for instance, of "utter_ask_teacher_name" and a different story for itself.
-Maybe I only need to raise an exception from here to guide the conversation,
-for instance by fallbacking it
-
-'''
-
-
-
-
-'''
-class ActionViewAllTables(Action):
-	def name(self):
-		return 'action_view_all_tables'
-	def run(self, dispatcher, tracker, domain):
-		response = 'Which table to you want to look at?'
-		#here the action should retrieve the NAMES of the tables
-		buttons = [
-			{'title':'Projects', 'payload':'/choose{"table_name": "Projects"}'},
-			{'title':'Tasks', 'payload':'/choose{"table_name": "Tasks"}'}
-		]
-		dispatcher.utter_button_message(response, buttons)
-		return []
-'''
