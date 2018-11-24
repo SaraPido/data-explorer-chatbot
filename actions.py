@@ -15,8 +15,10 @@ from rasa_core_sdk.forms import FormAction
 ''' DATABASE HANDLERS '''
 
 import mysql.connector
+#import psycopg2
 
 cnx = mysql.connector.connect(user='rasa', password='rasa', host='127.0.0.1', database='rasa_db')
+#cnx = psycopg2.connect("host='localhost' dbname='rasa_db' user='rasa' password='rasa'")
 
 def select(query):
 	global cnx
