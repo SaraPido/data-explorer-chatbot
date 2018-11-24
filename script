@@ -1,2 +1,12 @@
 #! /bin/bash
-python3 -m rasa_core_sdk.endpoint --actions actions -p 5055
+if [ $# -eq 1 ]
+then
+  if [ $1 == "2" ]
+  then
+    python3 -m rasa_core_sdk.endpoint --actions actions_2 -p 5055
+  else
+    echo "Pass '2' to run actions_2"
+  fi
+else
+  python3 -m rasa_core_sdk.endpoint --actions actions -p 5055
+fi
