@@ -12,7 +12,7 @@ from rasa_core_sdk.events import SlotSet
 from rasa_core_sdk.forms import FormAction
 
 
-''' DATABSE HANDLERS '''
+''' DATABASE HANDLERS '''
 
 import mysql.connector
 
@@ -48,6 +48,9 @@ def pop_element_and_leaves_from_context_list(element_name, context_list):
 	if index!= size:
 		print('\n *** Element '+element_name+' and its leaves has been deleted from the context_list *** \n')
 
+
+''' PRINTER '''
+
 def print_context_list(lis):
 	sep = ' * '
 	for el in lis:
@@ -72,48 +75,63 @@ class ActionValidateTeacherName(Action):
 	def run(self, dispatcher, tracker, domain):
 
 		context_list = tracker.get_slot('context_list')
-
 		teacher_name = next(tracker.get_latest_entity_values('teacher_name'), None)
+		found = False
 
+		# IF the name of the element has been extracted
 		if teacher_name!=None:
 			query = "SELECT id, name, surname FROM Teacher WHERE name = '"+teacher_name+"'"
 			rows = select(query)
 
+			# IF the element actually exists in the database
 			if len(rows)==1:
 				row = rows[0]
-
-				#TESTING, now i am APPENDING the teacher in ANY case
-				## TEST: now I just want to empty the context_list if there is already a teacher
-				## because I assume I am "exiting" the contest
 				pop_element_and_leaves_from_context_list('teacher',context_list)
 				add_element_to_context_list({'id':row[0], 'name':row[1], 'surname':row[2]},'teacher', context_list)
+				found = True
 
-				return [
-					SlotSet('found_name', True),
-					SlotSet('context_list', context_list)
-				]
+			# (ELSE) IF the element does NOT exist in the database
+			else: teacher_name = ""
 
-			else:
-				print('I received invalid name: '+teacher_name)
-
-		else:
-
-			print('\n ** NO entity teacher_name has been extracted :( **\n')
-
-			teacher = get_element_from_context_list('teacher', context_list)
-			if teacher!=None:
-
-				pop_element_and_leaves_from_context_list('teacher',context_list)
-				add_element_to_context_list('teacher', teacher, context_list)
+		return [
+			SlotSet('found', found),
+			SlotSet('context_list', context_list),
+			SlotSet('teacher_name', teacher_name)
+		]
 
 
-				return [
-					SlotSet('teacher_name', teacher['name']),
-					SlotSet('found_name', True),
-					SlotSet('context_list', context_list)
-				]
+class ActionValidateClassName(Action):
 
-		return [SlotSet('found_name', False)]
+	def name(self):
+		return 'action_validate_class_name'
+
+	def run(self, dispatcher, tracker, domain):
+
+		context_list = tracker.get_slot('context_list')
+		class_name = next(tracker.get_latest_entity_values('class_name'), None)
+		found = False
+
+		# IF the name of the element has been extracted
+		if class_name!=None:
+			query = "SELECT id, name FROM Class WHERE name = '"+class_name+"'"
+			rows = select(query)
+
+			# IF the element actually exists in the database
+			if len(rows)==1:
+				row = rows[0]
+				pop_element_and_leaves_from_context_list('class',context_list)
+				add_element_to_context_list({'id':row[0], 'name':row[1]},'class', context_list)
+				found = True
+
+			# (ELSE) IF the element does NOT exist in the database
+			else: class_name = ""
+
+		return [
+			SlotSet('found', found),
+			SlotSet('context_list', context_list),
+			SlotSet('class_name', class_name)
+		]
+
 
 
 class ActionValidateLessonName(Action):
@@ -138,7 +156,7 @@ class ActionValidateLessonName(Action):
 					add_element_to_context_list(lesson,'lesson', context_list)
 
 					return [
-						SlotSet("found_name", True),
+						SlotSet("found", True),
 						SlotSet('context_list', context_list)
 					]
 		else:
@@ -151,18 +169,54 @@ class ActionValidateLessonName(Action):
 				pop_element_and_leaves_from_context_list('lesson',context_list)
 				add_element_to_context_list(lesson,'lesson', context_list)
 
-				print('\nI will return found_name == True...\n')
+				print('\nI will return found == True...\n')
 
 				return [
 					SlotSet("lesson_name", lesson['name']),
-					SlotSet('found_name', True),
+					SlotSet('found', True),
 					SlotSet('context_list', context_list)
 				]
 
-		return [SlotSet('found_name', False)]
+		return [SlotSet('found', False)]
 
 
 ''' Getters '''
+
+
+def get_element_by_name_from_db(element_name, table_name):
+	query = "SELECT * FROM "+table_name+" WHERE name = '"+element_name+"'"
+	rows = select(query)
+	# IF the element actually exists in the database
+	if len(rows)==1: return rows[0]
+	else: return None
+
+def get_related_element_list_from_db(element_name, table_name):
+	query = "SELECT * FROM "+table_name+" WHERE name = '"+element_name+"'"
+	rows = select(query)
+	# IF the element actually exists in the database
+	if len(rows)==1: return rows[0]
+	else: return None
+
+
+class ActionGetLessons(Action):
+
+	def name(self):
+		return 'action_get_lessons'
+
+	def run(self, dispatcher, tracker, domain):
+
+		context_list = tracker.get_slot('context_list')
+		lesson_list = get_element_from_context_list('lesson_list', context_list)
+
+		if lesson_list == None:
+			return [SlotSet('found', False)]
+
+		else:
+			return [
+				SlotSet('found', True),
+				SlotSet('context_list',context_list),
+				SlotSet('lesson_name_list','\n'.join(map(lambda l:l['name'],lesson_list)))
+			]
 
 class ActionGetLessonsOfTeacherName(Action):
 
@@ -182,7 +236,35 @@ class ActionGetLessonsOfTeacherName(Action):
 		lesson_list = list(map(lambda r: {'id':r[0], 'name':r[1]} , rows))
 
 		pop_element_and_leaves_from_context_list('lesson_list',context_list)
+		add_element_to_context_list(lesson_list, 'lesson_list', context_list)
 
+		#What if only one lesson is returned? can i jump the step of the list? let us see..
+		if len(lesson_list) == 1:
+			add_element_to_context_list(lesson_list[0], 'lesson', context_list)
+
+		return [
+			SlotSet('context_list',context_list),
+			SlotSet('lesson_name_list','\n'.join(map(lambda l:l['name'],lesson_list)))
+		]
+
+class ActionGetLessonsOfClassName(Action):
+
+	def name(self):
+		return 'action_get_lessons_of_class_name'
+
+	def run(self, dispatcher, tracker, domain):
+
+		context_list = tracker.get_slot('context_list')
+		class_ = get_element_from_context_list('class', context_list)
+		class_id = class_['id']
+
+		query = "SELECT * FROM Lesson WHERE class_id = '"+str(class_id)+"'"
+		rows = select(query)
+
+		#from a list of tuples to a list of dictionaries
+		lesson_list = list(map(lambda r: {'id':r[0], 'name':r[1]} , rows))
+
+		pop_element_and_leaves_from_context_list('lesson_list',context_list)
 		add_element_to_context_list(lesson_list, 'lesson_list', context_list)
 
 		#What if only one lesson is returned? can i jump the step of the list? let us see..
