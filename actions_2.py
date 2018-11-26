@@ -20,7 +20,7 @@ import mysql.connector
 cnx = mysql.connector.connect(user='rasa', password='rasa', host='127.0.0.1', database='rasa_db')
 #cnx = psycopg2.connect("host='localhost' dbname='rasa_db' user='rasa' password='rasa'")
 
-def select(query):
+def query_select(query):
 	global cnx
 	cursor = cnx.cursor()
 	cursor.execute(query)
@@ -36,6 +36,14 @@ def get_element_from_context_list(element_type):
 	element = next(filter(lambda el: el['type']==element_type, context_list), None)
 	if element!= None:
 		return element['value']
+	else:
+		return None
+
+def get_last_element_from_context_list():
+	''' It also returns the type '''
+	global context_list
+	if context_list!= []:
+		return context_list[-1]
 	else:
 		return None
 
@@ -70,12 +78,16 @@ def print_context_list(lis):
 
 ### TODO: parametrize the most of it!
 table_properties = [
-	{'type':'teacher', 'columns':['id','name','surname'], 'id':['id'], 'word':['name','surname']},
+	{'type':'teacher', 'columns':['id','name','surname','telephone','email'], 'id':['id'], 'word':['name','surname']},
 	{'type':'lesson', 'columns':['id','name','class_id','teacher_id'], 'id':['id'], 'word':['name']},
 	{'type':'class', 'columns':['id','name'], 'id':['id'], 'word':['name']}
 ]
 
 ''' HELPERS '''
+
+def get_element_columns(element_type):
+	element = next(filter(lambda el: el['type']==element_type, table_properties), None)
+	return element['columns']
 
 def get_element_word_columns(element_type):
 	element = next(filter(lambda el: el['type']==element_type, table_properties), None)
@@ -93,7 +105,7 @@ def select_on_word(element_type, word):
 		#if not the last column
 		if i!= len(columns)-1:
 			query_string += " OR "
-	res = select(query_string)
+	res = query_select(query_string)
 	if len(res)>0: return res
 	else: return None
 
@@ -113,12 +125,22 @@ def find_element_by_word(element_type, word):
 		return element_list
 	else: return None
 
-def get_result_message(element_type, element_list):
+def get_message_word_list(element_type, element_list):
 	message = 'Results:\n'
 	word_columns = get_element_word_columns(element_type)
 	for i,e in enumerate(element_list):
 		message += '- '
 		message += ' '.join(e[x] for x in word_columns)
+		if i == len(e)-1: message += '\n'
+	return message
+
+def get_message_word_and_attribute_list(element_type, element_list, attribute_type):
+	message = 'Results for {'+attribute_type+'}:\n'
+	word_columns = get_element_word_columns(element_type)
+	for i,e in enumerate(element_list):
+		message += '- '
+		message += ' '.join(e[x] for x in word_columns)
+		message += ': '+ str(e[attribute_type])
 		if i == len(e)-1: message += '\n'
 	return message
 
@@ -131,25 +153,40 @@ def reset_context_list():
 def run_action_find_element_by_word(self, dispatcher, tracker, domain, element_type):
 
 	word = next(tracker.get_latest_entity_values('word'), None)
-
 	# when a "find" action gets called, the context list is reset
 	reset_context_list()
 
 	if word != None:
-
 		element_list = find_element_by_word(element_type, word)
-
 		if element_list==None:
 			message = 'Nothing has been found with: '+ word
 		else:
-			message = get_result_message(element_type, element_list)
-
+			message = get_message_word_list(element_type, element_list)
 	else:
 		message = "No word entity has been received..."
-
 	dispatcher.utter_message(message)
 
 	return []
+
+def run_action_view_element_id(self, dispatcher, tracker, domain, attribute_type):
+	element = get_last_element_from_context_list()
+	if element!= None:
+		type = element['type']
+		value_list = element['value']
+		if type.endswith('_list'):
+			type = type[:-5]
+		else:
+			value_list = [value_list]
+		if attribute_type in get_element_columns(type):
+			message = get_message_word_and_attribute_list(type, value_list, attribute_type)
+		else:
+			message = 'The specified attribute is not part of '+ type
+	else:
+		message = 'Problems with the context list here...'
+	dispatcher.utter_message(message)
+	return []
+
+''' find element '''
 
 class A1(Action):
 	def name(self):
@@ -168,6 +205,26 @@ class A3(Action):
 		return 'action_find_class_by_word'
 	def run(self, dispatcher, tracker, domain):
 		return run_action_find_element_by_word(self, dispatcher, tracker, domain, 'class')
+
+''' view table properties '''
+
+class A4(Action):
+	def name(self):
+		return 'action_view_element_id'
+	def run(self, dispatcher, tracker, domain):
+		return run_action_view_element_id(self, dispatcher, tracker, domain, 'id')
+
+class A5(Action):
+	def name(self):
+		return 'action_view_element_telephone'
+	def run(self, dispatcher, tracker, domain):
+		return run_action_view_element_id(self, dispatcher, tracker, domain, 'telephone')
+
+class A6(Action):
+	def name(self):
+		return 'action_view_element_email'
+	def run(self, dispatcher, tracker, domain):
+		return run_action_view_element_id(self, dispatcher, tracker, domain, 'email')
 
 # context_list
 reset_context_list()
