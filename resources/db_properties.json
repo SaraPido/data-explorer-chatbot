@@ -1,0 +1,70 @@
+[
+  {
+    "type":"teacher",
+    "column_list":["id", "name", "surname", "telephone", "email"],
+    "id": ["id"],
+    "word_list": ["name", "surname"],
+    "relation_list": [
+      {
+        "table": "lesson",
+        "from": "id",
+        "to": "teacher_id",
+        "by": ""
+      }
+    ]
+  },
+  {
+    "type":"lesson",
+    "column_list":["id", "name", "class_id", "teacher_id"],
+    "id": ["id"],
+    "word_list": ["name"],
+    "relation_list": [
+      {
+        "table": "teacher",
+        "from": "teacher_id",
+        "to": "id",
+        "by": ""
+      },
+      {
+        "table": "class",
+        "from": "class_id",
+        "to": "id",
+        "by": ""
+      },
+      {
+        "table": "timetables",
+        "from": "id",
+        "to": "lesson_id",
+        "by": ""
+      }
+    ]
+  },
+  {
+    "type":"class",
+    "column_list": ["id", "name"],
+    "id": ["id"],
+    "word_list": ["name"],
+    "relation_list": [
+      {
+        "table": "lesson",
+        "from": "id",
+        "to": "class_id",
+        "by": ""
+      }
+    ]
+  },
+  {
+    "type":"timetables",
+    "column_list":["id", "day", "from_time", "to_time", "lesson_id"],
+    "id": ["id"],
+    "word_list": [],
+    "relation_list": [
+      {
+        "table": "lesson",
+        "from": "lesson_id",
+        "to": "id",
+        "by": ""
+      }
+    ]
+  }
+]
