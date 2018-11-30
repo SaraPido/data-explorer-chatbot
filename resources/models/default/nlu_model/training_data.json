@@ -1,0 +1,325 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "greet",
+        "text": "hey"
+      },
+      {
+        "intent": "greet",
+        "text": "hello"
+      },
+      {
+        "intent": "greet",
+        "text": "hi"
+      },
+      {
+        "intent": "greet",
+        "text": "good morning"
+      },
+      {
+        "intent": "greet",
+        "text": "good evening"
+      },
+      {
+        "intent": "greet",
+        "text": "hey there"
+      },
+      {
+        "intent": "goodbye",
+        "text": "bye"
+      },
+      {
+        "intent": "goodbye",
+        "text": "goodbye"
+      },
+      {
+        "intent": "goodbye",
+        "text": "see you around"
+      },
+      {
+        "intent": "goodbye",
+        "text": "see you later"
+      },
+      {
+        "intent": "goodbye",
+        "text": "see ya"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 11,
+            "end": 15,
+            "value": "Luca",
+            "entity": "user_name"
+          }
+        ],
+        "text": "my name is Luca"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 26,
+            "end": 34,
+            "value": "Giovanni",
+            "entity": "user_name"
+          }
+        ],
+        "text": "can you change my name in Giovanni?"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 22,
+            "end": 27,
+            "value": "fabio",
+            "entity": "user_name"
+          }
+        ],
+        "text": "I want you to call me fabio"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 11,
+            "end": 15,
+            "value": "jeff",
+            "entity": "user_name"
+          }
+        ],
+        "text": "my name is jeff"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 11,
+            "value": "George",
+            "entity": "user_name"
+          }
+        ],
+        "text": "i am George"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "pippo",
+            "entity": "user_name"
+          }
+        ],
+        "text": "I am pippo"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 8,
+            "end": 13,
+            "value": "mario",
+            "entity": "user_name"
+          }
+        ],
+        "text": "call me mario"
+      },
+      {
+        "intent": "change_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "claudio",
+            "entity": "user_name"
+          }
+        ],
+        "text": "i am claudio"
+      },
+      {
+        "intent": "find_teacher_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 19,
+            "value": "Nicola",
+            "entity": "word"
+          }
+        ],
+        "text": "find teacher Nicola"
+      },
+      {
+        "intent": "find_teacher_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 19,
+            "value": "Matteo",
+            "entity": "word"
+          }
+        ],
+        "text": "find teacher Matteo"
+      },
+      {
+        "intent": "find_teacher_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 22,
+            "value": "Mandolino",
+            "entity": "word"
+          }
+        ],
+        "text": "find teacher Mandolino"
+      },
+      {
+        "intent": "find_teacher_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 20,
+            "value": "Simpson",
+            "entity": "word"
+          }
+        ],
+        "text": "find teacher Simpson"
+      },
+      {
+        "intent": "find_lesson_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 18,
+            "value": "Maths",
+            "entity": "word"
+          }
+        ],
+        "text": "find lessson Maths"
+      },
+      {
+        "intent": "find_lesson_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 22,
+            "value": "Geography",
+            "entity": "word"
+          }
+        ],
+        "text": "find lessson Geography"
+      },
+      {
+        "intent": "find_lesson_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 20,
+            "value": "Italian",
+            "entity": "word"
+          }
+        ],
+        "text": "find lessson Italian"
+      },
+      {
+        "intent": "find_lesson_by_word",
+        "entities": [
+          {
+            "start": 13,
+            "end": 19,
+            "value": "French",
+            "entity": "word"
+          }
+        ],
+        "text": "find lessson French"
+      },
+      {
+        "intent": "find_class_by_word",
+        "entities": [
+          {
+            "start": 11,
+            "end": 14,
+            "value": "1^A",
+            "entity": "word"
+          }
+        ],
+        "text": "find class 1^A"
+      },
+      {
+        "intent": "find_class_by_word",
+        "entities": [
+          {
+            "start": 11,
+            "end": 14,
+            "value": "3^B",
+            "entity": "word"
+          }
+        ],
+        "text": "find class 3^B"
+      },
+      {
+        "intent": "find_class_by_word",
+        "entities": [
+          {
+            "start": 11,
+            "end": 14,
+            "value": "2^A",
+            "entity": "word"
+          }
+        ],
+        "text": "find class 2^A"
+      },
+      {
+        "intent": "find_class_by_word",
+        "entities": [
+          {
+            "start": 11,
+            "end": 14,
+            "value": "1^C",
+            "entity": "word"
+          }
+        ],
+        "text": "find class 1^C"
+      },
+      {
+        "intent": "view_element_column_list",
+        "text": "view columns"
+      },
+      {
+        "intent": "view_element_column_list",
+        "text": "columns"
+      },
+      {
+        "intent": "view_element_id",
+        "text": "view id"
+      },
+      {
+        "intent": "view_element_id",
+        "text": "id"
+      },
+      {
+        "intent": "view_element_telephone",
+        "text": "view telephone"
+      },
+      {
+        "intent": "view_element_telephone",
+        "text": "telephone"
+      },
+      {
+        "intent": "view_element_email",
+        "text": "view email"
+      },
+      {
+        "intent": "view_element_email",
+        "text": "email"
+      }
+    ],
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": []
+  }
+}
