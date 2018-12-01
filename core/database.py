@@ -23,15 +23,16 @@ def query_select_on_word(element_type, word):
     :param word:
     :return: dictionary representing the row
     """
-    query_string = "SELECT * FROM " + get_element_table_name(element_type) + " "
-    word_list = get_element_word_list(element_type)
+    el_properties = get_element_properties(element_type)
+    query_string = "SELECT * FROM {} ".format(el_properties['table_name'])
+    word_list = el_properties['word_list']
     if word_list:
         query_string += "WHERE "
         query_string += " OR ".join(["{}=%s".format(w_col) for w_col in word_list])
         rows = query_select(query_string, tuple([word] * len(word_list)))
         return decorate_rows(element_type, rows)
     else:
-        pass # todo: error/exception
+        pass  # todo: error/exception
 
 
 def decorate_rows(element_type, rows):
@@ -54,27 +55,7 @@ def load_db_properties(db_properties_path):
     # logger.info(pformat(db_properties))
 
 
-def get_element_column_list(element_type):
-    return get_element_from_type(element_type)['column_list']
-
-
-def get_element_word_list(element_type):
-    return get_element_from_type(element_type)['word_list']
-
-
-def get_element_table_name(element_type):
-    return get_element_from_type(element_type)['table_name']
-
-
-def get_element_foreign_key_list(element_type):
-    return get_element_from_type(element_type)['foreign_key_list']
-
-
-def get_element_relation_list(element_type):
-    return get_element_from_type(element_type)['relation_list']
-
-
-def get_element_from_type(element_type):
+def get_element_properties(element_type):
     return next(filter(lambda el: el['type'] == element_type, db_properties), None)
 
 

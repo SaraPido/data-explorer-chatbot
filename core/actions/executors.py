@@ -4,11 +4,11 @@ from server.core import database
 from server.core import context
 from server.core.actions import messages
 
-
-
+logger = logging.getLogger(__name__)
 
 
 # Helpers
+
 
 def find_element_by_word(element_type, word):
     element_list = database.query_select_on_word(element_type, word)
@@ -18,7 +18,7 @@ def find_element_by_word(element_type, word):
             context.add_element_to_context_list(element_type, element_list[0])
         return element_list
     else:
-        return None # todo: error/exception
+        return None  # todo: error/exception
 
 
 def get_element_type_and_value_list(element):
@@ -32,48 +32,47 @@ def get_element_type_and_value_list(element):
     return element_type, value_list
 
 
+def get_element_attribute_list(element_type):
+    """
+    This method returns the list of attributes can be directly asked by the user,
+    it removes the list of "word" since that parameter is always present.
+
+    :param element_type: the string representing the type of the element
+    :return: the list of string representing the attributes
+    """
+    el_properties = database.get_element_properties(element_type)
+    attribute_list = [e for e in el_properties['column_list'] if
+                      e not in el_properties['foreign_key_list'] and
+                      e not in el_properties['word_list']]
+    attribute_list.extend([e['type'] for e in el_properties['relation_list']])
+    return attribute_list
+
+
 #
 
 #
 
 # Actions
 
-
-def run_action_find_element_by_word(self, dispatcher, tracker, domain, element_type):
-    word = next(tracker.get_latest_entity_values('word'), None)
-
-    # when a "find" action gets called, the context list is reset
-    context.reset_context_list()
-
-    if word:
-        element_list = find_element_by_word(element_type, word)
-        if not element_list:
-            message = 'Nothing has been found with: ' + word
-        else:
-            message = 'Here the results for {}:\n'.format(element_type)
-            message += messages.get_message_word_list(element_type, element_list)
-    else:
-        message = "No words entity has been received..."
-    dispatcher.utter_message(message)
-
-    return []
-
-
 # todo: maybe all this way....
 def action_find_element_by_word(element_type, word):
+    logger.info('Executing "action_find_element_by_word"')
+    message = None
+    buttons = []
+
     # when a "find" action gets called, the context list is reset
     context.reset_context_list()
 
     if word:
         element_list = find_element_by_word(element_type, word)
         if not element_list:
-            message = 'Nothing has been found with: ' + word
+            message = 'Nothing has been found with {} {}'.format(element_type, word)
         else:
-            message = 'Here the results for {}:\n'.format(element_type)
+            message = 'Here the results for {} {}:\n'.format(element_type, word)
             message += messages.get_message_word_list(element_type, element_list)
     else:
-        message = "No words entity has been received..."
-    return {'response': message}
+        message = "No word entity has been received..."
+    return {'message': message, 'buttons': buttons}
 
 
 # todo: maybe all this way....
@@ -82,68 +81,39 @@ def action_view_element_column_list():
     If the context_list is not empty, it generates BUTTONS
     for the available columns to the user
     """
+    logger.info('Executing "action_view_element_column_list"')
+    message = None
+    buttons = []
+
     element = context.get_last_element_from_context_list()
     buttons = []
     if element:
         message = 'Click the desired column:'
         type_, value_list = get_element_type_and_value_list(element)
-        column_list = database.get_element_column_list(type_)
-        # little trick to remove 'word' columns from the available
-        word_list = database.get_element_word_list(type_)
-        column_list = [e for e in column_list if e not in word_list]
-        foreign_key_list = database.get_element_foreign_key_list(type_)
-        relation_list = database.get_element_relation_list(type_)
-        for col in column_list:
-            if col not in foreign_key_list:
-                buttons.append({'title': col, 'payload': '/view_element_' + col})
-        for rel in relation_list:
-            buttons.append({'title': rel['type'], 'payload': '/view_element_' + rel['type']})
+        for e in get_element_attribute_list(type_):
+            buttons.append({'title': e, 'payload': '/view_element_' + e})
     else:
         message = 'The context_list is empty!'
-    return {'response': message, 'buttons': buttons}
+    return {'message': message, 'buttons': buttons}
 
 
-
-def run_action_view_element_column_list(self, dispatcher, tracker, domain):
-    """
-    If the context_list is not empty, it generates BUTTONS
-    for the available columns to the user
-    """
-    element = context.get_last_element_from_context_list()
+def action_view_element_attribute(attribute):
+    logger.info('Executing "action_view_element_attribute"')
+    message = None
     buttons = []
-    if element:
-        message = 'Click the desired column:'
-        type_, value_list = get_element_type_and_value_list(element)
-        column_list = database.get_element_column_list(type_)
-        # little trick to remove 'word' columns from the available
-        word_list = database.get_element_word_list(type_)
-        column_list = [e for e in column_list if e not in word_list]
-        foreign_key_list = database.get_element_foreign_key_list(type_)
-        relation_list = database.get_element_relation_list(type_)
-        for col in column_list:
-            if col not in foreign_key_list:
-                buttons.append({'title': col, 'payload': '/view_element_' + col})
-        for rel in relation_list:
-            buttons.append({'title': rel['type'], 'payload': '/view_element_' + rel['type']})
-    else:
-        message = 'The context_list is empty!'
-    dispatcher.utter_button_message(message, buttons)
-    return []
 
-
-def run_action_view_element_attribute(self, dispatcher, tracker, domain, attribute_type):
     element = context.get_last_element_from_context_list()
     if element:
         type_, value_list = get_element_type_and_value_list(element)
-        if attribute_type in database.get_element_column_list(type_):
-            message = 'Results for attribute {}:\n'.format(attribute_type)
-            message += messages.get_message_word_list_with_attribute(type_, value_list, attribute_type)
-            dispatcher.utter_message(message)
+        if attribute in get_element_attribute_list(type_):
+            # todo: control if there is a join todo :D
+            message = 'Results for attribute {}:\n'.format(attribute)
+            message += messages.get_message_word_list_with_attribute(type_, value_list, attribute)
         else:
-            message = 'The specified attribute is not part of ' + type_
-            dispatcher.utter_message(message)
-            run_action_view_element_column_list(self, dispatcher, tracker, domain)
+            message = 'The {} attribute is not part of {}\n'.format(attribute, type_)
+            res = action_view_element_column_list()
+            message += res.get('message')
+            buttons = res.get('buttons')
     else:
         message = 'The context_list is empty!'
-        dispatcher.utter_message(message)
-    return []
+    return {'message': message, 'buttons': buttons}

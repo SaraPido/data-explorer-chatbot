@@ -9,14 +9,12 @@ LOG_PATH_FILE = 'log.txt'
 # ACTIONS_MODULE_PATH = 'core.actions.register'
 DB_PROPERTIES_PATH = 'resources/db_properties.json'
 
-NLU_MODEL_PATH = 'resources/models/default/nlu_model'
-
 DEBUG = False
 
 
 def start_server():
 
-    extractor.load_model(os.path.abspath(NLU_MODEL_PATH))
+    extractor.load_model()
 
     print('Write a sentence or write "exit"')
     while True:
@@ -25,9 +23,11 @@ def start_server():
             break
         parsed_message = extractor.parse(message)
         result = caller.run_action_from_parsed_message(parsed_message)
-        print(result.get('response'))
+        print(result.get('message'))
         buttons = result.get('buttons')
-        if buttons: print(buttons)
+        if buttons:
+            for b in buttons:
+                print('{} => {}'.format(b['title'], b['payload']))
 
 
     '''
@@ -42,6 +42,9 @@ def start_server():
 
 
 if __name__ == '__main__':
+
+    with open(LOG_PATH_FILE, 'w'):
+        pass
     logging.basicConfig(filename=LOG_PATH_FILE, level=logging.INFO)
 
     database.connect()

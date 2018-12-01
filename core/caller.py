@@ -5,7 +5,7 @@ from server.core.actions import executors
 logger = logging.getLogger(__name__)
 
 # todo: make it better
-THRESHOLD = 0.2
+THRESHOLD = 0.6
 
 
 def run_action_from_parsed_message(parsed_message):
@@ -16,8 +16,15 @@ def run_action_from_parsed_message(parsed_message):
 
     if intent_confidence >= THRESHOLD:
 
-        if intent_name == 'view_element_column_list':
-            return executors.action_view_element_column_list()
+        if intent_name.startswith('view_element_'):
+
+            attribute = intent_name[len('view_element_'):]
+
+            if attribute == 'column_list':
+                return executors.action_view_element_column_list()
+
+            else:
+                return executors.action_view_element_attribute(attribute)
 
         intent_name_list = intent_name.split('_')
 
@@ -34,4 +41,4 @@ def run_action_from_parsed_message(parsed_message):
                 if word:
                     return executors.action_find_element_by_word(element_type, word)
 
-    return {'response':'I did not understand that :('}
+    return {'message': 'I did not understand that :('}

@@ -1,16 +1,21 @@
+import json
 import logging
 
-from rasa_nlu.model import Interpreter
+from rasa_nlu import config as nlu_config
+from rasa_nlu import model as nlu_model
+from rasa_nlu import training_data as nlu_train
+
+from server.core import NLU_MODEL_PATH, NLU_DATA_PATH, NLU_CONFIG_PATH
 
 logger = logging.getLogger(__name__)
 
 inter = None
 
 
-def load_model(model_path):
+def load_model():
     global inter
     logger.info('Loading the NLU model WITHOUT training...')
-    inter = Interpreter.load(model_path)
+    inter = nlu_model.Interpreter.load(NLU_MODEL_PATH)
     logger.info('NLU model loaded!')
 
 
@@ -26,10 +31,36 @@ def parse(message):
     :param message: the message to be converted
     :return: the dictionary representing the interpretation
     """
-    parsed_message = inter.parse(message)
-    del parsed_message['intent_ranking'], parsed_message['text']
-    for e in parsed_message.get('entities'):
-        del e['start'], e['end'], e['confidence'], e['extractor']
 
+    logger.info('Message to parse: "{}"'.format(message))
+
+    if message.startswith('/'):
+        parsed_message = dict()
+        message = message[1:]
+        split_message = message.split('{', 1)
+        intent_name = split_message[0]
+        entities = []
+        if len(split_message) > 1:
+            extracted_entities = json.loads(('{' + split_message[1]).replace("'", "\""))
+            entities = [{'value': val, 'entity': key} for key, val in extracted_entities.items()]
+
+        parsed_message['intent'] = {'name': intent_name, 'confidence': 1}
+        parsed_message['entities'] = entities
+    else:
+        parsed_message = inter.parse(message)
+        del parsed_message['intent_ranking'], parsed_message['text']
+        for e in parsed_message.get('entities'):
+            del e['start'], e['end'], e['confidence'], e['extractor']
+
+    logger.info('Parsed message: {}'.format(parsed_message))
     return parsed_message
 
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    logging.info('Training the NLU model...')
+    training_data = nlu_train.load_data(NLU_DATA_PATH)
+    trainer = nlu_model.Trainer(nlu_config.load(NLU_CONFIG_PATH))
+    trainer.train(training_data)
+    model_directory = trainer.persist(NLU_MODEL_PATH, fixed_model_name='nlu_model')
+    logging.info('NLU model completely trained!')
