@@ -5,7 +5,7 @@ import time
 
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
-from server.core import extractor, caller
+from modules import extractor, caller
 
 TOKEN = '609526959:AAGSGD4czhnJigcsv1QM2WUA2BMBqlw4ho0'
 

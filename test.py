@@ -1,8 +1,7 @@
 import logging
 
-from server import DB_PROPERTIES_PATH, LOG_PATH_FILE
-from server.core import database, extractor
-from server.core import connectors
+from modules import database, connectors, extractor
+from modules.settings import LOG_PATH_FILE, DB_PROPERTIES_PATH
 
 '''
 def start_server():

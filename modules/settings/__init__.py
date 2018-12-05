@@ -1,6 +1,12 @@
 import os
 
-DIR_PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
+file_path = os.path.normpath(os.path.abspath(__file__))
+file_path_list = file_path.split(os.sep)
+
+while file_path_list[-1] != 'sherbot':
+    del file_path_list[-1]
+
+DIR_PATH = os.sep.join(file_path_list) + '/'
 
 LOG_PATH_FILE = DIR_PATH + 'log.txt'
 

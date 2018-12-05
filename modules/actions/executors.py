@@ -1,8 +1,8 @@
 import logging
 
-from server.core import database
-from server.core import context
-from server.core.actions import messages
+from modules import database
+from modules import context
+from modules.actions import messages
 
 logger = logging.getLogger(__name__)
 

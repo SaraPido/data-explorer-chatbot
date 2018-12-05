@@ -1,6 +1,6 @@
 import logging
 
-from server.core.actions import executors
+from modules.actions import executors
 
 logger = logging.getLogger(__name__)
 

@@ -5,7 +5,7 @@ from rasa_nlu import config as nlu_config
 from rasa_nlu import model as nlu_model
 from rasa_nlu import training_data as nlu_train
 
-from server import NLU_MODEL_PATH, NLU_DATA_PATH, NLU_CONFIG_PATH, NLU_MODEL_DIR_PATH
+from modules.settings import NLU_DATA_PATH, NLU_CONFIG_PATH, NLU_MODEL_DIR_PATH, NLU_MODEL_PATH
 
 logger = logging.getLogger(__name__)
 

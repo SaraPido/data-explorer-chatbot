@@ -1,4 +1,4 @@
-from server.core import database
+from modules import database
 
 
 def get_message_word_list(element_type, element_list):
