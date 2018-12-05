@@ -20,11 +20,28 @@ def run_action_from_parsed_message(parsed_message):
 
             attribute = intent_name[len('view_element_'):]
 
-            if attribute == 'column_list':
-                return executors.action_view_element_column_list()
+            if attribute == 'relation_list':
+                return executors.action_view_element_relation_list()
 
             else:
-                return executors.action_view_element_attribute(attribute)
+
+                position = next(iter([e.get('value') for e in entities if e.get('entity') == 'position']), None)
+                try:
+                    if position:
+                        int_pos = int(position)
+                    else:
+                        int_pos = 0
+                    return executors.action_view_element_attribute(attribute, int_pos)
+                except ValueError:
+                    return {'message': 'Error converting string to int...'}
+
+        elif intent_name == 'select_element_by_position':
+            position = next(iter([e.get('value') for e in entities if e.get('entity') == 'position']), None)
+            try:
+                int_pos = int(position)
+                return executors.action_select_element_by_position(int_pos)
+            except ValueError:
+                return {'message': 'Error converting string to int...'}
 
         intent_name_list = intent_name.split('_')
 

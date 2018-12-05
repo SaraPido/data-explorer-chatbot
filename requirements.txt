@@ -1,2 +1,3 @@
-rasa_core_sdk==0.12.1
 mysql-connector>=2.1.6
+telepot
+rasa_nlu==0.13.7

@@ -1,2 +1,2 @@
-model_checkpoint_path: "/Users/Nicola/thesis/sherbot/chatbot/./models/default/nlu_model/intent_classifier_tensorflow_embedding.ckpt"
-all_model_checkpoint_paths: "/Users/Nicola/thesis/sherbot/chatbot/./models/default/nlu_model/intent_classifier_tensorflow_embedding.ckpt"
+model_checkpoint_path: "/Users/Nicola/thesis/sherbot/server/resources/nlu/models/default/nlu_model/intent_classifier_tensorflow_embedding.ckpt"
+all_model_checkpoint_paths: "/Users/Nicola/thesis/sherbot/server/resources/nlu/models/default/nlu_model/intent_classifier_tensorflow_embedding.ckpt"

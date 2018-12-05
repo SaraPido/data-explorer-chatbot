@@ -10,7 +10,11 @@ db_properties = None
 
 # Queries
 
-def query_select(query, t):
+def query_select(query, t=None):
+    logger.info('Executing query...')
+    logger.info('Query: "{}"'.format(query))
+    if t:
+        logger.info('Tuple: {}'.format(t))
     cursor = connection.cursor()
     cursor.execute(query, t)
     return cursor.fetchall()
@@ -33,6 +37,20 @@ def query_select_on_word(element_type, word):
         return decorate_rows(element_type, rows)
     else:
         pass  # todo: error/exception
+
+
+def query_select_join_on_attribute(element_type, element_value, attribute):
+    from_el_properties = get_element_properties(element_type)
+    relation = next(iter([e for e in from_el_properties['relation_list'] if e['type'] == attribute]))
+    to_el_properties = get_element_properties(attribute)
+    query_string = "SELECT "
+    query_string += ", ".join(["B.{}".format(name) for name in to_el_properties['column_list']])
+    query_string += " FROM {} A, {} B ".format(from_el_properties['table_name'], to_el_properties['table_name'])
+    query_string += "WHERE "
+    query_string += "A.{}=B.{} ".format(relation['from'], relation['to'])
+    query_string += "and A.{}={}".format(from_el_properties['id'], element_value[from_el_properties['id']])
+    rows = query_select(query_string)
+    return decorate_rows(to_el_properties['type'], rows)
 
 
 def decorate_rows(element_type, rows):

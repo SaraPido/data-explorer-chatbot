@@ -5,7 +5,7 @@ from rasa_nlu import config as nlu_config
 from rasa_nlu import model as nlu_model
 from rasa_nlu import training_data as nlu_train
 
-from server.core import NLU_MODEL_PATH, NLU_DATA_PATH, NLU_CONFIG_PATH
+from server import NLU_MODEL_PATH, NLU_DATA_PATH, NLU_CONFIG_PATH, NLU_MODEL_DIR_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -62,5 +62,5 @@ if __name__ == '__main__':
     training_data = nlu_train.load_data(NLU_DATA_PATH)
     trainer = nlu_model.Trainer(nlu_config.load(NLU_CONFIG_PATH))
     trainer.train(training_data)
-    model_directory = trainer.persist(NLU_MODEL_PATH, fixed_model_name='nlu_model')
+    model_directory = trainer.persist(NLU_MODEL_DIR_PATH, fixed_model_name='nlu_model')
     logging.info('NLU model completely trained!')

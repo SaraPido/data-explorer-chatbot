@@ -2,146 +2,6 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
-        "intent": "greet",
-        "text": "hey"
-      },
-      {
-        "intent": "greet",
-        "text": "hello"
-      },
-      {
-        "intent": "greet",
-        "text": "hi"
-      },
-      {
-        "intent": "greet",
-        "text": "good morning"
-      },
-      {
-        "intent": "greet",
-        "text": "good evening"
-      },
-      {
-        "intent": "greet",
-        "text": "hey there"
-      },
-      {
-        "intent": "goodbye",
-        "text": "bye"
-      },
-      {
-        "intent": "goodbye",
-        "text": "goodbye"
-      },
-      {
-        "intent": "goodbye",
-        "text": "see you around"
-      },
-      {
-        "intent": "goodbye",
-        "text": "see you later"
-      },
-      {
-        "intent": "goodbye",
-        "text": "see ya"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 11,
-            "end": 15,
-            "value": "Luca",
-            "entity": "user_name"
-          }
-        ],
-        "text": "my name is Luca"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 26,
-            "end": 34,
-            "value": "Giovanni",
-            "entity": "user_name"
-          }
-        ],
-        "text": "can you change my name in Giovanni?"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 22,
-            "end": 27,
-            "value": "fabio",
-            "entity": "user_name"
-          }
-        ],
-        "text": "I want you to call me fabio"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 11,
-            "end": 15,
-            "value": "jeff",
-            "entity": "user_name"
-          }
-        ],
-        "text": "my name is jeff"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "George",
-            "entity": "user_name"
-          }
-        ],
-        "text": "i am George"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 5,
-            "end": 10,
-            "value": "pippo",
-            "entity": "user_name"
-          }
-        ],
-        "text": "I am pippo"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 8,
-            "end": 13,
-            "value": "mario",
-            "entity": "user_name"
-          }
-        ],
-        "text": "call me mario"
-      },
-      {
-        "intent": "change_name",
-        "entities": [
-          {
-            "start": 5,
-            "end": 12,
-            "value": "claudio",
-            "entity": "user_name"
-          }
-        ],
-        "text": "i am claudio"
-      },
-      {
         "intent": "find_teacher_by_word",
         "entities": [
           {
@@ -157,13 +17,13 @@
         "intent": "find_teacher_by_word",
         "entities": [
           {
-            "start": 13,
-            "end": 19,
+            "start": 27,
+            "end": 33,
             "value": "Matteo",
             "entity": "word"
           }
         ],
-        "text": "find teacher Matteo"
+        "text": "find the teacher with name Matteo"
       },
       {
         "intent": "find_teacher_by_word",
@@ -193,49 +53,49 @@
         "intent": "find_lesson_by_word",
         "entities": [
           {
-            "start": 13,
-            "end": 18,
+            "start": 12,
+            "end": 17,
             "value": "Maths",
             "entity": "word"
           }
         ],
-        "text": "find lessson Maths"
+        "text": "find lesson Maths"
       },
       {
         "intent": "find_lesson_by_word",
         "entities": [
           {
-            "start": 13,
-            "end": 22,
+            "start": 12,
+            "end": 21,
             "value": "Geography",
             "entity": "word"
           }
         ],
-        "text": "find lessson Geography"
+        "text": "find lesson Geography"
       },
       {
         "intent": "find_lesson_by_word",
         "entities": [
           {
-            "start": 13,
-            "end": 20,
+            "start": 12,
+            "end": 19,
             "value": "Italian",
             "entity": "word"
           }
         ],
-        "text": "find lessson Italian"
+        "text": "find lesson Italian"
       },
       {
         "intent": "find_lesson_by_word",
         "entities": [
           {
-            "start": 13,
-            "end": 19,
+            "start": 12,
+            "end": 18,
             "value": "French",
             "entity": "word"
           }
         ],
-        "text": "find lessson French"
+        "text": "find lesson French"
       },
       {
         "intent": "find_class_by_word",
@@ -286,12 +146,20 @@
         "text": "find class 1^C"
       },
       {
-        "intent": "view_element_column_list",
-        "text": "view columns"
+        "intent": "view_element_relation_list",
+        "text": "view relations"
       },
       {
-        "intent": "view_element_column_list",
-        "text": "columns"
+        "intent": "view_element_relation_list",
+        "text": "what are its relations"
+      },
+      {
+        "intent": "view_element_relation_list",
+        "text": "relations"
+      },
+      {
+        "intent": "view_element_relation_list",
+        "text": "join"
       },
       {
         "intent": "view_element_id",
@@ -316,6 +184,30 @@
       {
         "intent": "view_element_email",
         "text": "email"
+      },
+      {
+        "intent": "view_element_teacher",
+        "text": "view teacher"
+      },
+      {
+        "intent": "view_element_teacher",
+        "text": "teacher"
+      },
+      {
+        "intent": "view_element_class",
+        "text": "view class"
+      },
+      {
+        "intent": "view_element_class",
+        "text": "class"
+      },
+      {
+        "intent": "view_element_lesson",
+        "text": "view lesson"
+      },
+      {
+        "intent": "view_element_lesson",
+        "text": "lesson"
       }
     ],
     "regex_features": [],
