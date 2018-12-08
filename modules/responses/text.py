@@ -1,8 +1,8 @@
-from modules import database
+from modules.database import resolver
 
 
 def get_message_word_list_with_attribute(element_type, element_list, attribute_type):
-    word_list = database.get_element_properties(element_type)['word_list']
+    word_list = resolver.get_element_properties(element_type)['word_list']
     message = ''
     for i, e in enumerate(element_list):
         message += '- '
@@ -14,7 +14,7 @@ def get_message_word_list_with_attribute(element_type, element_list, attribute_t
 
 
 def get_message_word_list(element_type, element_list):
-    word_list = database.get_element_properties(element_type)['word_list']
+    word_list = resolver.get_element_properties(element_type)['word_list']
     message = ''
     for i, e in enumerate(element_list):
         message += '- '

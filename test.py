@@ -1,10 +1,10 @@
 import logging
 import warnings
 
-from threading import Thread
 from time import sleep
 
 from modules import database, connectors, extractor, caller
+from modules.database import resolver
 from modules.settings import LOG_PATH_FILE, DB_PROPERTIES_PATH
 
 
@@ -36,8 +36,8 @@ if __name__ == '__main__':
 
     logging.info('Starting the bot...')
 
-    database.connect()
-    database.load_db_properties(DB_PROPERTIES_PATH)
+    resolver.connect()
+    resolver.load_db_properties(DB_PROPERTIES_PATH)
 
     extractor.load_model()
 

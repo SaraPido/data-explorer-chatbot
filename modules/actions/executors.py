@@ -1,6 +1,6 @@
 import logging
 
-from modules import database
+from modules.database import resolver
 from modules import context
 
 from modules.responses import buttons as btn
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 def find_element_by_word(element_type, word):
-    element_list = database.query_select_on_word(element_type, word)
+    element_list = resolver.query_select_on_word(element_type, word)
     if element_list:
         context.add_element_to_context_list(element_type + '_list', element_list)
         if len(element_list) == 1:
@@ -24,7 +24,7 @@ def find_element_by_word(element_type, word):
 
 
 def join_element_on_attribute(element_type, element, attribute):
-    element_list = database.query_select_join_on_attribute(element_type, element, attribute)
+    element_list = resolver.query_select_join_on_attribute(element_type, element, attribute)
     if element_list:
         context.add_element_to_context_list(attribute + '_list', element_list)
         if len(element_list) == 1:
@@ -49,7 +49,7 @@ def get_element_type_and_value_list(element):
 
 
 def extract_element_word_string(element_type, element):
-    word_list = database.get_element_properties(element_type)['word_list']
+    word_list = resolver.get_element_properties(element_type)['word_list']
     return ' '.join(element[x] for x in word_list)
 
 
@@ -174,7 +174,7 @@ def action_view_element_related_element(related_element_type, position=0, messag
     if element:
 
         type_, value_list = get_element_type_and_value_list(element)
-        element_properties = database.get_element_properties(type_)
+        element_properties = resolver.get_element_properties(type_)
 
         #  control if there is a join to do
         if related_element_type in extract_element_relation_list(element_properties):

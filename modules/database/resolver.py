@@ -43,13 +43,13 @@ def query_select_join_on_attribute(element_type, element_value, attribute):
     from_el_properties = get_element_properties(element_type)
     relation = next(iter([e for e in from_el_properties['relation_list'] if e['type'] == attribute]))
     to_el_properties = get_element_properties(attribute)
-    if relation['by'] is None:
-        query_string = get_query_string_join_one_to_many(element_value, relation,
-                                                         from_el_properties, to_el_properties)
-    else:
-        by_el_properties = get_element_properties(relation['by'])
-        query_string = get_query_string_join_many_to_many(element_value, relation,
-                                                          from_el_properties, by_el_properties, to_el_properties)
+    #if relation['by'] is '':
+    query_string = get_query_string_join_one_to_many(element_value, relation,
+                                                     from_el_properties, to_el_properties)
+    #else:
+        #by_el_properties = get_element_properties(relation['by'])
+        #query_string = get_query_string_join_many_to_many(element_value, relation,
+                                                         # from_el_properties, by_el_properties, to_el_properties)
     rows = query_select(query_string)
     return decorate_rows(to_el_properties['type'], rows)
 
@@ -85,12 +85,13 @@ def decorate_rows(element_type, rows):
 
 # Database properties
 
-def load_db_properties(db_properties_path):
+# todo: hybrid now
+def load_db_properties(db_concept_path):
     global db_properties
     logger.info('Loading database properties...')
-    with open(db_properties_path) as f:
+    with open(db_concept_path) as f:
         db_properties = json.load(f)
-    logger.info('Database properties have been loaded!')
+    logger.info('Database concept file has been loaded!')
     # logger.info(pformat(db_properties))
 
 

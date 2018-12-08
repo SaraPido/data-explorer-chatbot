@@ -17,11 +17,11 @@
         "by": [
           {
             "table_name": "dept_emp",
-            "as_type": "work(s) in"
+            "type": "work(s) in"
           },
           {
             "table_name": "dept_manager",
-            "as_type": "manage(s)"
+            "type": "manage(s)"
           }
         ]
       }
@@ -59,11 +59,11 @@
         "by": [
           {
             "table_name": "dept_emp",
-            "as_type": "has worker(s)"
+            "type": "has worker(s)"
           },
           {
             "table_name": "dept_manager",
-            "as_type": "has manager(s)"
+            "type": "has manager(s)"
           }
         ]
       }
