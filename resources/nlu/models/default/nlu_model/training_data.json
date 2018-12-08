@@ -2,8 +2,14 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
-        "intent": "find_teacher_by_word",
+        "intent": "find_element_by_word",
         "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "teacher",
+            "entity": "element"
+          },
           {
             "start": 13,
             "end": 19,
@@ -14,44 +20,14 @@
         "text": "find teacher Nicola"
       },
       {
-        "intent": "find_teacher_by_word",
+        "intent": "find_element_by_word",
         "entities": [
           {
-            "start": 27,
-            "end": 33,
-            "value": "Matteo",
-            "entity": "word"
-          }
-        ],
-        "text": "find the teacher with name Matteo"
-      },
-      {
-        "intent": "find_teacher_by_word",
-        "entities": [
-          {
-            "start": 13,
-            "end": 22,
-            "value": "Mandolino",
-            "entity": "word"
-          }
-        ],
-        "text": "find teacher Mandolino"
-      },
-      {
-        "intent": "find_teacher_by_word",
-        "entities": [
-          {
-            "start": 13,
-            "end": 20,
-            "value": "Simpson",
-            "entity": "word"
-          }
-        ],
-        "text": "find teacher Simpson"
-      },
-      {
-        "intent": "find_lesson_by_word",
-        "entities": [
+            "start": 5,
+            "end": 11,
+            "value": "lesson",
+            "entity": "element"
+          },
           {
             "start": 12,
             "end": 17,
@@ -62,44 +38,14 @@
         "text": "find lesson Maths"
       },
       {
-        "intent": "find_lesson_by_word",
+        "intent": "find_element_by_word",
         "entities": [
           {
-            "start": 12,
-            "end": 21,
-            "value": "Geography",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson Geography"
-      },
-      {
-        "intent": "find_lesson_by_word",
-        "entities": [
-          {
-            "start": 12,
-            "end": 19,
-            "value": "Italian",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson Italian"
-      },
-      {
-        "intent": "find_lesson_by_word",
-        "entities": [
-          {
-            "start": 12,
-            "end": 18,
-            "value": "French",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson French"
-      },
-      {
-        "intent": "find_class_by_word",
-        "entities": [
+            "start": 5,
+            "end": 10,
+            "value": "class",
+            "entity": "element"
+          },
           {
             "start": 11,
             "end": 14,
@@ -110,108 +56,123 @@
         "text": "find class 1^A"
       },
       {
-        "intent": "find_class_by_word",
+        "intent": "view_related_element",
         "entities": [
           {
-            "start": 11,
-            "end": 14,
-            "value": "3^B",
-            "entity": "word"
+            "start": 5,
+            "end": 12,
+            "value": "teacher",
+            "entity": "element"
           }
         ],
-        "text": "find class 3^B"
-      },
-      {
-        "intent": "find_class_by_word",
-        "entities": [
-          {
-            "start": 11,
-            "end": 14,
-            "value": "2^A",
-            "entity": "word"
-          }
-        ],
-        "text": "find class 2^A"
-      },
-      {
-        "intent": "find_class_by_word",
-        "entities": [
-          {
-            "start": 11,
-            "end": 14,
-            "value": "1^C",
-            "entity": "word"
-          }
-        ],
-        "text": "find class 1^C"
-      },
-      {
-        "intent": "view_element_relation_list",
-        "text": "view relations"
-      },
-      {
-        "intent": "view_element_relation_list",
-        "text": "what are its relations"
-      },
-      {
-        "intent": "view_element_relation_list",
-        "text": "relations"
-      },
-      {
-        "intent": "view_element_relation_list",
-        "text": "join"
-      },
-      {
-        "intent": "view_element_id",
-        "text": "view id"
-      },
-      {
-        "intent": "view_element_id",
-        "text": "id"
-      },
-      {
-        "intent": "view_element_telephone",
-        "text": "view telephone"
-      },
-      {
-        "intent": "view_element_telephone",
-        "text": "telephone"
-      },
-      {
-        "intent": "view_element_email",
-        "text": "view email"
-      },
-      {
-        "intent": "view_element_email",
-        "text": "email"
-      },
-      {
-        "intent": "view_element_teacher",
         "text": "view teacher"
       },
       {
-        "intent": "view_element_teacher",
-        "text": "teacher"
-      },
-      {
-        "intent": "view_element_class",
-        "text": "view class"
-      },
-      {
-        "intent": "view_element_class",
-        "text": "class"
-      },
-      {
-        "intent": "view_element_lesson",
+        "intent": "view_related_element",
+        "entities": [
+          {
+            "start": 5,
+            "end": 11,
+            "value": "lesson",
+            "entity": "element"
+          }
+        ],
         "text": "view lesson"
       },
       {
-        "intent": "view_element_lesson",
-        "text": "lesson"
+        "intent": "view_related_element",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "class",
+            "entity": "element"
+          }
+        ],
+        "text": "view class"
+      },
+      {
+        "intent": "view_relations",
+        "text": "relations"
+      },
+      {
+        "intent": "view_relations",
+        "text": "relations"
+      },
+      {
+        "intent": "view_relations",
+        "text": "relations"
+      },
+      {
+        "intent": "view_relations",
+        "text": "relations"
+      },
+      {
+        "intent": "select_element_by_position",
+        "entities": [
+          {
+            "start": 11,
+            "end": 12,
+            "value": "1",
+            "entity": "position"
+          }
+        ],
+        "text": "select row 1"
+      },
+      {
+        "intent": "select_element_by_position",
+        "entities": [
+          {
+            "start": 4,
+            "end": 5,
+            "value": "2",
+            "entity": "position"
+          }
+        ],
+        "text": "row 2"
+      },
+      {
+        "intent": "select_element_by_position",
+        "entities": [
+          {
+            "start": 7,
+            "end": 8,
+            "value": "3",
+            "entity": "position"
+          }
+        ],
+        "text": "select 3"
       }
     ],
     "regex_features": [],
-    "lookup_tables": [],
+    "lookup_tables": [
+      {
+        "name": "element",
+        "elements": [
+          "teacher",
+          "lesson",
+          "class",
+          "timetables"
+        ]
+      },
+      {
+        "name": "word",
+        "elements": [
+          "Nicola",
+          "Maristella",
+          "Vittorio",
+          "Albert",
+          "Florian",
+          "Maths",
+          "Computer Science",
+          "Geography",
+          "History",
+          "1^A",
+          "2^B",
+          "2^C"
+        ]
+      }
+    ],
     "entity_synonyms": []
   }
 }

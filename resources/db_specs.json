@@ -1,0 +1,72 @@
+[
+  {
+    "type": "employee",
+    "table_name": "employees",
+    "word_list": ["first_name", "last_name"],
+    "relation_list": [
+      {
+        "type": "title",
+        "by": []
+      },
+      {
+        "type": "salary",
+        "by": []
+      },
+      {
+        "type": "department",
+        "by": [
+          {
+            "table_name": "dept_emp",
+            "as_type": "work(s) in"
+          },
+          {
+            "table_name": "dept_manager",
+            "as_type": "manage(s)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "title",
+    "table_name": "titles",
+    "word_list": ["title"],
+    "relation_list": [
+      {
+        "type": "employee",
+        "by": []
+      }
+    ]
+  },
+  {
+    "type": "salary",
+    "table_name": "salaries",
+    "word_list": ["salary"],
+    "relation_list": [
+      {
+        "type": "employee",
+        "by": []
+      }
+    ]
+  },
+  {
+    "type": "department",
+    "table_name": "departments",
+    "word_list": ["dept_name"],
+    "relation_list": [
+      {
+        "type": "employee",
+        "by": [
+          {
+            "table_name": "dept_emp",
+            "as_type": "has worker(s)"
+          },
+          {
+            "table_name": "dept_manager",
+            "as_type": "has manager(s)"
+          }
+        ]
+      }
+    ]
+  }
+]

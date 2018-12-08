@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "name": "element",
+        "pattern": "(?i)(\\bteacher\\b|\\blesson\\b|\\bclass\\b|\\btimetables\\b)"
+    },
+    {
+        "name": "word",
+        "pattern": "(?i)(\\bNicola\\b|\\bMaristella\\b|\\bVittorio\\b|\\bAlbert\\b|\\bFlorian\\b|\\bMaths\\b|\\bComputer\\ Science\\b|\\bGeography\\b|\\bHistory\\b|\\b1\\^A\\b|\\b2\\^B\\b|\\b2\\^C\\b)"
+    }
+]

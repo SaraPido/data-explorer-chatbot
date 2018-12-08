@@ -1,0 +1,72 @@
+[
+  {
+    "table_name": "employees",
+    "column_list":["emp_no", "birth_date", "first_name", "last_name", "gender", "hire_date"],
+    "primary_key_list": ["emp_no"],
+    "foreign_property_list": []
+  },
+  {
+    "table_name": "titles",
+    "column_list":["emp_no", "title", "from_date", "to_date"],
+    "primary_key_list": ["emp_no", "title", "from_date"],
+    "foreign_property_list": [
+      {
+        "foreign_key_list": ["emp_no"],
+        "reference_table_name": "employees",
+        "reference_key_list": ["emp_no"]
+      }
+    ]
+  },
+  {
+    "table_name": "salaries",
+    "column_list":["emp_no", "salary", "from_date", "to_date"],
+    "primary_key_list": ["emp_no", "from_date"],
+    "foreign_property_list": [
+      {
+        "foreign_key_list": ["emp_no"],
+        "reference_table_name": "employees",
+        "reference_key_list": ["emp_no"]
+      }
+    ]
+  },
+  {
+    "table_name": "departments",
+    "column_list":["dept_no", "dept_name"],
+    "primary_key_list": ["dept_no"],
+    "foreign_property_list": []
+  },
+  {
+    "table_name": "dept_emp",
+    "column_list":["emp_no", "dept_no", "from_date", "to_date"],
+    "primary_key_list": ["emp_no", "dept_no"],
+    "foreign_property_list": [
+      {
+        "foreign_key_list": ["emp_no"],
+        "reference_table_name": "employees",
+        "reference_key_list": ["emp_no"]
+      },
+      {
+        "foreign_key_list": ["dept_no"],
+        "reference_table_name": "departments",
+        "reference_key_list": ["dept_no"]
+      }
+    ]
+  },
+  {
+    "table_name": "dept_manager",
+    "column_list":["emp_no", "dept_no", "from_date", "to_date"],
+    "primary_key_list": ["emp_no", "dept_no"],
+    "foreign_property_list": [
+      {
+        "foreign_key_list": ["emp_no"],
+        "reference_table_name": "employees",
+        "reference_key_list": ["emp_no"]
+      },
+      {
+        "foreign_key_list": ["dept_no"],
+        "reference_table_name": "departments",
+        "reference_key_list": ["dept_no"]
+      }
+    ]
+  }
+]

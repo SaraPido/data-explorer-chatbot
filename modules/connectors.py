@@ -33,7 +33,11 @@ def respond(chat_id, msg):
                 for b in result['buttons']
             ]
         )
-    bot.sendMessage(chat_id, result['message'], reply_markup=keyboard)
+    messages = result['messages']
+    # all but last, telegram needs..
+    for msg in messages[:-1]:
+        bot.sendMessage(chat_id=chat_id, text=msg)
+    bot.sendMessage(chat_id=chat_id, text=messages[-1], reply_markup=keyboard)
 
 
 def start():
@@ -41,18 +45,18 @@ def start():
     bot = telepot.Bot(TOKEN)
     MessageLoop(bot, {'chat': on_chat_message,
                       'callback_query': on_callback_query}).run_as_thread()
-    while 1:
-        time.sleep(100)
 
 
 def execute(message):
     parsed_message = extractor.parse(message)
     result = caller.run_action_from_parsed_message(parsed_message)
-    print(result.get('message'))
+    print('messages:\n'
+          '* {}'.format(result.get('messages')))
     buttons = result.get('buttons')
     if buttons:
+        print('buttons:')
         for b in buttons:
-            print('{} => {}'.format(b['title'], b['payload']))
+            print('* {} => {}'.format(b['title'], b['payload']))
     return result
 
 

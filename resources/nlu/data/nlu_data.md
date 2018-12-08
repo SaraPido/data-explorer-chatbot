@@ -1,48 +1,41 @@
-## intent:find_teacher_by_word
-- find teacher [Nicola](word)
-- find the teacher with name [Matteo](word)
-- find teacher [Mandolino](word)
-- find teacher [Simpson](word)
+## intent:find_element_by_word
+- find [teacher](element) [Nicola](word)
+- find [lesson](element) [Maths](word)
+- find [class](element) [1^A](word)
 
-## intent:find_lesson_by_word
-- find lesson [Maths](word)
-- find lesson [Geography](word)
-- find lesson [Italian](word)
-- find lesson [French](word)
+## intent:view_related_element
+- view [teacher](element)
+- view [lesson](element)
+- view [class](element)
 
-## intent:find_class_by_word
-- find class [1^A](word)
-- find class [3^B](word)
-- find class [2^A](word)
-- find class [1^C](word)
-
-## intent:view_element_relation_list
-- view relations
-- what are its relations
+## intent:view_relations
 - relations
-- join 
+- relations
+- relations
+- relations
 
-## intent:view_element_id
-- view id
-- id
+## intent:select_element_by_position
+- select row [1](position)
+- row [2](position)
+- select [3](position)
 
-## intent:view_element_telephone
-- view telephone
-- telephone
 
-## intent:view_element_email
-- view email
-- email
-
-## intent:view_element_teacher
-- view teacher
+## lookup:element
 - teacher
-
-## intent:view_element_class
-- view class
-- class
-
-## intent:view_element_lesson
-- view lesson
 - lesson
+- class
+- timetables
 
+## lookup:word
+- Nicola
+- Maristella
+- Vittorio
+- Albert
+- Florian
+- Maths
+- Computer Science
+- Geography
+- History
+- 1^A
+- 2^B
+- 2^C

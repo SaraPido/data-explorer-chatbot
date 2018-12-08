@@ -2,7 +2,9 @@ import logging
 
 from modules import database
 from modules import context
-from modules.actions import messages
+
+from modules.responses import buttons as btn
+
 
 logger = logging.getLogger(__name__)
 
@@ -21,8 +23,8 @@ def find_element_by_word(element_type, word):
         return None  # todo: error/exception
 
 
-def join_element_on_attribute(element, attribute):
-    element_list = database.query_select_join_on_attribute(element['type'], element['value'], attribute)
+def join_element_on_attribute(element_type, element, attribute):
+    element_list = database.query_select_join_on_attribute(element_type, element, attribute)
     if element_list:
         context.add_element_to_context_list(attribute + '_list', element_list)
         if len(element_list) == 1:
@@ -46,28 +48,12 @@ def get_element_type_and_value_list(element):
     return element_type, value_list
 
 
-#
-
-def extract_element_id_column(element_properties):
-    return next(col for col in element_properties['column_list'] if col == element_properties['id'])
-
-
-def extract_element_attribute_list(element_properties):
-    """
-    This method returns the list of attributes can be directly asked by the user,
-    it removes the list of "word" since that parameter is always present.
-
-    :param element_properties: the db_properties of the element
-    :return: the list of string representing the attributes
-    """
-    attribute_list = [e for e in element_properties['column_list'] if
-                      e not in element_properties['foreign_key_list'] and
-                      e not in element_properties['word_list']]
-    attribute_list.extend(extract_element_relation_attribute_list(element_properties))
-    return attribute_list
+def extract_element_word_string(element_type, element):
+    word_list = database.get_element_properties(element_type)['word_list']
+    return ' '.join(element[x] for x in word_list)
 
 
-def extract_element_relation_attribute_list(element_properties):
+def extract_element_relation_list(element_properties):
     return [e['type'] for e in element_properties['relation_list']]
 
 
@@ -78,76 +64,63 @@ def extract_element_relation_attribute_list(element_properties):
 # Actions
 
 
-def action_find_element_by_word(element_type, word, msg=''):
+def action_find_element_by_word(element_type, word, messages=None):
+    if messages is None:
+        messages = []
     logger.info('Executing "action_find_element_by_word"')
-    message = msg
     buttons = []
 
     # when a "find" action gets called, the context list is reset
     context.reset_context_list()
 
-    if word:
-        element_list = find_element_by_word(element_type, word)
-        if not element_list:
-            message += 'NO RESULTS for element "{}" and word "{}"'.format(element_type, word)
-        elif len(element_list) == 1:
-            return action_view_element_info()
-        else:
-            message += 'SELECT:\n'
-            buttons = messages.get_buttons_select_element(element_type, element_list)
+    messages.append('If I am right, you are looking for...\n'
+                    'Element: {}\n'
+                    'By word: "{}"\n'
+                    'Let me check if it is present the database...\n'.format(element_type.upper(), word))
+    element_list = find_element_by_word(element_type, word)
+
+    if not element_list:
+        messages.append('Nothing has been found, I am sorry!'.format(element_type, word))
+
+    elif len(element_list) == 1:
+        messages.append('I have found one result!')
+        return action_view_element_info(messages)
+
     else:
-        message = "No word entity has been received..."
-    return {'message': message, 'buttons': buttons}
+        messages.append('Multiple results have been found!\n'
+                        'If you want more information, SELECT one result.')
+        buttons = btn.get_buttons_select_element(element_type, element_list)
+
+    return {'messages': messages, 'buttons': buttons}
 
 
-def action_select_element_by_position(position: int, msg=''):
-    """
-
-    :param position: position 1 is for element at index 0
-    :param msg:
-    :return:
-    """
+def action_select_element_by_position(position: int, messages=None):
+    if messages is None:
+        messages = []
     logger.info('Executing "action_select_element_by_position"')
-    element = context.get_last_element_from_context_list()
-    message = msg
     buttons = []
+
+    element = context.get_last_element_from_context_list()
+
     if element:
         type_, value_list = get_element_type_and_value_list(element)
         if len(value_list) == 1:
-            message += 'THERE IS ONLY ONE ELEMENT\n'
-            action_view_element_info(message)
+            messages.append('There is only one element!\n')
+            action_view_element_info(messages)
         else:
             if position <= len(value_list):
                 context.add_element_to_context_list(type_, value_list[position - 1])
                 return action_view_element_info()
             else:
-                message += 'THE SELECTION IS OUT OF RANGE'
-    return {'message': message, 'buttons': buttons}
+                messages.append('I am sorry, but you are selecting an element with an index out of range!')
+
+    return {'messages': messages, 'buttons': buttons}
 
 
-def action_view_element_relation_list(msg=''):
-    """
-    If the context_list is not empty, it generates BUTTONS
-    for the available columns to the user
-    """
-    logger.info('Executing "action_view_element_relation_list"')
-    message = msg
-    buttons = []
-
-    element = context.get_last_element_from_context_list()
-    buttons = []
-    if element:
-        message = 'SELECT THE RELATION:'
-        type_, value_list = get_element_type_and_value_list(element)
-        buttons = messages.get_buttons_relation_list(type_)
-    else:
-        message += 'No element registered yet...'
-    return {'message': message, 'buttons': buttons}
-
-
-def action_view_element_info(msg=''):
+def action_view_element_info(messages=None):
+    if messages is None:
+        messages = []
     logger.info('Executing "action_view_element_info"')
-    message = msg
     buttons = []
 
     element = context.get_last_element_from_context_list()
@@ -155,16 +128,46 @@ def action_view_element_info(msg=''):
 
         type_, value_list = get_element_type_and_value_list(element)
         if len(value_list) == 1:
-            message += 'RESULT:\n'
-            message += '\n'.join(['- {0} : {1}'.format(k, v) for k, v in value_list[0].items()])
+            msg = '{}: "{}"\n'.format(type_.upper(), extract_element_word_string(type_, value_list[0]))
+            msg += '\n'.join(['- {0}: {1}'.format(k, v) for k, v in value_list[0].items()])
+            messages.append(msg)
     else:
-        message += 'No element registered yet...'
-    return {'message': message, 'buttons': buttons}
+        messages.append('No element registered yet, I am sorry!')
+
+    return {'messages': messages, 'buttons': buttons}
 
 
-def action_view_element_attribute(attribute, position=0, msg=''):
+def action_view_element_relation_list(messages=None):
+    """
+    If the context_list is not empty, it generates BUTTONS
+    for the available columns to the user
+    """
+    if messages is None:
+        messages = []
+    logger.info('Executing "action_view_element_relation_list"')
+    buttons = []
+
+    element = context.get_last_element_from_context_list()
+    buttons = []
+    if element:
+        type_, value_list = get_element_type_and_value_list(element)
+
+        if len(value_list) == 1:
+            word_elements = ', '.join(extract_element_word_string(type_, el) for el in value_list)
+            messages.append('Down here the relations of:\n'
+                            '{}: "{}"'.format(type_.upper(), word_elements))
+        messages.append('SELECT one relation to perform the JOIN')
+        buttons = btn.get_buttons_relation_list(type_)
+
+    else:
+        messages.append('No element registered yet, I am sorry!')
+    return {'messages': messages, 'buttons': buttons}
+
+
+def action_view_element_related_element(related_element_type, position=0, messages=None):
+    if messages is None:
+        messages = []
     logger.info('Executing "action_view_element_attribute"')
-    message = msg
     buttons = []
 
     element = context.get_last_element_from_context_list()
@@ -174,14 +177,30 @@ def action_view_element_attribute(attribute, position=0, msg=''):
         element_properties = database.get_element_properties(type_)
 
         #  control if there is a join to do
-        if attribute in extract_element_relation_attribute_list(element_properties):
+        if related_element_type in extract_element_relation_list(element_properties):
 
             # control if there is an element in context_list
             if len(value_list) == 1:
 
-                element_list = join_element_on_attribute(element, attribute)
-                message += 'JOINING...\n'
-                message += messages.get_message_word_list(attribute, element_list)
+                element_list = join_element_on_attribute(type_, value_list[0], related_element_type)
+                messages.append('I have just performed a JOIN! From:\n'
+                                '{}: "{}"'.format(type_.upper(), extract_element_word_string(type_, value_list[0])))
+                if element_list:
+
+                    # if only one result
+                    if len(element_list) == 1:
+
+                        messages.append('I have found only one result!')
+                        return action_view_element_info(messages)
+
+                    else:
+
+                        messages.append('Multiple results have been found!\n'
+                                        'If you want more information, SELECT one result.')
+                        buttons = btn.get_buttons_select_element(related_element_type, element_list)
+
+                else:
+                    messages.append('Nothing has been found!')
 
             # if there is an element or a list...
             else:
@@ -189,22 +208,23 @@ def action_view_element_attribute(attribute, position=0, msg=''):
                 # if position > 0, it means a selection has already been done
                 if position > 0:
                     # todo: needs some checks...
-                    context.add_element_to_context_list(value_list[position - 1])
+                    context.add_element_to_context_list(type_, value_list[position - 1])
                     # recursively calls itself
-                    return action_view_element_attribute(attribute)
+                    return action_view_element_related_element(related_element_type)
 
                 else:
-                    message += 'WHICH ONE?:\n'.format(type_)
-                    payload_list = ['/view_element_{}{{"position":"{}"}}'
-                                    .format(attribute, pos + 1) for pos, val in enumerate(value_list)]
-                    buttons = messages.get_buttons_word_list(type_, value_list, payload_list)
+                    messages.append('There is more than one element on which you can perform the JOIN!\n'
+                                    'Please SELECT the one you are interested in.'.format(type_))
+                    payload_list = ['/view_related_element{{"element":"{}", "position":"{}"}}'
+                                    .format(related_element_type, pos + 1) for pos in range(len(value_list))]
+                    buttons = btn.get_buttons_word_list(type_, value_list, payload_list)
 
         else:
 
-            message += 'ATTRIBUTE NOT VALID\n'.format(attribute)
-            return action_view_element_relation_list(message)
+            messages.append('You cannot JOIN on this attribute :('.format(related_element_type))
+            return action_view_element_relation_list(messages)
 
     else:
-        message += 'No element registered yet...'
+        messages.append('No element registered yet...')
 
-    return {'message': message, 'buttons': buttons}
+    return {'messages': messages, 'buttons': buttons}
