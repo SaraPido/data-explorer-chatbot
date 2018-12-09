@@ -27,6 +27,8 @@ def query_select_on_word(element_type, word):
     :param word:
     :return: dictionary representing the row
     """
+
+
     el_properties = get_element_properties(element_type)
     query_string = "SELECT * FROM {} ".format(el_properties['table_name'])
     word_list = el_properties['word_list']

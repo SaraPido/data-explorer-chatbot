@@ -17,3 +17,9 @@ NLU_DATA_PATH = DIR_PATH + 'resources/nlu/data/nlu_data.md'
 NLU_MODEL_PATH = DIR_PATH + 'resources/nlu/models/default/nlu_model'
 
 NLU_MODEL_DIR_PATH = DIR_PATH + 'resources/nlu/models'
+
+
+# testing here
+
+DB_CONCEPT_PATH = DIR_PATH + 'resources/db_concept.json'
+DB_SCHEMA_PATH = DIR_PATH + 'resources/db_schema.json'

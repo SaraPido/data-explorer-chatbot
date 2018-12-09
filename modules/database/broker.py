@@ -1,9 +1,22 @@
 import json
 import logging
+from pprint import pprint
+
+from mysql import connector
+
+from modules.settings import DB_SCHEMA_PATH
 
 logger = logging.getLogger(__name__)
 
 db_schema = None
+
+
+def connect():
+    global connection
+    logger.info('Connecting to the database...')
+    connection = connector.connect(user='root', password='admin', host='127.0.0.1', database='employees')
+    logger.info('Connection succeeded!')
+    # cnx.close()
 
 
 def load_db_schema(db_schema_path):
@@ -12,13 +25,117 @@ def load_db_schema(db_schema_path):
         db_schema = json.load(f)
     logger.info('Database schema file has been loaded!')
 
-def join_one_to_many(element, from_table, to_table):
-    query_string = "SELECT "
-    query_string += ", "
 
-    query_string += ", ".join(["B.{}".format(name) for name in to_el_properties['column_list']])
-    query_string += " FROM {} A, {} B ".format(from_el_properties['table_name'],
-                                               to_el_properties['table_name'])
+def query_select(query, t=None):
+    logger.info('Executing query...')
+    logger.info('Query: "{}"'.format(query))
+    if t:
+        logger.info('Tuple: {}'.format(t))
+    cursor = connection.cursor()
+    cursor.execute(query, t)
+    return cursor.fetchall()
+
+
+def decorate_rows(rows, table_name):
+    element = next(filter(lambda el: el['table_name'] == table_name, db_schema), None)
+    if element:
+        columns = element['column_list']
+        return list(map(lambda r: dict(zip(columns, r)), rows))
+    else:
+        pass  # todo: error/exception
+
+
+def query_select_on_word(table_name, word_column_list, word):
+
+    query_string = "SELECT * FROM {} ".format(table_name)
     query_string += "WHERE "
-    query_string += "A.{}=B.{} ".format(relation['from'], relation['to'])
-    query_string += "and A.{}={}".format(from_el_properties['id'], element_value[from_el_properties['id']])
+    query_string += " OR ".join(["{}=%s".format(w_col) for w_col in word_column_list])
+
+    tup = tuple([word] * len(word_column_list))
+
+    rows = query_select(query_string, tup)
+
+    return decorate_rows(rows, table_name)
+
+
+def join_one_to_many(element, from_table_name, to_table_name):
+    from_schema = get_table_schema_from_name(from_table_name)
+    to_schema = get_table_schema_from_name(to_table_name)
+
+    query_string = "SELECT "
+    query_string += ", ".join(["{}.{}".format(to_table_name, col)
+                              for col in to_schema['column_list']])
+    query_string += " "
+    query_string += "FROM {}, {} ".format(from_schema['table_name'], to_schema['table_name'])
+    query_string += "WHERE "
+    query_string += "AND ".join(["{}.{}={}.{}".format(from_table_name, p[0], to_table_name, p[1])
+                                 for p in get_paired_reference_key_list(from_schema, to_schema)])
+    query_string += " AND "
+    query_string += "AND ".join(['{}.{}=%s'.format(from_table_name, primary, element[primary])
+                                 for primary in from_schema['primary_key_list']])
+
+    tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
+
+    rows = query_select(query_string, tup)
+
+    return decorate_rows(rows, to_table_name)
+
+
+def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
+    from_schema = get_table_schema_from_name(from_table_name)
+    to_schema = get_table_schema_from_name(to_table_name)
+    by_schema = get_table_schema_from_name(by_table_name)
+
+    query_string = "SELECT "
+    # relation/by columns
+    query_string += ", ".join(["{}.{}".format(to_table_name, col)
+                               for col in to_schema['column_list']]
+                              +
+                              ["{}.{}".format(by_table_name, col)
+                               for col in by_schema['column_list']])
+    query_string += " "
+    query_string += "FROM {}, {}, {} ".format(from_table_name, by_table_name, to_table_name)
+    query_string += "WHERE "
+    query_string += "AND ".join(["{}.{}={}.{}".format(from_table_name, p[0], by_table_name, p[1])
+                                 for p in get_paired_reference_key_list(from_schema, by_schema)])
+
+    query_string += " AND "
+    query_string += "AND ".join(["{}.{}={}.{}".format(by_table_name, p[0], to_table_name, p[1])
+                                 for p in get_paired_reference_key_list(by_schema, to_schema)])
+
+    query_string += " AND "
+    query_string += "AND ".join(['{}.{}=%s'.format(from_table_name, primary, element[primary])
+                                 for primary in from_schema['primary_key_list']])
+
+    tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
+
+    rows = query_select(query_string, tup)
+
+    first_type = decorate_rows(rows, to_table_name)
+    index = len(first_type)
+    second_type = decorate_rows([r[index:] for r in rows], by_table_name)
+
+    return first_type, second_type
+
+
+def get_paired_reference_key_list(from_schema, to_schema):
+    from_property_list = from_schema['foreign_property_list']
+    to_property_list = to_schema['foreign_property_list']
+    if from_property_list:
+        for prop in from_property_list:
+            if prop['reference_table_name'] == to_schema['table_name']:
+                return zip(prop['foreign_key_list'], prop['reference_key_list'])
+    elif to_property_list:
+        for prop in to_property_list:
+            if prop['reference_table_name'] == from_schema['table_name']:
+                return zip(prop['foreign_key_list'], prop['reference_key_list'])
+    return None
+
+
+def get_table_schema_from_name(table_name):
+    for table_schema in db_schema:
+        if table_schema['table_name'] == table_name:
+            return table_schema
+    return None
+
+
