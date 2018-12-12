@@ -58,14 +58,3 @@ def execute(message):
         for b in buttons:
             print('* {} => {}'.format(b['title'], b['payload']))
     return result
-
-
-'''
-bot = None
-
-keyboard = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='IP', callback_data='ip'),
-     InlineKeyboardButton(text='Info', callback_data='info')],
-    [InlineKeyboardButton(text='Time', callback_data='time')],
-])
-'''

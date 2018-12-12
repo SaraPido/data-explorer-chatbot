@@ -1,41 +1,45 @@
-## intent:find_element_by_word
-- find [teacher](element) [Nicola](word)
-- find [lesson](element) [Maths](word)
-- find [class](element) [1^A](word)
+## intent:find_el_by_word
+- find [employee](el) [Georgi](word)
+- find [title](el) [Staff](word)
+- find [department](el) [Finance](word)
 
-## intent:view_related_element
-- view [teacher](element)
-- view [lesson](element)
-- view [class](element)
+## intent:view_rel_el
+- view [employee](el)
+- view [title](el)
+- view [department](el)
 
-## intent:view_relations
+## intent:view_all_rel
 - relations
 - relations
 - relations
 - relations
 
-## intent:select_element_by_position
-- select row [1](position)
-- row [2](position)
-- select [3](position)
+## intent:select_el_by_pos
+- select row [1](pos)
+- row [2](pos)
+- select [3](pos)
 
 
-## lookup:element
-- teacher
-- lesson
-- class
-- timetables
+## lookup:el
+- employee
+- title
+- department
+- salary
 
 ## lookup:word
-- Nicola
-- Maristella
-- Vittorio
-- Albert
-- Florian
-- Maths
-- Computer Science
-- Geography
-- History
-- 1^A
-- 2^B
-- 2^C
+- Georgi
+- Bezalel
+- Simmel
+- Senior Engineer
+- Staff
+- Assistant Engineer
+- Development
+- Finance
+- Research
+
+## lookup:pos
+- 1
+- 2
+- 3
+- 4
+- 5

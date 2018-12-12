@@ -1,6 +1,7 @@
 import logging
 
 from modules.actions import executors
+from modules import patterns
 
 logger = logging.getLogger(__name__)
 
@@ -15,26 +16,34 @@ def run_action_from_parsed_message(parsed_message):
 
     if intent_confidence >= THRESHOLD:
 
-        element_type = next(iter([e.get('value') for e in entities if e.get('entity') == 'element']), None)
+        element_type = extract_entity_if_present(entities, patterns.ENTITY_ELEMENT_TYPE)
+        by_element_type = extract_entity_if_present(entities, patterns.ENTITY_BY_ELEMENT_TYPE)
+        word = extract_entity_if_present(entities, patterns.ENTITY_WORD)
+        position = int(extract_entity_if_present(entities, patterns.ENTITY_POSITION, otherwise=0))
 
-        word = next(iter([e.get('value') for e in entities if e.get('entity') == 'word']), None)
-
-        position = next(iter([e.get('value') for e in entities if e.get('entity') == 'position']), '0')
-
-        int_pos = int(position)
-
-        if intent_name == 'view_related_element':
+        if intent_name == patterns.INTENT_VIEW_RELATED_ELEMENT:
             if element_type:
-                return executors.action_view_element_related_element(element_type, int_pos)
+                return executors.action_view_element_related_element(element_type, by=by_element_type, position=position)
 
-        elif intent_name == 'view_relations':
+        elif intent_name == patterns.INTENT_VIEW_RELATIONS:
             return executors.action_view_element_relation_list()
 
-        elif intent_name == 'select_element_by_position':
-            return executors.action_select_element_by_position(int_pos)
+        elif intent_name == patterns.INTENT_SELECT_ELEMENT_BY_POSITION:
+            return executors.action_select_element_by_position(position)
 
-        elif intent_name == 'find_element_by_word':
+        elif intent_name == patterns.INTENT_FIND_ELEMENT_BY_WORD:
             if word and element_type:
                 return executors.action_find_element_by_word(element_type, word)
 
     return {'messages': ['I did not understand that :(']}
+
+
+def extract_entity_if_present(entities, entity_name, otherwise=None):
+    return next(
+        iter(
+            [e.get('value')
+             for e in entities
+             if e.get('entity') == entity_name]
+        ),
+        otherwise
+    )

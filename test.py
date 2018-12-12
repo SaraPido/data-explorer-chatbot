@@ -3,9 +3,9 @@ import warnings
 
 from time import sleep
 
-from modules import database, connectors, extractor, caller
-from modules.database import resolver
-from modules.settings import LOG_PATH_FILE, DB_PROPERTIES_PATH
+from modules import connectors, extractor, caller
+from modules.database import resolver, broker
+from modules.settings import LOG_PATH_FILE, DB_CONCEPT_PATH, DB_SCHEMA_PATH
 
 
 def console_input():
@@ -19,7 +19,7 @@ def console_input():
         parsed_message = extractor.parse(message)
         result = caller.run_action_from_parsed_message(parsed_message)
 
-        print(result.get('message'))
+        print(result.get('messages'))
         buttons = result.get('buttons')
         if buttons:
             for b in buttons:
@@ -36,16 +36,15 @@ if __name__ == '__main__':
 
     logging.info('Starting the bot...')
 
-    resolver.connect()
-    resolver.load_db_properties(DB_PROPERTIES_PATH)
-
+    resolver.load_db_concept(DB_CONCEPT_PATH)
+    broker.load_db_schema(DB_SCHEMA_PATH)
+    broker.connect()
     extractor.load_model()
 
     logging.info('Bot successfully started!')
 
     connectors.start()
-
-    # console.input()
+    #console_input()
     while 1:
         sleep(100)
 

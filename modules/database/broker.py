@@ -1,20 +1,20 @@
 import json
 import logging
-from pprint import pprint
 
 from mysql import connector
 
-from modules.settings import DB_SCHEMA_PATH
+from modules.settings import DATABASE_NAME
 
 logger = logging.getLogger(__name__)
 
 db_schema = None
+connection = None
 
 
 def connect():
     global connection
     logger.info('Connecting to the database...')
-    connection = connector.connect(user='root', password='admin', host='127.0.0.1', database='employees')
+    connection = connector.connect(user='root', password='admin', host='127.0.0.1', database=DATABASE_NAME)
     logger.info('Connection succeeded!')
     # cnx.close()
 
@@ -34,6 +34,13 @@ def query_select(query, t=None):
     cursor = connection.cursor()
     cursor.execute(query, t)
     return cursor.fetchall()
+
+
+def get_table_schema_from_name(table_name):
+    for table_schema in db_schema:
+        if table_schema['table_name'] == table_name:
+            return table_schema
+    return None
 
 
 def decorate_rows(rows, table_name):
@@ -68,10 +75,10 @@ def join_one_to_many(element, from_table_name, to_table_name):
     query_string += " "
     query_string += "FROM {}, {} ".format(from_schema['table_name'], to_schema['table_name'])
     query_string += "WHERE "
-    query_string += "AND ".join(["{}.{}={}.{}".format(from_table_name, p[0], to_table_name, p[1])
+    query_string += " AND ".join(["{}.{}={}.{}".format(from_table_name, p[0], to_table_name, p[1])
                                  for p in get_paired_reference_key_list(from_schema, to_schema)])
     query_string += " AND "
-    query_string += "AND ".join(['{}.{}=%s'.format(from_table_name, primary, element[primary])
+    query_string += " AND ".join(['{}.{}=%s'.format(from_table_name, primary, element[primary])
                                  for primary in from_schema['primary_key_list']])
 
     tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
@@ -96,15 +103,15 @@ def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
     query_string += " "
     query_string += "FROM {}, {}, {} ".format(from_table_name, by_table_name, to_table_name)
     query_string += "WHERE "
-    query_string += "AND ".join(["{}.{}={}.{}".format(from_table_name, p[0], by_table_name, p[1])
+    query_string += " AND ".join(["{}.{}={}.{}".format(from_table_name, p[0], by_table_name, p[1])
                                  for p in get_paired_reference_key_list(from_schema, by_schema)])
 
     query_string += " AND "
-    query_string += "AND ".join(["{}.{}={}.{}".format(by_table_name, p[0], to_table_name, p[1])
+    query_string += " AND ".join(["{}.{}={}.{}".format(by_table_name, p[0], to_table_name, p[1])
                                  for p in get_paired_reference_key_list(by_schema, to_schema)])
 
     query_string += " AND "
-    query_string += "AND ".join(['{}.{}=%s'.format(from_table_name, primary, element[primary])
+    query_string += " AND ".join(['{}.{}=%s'.format(from_table_name, primary, element[primary])
                                  for primary in from_schema['primary_key_list']])
 
     tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
@@ -128,14 +135,7 @@ def get_paired_reference_key_list(from_schema, to_schema):
     elif to_property_list:
         for prop in to_property_list:
             if prop['reference_table_name'] == from_schema['table_name']:
-                return zip(prop['foreign_key_list'], prop['reference_key_list'])
-    return None
-
-
-def get_table_schema_from_name(table_name):
-    for table_schema in db_schema:
-        if table_schema['table_name'] == table_name:
-            return table_schema
+                return zip(prop['reference_key_list'], prop['foreign_key_list'])
     return None
 
 

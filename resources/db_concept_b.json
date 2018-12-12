@@ -1,0 +1,54 @@
+[
+  {
+    "type":"teacher",
+    "table_name": "Teacher",
+    "word_column_list":["name", "surname"],
+    "relation_list": [
+      {
+        "type": "lesson",
+        "by": []
+      }
+    ]
+  },
+  {
+    "type":"lesson",
+    "table_name": "Lesson",
+    "word_column_list": ["name"],
+    "relation_list": [
+      {
+        "type": "teacher",
+        "by": []
+      },
+      {
+        "type": "class",
+        "by": []
+      },
+      {
+        "type": "timetable",
+        "by": []
+      }
+    ]
+  },
+  {
+    "type":"class",
+    "table_name": "Class",
+    "word_column_list": ["name"],
+    "relation_list": [
+      {
+        "type": "lesson",
+        "by": []
+      }
+    ]
+  },
+  {
+    "type":"timetables",
+    "table_name": "Timetables",
+    "word_column_list": ["day", "from_time", "to_time"],
+    "relation_list": [
+      {
+        "type": "lesson",
+        "by": []
+      }
+    ]
+  }
+]

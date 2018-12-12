@@ -2,7 +2,7 @@
   {
     "type": "employee",
     "table_name": "employees",
-    "word_list": ["first_name", "last_name"],
+    "word_column_list": ["first_name", "last_name"],
     "relation_list": [
       {
         "type": "title",
@@ -17,11 +17,11 @@
         "by": [
           {
             "table_name": "dept_emp",
-            "type": "work(s) in"
+            "type": "working-in"
           },
           {
             "table_name": "dept_manager",
-            "type": "manage(s)"
+            "type": "managing"
           }
         ]
       }
@@ -30,7 +30,7 @@
   {
     "type": "title",
     "table_name": "titles",
-    "word_list": ["title"],
+    "word_column_list": ["title"],
     "relation_list": [
       {
         "type": "employee",
@@ -41,7 +41,7 @@
   {
     "type": "salary",
     "table_name": "salaries",
-    "word_list": ["salary"],
+    "word_column_list": ["salary"],
     "relation_list": [
       {
         "type": "employee",
@@ -52,18 +52,18 @@
   {
     "type": "department",
     "table_name": "departments",
-    "word_list": ["dept_name"],
+    "word_column_list": ["dept_name"],
     "relation_list": [
       {
         "type": "employee",
         "by": [
           {
             "table_name": "dept_emp",
-            "type": "has worker(s)"
+            "type": "having-worker"
           },
           {
             "table_name": "dept_manager",
-            "type": "has manager(s)"
+            "type": "having-manager"
           }
         ]
       }

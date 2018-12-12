@@ -3,7 +3,7 @@ import logging
 from modules.database import resolver
 from modules import context
 
-from modules.responses import buttons as btn
+from modules.patterns import buttons as btn
 
 
 logger = logging.getLogger(__name__)
@@ -15,20 +15,29 @@ logger = logging.getLogger(__name__)
 def find_element_by_word(element_type, word):
     element_list = resolver.query_select_on_word(element_type, word)
     if element_list:
+        count = 0
+        # todo parametrize this
+        count = len(element_list)
+        #prune
+        if len(element_list) > 5:
+            element_list = element_list[:5]
         context.add_element_to_context_list(element_type + '_list', element_list)
         if len(element_list) == 1:
             context.add_element_to_context_list(element_type, element_list[0])
-        return element_list
+        return element_list, count
     else:
-        return None  # todo: error/exception
+        return None, None  # todo: error/exception
 
 
-def join_element_on_attribute(element_type, element, attribute):
-    element_list = resolver.query_select_join_on_attribute(element_type, element, attribute)
+def join_element_with_related_element(element_type, element, related_element_type, by):
+    if not by:
+        element_list = resolver.query_simple_join_with_related_element(element_type, element, related_element_type)
+    else:
+        element_list, todo = resolver.query_double_join_with_related_element(element_type, element, related_element_type, by)
     if element_list:
-        context.add_element_to_context_list(attribute + '_list', element_list)
+        context.add_element_to_context_list(related_element_type + '_list', element_list)
         if len(element_list) == 1:
-            context.add_element_to_context_list(attribute, element_list[0])
+            context.add_element_to_context_list(related_element_type, element_list[0])
         return element_list
     else:
         return None  # todo: error/exception
@@ -49,8 +58,8 @@ def get_element_type_and_value_list(element):
 
 
 def extract_element_word_string(element_type, element):
-    word_list = resolver.get_element_properties(element_type)['word_list']
-    return ' '.join(element[x] for x in word_list)
+    word_column_list = resolver.get_element_properties(element_type)['word_column_list']
+    return ' '.join(element[x] for x in word_column_list)
 
 
 def extract_element_relation_list(element_properties):
@@ -77,18 +86,25 @@ def action_find_element_by_word(element_type, word, messages=None):
                     'Element: {}\n'
                     'By word: "{}"\n'
                     'Let me check if it is present the database...\n'.format(element_type.upper(), word))
-    element_list = find_element_by_word(element_type, word)
+    element_list, count = find_element_by_word(element_type, word)
 
     if not element_list:
         messages.append('Nothing has been found, I am sorry!'.format(element_type, word))
 
-    elif len(element_list) == 1:
+    elif count == 1:
         messages.append('I have found one result!')
         return action_view_element_info(messages)
 
     else:
-        messages.append('Multiple results have been found!\n'
-                        'If you want more information, SELECT one result.')
+
+        messages.append('{} results have been found!'.format(count))
+
+        # parametrize this
+        if count < 5:
+            messages.append('If you want more information, SELECT one result.')
+        else:
+            messages.append('Only {} will be displayed, TODO HERE...'.format(5))  # parametrize
+
         buttons = btn.get_buttons_select_element(element_type, element_list)
 
     return {'messages': messages, 'buttons': buttons}
@@ -164,7 +180,8 @@ def action_view_element_relation_list(messages=None):
     return {'messages': messages, 'buttons': buttons}
 
 
-def action_view_element_related_element(related_element_type, position=0, messages=None):
+# todo case of many-to-many
+def action_view_element_related_element(related_element_type, by=None, position=0, messages=None):
     if messages is None:
         messages = []
     logger.info('Executing "action_view_element_attribute"')
@@ -182,7 +199,7 @@ def action_view_element_related_element(related_element_type, position=0, messag
             # control if there is an element in context_list
             if len(value_list) == 1:
 
-                element_list = join_element_on_attribute(type_, value_list[0], related_element_type)
+                element_list = join_element_with_related_element(type_, value_list[0], related_element_type, by)
                 messages.append('I have just performed a JOIN! From:\n'
                                 '{}: "{}"'.format(type_.upper(), extract_element_word_string(type_, value_list[0])))
                 if element_list:
@@ -217,7 +234,7 @@ def action_view_element_related_element(related_element_type, position=0, messag
                                     'Please SELECT the one you are interested in.'.format(type_))
                     payload_list = ['/view_related_element{{"element":"{}", "position":"{}"}}'
                                     .format(related_element_type, pos + 1) for pos in range(len(value_list))]
-                    buttons = btn.get_buttons_word_list(type_, value_list, payload_list)
+                    buttons = btn.get_buttons_word_column_list(type_, value_list, payload_list)
 
         else:
 
