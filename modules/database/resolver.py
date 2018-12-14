@@ -1,6 +1,8 @@
 import logging
 import json
 
+from nested_lookup import nested_lookup
+
 from modules.database import broker
 
 logger = logging.getLogger(__name__)
@@ -50,3 +52,16 @@ def get_element_properties(element_type):
         if el['type'] == element_type:
             return el
     return None
+
+
+def get_all_element_types():
+    """
+    It also finds the type of elements in many-to-many relations
+    :return: the list of elements, with no repetitions
+    """
+    res = nested_lookup('type', db_concept)
+    return list(set(res))
+
+
+def is_element_type_findable_by_word(element_type):
+    return element_type in (el['type'] for el in db_concept if el['word_column_list'])

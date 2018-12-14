@@ -1,5 +1,7 @@
+nltk
 mysql-connector>=2.1.6
 telepot
+nested-lookup
 
 jsonpickle==0.9.6
 six==1.11.0

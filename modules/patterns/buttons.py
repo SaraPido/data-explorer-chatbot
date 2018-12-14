@@ -1,3 +1,4 @@
+import modules.patterns.nlu
 from modules.database import resolver
 from modules import patterns
 
@@ -9,14 +10,14 @@ def get_buttons_relation_list(element_type):
         if r['by']:
             for by in r['by']:
                 title = '{} {}'.format(by['type'], r['type'])
-                payload = extract_payload(patterns.INTENT_VIEW_RELATED_ELEMENT,
-                                          [patterns.ENTITY_ELEMENT_TYPE, r['type']],
-                                          [patterns.ENTITY_BY_ELEMENT_TYPE, by['type']])
+                payload = extract_payload(modules.patterns.nlu.INTENT_VIEW_RELATED_ELEMENT,
+                                          [modules.patterns.nlu.ENTITY_ELEMENT_TYPE, r['type']],
+                                          [modules.patterns.nlu.ENTITY_BY_ELEMENT_TYPE, by['type']])
                 buttons.append({'title': title, 'payload': payload})
         else:
             title = r['type']
-            payload = extract_payload(patterns.INTENT_VIEW_RELATED_ELEMENT,
-                                      [patterns.ENTITY_BY_ELEMENT_TYPE, r['type']])
+            payload = extract_payload(modules.patterns.nlu.INTENT_VIEW_RELATED_ELEMENT,
+                                      [modules.patterns.nlu.ENTITY_ELEMENT_TYPE, r['type']])
             buttons.append({'title': title, 'payload': payload})
     return buttons
 
@@ -26,10 +27,14 @@ def get_buttons_select_element(element_type, element_list):
     buttons = []
     for i, e in enumerate(element_list):
         title = ' '.join(e[x] for x in word_column_list)
-        payload = extract_payload(patterns.INTENT_SELECT_ELEMENT_BY_POSITION,
-                                  [patterns.ENTITY_POSITION, i + 1])
+        payload = extract_payload(modules.patterns.nlu.INTENT_SELECT_ELEMENT_BY_POSITION,
+                                  [modules.patterns.nlu.ENTITY_POSITION, i + 1])
         buttons.append({'title': title, 'payload': payload})
     return buttons
+
+
+def get_buttons_view_related_element(element_type, related_element_type):
+    pass
 
 
 def get_buttons_word_column_list(element_type, element_list, payload_list):
@@ -42,6 +47,9 @@ def get_buttons_word_column_list(element_type, element_list, payload_list):
     return buttons
 
 
+# helper
+
+
 def extract_payload(intent_name, *entity_pairs):
     payload = '/{}'.format(intent_name)
     entities = ', '.join('"{}":"{}"'.format(ep[0], ep[1]) for ep in entity_pairs)
@@ -51,7 +59,7 @@ def extract_payload(intent_name, *entity_pairs):
 
 
 if __name__ == '__main__':
-    payload = extract_payload(patterns.INTENT_VIEW_RELATED_ELEMENT,
-                              [patterns.ENTITY_ELEMENT_TYPE, 'element'],
-                              [patterns.ENTITY_BY_ELEMENT_TYPE, '1'])
+    payload = extract_payload(modules.patterns.nlu.INTENT_VIEW_RELATED_ELEMENT,
+                              [modules.patterns.nlu.ENTITY_ELEMENT_TYPE, 'element'],
+                              [modules.patterns.nlu.ENTITY_BY_ELEMENT_TYPE, '1'])
     print(payload)

@@ -30,7 +30,7 @@
   {
     "type": "title",
     "table_name": "titles",
-    "word_column_list": ["title"],
+    "word_column_list": [],
     "relation_list": [
       {
         "type": "employee",
@@ -41,7 +41,7 @@
   {
     "type": "salary",
     "table_name": "salaries",
-    "word_column_list": ["salary"],
+    "word_column_list": [],
     "relation_list": [
       {
         "type": "employee",
