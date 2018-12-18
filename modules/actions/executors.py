@@ -25,6 +25,7 @@ def find_element_by_word(element_type, word):
         context.add_element_to_context_list(element_type + '_list', element_list)
         if len(element_list) == 1:
             context.add_element_to_context_list(element_type, element_list[0])
+        context.decorate_last_element_with_action_name('Elements "{}" by word "{}"'.format(element_type, word))
         return element_list, count
     else:
         return None, None  # todo: error/exception
@@ -42,6 +43,8 @@ def join_element_with_related_element(element_type, element, related_element_typ
         context.add_element_to_context_list(related_element_type + '_list', element_list)
         if len(element_list) == 1:
             context.add_element_to_context_list(related_element_type, element_list[0])
+        # todo: the "by"
+        context.decorate_last_element_with_action_name('Elements "{}" related with "{}"'.format(related_element_type, element_type))
         return element_list, count
     else:
         return None, None  # todo: error/exception
@@ -106,7 +109,7 @@ def action_find_element_by_word(entities, messages=None):
                     msg_simple.ONLY_COUNT_DISPLAYED(messages, LIMIT)  # param
 
                 # only listing here
-                msg_list.ELEMENTS_BY_WORD(messages, element_type, element_list)
+                msg_list.LIST_OF_ELEMENTS(messages, element_type, element_list)
                 # buttons = btn.get_buttons_select_element(element_type, element_list)
 
         else:
@@ -139,6 +142,8 @@ def action_select_element_by_position(entities, messages=None):
             else:
                 if position <= len(value_list):
                     context.add_element_to_context_list(type_, value_list[position - 1])
+                    context.decorate_last_element_with_action_name('Selection of "{}" with position "{}"'
+                                                                   .format(type_, position))
                     return action_view_element_info()
                 else:
                     messages.append('I am sorry, but you are selecting an element with an index out of range!')
@@ -195,8 +200,7 @@ def action_view_element_relation_list(messages=None):
 
 # todo case of many-to-many
 def action_view_element_related_element(entities, messages=None):
-    if messages is None:
-        messages = []
+    messages = messages if messages else []
     logger.info('Executing "action_view_element_attribute"')
     buttons = []
 
@@ -233,11 +237,10 @@ def action_view_element_related_element(entities, messages=None):
                         else:
 
                             msg_simple.COUNT_RESULTS_FOUND(messages, count)
-                            if count < LIMIT:
+                            if count > LIMIT:
                                 msg_simple.ONLY_COUNT_DISPLAYED(messages, LIMIT)  # param
 
-                            # todo if the results don't have word
-                            msg_list.ELEMENTS_BY_WORD(messages, related_element_type, element_list)
+                            msg_list.LIST_OF_ELEMENTS(messages, related_element_type, element_list)
 
                     else:
                         msg_simple.NOTHING_FOUND(messages)
@@ -250,6 +253,9 @@ def action_view_element_related_element(entities, messages=None):
                     if position > 0:
                         # todo: needs some checks...
                         context.add_element_to_context_list(type_, value_list[position - 1])
+                        # todo: review this decoration
+                        context.decorate_last_element_with_action_name('Selection of "{}" with position "{}"'
+                                                                       .format(type_, position))
                         # recursively calls itself
                         return action_view_element_related_element(related_element_type)
 
@@ -264,7 +270,7 @@ def action_view_element_related_element(entities, messages=None):
                 return action_view_element_relation_list(messages)
 
         else:
-            messages.append('No element registered yet...')
+            msg_simple.EMPTY_CONTEXT_LIST(messages)
 
     return {'messages': messages, 'buttons': buttons}
 
@@ -289,3 +295,54 @@ def handle_element_type_similarity(element_type_received):
                     winner = el_type
             logger.info('...I decided on: {}, with similarity distance: {}'.format(winner, sim))
     return winner
+
+
+def action_show_context(entities, messages=None):
+    messages = messages if messages else []
+    logger.info('Executing "action_show_context"')
+    buttons = []
+
+    action_name_and_position_list = context.get_action_name_and_position_list()
+    if action_name_and_position_list:
+
+        # removing the first element
+        action_name = action_name_and_position_list.pop()[0]
+        msg_simple.SHOW_CURRENT_ACTION_NAME_CONTEXT(messages, action_name)
+
+        msg_simple.SHOW_CONTEXT_BUTTONS(messages)
+        buttons = btn.get_buttons_go_back_to_context_position(action_name_and_position_list)
+
+    else:
+        msg_simple.EMPTY_CONTEXT_LIST(messages)
+
+    return {'messages': messages, 'buttons': buttons}
+
+
+def action_go_back_to_context_position(entities, messages=None):
+    messages = messages if messages else []
+    logger.info('Executing "action_show_context"')
+    buttons = []
+
+    pos = entities.get(nlu.ENTITY_POSITION)
+    if pos:
+        position = int(pos)
+        if position in [val[1] for val in context.get_action_name_and_position_list()]:
+            context.go_back_to_position(position)
+            element = context.get_last_element_from_context_list()
+            type_, value_list = get_element_type_and_value_list(element)
+            if len(value_list) == 1:
+                return action_view_element_info(messages)
+            else:
+                msg_list.LIST_OF_ELEMENTS(messages, type_, value_list)
+        elif position == nlu.VALUE_POSITION_RESET_CONTEXT:
+            context.reset_context_list()
+            msg_simple.CONTEXT_LIST_RESET(messages)
+        else:
+            return action_show_context(entities, messages)
+    else:
+        return action_show_context(entities, messages)
+
+    return {'messages': messages, 'buttons': buttons}
+
+
+

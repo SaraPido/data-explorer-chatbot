@@ -32,6 +32,12 @@ def run_action_from_parsed_message(parsed_message):
         elif intent_name == nlu.INTENT_FIND_ELEMENT_BY_WORD:
             return executors.action_find_element_by_word(entities)
 
+        elif intent_name == nlu.INTENT_SHOW_CONTEXT:
+            return executors.action_show_context(entities)
+
+        elif intent_name == nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION:
+            return executors.action_go_back_to_context_position(entities)
+
     messages = []
     msg_simple.ERROR(messages)
     return {'messages': messages}

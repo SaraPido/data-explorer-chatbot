@@ -142,6 +142,50 @@
           }
         ],
         "text": "select 3"
+      },
+      {
+        "intent": "show_context",
+        "text": "context"
+      },
+      {
+        "intent": "show_context",
+        "text": "show context"
+      },
+      {
+        "intent": "show_context",
+        "text": "view context"
+      },
+      {
+        "intent": "show_context",
+        "text": "context"
+      },
+      {
+        "intent": "go_back_to_context_pos",
+        "entities": [
+          {
+            "start": 11,
+            "end": 12,
+            "value": "1",
+            "entity": "pos"
+          }
+        ],
+        "text": "go back to 1"
+      },
+      {
+        "intent": "go_back_to_context_pos",
+        "entities": [
+          {
+            "start": 11,
+            "end": 12,
+            "value": "2",
+            "entity": "pos"
+          }
+        ],
+        "text": "go back to 2"
+      },
+      {
+        "intent": "go_back_to_context_pos",
+        "text": "go back"
       }
     ],
     "regex_features": [],

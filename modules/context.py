@@ -66,6 +66,7 @@ def get_last_element_from_context_list():
 def add_element_to_context_list(element_type, element):
     """
     Add the element independently
+    # action..(?)
     :param element: {'id':1, 'name':'t_name' ...}
     :param element_type: the string representing the element
     """
@@ -73,6 +74,22 @@ def add_element_to_context_list(element_type, element):
     logger.info(' ')
     logger.info(' *** Element ' + element_type + ' has been added to the context_list ***')
     print_context_list()
+
+
+def go_back_to_position(position):
+    del context_list[position:]
+
+
+def decorate_last_element_with_action_name(action_name):
+    context_list[-1]['action_name'] = action_name
+
+
+def get_action_name_and_position_list():
+    res = []
+    for i, e in enumerate(context_list):
+        if e.get('action_name'):
+            res.append([e['action_name'], i+1])
+    return res
 
 
 def pop_element_and_leaves_from_context_list(element_type):
@@ -96,6 +113,8 @@ def print_context_list():
     logger.info(' ')
     sep = ' * '
     for el in context_list:
+        if el.get('action_name'):
+            logger.info('>> ' + el['action_name'].upper() + ' >>')
         if not isinstance(el['value'], list):
             logger.info(sep + el['type'] + ': ' + str(el['value']))
         else:

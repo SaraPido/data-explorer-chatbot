@@ -4,6 +4,7 @@ import json
 from nested_lookup import nested_lookup
 
 from modules.database import broker
+from modules.settings import DB_CONCEPT_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -39,10 +40,10 @@ def query_double_join_with_related_element(element_type, element_value, related_
 
 # Database properties
 
-def load_db_concept(db_concept_path):
+def load_db_concept():
     global db_concept
     logger.info('Loading database concept file...')
-    with open(db_concept_path) as f:
+    with open(DB_CONCEPT_PATH) as f:
         db_concept = json.load(f)
     logger.info('Database concept file has been loaded!')
 

@@ -36,8 +36,8 @@ if __name__ == '__main__':
 
     logging.info('Starting the bot...')
 
-    resolver.load_db_concept(DB_CONCEPT_PATH)
-    broker.load_db_schema(DB_SCHEMA_PATH)
+    resolver.load_db_concept()
+    broker.load_db_schema()
     broker.connect()
     extractor.load_model()
 
