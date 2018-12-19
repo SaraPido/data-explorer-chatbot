@@ -2,27 +2,27 @@ from modules.patterns import nlu
 from modules.database import resolver
 
 
-def get_buttons_relation_list(element_type):
-    relation_list = resolver.get_element_properties(element_type)['relation_list']
+def get_buttons_element_relations(element_name):
+    relations = resolver.get_element_properties(element_name)['relations']
     buttons = []
-    for r in relation_list:
-        if r['by']:
-            for by in r['by']:
-                title = '{} {}'.format(by['type'], r['type'])
+    for with_el, by_list in relations.items():
+        if by_list:
+            for by_el in by_list:
+                title = '{} -> {}'.format(by_el, with_el)
                 payload = extract_payload(nlu.INTENT_VIEW_RELATED_ELEMENT,
-                                          [nlu.ENTITY_ELEMENT_TYPE, r['type']],
-                                          [nlu.ENTITY_BY_ELEMENT_TYPE, by['type']])
+                                          [nlu.ENTITY_ELEMENT_NAME, with_el],
+                                          [nlu.ENTITY_BY_ELEMENT_NAME, by_el])
                 buttons.append({'title': title, 'payload': payload})
         else:
-            title = r['type']
+            title = with_el
             payload = extract_payload(nlu.INTENT_VIEW_RELATED_ELEMENT,
-                                      [nlu.ENTITY_ELEMENT_TYPE, r['type']])
+                                      [nlu.ENTITY_ELEMENT_NAME, with_el])
             buttons.append({'title': title, 'payload': payload})
     return buttons
 
 
-def get_buttons_select_element(element_type, element_list):
-    word_column_list = resolver.get_element_properties(element_type)['word_column_list']
+def get_buttons_select_element(element_name, element_list):
+    word_column_list = resolver.get_element_properties(element_name)['word_column_list']
     buttons = []
     for i, e in enumerate(element_list):
         title = ' '.join(e[x] for x in word_column_list)
@@ -32,7 +32,7 @@ def get_buttons_select_element(element_type, element_list):
     return buttons
 
 
-def get_buttons_view_related_element(element_type, related_element_type):
+def get_buttons_view_related_element(element_name, related_element_name):
     pass
 
 

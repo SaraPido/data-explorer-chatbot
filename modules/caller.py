@@ -24,7 +24,7 @@ def run_action_from_parsed_message(parsed_message):
             return executors.action_view_element_related_element(entities)
 
         elif intent_name == nlu.INTENT_VIEW_RELATIONS:
-            return executors.action_view_element_relation_list(entities)
+            return executors.action_view_element_relations(entities)
 
         elif intent_name == nlu.INTENT_SELECT_ELEMENT_BY_POSITION:
             return executors.action_select_element_by_position(entities)

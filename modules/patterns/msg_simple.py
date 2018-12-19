@@ -2,15 +2,15 @@ def ERROR(messages):
     messages.append('Sorry, I did not get that! :(')
 
 
-def ELEMENT_TYPE_NOT_FINDABLE_BY_WORD(messages, el_type):
-    messages.append('I am sorry, but you cannot find elements of type "{}" by word'.format(el_type))
+def ELEMENT_NAME_NOT_FINDABLE_BY_WORD(messages, element_name):
+    messages.append('I am sorry, but you cannot find elements of name "{}" by word'.format(element_name))
 
 
-def FIND_BY_WORD(messages, el_type, word):
+def FIND_BY_WORD(messages, element_name, word):
     messages.append('If I am right, you are looking for...\n'
                     'Element: {}\n'
                     'By word: "{}"\n'
-                    'Let me check if it is present the database...\n'.format(el_type.upper(), word))
+                    'Let me check if it is present the database...\n'.format(element_name.upper(), word))
 
 
 def NOTHING_FOUND(messages):

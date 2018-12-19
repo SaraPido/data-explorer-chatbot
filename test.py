@@ -5,7 +5,7 @@ from time import sleep
 
 from modules import connectors, extractor, caller
 from modules.database import resolver, broker
-from modules.settings import LOG_PATH_FILE, DB_CONCEPT_PATH, DB_SCHEMA_PATH
+from modules.settings import LOG_PATH_FILE
 
 
 def console_input():

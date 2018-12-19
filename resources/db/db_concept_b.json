@@ -1,58 +1,70 @@
-[
-  {
-    "type":"teacher",
+{
+  "teacher": {
+    "type": "primary",
     "table_name": "Teacher",
-    "word_column_list":["name", "surname"],
-    "show_column_list":["name", "surname"],
-    "relation_list": [
-      {
-        "type": "lesson",
-        "by": []
-      }
-    ]
+    "word_column_list": [
+      "name",
+      "surname"
+    ],
+    "show_column_list": [
+      "name",
+      "surname"
+    ],
+    "relations": {
+      "lesson": [],
+      "class": [
+        "lesson"
+      ],
+      "timetables": [
+        "lesson"
+      ]
+    }
   },
-  {
-    "type":"lesson",
+  "lesson": {
+    "type": "primary",
     "table_name": "Lesson",
-    "word_column_list": ["name"],
-    "show_column_list": ["name"],
-    "relation_list": [
-      {
-        "type": "teacher",
-        "by": []
-      },
-      {
-        "type": "class",
-        "by": []
-      },
-      {
-        "type": "timetable",
-        "by": []
-      }
-    ]
+    "word_column_list": [
+      "name"
+    ],
+    "show_column_list": [
+      "name"
+    ],
+    "relations": {
+      "teacher": [],
+      "class": [],
+      "timetables": []
+    }
   },
-  {
-    "type":"class",
+  "class": {
+    "type": "primary",
     "table_name": "Class",
-    "word_column_list": ["name"],
-    "show_column_list": ["name"],
-    "relation_list": [
-      {
-        "type": "lesson",
-        "by": []
-      }
-    ]
+    "word_column_list": [
+      "name"
+    ],
+    "show_column_list": [
+      "name"
+    ],
+    "relations": {
+      "lesson": [],
+      "teacher": [
+        "lesson"
+      ],
+      "timetables": [
+        "lesson"
+      ]
+    }
   },
-  {
-    "type":"timetables",
-    "table_name": "Timetables",
+  "timetables": {
+    "type": "secondary",
+    "table_name": "Timetable",
     "word_column_list": [],
-    "show_column_list": ["day", "from_time", "to_time"],
-    "relation_list": [
-      {
-        "type": "lesson",
-        "by": []
-      }
-    ]
+    "show_column_list": [
+      "day",
+      "from_time",
+      "to_time"
+    ],
+    "relations": {
+      "lesson": []
+    }
   }
-]
+}
