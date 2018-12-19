@@ -1,76 +1,80 @@
-[
-  {
-    "type": "employee",
+{
+  "employee": {
+    "type": "primary",
     "table_name": "employees",
-    "word_column_list": ["first_name", "last_name"],
-    "show_column_list": ["first_name", "last_name"],
-    "relation_list": [
-      {
-        "type": "title",
-        "by": []
-      },
-      {
-        "type": "salary",
-        "by": []
-      },
-      {
-        "type": "department",
-        "by": [
-          {
-            "table_name": "dept_emp",
-            "type": "working-in"
-          },
-          {
-            "table_name": "dept_manager",
-            "type": "managing"
-          }
-        ]
-      }
-    ]
+    "word_column_list": [
+      "first_name",
+      "last_name"
+    ],
+    "show_column_list": [
+      "first_name",
+      "last_name"
+    ],
+    "relations": {
+      "title": [],
+      "salary": [],
+      "department": [
+        "working-in",
+        "managing"
+      ]
+    }
   },
-  {
-    "type": "title",
+  "title": {
+    "type": "secondary",
     "table_name": "titles",
     "word_column_list": [],
-    "show_column_list": ["title", "from_date", "to_date"],
-    "relation_list": [
-      {
-        "type": "employee",
-        "by": []
-      }
-    ]
+    "show_column_list": [
+      "title",
+      "from_date",
+      "to_date"
+    ],
+    "relations": {
+      "employee": []
+    }
   },
-  {
-    "type": "salary",
+  "salary": {
+    "type": "secondary",
     "table_name": "salaries",
     "word_column_list": [],
-    "show_column_list": ["salary", "from_date", "to_date"],
-    "relation_list": [
-      {
-        "type": "employee",
-        "by": []
-      }
-    ]
+    "show_column_list": [
+      "salary",
+      "from_date",
+      "to_date"
+    ],
+    "relations": {
+      "employee": []
+    }
   },
-  {
-    "type": "department",
+  "department": {
+    "type": "primary",
     "table_name": "departments",
-    "word_column_list": ["dept_name"],
-    "show_column_list": ["dept_name"],
-    "relation_list": [
-      {
-        "type": "employee",
-        "by": [
-          {
-            "table_name": "dept_emp",
-            "type": "having-worker"
-          },
-          {
-            "table_name": "dept_manager",
-            "type": "having-manager"
-          }
-        ]
-      }
-    ]
+    "word_column_list": [
+      "dept_name"
+    ],
+    "show_column_list": [
+      "dept_name"
+    ],
+    "relations": {
+      "employee": [
+        "having-worker",
+        "having-manager"
+      ]
+    }
+  },
+  "working-in": {
+    "type": "crossing",
+    "table_name": "dept_emp"
+  },
+  "managing": {
+    "type": "crossing",
+    "table_name": "dept_manager"
+  },
+  "having-worker": {
+    "type": "crossing",
+    "table_name": "dept_emp"
+  },
+  "having-manager": {
+    "type": "crossing",
+    "table_name": "dept_manager"
   }
-]
+}
