@@ -29,9 +29,12 @@ DB_SCHEMA_PATH = DIR_PATH + ('resources/db/db_schema.json' if which else 'resour
 
 #db
 
+DATABASE_USER = 'root'
+DATABASE_PASSWORD = 'admin'
+DATABASE_HOST = '127.0.0.1'
 DATABASE_NAME = 'employees' if which else 'classicmodels'
 
 # nlu
 
-NLU_CONFIG_PIPELINE = "tensorflow_embedding"  # spacy_sklearn
+NLU_CONFIG_PIPELINE = "spacy_sklearn"  # "tensorflow_embedding"
 NLU_CONFIG_LANGUAGE = "en"

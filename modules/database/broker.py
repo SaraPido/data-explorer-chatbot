@@ -1,11 +1,8 @@
 import json
 import logging
-import re
-
-import sqlparse
 from mysql import connector
 
-from modules.settings import DATABASE_NAME, DB_SCHEMA_PATH
+from modules.settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +13,10 @@ connection = None
 def connect():
     global connection
     logger.info('Connecting to the database...')
-    connection = connector.connect(user='root', password='admin', host='127.0.0.1', database=DATABASE_NAME)
+    connection = connector.connect(user=DATABASE_USER,
+                                   password=DATABASE_PASSWORD,
+                                   host=DATABASE_HOST,
+                                   database=DATABASE_NAME)
     logger.info('Connection succeeded!')
     # cnx.close()
 
