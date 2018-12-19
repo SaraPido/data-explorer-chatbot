@@ -1,11 +1,11 @@
 import json
 import logging
 
-from rasa_nlu import config as nlu_config
 from rasa_nlu import model as nlu_model
 from rasa_nlu import training_data as nlu_train
 
-from modules.settings import NLU_DATA_PATH, NLU_CONFIG_PATH, NLU_MODEL_DIR_PATH, NLU_MODEL_PATH
+from modules.settings import NLU_DATA_PATH, NLU_MODEL_DIR_PATH, NLU_MODEL_PATH, NLU_CONFIG_PIPELINE, \
+    NLU_CONFIG_LANGUAGE
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +60,8 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logging.info('Training the NLU model...')
     training_data = nlu_train.load_data(NLU_DATA_PATH)
-    trainer = nlu_model.Trainer(nlu_config.load(NLU_CONFIG_PATH))
+    trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": NLU_CONFIG_PIPELINE,
+                                                                     "language": NLU_CONFIG_LANGUAGE}))
     trainer.train(training_data)
     model_directory = trainer.persist(NLU_MODEL_DIR_PATH, fixed_model_name='nlu_model')
     logging.info('NLU model completely trained!')

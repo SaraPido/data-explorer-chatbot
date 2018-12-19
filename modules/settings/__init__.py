@@ -4,7 +4,9 @@ file_path = os.path.normpath(os.path.abspath(__file__))
 file_path_list = file_path.split(os.sep)
 
 # selector
-which = 0
+which = 1
+
+# files
 
 while file_path_list[-1] != 'sherbot':
     del file_path_list[-1]
@@ -12,8 +14,6 @@ while file_path_list[-1] != 'sherbot':
 DIR_PATH = os.sep.join(file_path_list) + '/'
 
 LOG_PATH_FILE = DIR_PATH + 'log.txt'
-
-NLU_CONFIG_PATH = DIR_PATH + 'resources/nlu/data/nlu_config.yml'
 
 NLU_DATA_PATH = DIR_PATH + ('resources/nlu/data/nlu_data.md' if which else 'resources/nlu/data/nlu_data_b.md')
 
@@ -27,6 +27,11 @@ DB_SCHEMA_PATH = DIR_PATH + ('resources/db/db_schema.json' if which else 'resour
 
 # settings
 
+#db
+
 DATABASE_NAME = 'employees' if which else 'classicmodels'
 
+# nlu
 
+NLU_CONFIG_PIPELINE = "tensorflow_embedding"  # spacy_sklearn
+NLU_CONFIG_LANGUAGE = "en"
