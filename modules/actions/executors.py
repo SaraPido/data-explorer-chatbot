@@ -98,6 +98,8 @@ def action_find_element_by_word(entities, messages, buttons):
 
             element_list, count = find_element_by_word(element_name, word)
 
+            # TODO convert everything into the dictionary format!!!!
+
             msg_simple.FIND_BY_WORD(messages, element_name, word)
 
             if not element_list:

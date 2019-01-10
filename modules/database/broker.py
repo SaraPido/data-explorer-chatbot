@@ -2,6 +2,7 @@ import json
 import logging
 from mysql import connector
 
+from modules import common
 from modules.settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,7 @@ def load_db_schema():
     logger.info('Database schema file has been loaded!')
 
 
-def query_select(query, t=None):
+def execute_query_select(query, t=None):
     logger.info('Executing query...')
     logger.info('Query: "{}"'.format(query))
     if t:
@@ -47,13 +48,18 @@ def get_table_schema_from_name(table_name):
     return db_schema.get(table_name)  # may return None
 
 
-def decorate_rows(rows, table_name):
-    element = db_schema.get(table_name)
-    if element:
-        columns = element['column_list']
-        return list(map(lambda r: dict(zip(columns, r)), rows))
-    else:
-        pass  # todo: error/exception
+def get_dictionary_result(q_string, q_tuple, rows, to_table_name, by_table_name=None):
+    query = common.get_dict(q_string, q_tuple)
+
+    to_element = db_schema.get(to_table_name)
+    columns = to_element['column_list']
+    value = list(map(lambda r: dict(zip(columns, r)), rows))
+    by_value = []
+    if by_table_name:
+        index = len(rows)
+        rows = [r[index:] for r in rows]
+        by_value = list(map(lambda r: dict(zip(columns, r)), rows))
+    return common.get_dict(query, value, by_value)
 
 
 def query_select_on_word(table_name, word_column_list, word):
@@ -64,9 +70,9 @@ def query_select_on_word(table_name, word_column_list, word):
 
     tup = tuple([word] * len(word_column_list))
 
-    rows = query_select(query_string, tup)
+    rows = execute_query_select(query_string, tup)
 
-    return decorate_rows(rows, table_name)
+    return get_dictionary_result(query_string, tup, rows, table_name)
 
 
 def join_one_to_many(element, from_table_name, to_table_name):
@@ -86,9 +92,8 @@ def join_one_to_many(element, from_table_name, to_table_name):
 
     tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
 
-    rows = query_select(query_string, tup)
-
-    return decorate_rows(rows, to_table_name)
+    rows = execute_query_select(query_string, tup)
+    return get_dictionary_result(query_string, tup, rows, to_table_name)
 
 
 def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
@@ -119,13 +124,9 @@ def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
 
     tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
 
-    rows = query_select(query_string, tup)
+    rows = execute_query_select(query_string, tup)
 
-    first_type = decorate_rows(rows, to_table_name)
-    index = len(first_type)
-    second_type = decorate_rows([r[index:] for r in rows], by_table_name)
-
-    return first_type, second_type
+    return get_dictionary_result(query_string, tup, rows, to_table_name, by_table_name)
 
 
 def get_paired_reference_key_list(from_table_name, to_table_name):
