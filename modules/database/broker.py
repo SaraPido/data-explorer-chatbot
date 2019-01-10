@@ -12,6 +12,8 @@ connection = None
 
 def connect():
     global connection
+    logger.info('Database:\n'
+                '"' + DATABASE_NAME + '"')
     logger.info('Connecting to the database...')
     connection = connector.connect(user=DATABASE_USER,
                                    password=DATABASE_PASSWORD,
@@ -23,6 +25,9 @@ def connect():
 
 def load_db_schema():
     global db_schema
+    logger.info('Database schema file:\n'
+                '"' + DB_SCHEMA_PATH + '"')
+    logger.info('Loading database schema file...')
     with open(DB_SCHEMA_PATH) as f:
         db_schema = json.load(f)
     logger.info('Database schema file has been loaded!')
@@ -39,14 +44,11 @@ def query_select(query, t=None):
 
 
 def get_table_schema_from_name(table_name):
-    for table_schema in db_schema:
-        if table_schema['table_name'] == table_name:
-            return table_schema
-    return None
+    return db_schema.get(table_name)  # may return None
 
 
 def decorate_rows(rows, table_name):
-    element = next(filter(lambda el: el['table_name'] == table_name, db_schema), None)
+    element = db_schema.get(table_name)
     if element:
         columns = element['column_list']
         return list(map(lambda r: dict(zip(columns, r)), rows))
@@ -77,7 +79,7 @@ def join_one_to_many(element, from_table_name, to_table_name):
     query_string += "FROM {} A, {} Z ".format(from_schema['table_name'], to_schema['table_name'])
     query_string += "WHERE "
     query_string += " AND ".join(["A.{}=Z.{}".format(p[0], p[1])
-                                 for p in get_paired_reference_key_list(from_schema, to_schema)])
+                                 for p in get_paired_reference_key_list(from_table_name, to_table_name)])
     query_string += " AND "
     query_string += " AND ".join(['A.{}=%s'.format(primary, element[primary])
                                  for primary in from_schema['primary_key_list']])
@@ -105,11 +107,11 @@ def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
     query_string += "FROM {} A, {} Y, {} Z ".format(from_table_name, by_table_name, to_table_name)
     query_string += "WHERE "
     query_string += " AND ".join(["A.{}=Y.{}".format(p[0], p[1])
-                                 for p in get_paired_reference_key_list(from_schema, by_schema)])
+                                 for p in get_paired_reference_key_list(from_table_name, by_table_name)])
 
     query_string += " AND "
     query_string += " AND ".join(["Y.{}=Z.{}".format(p[0], p[1])
-                                 for p in get_paired_reference_key_list(by_schema, to_schema)])
+                                 for p in get_paired_reference_key_list(by_table_name, to_table_name)])
 
     query_string += " AND "
     query_string += " AND ".join(['A.{}=%s'.format(primary, element[primary])
@@ -126,15 +128,15 @@ def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
     return first_type, second_type
 
 
-def get_paired_reference_key_list(from_schema, to_schema):
-    from_property_list = from_schema['foreign_property_list']
-    to_property_list = to_schema['foreign_property_list']
-    if from_property_list:
-        for prop in from_property_list:
-            if prop['reference_table_name'] == to_schema['table_name']:
-                return zip(prop['foreign_key_list'], prop['reference_key_list'])
-    if to_property_list:
-        for prop in to_property_list:
-            if prop['reference_table_name'] == from_schema['table_name']:
-                return zip(prop['reference_key_list'], prop['foreign_key_list'])
+def get_paired_reference_key_list(from_table_name, to_table_name):
+    from_schema = get_table_schema_from_name(from_table_name)
+    to_schema = get_table_schema_from_name(to_table_name)
+    from_references = from_schema['references']
+    to_references = to_schema['references']
+    if from_references:
+        if from_references.get(to_table_name):
+            return zip(from_references[to_table_name]['foreign_key_list'], from_references[to_table_name]['reference_key_list'])
+    if to_references:
+        if to_references.get(from_table_name):
+            return zip(to_references[from_table_name]['foreign_key_list'], to_references[from_table_name]['reference_key_list'])
     return None

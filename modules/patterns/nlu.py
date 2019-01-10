@@ -6,6 +6,8 @@ INTENT_FIND_ELEMENT_BY_WORD = 'find_el_by_word'
 INTENT_SHOW_CONTEXT = 'show_context'
 INTENT_GO_BACK_TO_CONTEXT_POSITION = 'go_back_to_context_pos'
 
+INTENT_FALLBACK = 'fallback'
+
 ENTITY_ELEMENT_NAME = 'el'
 ENTITY_BY_ELEMENT_NAME = 'by'
 ENTITY_WORD = 'word'

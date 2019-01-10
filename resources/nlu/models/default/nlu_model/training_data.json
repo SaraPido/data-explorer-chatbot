@@ -6,36 +6,18 @@
         "entities": [
           {
             "start": 5,
-            "end": 12,
-            "value": "teacher",
+            "end": 13,
+            "value": "employee",
             "entity": "el"
           },
           {
-            "start": 13,
-            "end": 19,
-            "value": "Nicola",
+            "start": 14,
+            "end": 20,
+            "value": "Georgi",
             "entity": "word"
           }
         ],
-        "text": "find teacher Nicola"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          },
-          {
-            "start": 12,
-            "end": 17,
-            "value": "Maths",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson Maths"
+        "text": "find employee Georgi"
       },
       {
         "intent": "find_el_by_word",
@@ -43,41 +25,65 @@
           {
             "start": 5,
             "end": 10,
-            "value": "class",
+            "value": "title",
             "entity": "el"
           },
           {
             "start": 11,
-            "end": 14,
-            "value": "1^A",
+            "end": 16,
+            "value": "Staff",
             "entity": "word"
           }
         ],
-        "text": "find class 1^A"
+        "text": "find title Staff"
+      },
+      {
+        "intent": "find_el_by_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 23,
+            "value": "Finance",
+            "entity": "word"
+          }
+        ],
+        "text": "find department Finance"
+      },
+      {
+        "intent": "find_el_by_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 20,
+            "value": "Nicola",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee Nicola"
       },
       {
         "intent": "view_rel_el",
         "entities": [
           {
             "start": 5,
-            "end": 12,
-            "value": "teacher",
+            "end": 13,
+            "value": "employee",
             "entity": "el"
           }
         ],
-        "text": "view teacher"
-      },
-      {
-        "intent": "view_rel_el",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          }
-        ],
-        "text": "view lesson"
+        "text": "view employee"
       },
       {
         "intent": "view_rel_el",
@@ -85,26 +91,50 @@
           {
             "start": 5,
             "end": 10,
-            "value": "class",
+            "value": "title",
             "entity": "el"
           }
         ],
-        "text": "view class"
+        "text": "view title"
       },
       {
-        "intent": "view_all_el",
-        "text": "relations"
+        "intent": "view_rel_el",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "el"
+          }
+        ],
+        "text": "view department"
       },
       {
-        "intent": "view_all_el",
-        "text": "relations"
+        "intent": "view_rel_el",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          }
+        ],
+        "text": "view employee"
       },
       {
-        "intent": "view_all_el",
-        "text": "relations"
+        "intent": "view_all_rel",
+        "text": "show me the relations"
       },
       {
-        "intent": "view_all_el",
+        "intent": "view_all_rel",
+        "text": "its relations"
+      },
+      {
+        "intent": "view_all_rel",
+        "text": "view relations"
+      },
+      {
+        "intent": "view_all_rel",
         "text": "relations"
       },
       {
@@ -144,8 +174,24 @@
         "text": "select 3"
       },
       {
+        "intent": "select_el_by_pos",
+        "entities": [
+          {
+            "start": 7,
+            "end": 8,
+            "value": "2",
+            "entity": "pos"
+          }
+        ],
+        "text": "select 2"
+      },
+      {
         "intent": "show_context",
-        "text": "context"
+        "text": "show the context"
+      },
+      {
+        "intent": "show_context",
+        "text": "the context"
       },
       {
         "intent": "show_context",
@@ -153,7 +199,7 @@
       },
       {
         "intent": "show_context",
-        "text": "context"
+        "text": "view context"
       },
       {
         "intent": "go_back_to_context_pos",
@@ -189,27 +235,34 @@
       {
         "name": "el",
         "elements": [
-          "teacher",
-          "lesson",
-          "class",
-          "timetables"
+          "employee",
+          "title",
+          "department",
+          "salary"
         ]
       },
       {
         "name": "word",
         "elements": [
-          "Nicola",
-          "Maristella",
-          "Vittorio",
-          "Albert",
-          "Florian",
-          "Maths",
-          "Computer Science",
-          "Geography",
-          "History",
-          "1^A",
-          "2^B",
-          "2^C"
+          "Georgi",
+          "Bezalel",
+          "Simmel",
+          "Senior Engineer",
+          "Staff",
+          "Assistant Engineer",
+          "Development",
+          "Finance",
+          "Research"
+        ]
+      },
+      {
+        "name": "pos",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
         ]
       }
     ],

@@ -1,43 +1,74 @@
-[
-  {
-    "table_name": "Teacher",
-    "column_list":["id", "name", "surname", "telephone", "email"],
-    "primary_key_list": ["id"],
-    "foreign_property_list": []
+{
+  "Class": {
+    "column_list": [
+      "id",
+      "name"
+    ],
+    "primary_key_list": [
+      "id"
+    ],
+    "references": {}
   },
-  {
-    "table_name": "Class",
-    "column_list":["id", "name"],
-    "primary_key_list": ["id"],
-    "foreign_property_list": []
-  },
-  {
-    "table_name": "Lesson",
-    "column_list":["id", "name", "class_id", "teacher_id"],
-    "primary_key_list": ["id"],
-    "foreign_property_list": [
-      {
-        "foreign_key_list": ["class_id"],
-        "reference_table_name": "Class",
-        "reference_key_list": ["id"]
+  "Lesson": {
+    "column_list": [
+      "id",
+      "name",
+      "class_id",
+      "teacher_id"
+    ],
+    "primary_key_list": [
+      "id"
+    ],
+    "references": {
+      "Class": {
+        "foreign_key_list": [
+          "class_id"
+        ],
+        "reference_key_list": [
+          "id"
+        ]
       },
-      {
-        "foreign_key_list": ["teacher_id"],
-        "reference_table_name": "Teacher",
-        "reference_key_list": ["id"]
+      "Teacher": {
+        "foreign_key_list": [
+          "teacher_id"
+        ],
+        "reference_key_list": [
+          "id"
+        ]
       }
-    ]
+    }
   },
-  {
-    "table_name": "Timetable",
-    "column_list":["id", "day", "from_time", "to_time", "lesson_id"],
-    "primary_key_list": ["id"],
-    "foreign_property_list": [
-      {
-        "foreign_key_list": ["lesson_id"],
-        "reference_table_name": "Lesson",
-        "reference_key_list": ["id"]
+  "Teacher": {
+    "column_list": [
+      "id",
+      "name",
+      "surname"
+    ],
+    "primary_key_list": [
+      "id"
+    ],
+    "references": {}
+  },
+  "Timetable": {
+    "column_list": [
+      "id",
+      "day",
+      "from_time",
+      "to_time",
+      "lesson_id"
+    ],
+    "primary_key_list": [
+      "id"
+    ],
+    "references": {
+      "Lesson": {
+        "foreign_key_list": [
+          "lesson_id"
+        ],
+        "reference_key_list": [
+          "id"
+        ]
       }
-    ]
+    }
   }
-]
+}

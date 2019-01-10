@@ -4,7 +4,7 @@ file_path = os.path.normpath(os.path.abspath(__file__))
 file_path_list = file_path.split(os.sep)
 
 # selector
-which = 0
+which = 1
 
 # files
 
