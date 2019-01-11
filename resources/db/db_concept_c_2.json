@@ -1,0 +1,34 @@
+{
+  "customers": {
+    "type": "primary",
+    "table_name": "customers"
+  },
+  "employees": {
+    "type": "primary",
+    "table_name": "employees"
+  },
+  "offices": {
+    "type": "primary",
+    "table_name": "offices"
+  },
+  "orderdetails": {
+    "type": "primary",
+    "table_name": "orderdetails"
+  },
+  "orders": {
+    "type": "primary",
+    "table_name": "orders"
+  },
+  "payments": {
+    "type": "primary",
+    "table_name": "payments"
+  },
+  "productlines": {
+    "type": "primary",
+    "table_name": "productlines"
+  },
+  "products": {
+    "type": "primary",
+    "table_name": "products"
+  }
+}
