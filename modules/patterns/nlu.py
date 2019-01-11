@@ -13,4 +13,4 @@ ENTITY_BY_ELEMENT_NAME = 'by'
 ENTITY_WORD = 'word'
 ENTITY_POSITION = 'pos'
 
-VALUE_POSITION_RESET_CONTEXT = -1
+VALUE_POSITION_RESET_CONTEXT = -1  # going back to position -1 means deleting the context

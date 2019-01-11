@@ -5,7 +5,7 @@ from modules import common
 """
 [
     {
-        'name': 'teacher',
+        'element_name': 'teacher',
         'query': {
             q_string: 'SELECT * FROM Teacher WHERE name=%s'
             q_tuple: [ 'Nicola' ]
@@ -35,44 +35,6 @@ from modules import common
     }
 ]
 
-
-
-
-"""
-
-"""
-The context list is like this one
-[
-    {
-        'name': 'teacher_list', 
-        'value': [
-            {
-                'id': 1, 
-                'name': 'Nicola', 
-                'surname': 'Castaldo', 
-                'telephone': '0000000001', 
-                'email': 'admin_1@admin.com'
-            },
-            {
-                'id': 6, 
-                'name': 'Nicola', 
-                'surname': 'Abbagnano', 
-                'telephone': '0000000006', 
-                'email': 'admin_6@admin.com'
-            }
-        ]
-    }, 
-    {
-        'name': 'teacher', 
-        'value': {
-            'id': 1, 
-            'name': 'Nicola', 
-            'surname': 'Castaldo', 
-            'telephone': '0000000001', 
-            'email': 'admin_1@admin.com'
-        }
-    }
-]
 """
 
 logger = logging.getLogger(__name__)
@@ -87,7 +49,7 @@ def get_element_from_context_list(element_name):
     """
     Returns None if the element is not found
     """
-    return next(filter(lambda el: el['name'] == element_name, context_list), None)
+    return next(filter(lambda el: el['element_name'] == element_name, context_list), None)
 
 
 def get_last_element_from_context_list():
@@ -97,20 +59,11 @@ def get_last_element_from_context_list():
     return context_list[-1] if context_list else None
 
 
-def add_element_to_context_list(name,
-                                query,
-                                action_description,
-                                value,
-                                real_value_length=None):
-    # adjust real_value_length
-    real_value_length = real_value_length if real_value_length else len(value)
+def add_element_to_context_list(element):
 
-    # create dictionary with keys as variable names
-    d = common.get_dict(name, query, action_description, value, real_value_length)
-    context_list.append(d)
-
+    context_list.append(element)
     logger.info(' ')
-    logger.info(' *** Element ' + name + ' has been added to the context_list ***')
+    logger.info(' *** Element ' + element['element_name'] + ' has been added to the context_list ***')
     print_context_list()
 
 
@@ -118,11 +71,8 @@ def go_back_to_position(position):
     del context_list[position:]
 
 
-def get_action_name_and_position_list():
-    res = []
-    for i, e in enumerate(context_list):
-        res.append([e['action_description'], i + 1])
-    return res
+def get_action_name_list():
+    return [e['action_description'] for e in context_list]
 
 
 """
@@ -147,10 +97,13 @@ def print_context_list():
     sep = ' * '
     for el in context_list:
 
-        logger.info(sep + 'name: ' + el.get(['name']))
-        logger.info(sep + 'query: ' + el.get(['query']))
-        logger.info(sep + 'action_description: ' + el.get(['action_description']))
-        logger.info(sep + 'real_value_length: ' + el.get(['real_value_length']))
+        logger.info(sep + 'name: ' + el.get('element_name'))
+        query = el.get('query')
+        if query:
+            logger.info(sep + 'q_string: ' + query.get('q_string'))
+            logger.info(sep + 'q_tuple: ' + str(query.get('q_tuple')))
+        logger.info(sep + 'action_description: ' + el.get('action_description'))
+        logger.info(sep + 'real_value_length: ' + str(el.get('real_value_length')))
         for obj in el['value']:
             logger.info(sep + '- ' + str(obj))
         logger.info(' ')
