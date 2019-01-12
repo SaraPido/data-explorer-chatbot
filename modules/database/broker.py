@@ -63,13 +63,15 @@ def get_dictionary_result(q_string, q_tuple, rows, to_table_name, by_table_name=
             'real_value_length': len(value)}
 
 
-def query_select_on_word(table_name, word_column_list, word):
+# TODO review the default values of operator and strict_condition
+def query_select_on_value(table_name, value_column_list, value, operator='=', strict_condition=False):
+    and_or_condition = ' AND ' if strict_condition else ' OR '
 
     query_string = "SELECT * FROM {} ".format(table_name)
     query_string += "WHERE "
-    query_string += " OR ".join(["{}=%s".format(w_col) for w_col in word_column_list])
+    query_string += and_or_condition.join(["{} {} %s".format(v_col, operator) for v_col in value_column_list])
 
-    tup = tuple([word] * len(word_column_list))
+    tup = tuple([value] * len(value_column_list))
 
     rows = execute_query_select(query_string, tup)
 

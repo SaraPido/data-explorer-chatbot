@@ -53,6 +53,8 @@ def parse(message):
         del parsed_message['intent_ranking'], parsed_message['text']
         for e in parsed_message.get('entities'):
             del e['start'], e['end'], e['confidence'], e['extractor']
+            if e.get('processors'):
+                del e['processors']
 
     logger.info('Parsed message: {}'.format(parsed_message))
     return parsed_message

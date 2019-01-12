@@ -5,7 +5,7 @@ from modules.actions import executors
 logger = logging.getLogger(__name__)
 
 # todo: make it better
-INTENT_THRESHOLD = 0.5
+INTENT_THRESHOLD = 0.4
 
 
 def run_action_from_parsed_message(parsed_message):

@@ -1,10 +1,18 @@
 [
     {
+        "name": "num",
+        "pattern": "[1-9][0-9]*"
+    },
+    {
         "name": "el",
-        "pattern": "(?i)(\\bcustomer\\b|\\bemployee\\b|\\boffice\\b|\\border\\b|\\bpayment\\b|\\bproduct\\ line\\b|\\bproduct\\b)"
+        "pattern": "(?i)(\\bemployee\\b|\\bdepartment\\b)"
+    },
+    {
+        "name": "rel_el",
+        "pattern": "(?i)(\\bemployee\\b|\\btitle\\b|\\bdepartment\\b|\\bsalary\\b)"
     },
     {
         "name": "word",
-        "pattern": "(?i)(\\bNicola\\b|\\bMaristella\\b|\\bVittorio\\b|\\bAlbert\\b|\\bFlorian\\b|\\bCar\\b|\\bFerrari\\b|\\bMario\\b)"
+        "pattern": "(?i)(\\bGeorgi\\b|\\bBezalel\\b|\\bSimmel\\b|\\bSenior\\ Engineer\\b|\\bStaff\\b|\\bAssistant\\ Engineer\\b|\\bDevelopment\\b|\\bFinance\\b|\\bResearch\\b)"
     }
 ]

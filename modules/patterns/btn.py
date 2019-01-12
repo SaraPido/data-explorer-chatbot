@@ -46,12 +46,12 @@ def get_buttons_word_column_list(element_type, element_list, payload_list):
 
 def get_buttons_go_back_to_context_position(buttons, action_name_list):
     payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
-                              [nlu.ENTITY_POSITION, nlu.VALUE_POSITION_RESET_CONTEXT])
+                              [nlu.ENTITY_POSITION, str(nlu.VALUE_POSITION_RESET_CONTEXT)+'xx'])
     buttons.insert(0, {'title': 'RESET context ', 'payload': payload})
     for i, action_name in enumerate(action_name_list):
         title = action_name
         payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
-                                  [nlu.ENTITY_POSITION, i+1])  # position plus 1
+                                  [nlu.ENTITY_POSITION, str(i+1)+'xx'])  # position plus 1 + xx (st, nd, rd, th)
         # prepending
         buttons.insert(0, {'title': title, 'payload': payload})
 

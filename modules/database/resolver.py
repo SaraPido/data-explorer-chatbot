@@ -9,11 +9,20 @@ logger = logging.getLogger(__name__)
 db_concept = None
 
 
-def query_select_on_word(element_name, word):
+def query_select_on_word(element_name, word, operator):
     el_properties = db_concept[element_name]
     table_name = el_properties['table_name']
     word_column_list = el_properties['word_column_list']
-    result_element = broker.query_select_on_word(table_name, word_column_list, word)
+    result_element = broker.query_select_on_value(table_name, word_column_list, word, operator)
+    result_element['element_name'] = element_name
+    return result_element
+
+
+def query_select_on_number(element_name, number, operator):
+    el_properties = db_concept[element_name]
+    table_name = el_properties['table_name']
+    number_column_list = el_properties['number_column_list']
+    result_element = broker.query_select_on_value(table_name, number_column_list, number, operator)
     result_element['element_name'] = element_name
     return result_element
 
@@ -49,4 +58,13 @@ def get_all_element_names():
 
 
 def is_element_findable_by_word(element_name):
-    return element_name in (k for k, v in db_concept.items() if v.get('word_column_list'))
+    el_concept = db_concept.get(element_name)
+    # it can be found by name only if it is of type primary
+    return el_concept.get('word_column_list') and el_concept.get('type') == 'primary'
+    # return element_name in (k for k, v in db_concept.items() if v.get('word_column_list'))
+
+
+def is_element_findable_by_number(element_name):
+    el_concept = db_concept.get(element_name)
+    # it can be found by name only if it is of type primary
+    return el_concept.get('number_column_list') and el_concept.get('type') == 'primary'

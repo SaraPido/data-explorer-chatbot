@@ -6,6 +6,7 @@
       "first_name",
       "last_name"
     ],
+    "number_column_list": ["emp_no"],
     "show_column_list": [
       "first_name",
       "last_name"
@@ -22,7 +23,8 @@
   "title": {
     "type": "secondary",
     "table_name": "titles",
-    "word_column_list": [],
+    "word_column_list": ["title"],
+    "number_column_list": [],
     "show_column_list": [
       "title",
       "from_date",
@@ -36,6 +38,7 @@
     "type": "secondary",
     "table_name": "salaries",
     "word_column_list": [],
+    "number_column_list": ["salary"],
     "show_column_list": [
       "salary",
       "from_date",
@@ -54,6 +57,7 @@
     "show_column_list": [
       "dept_name"
     ],
+    "number_column_list": ["dep_no"],
     "relations": {
       "employee": [
         "having-worker",

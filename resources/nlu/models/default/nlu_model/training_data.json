@@ -7,7 +7,61 @@
           {
             "start": 5,
             "end": 13,
-            "value": "customer",
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 20,
+            "value": "Georgi",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee Georgi"
+      },
+      {
+        "intent": "find_el_by_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 21,
+            "value": "Sales",
+            "entity": "word"
+          }
+        ],
+        "text": "find department Sales"
+      },
+      {
+        "intent": "find_el_by_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 23,
+            "value": "Finance",
+            "entity": "word"
+          }
+        ],
+        "text": "find department Finance"
+      },
+      {
+        "intent": "find_el_by_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
             "entity": "el"
           },
           {
@@ -17,10 +71,10 @@
             "entity": "word"
           }
         ],
-        "text": "find customer Nicola"
+        "text": "find employee Nicola"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_num",
         "entities": [
           {
             "start": 5,
@@ -30,60 +84,312 @@
           },
           {
             "start": 14,
-            "end": 19,
-            "value": "Maths",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee Maths"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "office",
-            "entity": "el"
+            "end": 26,
+            "value": "greater than",
+            "entity": "op"
           },
           {
-            "start": 12,
-            "end": 15,
-            "value": "1^A",
-            "entity": "word"
+            "start": 27,
+            "end": 29,
+            "value": "23",
+            "entity": "num"
           }
         ],
-        "text": "find office 1^A"
+        "text": "find employee greater than 23"
       },
       {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 12,
-            "value": "product",
-            "entity": "el"
-          },
-          {
-            "start": 13,
-            "end": 16,
-            "value": "1^A",
-            "entity": "word"
-          }
-        ],
-        "text": "find product 1^A"
-      },
-      {
-        "intent": "view_rel_el",
+        "intent": "find_el_by_num",
         "entities": [
           {
             "start": 5,
             "end": 13,
-            "value": "customer",
+            "value": "employee",
             "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 17,
+            "value": "540",
+            "entity": "num"
           }
         ],
-        "text": "view customer"
+        "text": "find employee 540"
+      },
+      {
+        "intent": "find_el_by_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 26,
+            "value": "lower than",
+            "entity": "op"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "2340",
+            "entity": "num"
+          }
+        ],
+        "text": "find department lower than 2340"
+      },
+      {
+        "intent": "find_el_by_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 24,
+            "value": "equal to",
+            "entity": "op"
+          },
+          {
+            "start": 25,
+            "end": 28,
+            "value": "927",
+            "entity": "num"
+          }
+        ],
+        "text": "find department equal to 927"
+      },
+      {
+        "intent": "find_el_by_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 18,
+            "value": "6784",
+            "entity": "num"
+          }
+        ],
+        "text": "find employee 6784"
+      },
+      {
+        "intent": "find_el_by_rel_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 24,
+            "value": "title",
+            "entity": "rel_el"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "Staff",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee with title Staff"
+      },
+      {
+        "intent": "find_el_by_rel_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 24,
+            "value": "title",
+            "entity": "rel_el"
+          },
+          {
+            "start": 25,
+            "end": 33,
+            "value": "Engineer",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee with title Engineer"
+      },
+      {
+        "intent": "find_el_by_rel_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 24,
+            "value": "title",
+            "entity": "rel_el"
+          },
+          {
+            "start": 25,
+            "end": 37,
+            "value": "Senior Staff",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee with title Senior Staff"
+      },
+      {
+        "intent": "find_el_by_rel_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 24,
+            "value": "title",
+            "entity": "rel_el"
+          },
+          {
+            "start": 25,
+            "end": 43,
+            "value": "Assistant Engineer",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee with title Assistant Engineer"
+      },
+      {
+        "intent": "find_el_by_rel_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 25,
+            "value": "salary",
+            "entity": "rel_el"
+          },
+          {
+            "start": 26,
+            "end": 38,
+            "value": "greater than",
+            "entity": "op"
+          },
+          {
+            "start": 39,
+            "end": 41,
+            "value": "23",
+            "entity": "num"
+          }
+        ],
+        "text": "find employee with salary greater than 23"
+      },
+      {
+        "intent": "find_el_by_rel_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 25,
+            "value": "salary",
+            "entity": "rel_el"
+          },
+          {
+            "start": 26,
+            "end": 28,
+            "value": "11",
+            "entity": "num"
+          }
+        ],
+        "text": "find employee with salary 11"
+      },
+      {
+        "intent": "find_el_by_rel_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 25,
+            "value": "salary",
+            "entity": "rel_el"
+          },
+          {
+            "start": 26,
+            "end": 34,
+            "value": "equal to",
+            "entity": "op"
+          },
+          {
+            "start": 35,
+            "end": 38,
+            "value": "746",
+            "entity": "num"
+          }
+        ],
+        "text": "find employee with salary equal to 746"
+      },
+      {
+        "intent": "find_el_by_rel_num",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 25,
+            "value": "salary",
+            "entity": "rel_el"
+          },
+          {
+            "start": 26,
+            "end": 36,
+            "value": "lower than",
+            "entity": "op"
+          },
+          {
+            "start": 37,
+            "end": 42,
+            "value": "23421",
+            "entity": "num"
+          }
+        ],
+        "text": "find employee with salary lower than 23421"
       },
       {
         "intent": "view_rel_el",
@@ -92,7 +398,7 @@
             "start": 5,
             "end": 13,
             "value": "employee",
-            "entity": "el"
+            "entity": "rel_el"
           }
         ],
         "text": "view employee"
@@ -102,64 +408,132 @@
         "entities": [
           {
             "start": 5,
-            "end": 17,
-            "value": "product line",
-            "entity": "el"
+            "end": 10,
+            "value": "title",
+            "entity": "rel_el"
           }
         ],
-        "text": "view product line"
+        "text": "view title"
       },
       {
-        "intent": "view_all_rel",
-        "text": "relations"
-      },
-      {
-        "intent": "view_all_rel",
-        "text": "relations"
-      },
-      {
-        "intent": "view_all_rel",
-        "text": "relations"
-      },
-      {
-        "intent": "view_all_rel",
-        "text": "relations"
-      },
-      {
-        "intent": "select_el_by_pos",
+        "intent": "view_rel_el",
         "entities": [
           {
-            "start": 11,
-            "end": 12,
-            "value": "1",
-            "entity": "pos"
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "rel_el"
           }
         ],
-        "text": "select row 1"
+        "text": "view department"
       },
       {
-        "intent": "select_el_by_pos",
+        "intent": "view_rel_el",
         "entities": [
           {
-            "start": 4,
-            "end": 5,
-            "value": "2",
-            "entity": "pos"
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "rel_el"
           }
         ],
-        "text": "row 2"
+        "text": "view employee"
+      },
+      {
+        "intent": "view_all_rel",
+        "text": "show me the relations"
+      },
+      {
+        "intent": "view_all_rel",
+        "text": "its relations"
+      },
+      {
+        "intent": "view_all_rel",
+        "text": "view relations"
+      },
+      {
+        "intent": "view_all_rel",
+        "text": "relations"
       },
       {
         "intent": "select_el_by_pos",
         "entities": [
           {
             "start": 7,
-            "end": 8,
-            "value": "3",
+            "end": 12,
+            "value": "first",
             "entity": "pos"
           }
         ],
-        "text": "select 3"
+        "text": "select first row"
+      },
+      {
+        "intent": "select_el_by_pos",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "second",
+            "entity": "pos"
+          }
+        ],
+        "text": "second row"
+      },
+      {
+        "intent": "select_el_by_pos",
+        "entities": [
+          {
+            "start": 7,
+            "end": 12,
+            "value": "third",
+            "entity": "pos"
+          }
+        ],
+        "text": "select third"
+      },
+      {
+        "intent": "select_el_by_pos",
+        "entities": [
+          {
+            "start": 7,
+            "end": 13,
+            "value": "fourth",
+            "entity": "pos"
+          }
+        ],
+        "text": "select fourth"
+      },
+      {
+        "intent": "select_el_by_pos",
+        "entities": [
+          {
+            "start": 11,
+            "end": 14,
+            "value": "2nd",
+            "entity": "pos"
+          }
+        ],
+        "text": "select the 2nd row"
+      },
+      {
+        "intent": "select_el_by_pos",
+        "entities": [
+          {
+            "start": 11,
+            "end": 16,
+            "value": "fifth",
+            "entity": "pos"
+          }
+        ],
+        "text": "select the fifth"
+      },
+      {
+        "intent": "show_context",
+        "text": "show the context"
+      },
+      {
+        "intent": "show_context",
+        "text": "the context"
       },
       {
         "intent": "show_context",
@@ -167,69 +541,135 @@
       },
       {
         "intent": "show_context",
-        "text": "context"
-      },
-      {
-        "intent": "show_context",
-        "text": "context"
+        "text": "view context"
       },
       {
         "intent": "go_back_to_context_pos",
         "entities": [
           {
             "start": 11,
-            "end": 12,
-            "value": "1",
+            "end": 16,
+            "value": "first",
             "entity": "pos"
           }
         ],
-        "text": "go back to 1"
+        "text": "go back to first"
       },
       {
         "intent": "go_back_to_context_pos",
         "entities": [
           {
             "start": 11,
-            "end": 12,
-            "value": "2",
+            "end": 17,
+            "value": "second",
             "entity": "pos"
           }
         ],
-        "text": "go back to 2"
+        "text": "go back to second"
       },
       {
         "intent": "go_back_to_context_pos",
         "text": "go back"
       }
     ],
-    "regex_features": [],
+    "regex_features": [
+      {
+        "name": "num",
+        "pattern": "[1-9][0-9]*"
+      }
+    ],
     "lookup_tables": [
       {
         "name": "el",
         "elements": [
-          "customer",
           "employee",
-          "office",
-          "order",
-          "payment",
-          "product line",
-          "product"
+          "department"
+        ]
+      },
+      {
+        "name": "rel_el",
+        "elements": [
+          "employee",
+          "title",
+          "department",
+          "salary"
         ]
       },
       {
         "name": "word",
         "elements": [
-          "Nicola",
-          "Maristella",
-          "Vittorio",
-          "Albert",
-          "Florian",
-          "Car",
-          "Ferrari",
-          "Mario"
+          "Georgi",
+          "Bezalel",
+          "Simmel",
+          "Senior Engineer",
+          "Staff",
+          "Assistant Engineer",
+          "Development",
+          "Finance",
+          "Research"
         ]
       }
     ],
-    "entity_synonyms": []
+    "entity_synonyms": [
+      {
+        "value": "1st",
+        "synonyms": [
+          "first",
+          "1"
+        ]
+      },
+      {
+        "value": "2nd",
+        "synonyms": [
+          "second",
+          "2"
+        ]
+      },
+      {
+        "value": "3rd",
+        "synonyms": [
+          "third",
+          "3"
+        ]
+      },
+      {
+        "value": "4th",
+        "synonyms": [
+          "fourth",
+          "4"
+        ]
+      },
+      {
+        "value": "5th",
+        "synonyms": [
+          "fifth",
+          "5"
+        ]
+      },
+      {
+        "value": ">",
+        "synonyms": [
+          "greater than",
+          "greater",
+          "bigger"
+        ]
+      },
+      {
+        "value": "<",
+        "synonyms": [
+          "lower than",
+          "lower",
+          "smaller"
+        ]
+      },
+      {
+        "value": "=",
+        "synonyms": [
+          "equal to",
+          "equal",
+          "exactly"
+        ]
+      }
+    ]
   }
 }

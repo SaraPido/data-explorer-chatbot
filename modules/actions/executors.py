@@ -34,11 +34,26 @@ def handle_element_name_similarity(element_name_received):
             logger.info('...I decided on: {}, with similarity distance: {}'.format(winner, sim))
     return winner
 
-def handle_multiple_result_elements():
-    pass
+
+def handle_quantity_result_elements(entities, messages, buttons, element):
+
+    if element['real_value_length'] == 1:
+        msg_simple.ONE_RESULT_FOUND(messages)
+        view_element_info(entities, messages, buttons)
+
+    else:
+        msg_simple.N_RESULTS_FOUND(messages, element['real_value_length'])
+        # parametrize this
+        if element['real_value_length'] > LIMIT:
+            msg_simple.ONLY_N_DISPLAYED(messages, LIMIT)  # param
+
+        msg_list.LIST_OF_ELEMENTS(messages, element)
 
 
 # Actions
+
+
+# FIND ACTIONS
 
 
 def action_find_element_by_word(entities, messages, buttons):
@@ -52,7 +67,7 @@ def action_find_element_by_word(entities, messages, buttons):
             # when a "find" action gets called, the context list is reset
             context.reset_context_list()
 
-            element = resolver.query_select_on_word(element_name, word)
+            element = resolver.query_select_on_word(element_name, word, '=')
 
             if element['value']:
 
@@ -63,35 +78,83 @@ def action_find_element_by_word(entities, messages, buttons):
 
                 msg_simple.FIND_BY_WORD(messages, element_name, word)
 
-                if element['real_value_length'] == 1:
-                    msg_simple.ONE_RESULT_FOUND(messages)
-                    view_element_info(entities, messages, buttons)
-
-                else:
-                    msg_simple.N_RESULTS_FOUND(messages, element['real_value_length'])
-                    # parametrize this
-                    if element['real_value_length'] > LIMIT:
-                        msg_simple.ONLY_N_DISPLAYED(messages, LIMIT)  # param
-
-                    msg_list.LIST_OF_ELEMENTS(messages, element)
-                    # btn.get_buttons_select_element(buttons, element_name, element_list
+                handle_quantity_result_elements(entities, messages, buttons, element)
 
             else:
                 msg_simple.NOTHING_FOUND(messages)
 
         else:
-            msg_simple.ELEMENT_NAME_NOT_FINDABLE_BY_WORD(messages, element_name)
+            msg_simple.ELEMENT_NOT_FINDABLE_BY_WORD(messages, element_name)
 
     else:
 
         msg_simple.ERROR(messages)
 
 
+def action_find_element_by_number(entities, messages, buttons):
+    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
+    number = entities.get(nlu.ENTITY_NUMBER)
+    operator = entities.get(nlu.ENTITY_OPERATOR)
+
+    if element_name and number:
+
+        if resolver.is_element_findable_by_number(element_name):
+
+            # when a "find" action gets called, the context list is reset
+            context.reset_context_list()
+
+            # TODO maybe work more on this concept
+            operator = operator if operator in {'=', '>', '<'} else '='
+
+            element = resolver.query_select_on_number(element_name, number, operator)
+
+            if element['value']:
+
+                element['action_description'] = 'Elements of type ' + element_name + ' by number ' + number
+
+                element['value'] = element['value'][:LIMIT]
+                context.add_element_to_context_list(element)
+
+                msg_simple.FIND_BY_NUMBER(messages, element_name, number)
+
+                handle_quantity_result_elements(entities, messages, buttons, element)
+
+            else:
+                msg_simple.NOTHING_FOUND(messages)
+
+        else:
+            msg_simple.ELEMENT_NOT_FINDABLE_BY_NUMBER(messages, element_name)
+
+    else:
+
+        msg_simple.ERROR(messages)
+
+
+def action_find_el_by_related_word(entities, messages, buttons):
+    # TODO HERE
+    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
+    related_element_name = entities.get(nlu.ENTITY_RELATED_ELEMENT_NAME)
+    word = entities.get(nlu.ENTITY_WORD)
+    messages.append('Hey hey heeeeeeey: {} {} {}'.format(element_name, related_element_name, word))
+
+
+def action_find_el_by_rel_num(entities, messages, buttons):
+    # TODO HERE
+    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
+    related_element_name = entities.get(nlu.ENTITY_RELATED_ELEMENT_NAME)
+    number = entities.get(nlu.ENTITY_NUMBER)
+    messages.append('Hey hey heeeeeeey: {} {} {}'.format(element_name, related_element_name, number))
+
+
+# SELECT ACTIONS
+
+
 def action_select_element_by_position(entities, messages, buttons):
     pos = entities.get(nlu.ENTITY_POSITION)
 
     if pos:
-        position = int(pos)
+        # attention, I suppose "position" is in the form "1st", "2nd", ...
+        position = int(pos[:-2])
 
         element = context.get_last_element_from_context_list()
 
@@ -153,7 +216,7 @@ def action_view_element_relations(entities, messages, buttons):
 
 
 def action_view_element_related_element(entities, messages, buttons):
-    related_element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
+    related_element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_RELATED_ELEMENT_NAME))
     by_element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_BY_ELEMENT_NAME))
     # pos = entities.get(nlu.ENTITY_POSITION)
 
@@ -182,19 +245,7 @@ def action_view_element_related_element(entities, messages, buttons):
                         result_element['value'] = result_element['value'][:LIMIT]
                         context.add_element_to_context_list(result_element)
 
-                        # if only one result
-                        if result_element['real_value_length'] == 1:
-
-                            msg_simple.ONE_RESULT_FOUND(messages)
-                            view_element_info(entities, messages, buttons)
-
-                        else:
-
-                            msg_simple.N_RESULTS_FOUND(messages, result_element['real_value_length'])
-                            if result_element['real_value_length'] > LIMIT:
-                                msg_simple.ONLY_N_DISPLAYED(messages, LIMIT)  # param
-
-                            msg_list.LIST_OF_ELEMENTS(messages, result_element)
+                        handle_quantity_result_elements(entities, messages, buttons, result_element)
 
                     else:
                         msg_simple.NOTHING_FOUND(messages)
@@ -251,7 +302,7 @@ def action_go_back_to_context_position(entities, messages, buttons):
     pos = entities.get(nlu.ENTITY_POSITION)
 
     if pos:
-        position = int(pos)
+        position = int(pos[:-2])
 
         # if context is not empty
         if context.get_action_name_list():
@@ -280,6 +331,9 @@ def action_go_back_to_context_position(entities, messages, buttons):
 
 intents_to_action_functions = {
     nlu.INTENT_FIND_ELEMENT_BY_WORD: action_find_element_by_word,
+    nlu.INTENT_FIND_ELEMENT_BY_NUMBER: action_find_element_by_number,
+    nlu.INTENT_FIND_ELEMENT_BY_RELATED_WORD: action_find_el_by_related_word,
+    nlu.INTENT_FIND_ELEMENT_BY_RELATED_NUMBER: action_find_el_by_rel_num,
     nlu.INTENT_SELECT_ELEMENT_BY_POSITION: action_select_element_by_position,
     nlu.INTENT_VIEW_RELATIONS: action_view_element_relations,
     nlu.INTENT_VIEW_RELATED_ELEMENT: action_view_element_related_element,
