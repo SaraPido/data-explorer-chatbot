@@ -147,5 +147,5 @@ def get_paired_reference_key_list(from_table_name, to_table_name):
             return zip(from_references[to_table_name]['foreign_key_list'], from_references[to_table_name]['reference_key_list'])
     if to_references:
         if to_references.get(from_table_name):
-            return zip(to_references[from_table_name]['foreign_key_list'], to_references[from_table_name]['reference_key_list'])
+            return zip(to_references[from_table_name]['reference_key_list'], to_references[from_table_name]['foreign_key_list'])
     return None

@@ -49,4 +49,4 @@ def get_all_element_names():
 
 
 def is_element_findable_by_word(element_name):
-    return element_name in (k for k, v in db_concept.items() if v['word_column_list'])
+    return element_name in (k for k, v in db_concept.items() if v.get('word_column_list'))

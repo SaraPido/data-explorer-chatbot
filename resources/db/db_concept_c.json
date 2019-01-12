@@ -1,108 +1,113 @@
-[
-  {
-    "type":"customer",
+{
+  "customer": {
+    "type": "primary",
     "table_name": "customers",
-    "word_column_list":["customerName", "contactLastName", "contactFirstName"],
-    "show_column_list":["customerName", "contactLastName", "contactFirstName"],
-    "relation_list": [
-      {
-        "type": "employee",
-        "by": []
-      },
-      {
-        "type": "order",
-        "by": []
-      },
-      {
-        "type": "payment",
-        "by": []
-      }
-    ]
+    "word_column_list":[
+      "customerName",
+      "contactLastName",
+      "contactFirstName"
+    ],
+    "show_column_list":[
+      "customerName",
+      "contactLastName",
+      "contactFirstName"
+    ],
+    "relations": {
+      "employee": [],
+      "order": [],
+      "payment": []
+    }
   },
-  {
-    "type":"employee",
+  "employee": {
+    "type": "primary",
     "table_name": "employees",
-    "word_column_list":["lastName", "firstName"],
-    "show_column_list":["lastName", "firstName"],
-    "relation_list": [
-      {
-        "type": "employee",
-        "by": []
-      },
-      {
-        "type": "customer",
-        "by": []
-      },
-      {
-        "type": "office",
-        "by": []
-      }
-    ]
+    "word_column_list":[
+      "lastName",
+      "firstName"
+    ],
+    "show_column_list":[
+      "lastName",
+      "firstName"
+    ],
+    "relations": {
+      "employee": [],
+      "customer": [],
+      "office": []
+    }
   },
-  {
-    "type":"office",
+  "office": {
+    "type": "primary",
     "table_name": "offices",
     "word_column_list":[],
-    "show_column_list":["city", "phone", "addressLine1"],
-    "relation_list": [
-      {
-        "type": "employee",
-        "by": []
-      }
-    ]
+    "show_column_list":[
+      "city",
+      "phone",
+      "addressLine1"
+    ],
+    "relations": {
+      "employee": []
+    }
   },
-  {
-    "type":"order",
+  "order": {
+    "type": "secondary",
     "table_name": "orders",
     "word_column_list":[],
-    "show_column_list":["orderDate", "requiredDate", "shippedDate"],
-    "relation_list": [
-      {
-        "type": "product",
-        "by": [
-          {
-            "table_name": "orderdetails",
-            "type": "products-of-order"
-          }
-        ]
-      },
-      {
-        "type": "employee",
-        "by": []
-      }
+    "show_column_list":[
+      "orderDate",
+      "requiredDate",
+      "shippedDate"
+    ],
+    "relations": {
+      "customer": [],
+      "product": [
+        "product-of-order"
+      ]
+    }
+  },
+  "payment": {
+    "type": "secondary",
+    "table_name": "payments",
+    "word_column_list":[],
+    "show_column_list":[
+      "paymentDate",
+      "amount"
     ]
   },
-  {
-    "type":"product",
-    "table_name": "products",
-    "word_column_list":["productName", "productLine"],
-    "show_column_list":["productName", "productLine"],
-    "relation_list": [
-      {
-        "type": "order",
-        "by": [
-          {
-            "table_name": "orderdetails",
-            "type": "orders-of-products"
-          }
-        ]
-      },
-      {
-        "type": "product line",
-        "by": []
-      }
-    ]
-  },
-  {
-    "type":"product line",
+  "product line": {
+    "type": "secondary",
     "table_name": "productlines",
-    "word_column_list":["productLine"],
-    "show_column_list":["productLine"],
-    "relation_list": [
-      {
-        "type": "product",
-        "by": []
-      }
-    ]
+    "word_column_list":[],
+    "show_column_list":[
+      "productLine"
+    ],
+    "relations":{
+      "product": []
+    }
+  },
+  "product": {
+    "type": "primary",
+    "table_name": "products",
+    "word_column_list":[
+      "productName",
+      "productLine"
+    ],
+    "show_column_list":[
+      "productName",
+      "productLine"
+    ],
+    "relations": {
+      "order":[
+        "order-of-product"
+      ],
+      "product line": []
+    }
+  },
+  "product-of-order": {
+    "type": "crossing",
+    "table_name": "orderdetails"
+  },
+  "order-of-product": {
+    "type": "crossing",
+    "table_name": "orderdetails"
   }
-]
+}

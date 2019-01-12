@@ -5,7 +5,7 @@ from time import sleep
 
 from modules import connectors, extractor, caller
 from modules.database import resolver, broker
-from modules.settings import LOG_PATH_FILE
+from modules.settings import LOG_PATH
 
 
 def console_input():
@@ -30,9 +30,9 @@ if __name__ == '__main__':
 
     warnings.filterwarnings('ignore')
 
-    with open(LOG_PATH_FILE, 'w'):
+    with open(LOG_PATH, 'w'):
         pass
-    logging.basicConfig(filename=LOG_PATH_FILE, level=logging.INFO)
+    logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 
     logging.info('Starting the bot...')
 

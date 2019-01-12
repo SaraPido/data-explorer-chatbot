@@ -110,7 +110,7 @@ def create_concept_file():
         chosen_type = ask_number(types)
         concept[name] = {'type': chosen_type, 'table_name': table_name}
 
-    with open('../../resources/db/db_concept_c_2.json', 'w') as f:
+    with open('../../resources/db/db_concept_c.json', 'w') as f:
         json.dump(concept, f, indent=2)
 
 

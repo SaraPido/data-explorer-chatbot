@@ -2,28 +2,36 @@ import os
 
 file_path = os.path.normpath(os.path.abspath(__file__))
 file_path_list = file_path.split(os.sep)
+file_sep = os.sep
+
 
 # selector
-which = 1
+
+select = 'employees'
+
+select_dict = {
+    'employees': ['a', 'employees'],
+    'school': ['b', 'rasa_db'],
+    'shop': ['c', 'classicmodels']
+}
+
+abc = select_dict[select][0]
+db_name = select_dict[select][1]
+
 
 # files
 
 while file_path_list[-1] != 'sherbot':
     del file_path_list[-1]
 
-DIR_PATH = os.sep.join(file_path_list) + '/'
+DIR_PATH = os.sep.join(file_path_list)
 
-LOG_PATH_FILE = DIR_PATH + 'log.txt'
-
-NLU_DATA_PATH = DIR_PATH + ('resources/nlu/data/nlu_data.md' if which else 'resources/nlu/data/nlu_data_b.md')
-
-NLU_MODEL_PATH = DIR_PATH + 'resources/nlu/models/default/nlu_model'
-
-NLU_MODEL_DIR_PATH = DIR_PATH + 'resources/nlu/models'
-
-DB_CONCEPT_PATH = DIR_PATH + ('resources/db/db_concept.json' if which else 'resources/db/db_concept_b.json')
-
-DB_SCHEMA_PATH = DIR_PATH + ('resources/db/db_schema.json' if which else 'resources/db/db_schema_b.json')
+LOG_PATH = file_sep.join([DIR_PATH, 'log.txt'])
+NLU_DATA_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'data']) + file_sep + 'nlu_data_' + abc + '.md'
+NLU_MODEL_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models', 'default', 'nlu_model'])
+NLU_MODEL_DIR_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models'])
+DB_CONCEPT_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_concept_' + abc + '.json'
+DB_SCHEMA_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_schema_' + abc + '.json'
 
 # settings
 
@@ -32,7 +40,7 @@ DB_SCHEMA_PATH = DIR_PATH + ('resources/db/db_schema.json' if which else 'resour
 DATABASE_USER = 'root'
 DATABASE_PASSWORD = 'admin'
 DATABASE_HOST = '127.0.0.1'
-DATABASE_NAME = 'employees' if which else 'rasa_db'
+DATABASE_NAME = db_name
 
 # nlu
 

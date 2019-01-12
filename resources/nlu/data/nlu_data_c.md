@@ -1,12 +1,13 @@
 ## intent:find_el_by_word
-- find [teacher](el) [Nicola](word)
-- find [lesson](el) [Maths](word)
-- find [class](el) [1^A](word)
+- find [customer](el) [Nicola](word)
+- find [employee](el) [Maths](word)
+- find [office](el) [1^A](word)
+- find [product](el) [1^A](word)
 
 ## intent:view_rel_el
-- view [teacher](el)
-- view [lesson](el)
-- view [class](el)
+- view [customer](el)
+- view [employee](el)
+- view [product line](el)
 
 ## intent:view_all_rel
 - relations
@@ -31,10 +32,13 @@
 
 
 ## lookup:el
-- teacher
-- lesson
-- class
-- timetables
+- customer
+- employee
+- office
+- order
+- payment
+- product line
+- product
 
 ## lookup:word
 - Nicola
@@ -42,10 +46,6 @@
 - Vittorio
 - Albert
 - Florian
-- Maths
-- Computer Science
-- Geography
-- History
-- 1^A
-- 2^B
-- 2^C
+- Car
+- Ferrari
+- Mario

@@ -1,14 +1,10 @@
 [
     {
         "name": "el",
-        "pattern": "(?i)(\\bemployee\\b|\\btitle\\b|\\bdepartment\\b|\\bsalary\\b)"
+        "pattern": "(?i)(\\bcustomer\\b|\\bemployee\\b|\\boffice\\b|\\border\\b|\\bpayment\\b|\\bproduct\\ line\\b|\\bproduct\\b)"
     },
     {
         "name": "word",
-        "pattern": "(?i)(\\bGeorgi\\b|\\bBezalel\\b|\\bSimmel\\b|\\bSenior\\ Engineer\\b|\\bStaff\\b|\\bAssistant\\ Engineer\\b|\\bDevelopment\\b|\\bFinance\\b|\\bResearch\\b)"
-    },
-    {
-        "name": "pos",
-        "pattern": "(?i)(\\b1\\b|\\b2\\b|\\b3\\b|\\b4\\b|\\b5\\b)"
+        "pattern": "(?i)(\\bNicola\\b|\\bMaristella\\b|\\bVittorio\\b|\\bAlbert\\b|\\bFlorian\\b|\\bCar\\b|\\bFerrari\\b|\\bMario\\b)"
     }
 ]

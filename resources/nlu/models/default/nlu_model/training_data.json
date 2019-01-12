@@ -7,61 +7,7 @@
           {
             "start": 5,
             "end": 13,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 14,
-            "end": 20,
-            "value": "Georgi",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee Georgi"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 10,
-            "value": "title",
-            "entity": "el"
-          },
-          {
-            "start": 11,
-            "end": 16,
-            "value": "Staff",
-            "entity": "word"
-          }
-        ],
-        "text": "find title Staff"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 15,
-            "value": "department",
-            "entity": "el"
-          },
-          {
-            "start": 16,
-            "end": 23,
-            "value": "Finance",
-            "entity": "word"
-          }
-        ],
-        "text": "find department Finance"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "employee",
+            "value": "customer",
             "entity": "el"
           },
           {
@@ -71,43 +17,73 @@
             "entity": "word"
           }
         ],
-        "text": "find employee Nicola"
+        "text": "find customer Nicola"
       },
       {
-        "intent": "view_rel_el",
+        "intent": "find_el_by_word",
         "entities": [
           {
             "start": 5,
             "end": 13,
             "value": "employee",
             "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 19,
+            "value": "Maths",
+            "entity": "word"
           }
         ],
-        "text": "view employee"
+        "text": "find employee Maths"
       },
       {
-        "intent": "view_rel_el",
+        "intent": "find_el_by_word",
         "entities": [
           {
             "start": 5,
-            "end": 10,
-            "value": "title",
+            "end": 11,
+            "value": "office",
             "entity": "el"
-          }
-        ],
-        "text": "view title"
-      },
-      {
-        "intent": "view_rel_el",
-        "entities": [
+          },
           {
-            "start": 5,
+            "start": 12,
             "end": 15,
-            "value": "department",
+            "value": "1^A",
+            "entity": "word"
+          }
+        ],
+        "text": "find office 1^A"
+      },
+      {
+        "intent": "find_el_by_word",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "product",
+            "entity": "el"
+          },
+          {
+            "start": 13,
+            "end": 16,
+            "value": "1^A",
+            "entity": "word"
+          }
+        ],
+        "text": "find product 1^A"
+      },
+      {
+        "intent": "view_rel_el",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           }
         ],
-        "text": "view department"
+        "text": "view customer"
       },
       {
         "intent": "view_rel_el",
@@ -122,16 +98,28 @@
         "text": "view employee"
       },
       {
-        "intent": "view_all_rel",
-        "text": "show me the relations"
+        "intent": "view_rel_el",
+        "entities": [
+          {
+            "start": 5,
+            "end": 17,
+            "value": "product line",
+            "entity": "el"
+          }
+        ],
+        "text": "view product line"
       },
       {
         "intent": "view_all_rel",
-        "text": "its relations"
+        "text": "relations"
       },
       {
         "intent": "view_all_rel",
-        "text": "view relations"
+        "text": "relations"
+      },
+      {
+        "intent": "view_all_rel",
+        "text": "relations"
       },
       {
         "intent": "view_all_rel",
@@ -174,24 +162,8 @@
         "text": "select 3"
       },
       {
-        "intent": "select_el_by_pos",
-        "entities": [
-          {
-            "start": 7,
-            "end": 8,
-            "value": "2",
-            "entity": "pos"
-          }
-        ],
-        "text": "select 2"
-      },
-      {
         "intent": "show_context",
-        "text": "show the context"
-      },
-      {
-        "intent": "show_context",
-        "text": "the context"
+        "text": "context"
       },
       {
         "intent": "show_context",
@@ -199,7 +171,7 @@
       },
       {
         "intent": "show_context",
-        "text": "view context"
+        "text": "context"
       },
       {
         "intent": "go_back_to_context_pos",
@@ -235,34 +207,26 @@
       {
         "name": "el",
         "elements": [
+          "customer",
           "employee",
-          "title",
-          "department",
-          "salary"
+          "office",
+          "order",
+          "payment",
+          "product line",
+          "product"
         ]
       },
       {
         "name": "word",
         "elements": [
-          "Georgi",
-          "Bezalel",
-          "Simmel",
-          "Senior Engineer",
-          "Staff",
-          "Assistant Engineer",
-          "Development",
-          "Finance",
-          "Research"
-        ]
-      },
-      {
-        "name": "pos",
-        "elements": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
+          "Nicola",
+          "Maristella",
+          "Vittorio",
+          "Albert",
+          "Florian",
+          "Car",
+          "Ferrari",
+          "Mario"
         ]
       }
     ],

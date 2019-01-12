@@ -34,6 +34,9 @@ def handle_element_name_similarity(element_name_received):
             logger.info('...I decided on: {}, with similarity distance: {}'.format(winner, sim))
     return winner
 
+def handle_multiple_result_elements():
+    pass
+
 
 # Actions
 
@@ -62,8 +65,7 @@ def action_find_element_by_word(entities, messages, buttons):
 
                 if element['real_value_length'] == 1:
                     msg_simple.ONE_RESULT_FOUND(messages)
-                    context.add_element_to_context_list(element)
-                    view_element_info(messages)
+                    view_element_info(entities, messages, buttons)
 
                 else:
                     msg_simple.N_RESULTS_FOUND(messages, element['real_value_length'])
@@ -116,6 +118,9 @@ def action_select_element_by_position(entities, messages, buttons):
                     view_element_info(entities, messages, buttons)
                 else:
                     messages.append('I am sorry, but you are selecting an element with an index out of range!')
+
+        else:
+            msg_simple.EMPTY_CONTEXT_LIST(messages)
 
     else:
         msg_simple.ERROR(messages)
@@ -273,13 +278,13 @@ def action_go_back_to_context_position(entities, messages, buttons):
         action_show_context(entities, messages, buttons)
 
 
-intents_to_actions = {
-    nlu.INTENT_FIND_ELEMENT_BY_WORD: action_find_element_by_word.__name__,
-    nlu.INTENT_SELECT_ELEMENT_BY_POSITION: action_select_element_by_position.__name__,
-    nlu.INTENT_VIEW_RELATIONS: action_view_element_relations.__name__,
-    nlu.INTENT_VIEW_RELATED_ELEMENT: action_view_element_related_element.__name__,
-    nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION: action_go_back_to_context_position.__name__,
-    nlu.INTENT_SHOW_CONTEXT: action_show_context.__name__
+intents_to_action_functions = {
+    nlu.INTENT_FIND_ELEMENT_BY_WORD: action_find_element_by_word,
+    nlu.INTENT_SELECT_ELEMENT_BY_POSITION: action_select_element_by_position,
+    nlu.INTENT_VIEW_RELATIONS: action_view_element_relations,
+    nlu.INTENT_VIEW_RELATED_ELEMENT: action_view_element_related_element,
+    nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION: action_go_back_to_context_position,
+    nlu.INTENT_SHOW_CONTEXT: action_show_context
 }
 
 
@@ -289,16 +294,18 @@ intents_to_actions = {
 def execute_action_from_intent_name(intent_name, entities):
     messages = []
     buttons = []
-    action_name = intents_to_actions.get(intent_name)
-    if action_name:
-        logger.info('Executing action: "' + action_name + '"')
-        globals()[action_name](entities, messages, buttons)
+    action_function = intents_to_action_functions.get(intent_name)
+    if action_function:
+        logger.info('Executing action: "' + action_function.__name__ + '"')
+        action_function(entities, messages, buttons)
         return {'messages': messages, 'buttons': buttons}
     else:
+        logger.info('Action related to intent "' + intent_name + '" NOT FOUND')
         return execute_fallback()
 
 
 def execute_fallback():
     messages = []
     msg_simple.ERROR(messages)
+    logger.info('Executing FALLBACK')
     return {'messages': messages}
