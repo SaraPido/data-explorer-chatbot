@@ -14,14 +14,30 @@ def FIND_BY_WORD(messages, element_name, word):
     messages.append('If I am right, you are looking for...\n'
                     'Element: {}\n'
                     'By word: "{}"\n'
-                    'Let me check if it is present the database...\n'.format(element_name.upper(), word))
+                    'Let me check if it is present the database...\n'.format(element_name, word))
+
+
+def FIND_BY_RELATED_ELEMENT_WORD(messages, element_name, related_element_name, word):
+    messages.append('If I am right, you are looking for...\n'
+                    'Element: {}\n'
+                    'Related to element: {}\n'
+                    'By word: "{}"\n'
+                    'Let me check if it is present the database...\n'.format(element_name, related_element_name, word))
 
 
 def FIND_BY_NUMBER(messages, element_name, number):
     messages.append('If I am right, you are looking for...\n'
                     'Element: {}\n'
-                    'By number: "{}"\n'
-                    'Let me check if it is present the database...\n'.format(element_name.upper(), number))
+                    'By number: {}\n'
+                    'Let me check if it is present the database...\n'.format(element_name, number))
+
+
+def FIND_BY_RELATED_ELEMENT_NUMBER(messages, element_name, related_element_name, number):
+    messages.append('If I am right, you are looking for...\n'
+                    'Element: {}\n'
+                    'Related to element: {}\n'
+                    'By number: {}\n'
+                    'Let me check if it is present the database...\n'.format(element_name, related_element_name,number))
 
 
 def NOTHING_FOUND(messages):

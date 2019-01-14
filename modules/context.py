@@ -1,7 +1,5 @@
 import logging
 
-from modules import common
-
 """
 [
     {
@@ -61,6 +59,18 @@ def get_last_element_from_context_list():
 
 def add_element_to_context_list(element):
 
+    # NEW feature: deletes the element of the same type and all its predecessor
+    # the search is limited to the context excluding the last element
+    index = -1
+    for i, el in enumerate(context_list):
+        if el['element_name'] == element['element_name'] and i < len(context_list)-1:  # keep the last
+            index = i
+            break
+    if index > -1:
+        logger.info('Removing elements from the context list, total: {}'.format(index+1))
+        for i in range(index+1):
+            context_list.pop(0)
+
     context_list.append(element)
     logger.info(' ')
     logger.info(' *** Element ' + element['element_name'] + ' has been added to the context_list ***')
@@ -73,20 +83,6 @@ def go_back_to_position(position):
 
 def get_action_name_list():
     return [e['action_description'] for e in context_list]
-
-
-"""
-def pop_element_and_leaves_from_context_list(element_name):
-    size = len(context_list)
-    index = next((i for i, v in enumerate(context_list) if v['name'] == element_name), size)
-    del context_list[index:]
-    if index != size:
-        logger.info(' ')
-        logger.info(' *** Element ' + element_name + ' and its leaves has been deleted from the context_list ***')
-        logger.info(' ')
-"""
-
-''' printer '''
 
 
 def print_context_list():
@@ -104,8 +100,10 @@ def print_context_list():
             logger.info(sep + 'q_tuple: ' + str(query.get('q_tuple')))
         logger.info(sep + 'action_description: ' + el.get('action_description'))
         logger.info(sep + 'real_value_length: ' + str(el.get('real_value_length')))
-        for obj in el['value']:
+        for i, obj in enumerate(el['value']):
             logger.info(sep + '- ' + str(obj))
+            if el.get('by_value'):
+                logger.info(sep + 'BY: - ' + str(el['by_value'][i]))
         logger.info(' ')
 
 

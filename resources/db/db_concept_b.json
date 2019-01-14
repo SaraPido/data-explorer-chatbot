@@ -6,6 +6,7 @@
       "name",
       "surname"
     ],
+    "number_column_list": [],
     "show_column_list": [
       "name",
       "surname"
@@ -26,6 +27,7 @@
     "word_column_list": [
       "name"
     ],
+    "number_column_list": [],
     "show_column_list": [
       "name"
     ],
@@ -41,6 +43,7 @@
     "word_column_list": [
       "name"
     ],
+    "number_column_list": [],
     "show_column_list": [
       "name"
     ],
@@ -58,6 +61,7 @@
     "type": "secondary",
     "table_name": "Timetable",
     "word_column_list": [],
+    "number_column_list": [],
     "show_column_list": [
       "day",
       "from_time",

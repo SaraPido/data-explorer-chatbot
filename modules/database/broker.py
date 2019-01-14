@@ -1,5 +1,7 @@
 import json
 import logging
+import string
+
 from mysql import connector
 
 from modules.settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST
@@ -34,6 +36,8 @@ def load_db_schema():
 
 
 def execute_query_select(query, t=None):
+    # TODO: in order to have a debug working quickly
+    query += ' LIMIT 100'
     logger.info('Executing query...')
     logger.info('Query: "{}"'.format(query))
     if t:
@@ -47,101 +51,104 @@ def get_table_schema_from_name(table_name):
     return db_schema.get(table_name)  # may return None
 
 
-def get_dictionary_result(q_string, q_tuple, rows, to_table_name, by_table_name=None):
-    query = {'q_string': q_string, 'q_tuple': q_tuple}
-    to_element = db_schema.get(to_table_name)
-    columns = to_element['column_list']
-    value = list(map(lambda r: dict(zip(columns, r)), rows))
-    by_value = []
-    if by_table_name:
-        index = len(rows)
-        rows = [r[index:] for r in rows]
-        by_value = list(map(lambda r: dict(zip(columns, r)), rows))
-    return {'query': query,
-            'value': value,
-            'by_value': by_value,
-            'real_value_length': len(value)}
+def find_on_value(value_column_list, value, operator='=', *table_names):
+    tables = get_tables_dict(table_names)
 
-
-# TODO review the default values of operator and strict_condition
-def query_select_on_value(table_name, value_column_list, value, operator='=', strict_condition=False):
-    and_or_condition = ' AND ' if strict_condition else ' OR '
-
-    query_string = "SELECT * FROM {} ".format(table_name)
-    query_string += "WHERE "
-    query_string += and_or_condition.join(["{} {} %s".format(v_col, operator) for v_col in value_column_list])
+    query_string = "SELECT DISTINCT " + get_select_tables_query_string([tables[0]])
+    query_string += " FROM " + get_from_tables_query_string(tables)
+    query_string += " WHERE "
+    where_tables_pair = get_where_tables_pair_query_string(tables)
+    query_string += where_tables_pair + " AND " if where_tables_pair else ""
+    query_string += get_where_on_value_query_string(tables[-1], value_column_list, operator)
 
     tup = tuple([value] * len(value_column_list))
-
     rows = execute_query_select(query_string, tup)
-
-    return get_dictionary_result(query_string, tup, rows, table_name)
-
-
-def query_join(element, from_table_name, to_table_name, by_table_name):
-    if not by_table_name:
-        return join_one_to_many(element, from_table_name, to_table_name)
-    else:
-        return join_many_to_many(element, from_table_name, to_table_name, by_table_name)
+    return get_dictionary_result(query_string, tup, rows, tables)
 
 
-def join_one_to_many(element, from_table_name, to_table_name):
-    from_schema = get_table_schema_from_name(from_table_name)
-    to_schema = get_table_schema_from_name(to_table_name)
+def join_from_element(element, *table_names):
+    tables = get_tables_dict(table_names)
 
-    query_string = "SELECT "
-    query_string += ", ".join(["Z.{}".format(col) for col in to_schema['column_list']])
-    query_string += " "
-    query_string += "FROM {} A, {} Z ".format(from_table_name, to_table_name)
-    query_string += "WHERE "
-    query_string += " AND ".join(["A.{}=Z.{}".format(p[0], p[1])
-                                 for p in get_paired_reference_key_list(from_table_name, to_table_name)])
-    query_string += " AND "
-    query_string += " AND ".join(['A.{}=%s'.format(primary, element[primary])
-                                 for primary in from_schema['primary_key_list']])
+    query_string = "SELECT " + get_select_tables_query_string(tables[::-1][:-1])
+    query_string += " FROM " + get_from_tables_query_string(tables)
+    query_string += " WHERE "
+    where_tables_pair = get_where_tables_pair_query_string(tables)
+    query_string += where_tables_pair + " AND " if where_tables_pair else ""
+    query_string += get_where_on_primary_query_string(tables[0], element)
 
-    tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
-
+    tup = tuple([element[primary] for primary in tables[0]['schema']['primary_key_list']])
     rows = execute_query_select(query_string, tup)
-    return get_dictionary_result(query_string, tup, rows, to_table_name)
+    return get_dictionary_result(query_string, tup, rows, tables[::-1])
 
 
-def join_many_to_many(element, from_table_name, to_table_name, by_table_name):
-    from_schema = get_table_schema_from_name(from_table_name)
-    to_schema = get_table_schema_from_name(to_table_name)
-    by_schema = get_table_schema_from_name(by_table_name)
+def get_dictionary_result(q_string, q_tuple, rows, tables):
 
-    query_string = "SELECT "
-    # relation/by columns
-    query_string += ", ".join(["Z.{}".format(col)
-                               for col in to_schema['column_list']]
-                              +
-                              ["Y.{}".format(col)
-                               for col in by_schema['column_list']])
-    query_string += " "
-    query_string += "FROM {} A, {} Y, {} Z ".format(from_table_name, by_table_name, to_table_name)
-    query_string += "WHERE "
-    query_string += " AND ".join(["A.{}=Y.{}".format(p[0], p[1])
-                                 for p in get_paired_reference_key_list(from_table_name, by_table_name)])
+    query = {'q_string': q_string, 'q_tuple': q_tuple}
 
-    query_string += " AND "
-    query_string += " AND ".join(["Y.{}=Z.{}".format(p[0], p[1])
-                                 for p in get_paired_reference_key_list(by_table_name, to_table_name)])
+    to_columns = tables[0]['schema']['column_list']
+    value = list(map(lambda r: dict(zip(to_columns, r)), rows))
 
-    query_string += " AND "
-    query_string += " AND ".join(['A.{}=%s'.format(primary, element[primary])
-                                 for primary in from_schema['primary_key_list']])
+    index = len(to_columns)
+    by_value = []
 
-    tup = tuple([element[primary] for primary in from_schema['primary_key_list']])
+    # if there is a "by element"
+    if len(tables) > 2:
+        by_columns = tables[1]['schema']['column_list']
+        by_value = list(map(lambda r: dict(zip(by_columns, r[index:])), rows))
 
-    rows = execute_query_select(query_string, tup)
-
-    return get_dictionary_result(query_string, tup, rows, to_table_name, by_table_name)
+    return {'query': query, 'value': value, 'by_value': by_value, 'real_value_length': len(value)}
 
 
-def get_paired_reference_key_list(from_table_name, to_table_name):
-    from_schema = get_table_schema_from_name(from_table_name)
-    to_schema = get_table_schema_from_name(to_table_name)
+# query helper
+
+def get_tables_dict(table_names):
+    tables = []
+    num2alpha = dict(zip(range(1, 27), string.ascii_lowercase))
+    for i, tn in enumerate(table_names):
+        tables.append({"table_name": tn, "schema": get_table_schema_from_name(tn), "letter": num2alpha[i + 1]})
+    return tables
+
+
+# query creators
+
+def get_select_tables_query_string(tables):
+    col_string_list = []
+    for t in tables:
+        col_string_list.extend("{}.{}".format(t['letter'], col) for col in t['schema']['column_list'])
+    return ", ".join(col_string_list)
+
+
+def get_from_tables_query_string(tables):
+    tab_string_list = []
+    for t in tables:
+        tab_string_list.append("{} {}".format(t['table_name'], t['letter']))
+    return ", ".join(tab_string_list)
+
+
+def get_where_tables_pair_query_string(tables):
+    pair_string_list = []
+    for i, t in enumerate(tables):
+        if i < len(tables) - 1:
+            pair_string_list.extend(["{}.{}={}.{}".format(t['letter'], p[0], tables[i+1]['letter'], p[1])
+                                     for p in
+                                     get_paired_reference_key_list(t, tables[i+1])])
+    return " AND ".join(pair_string_list)
+
+
+def get_where_on_value_query_string(single_table, value_column_list, operator):
+    return " OR ".join(["{}.{} {} %s".format(single_table['letter'], v_col, operator) for v_col in value_column_list])
+
+
+def get_where_on_primary_query_string(single_table, element):
+    return " AND ".join(['{}.{}=%s'.format(single_table['letter'], primary, element[primary])
+                         for primary in single_table['schema']['primary_key_list']])
+
+
+def get_paired_reference_key_list(from_table, to_table):
+    from_table_name = from_table['table_name']
+    to_table_name = to_table['table_name']
+    from_schema = from_table['schema']
+    to_schema = to_table['schema']
     from_references = from_schema['references']
     to_references = to_schema['references']
     if from_references:

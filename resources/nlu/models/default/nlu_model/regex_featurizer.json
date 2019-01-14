@@ -5,14 +5,14 @@
     },
     {
         "name": "el",
-        "pattern": "(?i)(\\bemployee\\b|\\bdepartment\\b)"
+        "pattern": "(?i)(\\bteacher\\b|\\blesson\\b|\\bclass\\b)"
     },
     {
         "name": "rel_el",
-        "pattern": "(?i)(\\bemployee\\b|\\btitle\\b|\\bdepartment\\b|\\bsalary\\b)"
+        "pattern": "(?i)(\\bteacher\\b|\\blesson\\b|\\bclass\\b|\\btimetables\\b)"
     },
     {
         "name": "word",
-        "pattern": "(?i)(\\bGeorgi\\b|\\bBezalel\\b|\\bSimmel\\b|\\bSenior\\ Engineer\\b|\\bStaff\\b|\\bAssistant\\ Engineer\\b|\\bDevelopment\\b|\\bFinance\\b|\\bResearch\\b)"
+        "pattern": "(?i)(\\bNicola\\b|\\bMaristella\\b|\\bVittorio\\b|\\bAlbert\\b|\\bFlorian\\b|\\bMaths\\b|\\bComputer\\ Science\\b|\\bGeography\\b|\\bHistory\\b|\\b1\\^A\\b|\\b2\\^B\\b|\\b2\\^C\\b)"
     }
 ]

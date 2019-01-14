@@ -29,31 +29,6 @@
 - view [department](rel_el)
 - view [employee](rel_el)
 
-## intent:view_all_rel
-- show me the relations
-- its relations
-- view relations
-- relations
-
-## intent:select_el_by_pos
-- select [first](pos) row
-- [second](pos) row
-- select [third](pos)
-- select [fourth](pos)
-- select the [2nd](pos) row
-- select the [fifth](pos)
-
-## intent:show_context
-- show the context
-- the context
-- context
-- view context
-
-## intent:go_back_to_context_pos
-- go back to [first](pos)
-- go back to [second](pos)
-- go back
-
 ## lookup:el
 - employee
 - department
@@ -63,7 +38,6 @@
 - title
 - department
 - salary
-
 
 ## lookup:word
 - Georgi
@@ -76,6 +50,27 @@
 - Finance
 - Research
 
+## intent:view_all_rel
+- show me the relations
+- its relations
+- view relations
+- relations
+## intent:select_el_by_pos
+- select [first](pos) row
+- [second](pos) row
+- select [third](pos)
+- select [fourth](pos)
+- select the [2nd](pos) row
+- select the [fifth](pos)
+## intent:show_context
+- show the context
+- the context
+- context
+- view context
+## intent:go_back_to_context_pos
+- go back to [first](pos)
+- go back to [second](pos)
+- go back
 ## synonym:1st
 - first
 - 1
@@ -91,10 +86,8 @@
 ## synonym:5th
 - fifth
 - 5
-
 ## regex:num
 - [1-9][0-9]*
-
 ## synonym:>
 - greater than
 - greater

@@ -7,6 +7,9 @@
       "contactLastName",
       "contactFirstName"
     ],
+    "num_column_list": [
+      "customerNumber"
+    ],
     "show_column_list":[
       "customerName",
       "contactLastName",
@@ -25,6 +28,9 @@
       "lastName",
       "firstName"
     ],
+    "num_column_list": [
+      "employeeNumber"
+    ],
     "show_column_list":[
       "lastName",
       "firstName"
@@ -39,6 +45,9 @@
     "type": "primary",
     "table_name": "offices",
     "word_column_list":[],
+    "num_column_list": [
+      "officeCode"
+    ],
     "show_column_list":[
       "city",
       "phone",
@@ -52,6 +61,9 @@
     "type": "secondary",
     "table_name": "orders",
     "word_column_list":[],
+    "num_column_list": [
+      "orderNumber"
+    ],
     "show_column_list":[
       "orderDate",
       "requiredDate",
@@ -60,7 +72,7 @@
     "relations": {
       "customer": [],
       "product": [
-        "product-of-order"
+        "product-order"
       ]
     }
   },
@@ -68,15 +80,24 @@
     "type": "secondary",
     "table_name": "payments",
     "word_column_list":[],
+    "num_column_list": [
+      "amount"
+    ],
     "show_column_list":[
       "paymentDate",
       "amount"
-    ]
+    ],
+    "relations": {
+      "customer": []
+    }
   },
   "product line": {
     "type": "secondary",
     "table_name": "productlines",
-    "word_column_list":[],
+    "word_column_list":[
+      "productLine"
+    ],
+    "num_column_list": [],
     "show_column_list":[
       "productLine"
     ],
@@ -91,22 +112,25 @@
       "productName",
       "productLine"
     ],
+    "num_column_list": [
+      "productCode"
+    ],
     "show_column_list":[
       "productName",
       "productLine"
     ],
     "relations": {
       "order":[
-        "order-of-product"
+        "order-product"
       ],
       "product line": []
     }
   },
-  "product-of-order": {
+  "product-order": {
     "type": "crossing",
     "table_name": "orderdetails"
   },
-  "order-of-product": {
+  "order-product": {
     "type": "crossing",
     "table_name": "orderdetails"
   }

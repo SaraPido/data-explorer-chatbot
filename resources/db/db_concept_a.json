@@ -6,7 +6,7 @@
       "first_name",
       "last_name"
     ],
-    "number_column_list": ["emp_no"],
+    "number_column_list": [],
     "show_column_list": [
       "first_name",
       "last_name"
@@ -57,7 +57,7 @@
     "show_column_list": [
       "dept_name"
     ],
-    "number_column_list": ["dep_no"],
+    "number_column_list": [],
     "relations": {
       "employee": [
         "having-worker",
