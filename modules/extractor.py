@@ -42,9 +42,12 @@ def parse(message):
         split_message = message.split('{', 1)
         intent_name = split_message[0]
         entities = []
-        if len(split_message) > 1:
-            extracted_entities = json.loads(('{' + split_message[1]).replace("'", "\""))
-            entities = [{'value': val, 'entity': key} for key, val in extracted_entities.items()]
+        if len(split_message) > 1:  # if there are entities
+            entity_list = split_message[1].split(',')
+            for i, e in enumerate(entity_list):
+                import re
+                matches = re.findall(r'.*(?:\"|\')(.+?)(?:\"|\'):.*(?:\"|\')(.+?)(?:\"|\').*', e)
+                entities.append({'entity': matches[0][0], 'value': matches[0][1], 'start': i+1})
 
         parsed_message['intent'] = {'name': intent_name, 'confidence': 1}
         parsed_message['entities'] = entities
@@ -52,7 +55,8 @@ def parse(message):
         parsed_message = inter.parse(message)
         del parsed_message['intent_ranking'], parsed_message['text']
         for e in parsed_message.get('entities'):
-            del e['start'], e['end'], e['confidence'], e['extractor']
+            # del e['start']
+            del e['end'], e['confidence'], e['extractor']
             if e.get('processors'):
                 del e['processors']
 
@@ -66,7 +70,14 @@ if __name__ == '__main__':
                 '"' + NLU_MODEL_PATH + '"')
     logging.info('Training the NLU model...')
     training_data = nlu_train.load_data(NLU_DATA_PATH)
-    trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": NLU_CONFIG_PIPELINE,
+    pipeline = [{"name": "nlp_spacy"},
+                {"name": "tokenizer_spacy"},
+                {"name": "intent_entity_featurizer_regex"},
+                {"name": "intent_featurizer_spacy"},
+                {"name": "ner_crf"},
+                {"name": "ner_synonyms"},
+                {"name": "intent_classifier_sklearn"}]
+    trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": pipeline,
                                                                      "language": NLU_CONFIG_LANGUAGE}))
     trainer.train(training_data)
     model_directory = trainer.persist(NLU_MODEL_DIR_PATH, fixed_model_name='nlu_model')

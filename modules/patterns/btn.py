@@ -3,26 +3,19 @@ from modules.database import resolver
 
 
 def get_buttons_element_relations(buttons, element_name):
-    relations = resolver.get_element_properties(element_name)['relations']
-    for with_el, by_list in relations.items():
-        if by_list:
-            for by_el in by_list:
-                title = '{} -> {}'.format(by_el, with_el)
-                payload = extract_payload(nlu.INTENT_VIEW_RELATED_ELEMENT,
-                                          [nlu.ENTITY_RELATED_ELEMENT_NAME, with_el],
-                                          [nlu.ENTITY_BY_ELEMENT_NAME, by_el])
-                buttons.append({'title': title, 'payload': payload})
-        else:
-            title = with_el
-            payload = extract_payload(nlu.INTENT_VIEW_RELATED_ELEMENT,
-                                      [nlu.ENTITY_RELATED_ELEMENT_NAME, with_el])
-            buttons.append({'title': title, 'payload': payload})
+    relations = resolver.extract_relations(element_name)
+    for rel in relations:
+        title = rel['keyword']
+        # todo payload for join
+        payload = '/show_context'#extract_payload(nlu.INTENT_VIEW_RELATED_ELEMENT,
+                   #               [nlu.ENTITY_RELATED_ELEMENT_NAME, with_el])
+        buttons.append({'title': title, 'payload': payload})
 
 
-def get_buttons_select_element(buttons, element_name, element_list):
-    show_column_list = resolver.get_element_properties(element_name)['show_column_list']
-    for i, e in enumerate(element_list):
-        title = ' '.join(e[x] for x in show_column_list)
+def get_buttons_select_element(buttons, element):
+    show_columns = resolver.extract_show_columns(element['element_name'])
+    for i, e in enumerate(element['value']):
+        title = ' '.join(e[x] for x in show_columns)
         payload = extract_payload(nlu.INTENT_SELECT_ELEMENT_BY_POSITION,
                                   [nlu.ENTITY_POSITION, str(i+1)+'xx'])
         buttons.append({'title': title, 'payload': payload})

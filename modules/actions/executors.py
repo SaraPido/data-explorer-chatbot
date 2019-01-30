@@ -14,19 +14,34 @@ LIMIT = 5
 
 # Helpers
 
+def extract_entities(entities, entity_name):
+    found = []
+    for e in entities:
+        if e.get('entity') == entity_name:
+            found.append(e)
+    return found
+
 
 def handle_element_name_similarity(element_name_received):
-    winner = None
     all_elements_names = resolver.get_all_element_names()
-    if element_name_received:
-        if element_name_received in all_elements_names:
-            winner = element_name_received
+    return handle_similarity(element_name_received, all_elements_names)
+
+
+def handle_element_relations_similarity(element_name, relation_name_received):
+    relations = resolver.extract_relations(element_name)
+
+
+def handle_similarity(keyword, keyword_list):
+    winner = None
+    if keyword:
+        if keyword in keyword_list:
+            winner = keyword
         else:
             logger.info('I will compute some similarity distance '
-                        'for the received element "{}"...'.format(element_name_received))
+                        'for the received element "{}"...'.format(keyword))
             sim = 100  # very high number
-            for el_name in all_elements_names:
-                received = element_name_received
+            for el_name in keyword_list:
+                received = keyword
                 cur = edit_distance(el_name, received)
                 if cur < sim and cur < ELEMENT_SIMILARITY_DISTANCE_THRESHOLD:
                     sim = cur
@@ -39,15 +54,12 @@ def handle_quantity_result_elements(entities, messages, buttons, element):
 
     if element['real_value_length'] == 1:
         msg_simple.ONE_RESULT_FOUND(messages)
-        view_element_info(entities, messages, buttons)
 
     else:
         msg_simple.N_RESULTS_FOUND(messages, element['real_value_length'])
         # parametrize this
         if element['real_value_length'] > LIMIT:
             msg_simple.ONLY_N_DISPLAYED(messages, LIMIT)  # param
-
-        msg_list.LIST_OF_ELEMENTS(messages, element)
 
 
 def handle_element_selection(element, position):
@@ -69,183 +81,92 @@ def handle_element_selection(element, position):
 
     return False
 
-# Actions
+
+# ACTIONS
 
 
-# FIND ACTIONS
+def action_find_element(entities, messages, buttons):
 
+    # todo handle case no element is extracted
 
-def action_find_element_by_word(entities, messages, buttons):
-    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
-    word = entities.get(nlu.ENTITY_WORD)
+    extracted_element_name = extract_entities(entities, nlu.ENTITY_ELEMENT_NAME)[0]['value']
+    element_name = handle_element_name_similarity(extracted_element_name)
 
-    if element_name and word:
+    # todo: handle similary also for attributes...
 
-        if resolver.is_element_findable_by_word(element_name, directly=True):
+    # >----
+    # TODO: the complex case will consider multiple attributes
+    attrss = extract_entities(entities, 'attr') # nlu.ENTITY_ATTRIBUTE
+    words = extract_entities(entities, nlu.ENTITY_WORD)
+    nums = extract_entities(entities, nlu.ENTITY_NUMBER)
+    attr = attrss[0]['value'] if attrss else None
+    word = words[0]['value'] if words else None
+    num = nums[0]['value'] if nums else None
+    # ----<
 
-            # when a "find" action gets called, the context list is reset
-            context.reset_context_list()
+    if element_name:
+        attributes = []
+        for a in resolver.extract_attributes(element_name):
+            # if the attribute is the one extracted
+            if a.get('keyword') == attr:
+                if a.get('type') == 'word' and word:
+                    a['value'] = word
+                    attributes.append(a)
+                elif a.get('type') == 'num' and num:
+                    a['value'] = num
+                    attributes.append(a)
 
-            element = resolver.query_select_on_word(element_name, word, '=')
+        element = resolver.query_select(element_name, attributes)
 
-            if element['value']:
+        if element['value']:
+            element['action_description'] = 'TODO'
 
-                element['action_description'] = 'Elements ' + element_name + ' by word ' + word
+            element['value'] = element['value'][:LIMIT]
+            context.add_element_to_context_list(element)
 
-                element['value'] = element['value'][:LIMIT]
-                context.add_element_to_context_list(element)
+            msg_simple.FIND_BY_WORD(messages, element_name, word)
 
-                msg_simple.FIND_BY_WORD(messages, element_name, word)
+            handle_quantity_result_elements(entities, messages, buttons, element)
 
-                handle_quantity_result_elements(entities, messages, buttons, element)
-
-                action_view_element_relations(entities, messages, buttons)
-
-            else:
-                msg_simple.NOTHING_FOUND(messages)
-
-        else:
-            msg_simple.ELEMENT_NOT_FINDABLE_BY_WORD(messages, element_name)
+            view_context_element(entities, messages, buttons)
 
     else:
-
         msg_simple.ERROR(messages)
 
 
-def action_find_element_by_number(entities, messages, buttons):
-    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
-    number = entities.get(nlu.ENTITY_NUMBER)
-    operator = entities.get(nlu.ENTITY_OPERATOR)
+def action_join_element(entities, messages, buttons):
 
-    if element_name and number:
+    element = context.get_last_element_from_context_list()
 
-        if resolver.is_element_findable_by_number(element_name, directly=True):
+    if element:
 
-            # when a "find" action gets called, the context list is reset
-            context.reset_context_list()
+        #  control if there is a join to do
+        if resolver.are_elements_related(element['element_name'], related_element_name, by_element_name):
 
-            # TODO maybe work more on this concept
-            operator = operator if operator in {'=', '>', '<'} else '='
+            # control if there is ONLY an element in context_list
+            if element['real_value_length'] == 1:
 
-            element = resolver.query_select_on_number(element_name, number, operator)
+                result_element = resolver.query_join_with_related_element(element,
+                                                                          related_element_name,
+                                                                          by_element_name)
 
-            if element['value']:
+                messages.append('I have just performed a JOIN! From TODO')
+                if result_element['value']:
 
-                element['action_description'] = 'Elements ' + element_name + ' by number ' + number
+                    result_element['action_description'] = 'Elements ' + related_element_name + \
+                                                           ' related with ' + element['element_name']
+                    result_element['value'] = result_element['value'][:LIMIT]
+                    context.add_element_to_context_list(result_element)
 
-                element['value'] = element['value'][:LIMIT]
-                context.add_element_to_context_list(element)
-
-                msg_simple.FIND_BY_NUMBER(messages, element_name, number)
-
-                handle_quantity_result_elements(entities, messages, buttons, element)
-
-                action_view_element_relations(entities, messages, buttons)
-
-            else:
-                msg_simple.NOTHING_FOUND(messages)
-
-        else:
-            msg_simple.ELEMENT_NOT_FINDABLE_BY_NUMBER(messages, element_name)
-
-    else:
-
-        msg_simple.ERROR(messages)
-
-
-def action_find_el_by_related_word(entities, messages, buttons):
-    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
-    related_element_name = entities.get(nlu.ENTITY_RELATED_ELEMENT_NAME)
-    word = entities.get(nlu.ENTITY_WORD)
-
-    if element_name and related_element_name and word:
-
-        # this time I check if the RELATED element is findable by word
-        if resolver.is_element_findable_by_word(related_element_name):
-
-            # todo need to pay attention to many to many joins!!! now it causes problem when multijoin has more paths
-            if resolver.are_elements_related(element_name, related_element_name):
-
-                element = resolver.query_select_on_related_element_word(element_name, related_element_name, word, '=')
-
-                if element['value']:
-
-                    element['action_description'] = 'Elements ' + element_name + ' related with ' + \
-                                                    related_element_name + ' by word ' + word
-
-                    element['value'] = element['value'][:LIMIT]
-                    context.add_element_to_context_list(element)
-
-                    msg_simple.FIND_BY_RELATED_ELEMENT_WORD(messages, element_name, related_element_name, word)
-
-                    handle_quantity_result_elements(entities, messages, buttons, element)
+                    handle_quantity_result_elements(entities, messages, buttons, result_element)
 
                     action_view_element_relations(entities, messages, buttons)
 
                 else:
                     msg_simple.NOTHING_FOUND(messages)
-
-            else:
-                # todo: elements not related message
-                messages.append('elements not related')
-
-        else:
-            msg_simple.ELEMENT_NOT_FINDABLE_BY_WORD(messages, element_name)
-
-    else:
-        msg_simple.ERROR(messages)
-
-
-def action_find_el_by_related_number(entities, messages, buttons):
-    element_name = handle_element_name_similarity(entities.get(nlu.ENTITY_ELEMENT_NAME))
-    related_element_name = entities.get(nlu.ENTITY_RELATED_ELEMENT_NAME)
-    number = entities.get(nlu.ENTITY_NUMBER)
-
-    operator = entities.get(nlu.ENTITY_OPERATOR)
-
-    if element_name and related_element_name and number:
-
-        # this time I check if the RELATED element is findable by word
-        if resolver.is_element_findable_by_number(related_element_name):
-
-            if resolver.are_elements_related(element_name, related_element_name):
-
-                # TODO maybe work more on this concept
-                operator = operator if operator in {'=', '>', '<'} else '='
-
-                element = resolver.query_select_on_related_element_number(element_name, related_element_name, number,
-                                                                          operator)
-
-                if element['value']:
-
-                    element['action_description'] = 'Elements ' + element_name + ' related with ' + \
-                                                    related_element_name + ' by number ' + number
-
-                    element['value'] = element['value'][:LIMIT]
-                    context.add_element_to_context_list(element)
-
-                    msg_simple.FIND_BY_RELATED_ELEMENT_NUMBER(messages, element_name, related_element_name, number)
-
-                    handle_quantity_result_elements(entities, messages, buttons, element)
-
-                    action_view_element_relations(entities, messages, buttons)
-
-                else:
-                    msg_simple.NOTHING_FOUND(messages)
-
-            else:
-                # todo: elements not related message
-                messages.append('elements not related')
-
-        else:
-            msg_simple.ELEMENT_NOT_FINDABLE_BY_WORD(messages, element_name)
-
-    else:
-        msg_simple.ERROR(messages)
 
 
 # SELECT ACTIONS
-
 
 def action_select_element_by_position(entities, messages, buttons):
     pos = entities.get(nlu.ENTITY_POSITION)
@@ -260,11 +181,11 @@ def action_select_element_by_position(entities, messages, buttons):
 
             if element['real_value_length'] == 1:
                 messages.append('There is only one element!\n')
-                view_element_info(entities, messages, buttons)
+                view_context_element(entities, messages, buttons)
 
             else:
                 if handle_element_selection(element, position):
-                    view_element_info(entities, messages, buttons)
+                    view_context_element(entities, messages, buttons)
                 else:
                     messages.append('I am sorry, but you are selecting an element with an index out of range!')
 
@@ -275,12 +196,15 @@ def action_select_element_by_position(entities, messages, buttons):
         msg_simple.ERROR(messages)
 
 
-def view_element_info(entities, messages, buttons):
+def view_context_element(entities, messages, buttons):
     element = context.get_last_element_from_context_list()
 
-    if element and element['real_value_length'] == 1:
-        msg_list.ELEMENT_ATTRIBUTES(messages, element)
-
+    if element:
+        if element['real_value_length'] == 1:
+            msg_list.ELEMENT_ATTRIBUTES(messages, element)
+            action_view_element_relations(entities, messages, buttons)
+        else:
+            btn.get_buttons_select_element(buttons, element)
     else:
         msg_simple.EMPTY_CONTEXT_LIST(messages)
 
@@ -290,8 +214,7 @@ def action_view_element_relations(entities, messages, buttons):
 
     if element:
 
-        messages.append('Down here the relations of ' + element['element_name'])
-        messages.append('SELECT one relation to perform the JOIN')
+        messages.append('If you want more information, I can tell you:')
         btn.get_buttons_element_relations(buttons, element['element_name'])
 
     else:
@@ -395,7 +318,7 @@ def action_go_back_to_context_position(entities, messages, buttons):
                 context.go_back_to_position(position)
                 element = context.get_last_element_from_context_list()
                 if element['real_value_length'] == 1:
-                    view_element_info(entities, messages, buttons)
+                    view_context_element(entities, messages, buttons)
                 else:
                     msg_list.LIST_OF_ELEMENTS(messages, element)
 
@@ -410,15 +333,14 @@ def action_go_back_to_context_position(entities, messages, buttons):
 
 
 intents_to_action_functions = {
-    nlu.INTENT_FIND_ELEMENT_BY_WORD: action_find_element_by_word,
-    nlu.INTENT_FIND_ELEMENT_BY_NUMBER: action_find_element_by_number,
-    nlu.INTENT_FIND_ELEMENT_BY_RELATED_WORD: action_find_el_by_related_word,
-    nlu.INTENT_FIND_ELEMENT_BY_RELATED_NUMBER: action_find_el_by_related_number,
     nlu.INTENT_SELECT_ELEMENT_BY_POSITION: action_select_element_by_position,
     nlu.INTENT_VIEW_RELATIONS: action_view_element_relations,
     nlu.INTENT_VIEW_RELATED_ELEMENT: action_view_element_related_element,
     nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION: action_go_back_to_context_position,
     nlu.INTENT_SHOW_CONTEXT: action_show_context
+
+    ,
+    'find_el_by_attr': action_find_element
 }
 
 

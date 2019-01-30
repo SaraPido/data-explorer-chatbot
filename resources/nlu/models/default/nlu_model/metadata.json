@@ -12,13 +12,13 @@
             "class": "rasa_nlu.tokenizers.spacy_tokenizer.SpacyTokenizer"
         },
         {
-            "name": "intent_featurizer_spacy",
-            "class": "rasa_nlu.featurizers.spacy_featurizer.SpacyFeaturizer"
-        },
-        {
             "name": "intent_entity_featurizer_regex",
             "regex_file": "regex_featurizer.json",
             "class": "rasa_nlu.featurizers.regex_featurizer.RegexFeaturizer"
+        },
+        {
+            "name": "intent_featurizer_spacy",
+            "class": "rasa_nlu.featurizers.spacy_featurizer.SpacyFeaturizer"
         },
         {
             "BILOU_flag": true,
@@ -82,6 +82,6 @@
         }
     ],
     "training_data": "training_data.json",
-    "trained_at": "20190114-103337",
+    "trained_at": "20190130-144308",
     "rasa_nlu_version": "0.13.7"
 }

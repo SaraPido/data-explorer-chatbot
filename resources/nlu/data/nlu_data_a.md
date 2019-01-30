@@ -18,9 +18,9 @@
 - male
 - female
 
-## synonym:has salary
+## synonym:with salary
 - have salary
-- with salary
+- has salary
 
 ## synonym:was born
 - with birth date

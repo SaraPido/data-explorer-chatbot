@@ -2,382 +2,196 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 12,
-            "value": "teacher",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 13,
-            "end": 19,
-            "value": "Daniel",
+            "start": 14,
+            "end": 18,
+            "value": "Mark",
             "entity": "word"
           }
         ],
-        "text": "find teacher Daniel"
+        "text": "find customer Mark"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 10,
-            "value": "class",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 11,
-            "end": 14,
-            "value": "1^B",
+            "start": 14,
+            "end": 26,
+            "value": "with contact",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 39,
+            "value": "Peter Parker",
             "entity": "word"
           }
         ],
-        "text": "find class 1^B"
+        "text": "find customer with contact Peter Parker"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 10,
-            "value": "class",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 11,
-            "end": 14,
-            "value": "2^A",
+            "start": 14,
+            "end": 26,
+            "value": "with contact",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "Mark",
             "entity": "word"
           }
         ],
-        "text": "find class 2^A"
+        "text": "find customer with contact Mark"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 10,
-            "value": "class",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 11,
-            "end": 14,
-            "value": "1^C",
+            "start": 19,
+            "end": 23,
+            "value": "paid",
+            "entity": "attr"
+          },
+          {
+            "start": 24,
+            "end": 25,
+            "value": "<",
+            "entity": "num_op"
+          },
+          {
+            "start": 26,
+            "end": 30,
+            "value": "1223",
+            "entity": "num"
+          }
+        ],
+        "text": "find customer that paid < 1223€"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "customer",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 30,
+            "value": "reported to",
+            "entity": "attr"
+          },
+          {
+            "start": 31,
+            "end": 42,
+            "value": "James Brown",
             "entity": "word"
           }
         ],
-        "text": "find class 1^C"
+        "text": "find customer that reported to James Brown"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 11,
-            "value": "lesson",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 12,
-            "end": 17,
-            "value": "Maths",
+            "start": 19,
+            "end": 26,
+            "value": "ordered",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 37,
+            "value": "Motorcycle",
             "entity": "word"
           }
         ],
-        "text": "find lesson Maths"
+        "text": "find customer that ordered Motorcycle"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 12,
-            "value": "teacher",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 13,
-            "end": 19,
-            "value": "Nicola",
+            "start": 19,
+            "end": 26,
+            "value": "ordered",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 41,
+            "value": "Something Cool",
             "entity": "word"
           }
         ],
-        "text": "find teacher Nicola"
+        "text": "find customer that ordered Something Cool"
       },
       {
-        "intent": "find_el_by_word",
+        "intent": "find_el_by_attr",
         "entities": [
           {
             "start": 5,
-            "end": 12,
-            "value": "teacher",
+            "end": 13,
+            "value": "customer",
             "entity": "el"
           },
           {
-            "start": 13,
-            "end": 19,
-            "value": "Nicola",
-            "entity": "word"
-          }
-        ],
-        "text": "find teacher Nicola"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 12,
-            "value": "teacher",
-            "entity": "el"
-          },
-          {
-            "start": 13,
-            "end": 19,
-            "value": "Nicola",
-            "entity": "word"
-          }
-        ],
-        "text": "find teacher Nicola"
-      },
-      {
-        "intent": "find_el_by_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 12,
-            "value": "teacher",
-            "entity": "el"
-          },
-          {
-            "start": 13,
-            "end": 19,
-            "value": "Nicola",
-            "entity": "word"
-          }
-        ],
-        "text": "find teacher Nicola"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 10,
-            "value": "class",
-            "entity": "el"
-          },
-          {
-            "start": 16,
-            "end": 22,
-            "value": "lesson",
-            "entity": "rel_el"
-          },
-          {
-            "start": 23,
-            "end": 28,
-            "value": "Maths",
-            "entity": "word"
-          }
-        ],
-        "text": "find class with lesson Maths"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          },
-          {
-            "start": 17,
+            "start": 14,
             "end": 24,
-            "value": "teacher",
-            "entity": "rel_el"
+            "value": "located in",
+            "entity": "attr"
           },
           {
             "start": 25,
             "end": 31,
-            "value": "Nicola",
+            "value": "London",
             "entity": "word"
           }
         ],
-        "text": "find lesson with teacher Nicola"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          },
-          {
-            "start": 17,
-            "end": 24,
-            "value": "teacher",
-            "entity": "rel_el"
-          },
-          {
-            "start": 25,
-            "end": 31,
-            "value": "Nicola",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson with teacher Nicola"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 12,
-            "value": "teacher",
-            "entity": "el"
-          },
-          {
-            "start": 18,
-            "end": 24,
-            "value": "lesson",
-            "entity": "rel_el"
-          },
-          {
-            "start": 25,
-            "end": 34,
-            "value": "Geography",
-            "entity": "word"
-          }
-        ],
-        "text": "find teacher with lesson Geography"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          },
-          {
-            "start": 17,
-            "end": 22,
-            "value": "class",
-            "entity": "rel_el"
-          },
-          {
-            "start": 23,
-            "end": 26,
-            "value": "1^B",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson with class 1^B"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          },
-          {
-            "start": 17,
-            "end": 22,
-            "value": "class",
-            "entity": "rel_el"
-          },
-          {
-            "start": 23,
-            "end": 26,
-            "value": "2^B",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson with class 2^B"
-      },
-      {
-        "intent": "find_el_by_rel_word",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "el"
-          },
-          {
-            "start": 17,
-            "end": 22,
-            "value": "class",
-            "entity": "rel_el"
-          },
-          {
-            "start": 23,
-            "end": 26,
-            "value": "1^B",
-            "entity": "word"
-          }
-        ],
-        "text": "find lesson with class 1^B"
-      },
-      {
-        "intent": "view_rel_el",
-        "entities": [
-          {
-            "start": 5,
-            "end": 12,
-            "value": "teacher",
-            "entity": "rel_el"
-          }
-        ],
-        "text": "view teacher"
-      },
-      {
-        "intent": "view_rel_el",
-        "entities": [
-          {
-            "start": 5,
-            "end": 11,
-            "value": "lesson",
-            "entity": "rel_el"
-          }
-        ],
-        "text": "view lesson"
-      },
-      {
-        "intent": "view_rel_el",
-        "entities": [
-          {
-            "start": 5,
-            "end": 10,
-            "value": "class",
-            "entity": "rel_el"
-          }
-        ],
-        "text": "view class"
-      },
-      {
-        "intent": "view_rel_el",
-        "entities": [
-          {
-            "start": 5,
-            "end": 14,
-            "value": "timetable",
-            "entity": "rel_el"
-          }
-        ],
-        "text": "view timetable"
+        "text": "find customer located in London"
       },
       {
         "intent": "view_all_rel",
@@ -522,35 +336,29 @@
       {
         "name": "el",
         "elements": [
-          "teacher",
-          "lesson",
-          "class"
-        ]
-      },
-      {
-        "name": "rel_el",
-        "elements": [
-          "teacher",
-          "lesson",
-          "class",
-          "timetables"
+          "customer",
+          "employee",
+          "office",
+          "product",
+          "product line",
+          "payment",
+          "order"
         ]
       },
       {
         "name": "word",
         "elements": [
           "Nicola",
-          "Maristella",
+          "Giorgio",
           "Vittorio",
           "Albert",
+          "1923 Moto Guzzi",
+          "Car Models",
           "Florian",
-          "Maths",
-          "Computer Science",
-          "Geography",
-          "History",
-          "1^A",
-          "2^B",
-          "2^C"
+          "Car",
+          "Ferrari",
+          "Moto Guzzi",
+          "Mario"
         ]
       }
     ],

@@ -9,7 +9,7 @@ def ELEMENT_ATTRIBUTES(messages, element):
 
 
 def LIST_OF_ELEMENTS(messages, element):
-    show_column_list = resolver.get_element_properties(element['element_name'])['show_column_list']
+    show_column_list = resolver.get_element(element['element_name'])['show_columns']
     message = 'i. ' + ', '.join(x.upper() for x in show_column_list) + '\n'
     for i, e in enumerate(element['value']):
         message += '{}. '.format(i + 1)

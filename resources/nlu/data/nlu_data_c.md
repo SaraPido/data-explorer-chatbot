@@ -1,42 +1,15 @@
-## intent:find_el_by_word
-- find [customer](el) [Nicola](word)
-- find [employee](el) [Mark](word)
-- find [employee](el) [Luigi](word)
-- find [product](el) [Ferrari](word)
-- find [employee](el) [George](word)
+## intent:find_el_by_attr
+- find [customer](el) [Mark](word)
+- find [customer](el) [with contact](attr) [Peter Parker](word)
+- find [customer](el) [with contact](attr) [Mark](word)
+- find [customer](el) that [paid](attr) [<](num_op) [1223](num)€
+- find [customer](el) that [reported to](attr) [James Brown](word)
+- find [customer](el) that [ordered](attr) [Motorcycle](word)
+- find [customer](el) that [ordered](attr) [Something Cool](word)
+- find [customer](el) [located in](attr) [London](word)
 
-## intent:find_el_by_num
-- find [customer](el) [greater than](op) [23](num)
-- find [employee](el) [540](num)
-- find [office](el) [lower than](op) [2340](num)
-- find [product](el) [equal to](op) [927](num)
-- find [employee](el) [6784](num)
-
-## intent:find_el_by_rel_word
-- find [customer](el) with [product](rel_el) [Ferrari](word)
-- find [office](el) with [office](rel_el) [Motorola](word)
-- find [employee](el) with [product line](rel_el) [Example](word)
-- find [employee](el) with [office](rel_el) [Mario](word)
-
-## intent:find_el_by_rel_num
-- find [office](el) with [product](rel_el) [greater than](op) [23](num)
-- find [employee](el) with [title](rel_el) [11](num)
-- find [customer](el) with [salary](rel_el) [equal to](op) [746](num)
-- find [employee](el) with [product](rel_el) [lower than](op) [23421](num)
-
-## intent:view_rel_el
-- view [payment](rel_el)
-- view [product](rel_el)
-- view [employee](rel_el)
-- view [product line](rel_el)
 
 ## lookup:el
-- customer
-- employee
-- office
-- product
-
-## lookup:rel_el
 - customer
 - employee
 - office
@@ -50,9 +23,12 @@
 - Giorgio
 - Vittorio
 - Albert
+- 1923 Moto Guzzi
+- Car Models
 - Florian
 - Car
 - Ferrari
+- Moto Guzzi
 - Mario
 
 ## intent:view_all_rel

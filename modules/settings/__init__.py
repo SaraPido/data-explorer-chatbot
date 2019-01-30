@@ -7,12 +7,12 @@ file_sep = os.sep
 
 # selector
 
-select = 'employees'
+select = 'classicmodels'
 
 select_dict = {
     'employees': ['a', 'employees'],
     'school': ['b', 'rasa_db'],
-    'shop': ['c', 'classicmodels']
+    'classicmodels': ['c', 'classicmodels']
 }
 
 abc = select_dict[select][0]

@@ -6,8 +6,58 @@ from modules.settings import DB_CONCEPT_PATH
 
 logger = logging.getLogger(__name__)
 
-db_concept = None
+db_concept = []
 
+# Database properties
+
+
+def load_db_concept():
+    global db_concept
+    logger.info('Database concept file:\n'
+                '"' + DB_CONCEPT_PATH + '"')
+    logger.info('Loading database concept file...')
+    with open(DB_CONCEPT_PATH) as f:
+        db_concept = json.load(f)
+    logger.info('Database concept file has been loaded!')
+
+
+def get_all_element_names():
+    return [e.get('element_name') for e in db_concept]
+
+
+def get_element(element_name):
+    for e in db_concept:
+        if e.get('element_name') == element_name:
+            return e
+    return None
+
+
+def extract_show_columns(element_name):
+    e = get_element(element_name)
+    return e.get('show_columns') if e else None
+
+
+def extract_attributes(element_name):
+    e = get_element(element_name)
+    return e.get('attributes') if e else None
+
+
+def extract_relations(element_name):
+    e = get_element(element_name)
+    return e.get('relations') if e else None
+
+
+def query_select(element_name, attributes):
+    e = get_element(element_name)
+    table_name = e.get('table_name')
+    for a in attributes:
+        a['operator'] = '='
+    result_element = broker.query_find(table_name, attributes)
+    result_element['element_name'] = element_name
+    return result_element
+
+
+"""
 
 def query_select_on_word(element_name, word, operator):
     el_properties = db_concept[element_name]
@@ -74,23 +124,10 @@ def extract_by_table_name_if_necessary(element_name, related_element_name, by_el
             # taking the first because I know is the only one
             by_element_name = complex_relation[0]
     return db_concept[by_element_name]['table_name'] if by_element_name else None
+"""
 
 
-# Database properties
-
-
-def load_db_concept():
-    global db_concept
-    logger.info('Database concept file:\n'
-                '"' + DB_CONCEPT_PATH + '"')
-    logger.info('Loading database concept file...')
-    with open(DB_CONCEPT_PATH) as f:
-        db_concept = json.load(f)
-    logger.info('Database concept file has been loaded!')
-
-
-def get_element_properties(element_name):
-    return db_concept.get(element_name)  # may return None
+"""
 
 
 def are_elements_related(element_name, related_element_name, by_element_name=None):
@@ -103,10 +140,6 @@ def are_elements_related(element_name, related_element_name, by_element_name=Non
             return True
         # if there are multiple ways, check by_element_name
         return by_element_name in complex_relation
-
-
-def get_all_element_names():
-    return list(db_concept.keys())
 
 
 def is_element_findable_by_word(element_name, directly=False):
@@ -125,3 +158,4 @@ def is_element_findable_by_number(element_name, directly=False):
     if el_concept.get('number_column_list'):
         return directly and el_concept.get('type') == 'primary' or el_concept.get('type') == 'secondary'
 
+"""
