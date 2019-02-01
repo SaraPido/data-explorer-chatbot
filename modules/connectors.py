@@ -37,8 +37,9 @@ def respond(chat_id, msg):
     # all but last, telegram needs..
     for msg in messages[:-1]:
         bot.sendMessage(chat_id=chat_id, text=msg)
+    if not msg:
+        messages = ['[Attention, you are sending a message with no text]']
     bot.sendMessage(chat_id=chat_id, text=messages[-1], reply_markup=keyboard)
-
 
 def start():
     global bot

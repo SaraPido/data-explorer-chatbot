@@ -47,15 +47,24 @@ def extract_relations(element_name):
     return e.get('relations') if e else None
 
 
-def query_select(element_name, attributes):
+def query_find(element_name, attributes):
     e = get_element(element_name)
     table_name = e.get('table_name')
-    for a in attributes:
-        a['operator'] = '='
+    # todo: operator should be put in the executor phase, now in broker there is the control
     result_element = broker.query_find(table_name, attributes)
     result_element['element_name'] = element_name
     return result_element
 
+
+def query_join(element, relation_name):
+    all_relations = extract_relations(element['element_name'])
+
+    # there should always be the relation we want, the control is made in the executor
+    relation = [rel for rel in all_relations if rel['keyword'] == relation_name][0]
+
+    result_element = broker.query_join(element, relation)
+    result_element['element_name'] = relation['element_name']
+    return result_element
 
 """
 

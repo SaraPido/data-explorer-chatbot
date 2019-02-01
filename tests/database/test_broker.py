@@ -4,6 +4,18 @@ from modules.database import broker as b
 
 
 class TestBroker(TestCase):
+    customer_in_context = {
+        'element_name': 'customer',
+        'value': [
+            {
+                'customerNumber': 114, 'customerName': 'Australian Collectors, Co.',
+                'contactLastName': 'Ferguson', 'contactFirstName': 'Peter', 'phone': '03 9520 4555',
+                'addressLine1': '636 St Kilda Road', 'addressLine2': 'Level 3', 'city': 'Melbourne',
+                'state': 'Victoria', 'postalCode': '3004', 'country': 'Australia', 'salesRepEmployeeNumber': 1611,
+                'creditLimit': '117300.00'
+            }  # it should be Decimal('117300.00')
+        ]
+    }
 
     customer_element = {
         "element_name": "customer",
@@ -14,25 +26,21 @@ class TestBroker(TestCase):
             {
                 "keyword": "_",
                 "type": "word",
-                "table_name": "customers",
                 "columns": ["customerName"]
             },
             {
                 "keyword": "with contact",
                 "type": "word",
-                "table_name": "customers",
                 "columns": ["contactLastName", "contactFirstName"]
             },
             {
                 "keyword": "located in",
                 "type": "word",
-                "table_name": "customers",
                 "columns": ["city", "state", "country"]
             },
             {
                 "keyword": "paid",
                 "type": "num",
-                "table_name": "payments",
                 "columns": ["amount"],
                 "by": [
                     {
@@ -46,7 +54,6 @@ class TestBroker(TestCase):
             {
                 "keyword": "ordered",
                 "type": "word",
-                "table_name": "products",
                 "columns": ["productName"],
                 "by": [
                     {
@@ -72,7 +79,6 @@ class TestBroker(TestCase):
             {
                 "keyword": "reported to",
                 "type": "word",
-                "table_name": "employees",
                 "columns": ["lastName", "firstName"],
                 "by": [
                     {
@@ -139,14 +145,14 @@ class TestBroker(TestCase):
         ]
     }
 
-    for a in customer_element['attributes']:
-        a['operator'] = '='
+    def addAttributesAndValues(self):
+        for a in self.customer_element['attributes']:
+            a['operator'] = '='
 
-    for a in customer_element['attributes']:
-        a['value'] = '123'
+        for a in self.customer_element['attributes']:
+            a['value'] = '123'
 
     def test_label_attribute_columns(self):
-
         b.label_attributes(self.customer_element['attributes'])
 
         for a in self.customer_element['attributes']:
@@ -157,25 +163,33 @@ class TestBroker(TestCase):
         # self.fail()
 
     def test_get_FROM_query_string(self):
-
         self.customer_element['attributes'].append(self.customer_self_attribute)
+        self.addAttributesAndValues()
         b.label_attributes(self.customer_element['attributes'])
-        print(b.get_FROM_query_string('customers', self.customer_element['attributes']))
+        print(b.get_FROM_query_string(self.customer_element['attributes']),'customers')
 
     def test_get_WHERE_JOIN_query_string(self):
-
         self.customer_element['attributes'].append(self.customer_self_attribute)
+        self.addAttributesAndValues()
         b.label_attributes(self.customer_element['attributes'])
         print(b.get_WHERE_JOIN_query_string(self.customer_element['attributes']))
 
     def test_get_WHERE_ATTRIBUTES_query_string(self):
-
         self.customer_element['attributes'].append(self.customer_self_attribute)
+        self.addAttributesAndValues()
         b.label_attributes(self.customer_element['attributes'])
         print(b.get_WHERE_ATTRIBUTES_query_string(self.customer_element['attributes']))
 
-    def test_execute_query_select(self):
-
+    def test_execute_query_find(self):
         b.load_db_schema()
         b.connect()
-        print(b.query_find('customers', self.customer_element['attributes']))
+        res = b.query_find('customers', self.customer_element['attributes'])
+        print(res['query']['q_string'])
+        print(res['value'])
+
+    def test_execute_query_join(self):
+        b.load_db_schema()
+        b.connect()
+        res = b.query_join(self.customer_in_context, self.customer_element['relations'][1])
+        print(res['query']['q_string'])
+        print(res['value'])

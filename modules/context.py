@@ -1,38 +1,56 @@
 import logging
 
 """
-[
-    {
-        'element_name': 'teacher',
-        'query': {
-            q_string: 'SELECT * FROM Teacher WHERE name=%s'
-            q_tuple: [ 'Nicola' ]
+{
+    'query': {
+        'q_string': 'SELECT DISTINCT a.customerNumber, a.customerName, a.contactLastName, a.contactFirstName, '
+                    'a.phone, a.addressLine1, a.addressLine2, a.city, a.state, a.postalCode, a.country, '
+                    'a.salesRepEmployeeNumber, a.creditLimit '
+                    'FROM customers a '
+                    'WHERE ( a.city = %s OR a.state = %s OR a.country = %s )',
+        'q_tuple': ('london', 'london', 'london')
+    },
+    'value': [
+        {
+            'customerNumber': 324,
+            'customerName': 'Stylish Desk Decors, Co.',
+            'contactLastName': 'Brown',
+            'contactFirstName': 'Ann ',
+            'phone': '(171) 555-0297',
+            'addressLine1': '35 King George',
+            'addressLine2': None,
+            'city': 'London',
+            'state': None,
+            'postalCode': 'WX3 6FW',
+            'country': 'UK',
+            'salesRepEmployeeNumber': 1501,
+            'creditLimit': "Decimal('77000.00')"
         },
-        'action_description': 'Find element teacher with word Nicola',
-        'value': [
-            {
-                'id': 1, 
-                'name': 'Nicola', 
-                'surname': 'Castaldo', 
-                'telephone': '0000000001', 
-                'email': 'admin_1@admin.com'
-            },
-            {
-                'id': 6, 
-                'name': 'Nicola', 
-                'surname': 'Abbagnano', 
-                'telephone': '0000000006', 
-                'email': 'admin_6@admin.com'
-            }
-        ],
-        'by_value': [
-        
-        
-        ]
-        'real_value_length': 2
-    }
-]
-
+        {
+            'customerNumber': 489,
+            'customerName': 'Double Decker Gift Stores, Ltd',
+            'contactLastName': 'Smith',
+            'contactFirstName': 'Thomas ',
+            'phone': '(171) 555-7555',
+            'addressLine1': '120 Hanover Sq.',
+            'addressLine2': None,
+            'city': 'London',
+            'state': None,
+            'postalCode': 'WA1 1DP',
+            'country': 'UK',
+            'salesRepEmployeeNumber': 1501,
+            'creditLimit': "Decimal('43300.00')"
+         }
+    ], 
+    'by_value': [],
+    'show': {
+        "from": 1,
+        "to": 5
+    }   
+    'real_value_length': 2,
+    'element_name': 'customer', 
+    'action_description': 'TODO'
+}
 """
 
 logger = logging.getLogger(__name__)
@@ -58,17 +76,16 @@ def get_last_element_from_context_list():
 
 
 def add_element_to_context_list(element):
-
     # NEW feature: deletes the element of the same type and all its predecessor
     # the search is limited to the context excluding the last element
     index = -1
     for i, el in enumerate(context_list):
-        if el['element_name'] == element['element_name'] and i < len(context_list)-1:  # keep the last
+        if el['element_name'] == element['element_name'] and i < len(context_list) - 1:  # keep the last
             index = i
             break
     if index > -1:
-        logger.info('Removing elements from the context list, total: {}'.format(index+1))
-        for i in range(index+1):
+        logger.info('Removing elements from the context list, total: {}'.format(index + 1))
+        for i in range(index + 1):
             context_list.pop(0)
 
     context_list.append(element)
@@ -79,6 +96,8 @@ def add_element_to_context_list(element):
 
 def go_back_to_position(position):
     del context_list[position:]
+    # todo check correctness
+    del context_list[position]['show']
 
 
 def get_action_name_list():
@@ -108,4 +127,3 @@ def print_context_list():
 
 
 reset_context_list()
-

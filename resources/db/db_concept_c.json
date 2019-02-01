@@ -8,31 +8,26 @@
       {
         "keyword": "_",
         "type": "word",
-        "table_name": "customers",
         "columns": ["customerName"]
       },
       {
         "keyword": "with contact",
         "type": "word",
-        "table_name": "customers",
         "columns": ["contactLastName", "contactFirstName"]
       },
       {
         "keyword": "located in",
         "type": "word",
-        "table_name": "customers",
         "columns": ["city", "state", "country"]
       },
       {
         "keyword": "paid",
         "type": "num",
-        "table_name": "payments",
         "columns": ["amount"]
       },
       {
         "keyword": "ordered",
         "type": "word",
-        "table_name": "products",
         "columns": ["productName"],
         "by": [
           {
@@ -58,7 +53,6 @@
       {
         "keyword": "reported to",
         "type": "word",
-        "table_name": "employees",
         "columns": ["lastName", "firstName"],
         "by": [
           {
@@ -104,6 +98,30 @@
             "from_columns": ["customerNumber"],
             "to_table_name": "orders",
             "to_columns": ["customerNumber"]
+          }
+        ]
+      },
+      {
+        "keyword": "products ordered",
+        "element_name": "product",
+        "by": [
+          {
+            "from_table_name": "customers",
+            "from_columns": ["customerNumber"],
+            "to_table_name": "orders",
+            "to_columns": ["customerNumber"]
+          },
+          {
+            "from_table_name": "orders",
+            "from_columns": ["orderNumber"],
+            "to_table_name": "orderdetails",
+            "to_columns": ["orderNumber"]
+          },
+          {
+            "from_table_name": "orderdetails",
+            "from_columns": ["productCode"],
+            "to_table_name": "products",
+            "to_columns": ["productCode"]
           }
         ]
       }
