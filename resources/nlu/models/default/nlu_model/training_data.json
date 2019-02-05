@@ -194,19 +194,163 @@
         "text": "find customer located in London"
       },
       {
-        "intent": "view_all_rel",
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 26,
+            "value": "work in",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "Italy",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee that work in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 18,
+            "value": "John",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee John"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 26,
+            "value": "work in",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "Milan",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee that work in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 14,
+            "end": 20,
+            "value": "Philip",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee Philip"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 19,
+            "end": 26,
+            "value": "work in",
+            "entity": "attr"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "Paris",
+            "entity": "word"
+          }
+        ],
+        "text": "find employee that work in Paris"
+      },
+      {
+        "intent": "cross_rel",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "works in office",
+            "entity": "rel"
+          }
+        ],
+        "text": "works in office"
+      },
+      {
+        "intent": "cross_rel",
+        "entities": [
+          {
+            "start": 0,
+            "end": 28,
+            "value": "related sales representative",
+            "entity": "rel"
+          }
+        ],
+        "text": "related sales representative"
+      },
+      {
+        "intent": "cross_rel",
+        "entities": [
+          {
+            "start": 0,
+            "end": 11,
+            "value": "orders made",
+            "entity": "rel"
+          }
+        ],
+        "text": "orders made"
+      },
+      {
+        "intent": "show_rel",
         "text": "show me the relations"
       },
       {
-        "intent": "view_all_rel",
+        "intent": "show_rel",
         "text": "its relations"
       },
       {
-        "intent": "view_all_rel",
+        "intent": "show_rel",
         "text": "view relations"
       },
       {
-        "intent": "view_all_rel",
+        "intent": "show_rel",
         "text": "relations"
       },
       {
@@ -343,6 +487,12 @@
           "product line",
           "payment",
           "order"
+        ]
+      },
+      {
+        "name": "rel",
+        "elements": [
+          "something"
         ]
       },
       {

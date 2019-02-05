@@ -61,21 +61,21 @@ def reset_context_list():
     del context_list[:]
 
 
-def get_element_from_context_list(element_name):
+def get_element_by_name(element_name):
     """
     Returns None if the element is not found
     """
     return next(filter(lambda el: el['element_name'] == element_name, context_list), None)
 
 
-def get_last_element_from_context_list():
+def get_last_element():
     """
     Returns None if the context_list is empty
     """
     return context_list[-1] if context_list else None
 
 
-def add_element_to_context_list(element):
+def append_element(element):
     # NEW feature: deletes the element of the same type and all its predecessor
     # the search is limited to the context excluding the last element
     index = -1
@@ -91,20 +91,21 @@ def add_element_to_context_list(element):
     context_list.append(element)
     logger.info(' ')
     logger.info(' *** Element ' + element['element_name'] + ' has been added to the context_list ***')
-    print_context_list()
+    update_log()
 
 
 def go_back_to_position(position):
     del context_list[position:]
     # todo check correctness
-    del context_list[position]['show']
+    if context_list[position-1].get('show'):
+        del context_list[position-1]['show']
 
 
 def get_action_name_list():
     return [e['action_description'] for e in context_list]
 
 
-def print_context_list():
+def update_log():
     """
     Logs the context_list in a human-readable way
     """
@@ -121,8 +122,8 @@ def print_context_list():
         logger.info(sep + 'real_value_length: ' + str(el.get('real_value_length')))
         for i, obj in enumerate(el['value']):
             logger.info(sep + '- ' + str(obj))
-            if el.get('by_value'):
-                logger.info(sep + 'BY: - ' + str(el['by_value'][i]))
+        if el.get('show'):
+            logger.info(sep + 'showing from {} to {}'.format(el['show']['from'], el['show']['to']))
         logger.info(' ')
 
 

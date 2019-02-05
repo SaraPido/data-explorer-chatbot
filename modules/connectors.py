@@ -1,9 +1,7 @@
 import telepot
 from telepot.loop import MessageLoop
 
-import time
-
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
 from modules import extractor, caller
 
@@ -24,22 +22,28 @@ def on_callback_query(msg):
 
 
 def respond(chat_id, msg):
-    result = execute(msg)
-    keyboard = None
-    if result.get('buttons'):
-        keyboard = InlineKeyboardMarkup(
+    global last_sent_message
+
+    response = execute(msg)
+
+    for i, x in enumerate(response.get_telegram_format()):
+        text = x['message']
+        inline_keyboard = InlineKeyboardMarkup(
             inline_keyboard=[
                 [InlineKeyboardButton(text=b['title'], callback_data=b['payload'])]
-                for b in result['buttons']
+                for b in x['buttons']
             ]
-        )
-    messages = result['messages']
-    # all but last, telegram needs..
-    for msg in messages[:-1]:
-        bot.sendMessage(chat_id=chat_id, text=msg)
-    if not msg:
-        messages = ['[Attention, you are sending a message with no text]']
-    bot.sendMessage(chat_id=chat_id, text=messages[-1], reply_markup=keyboard)
+        ) if x['buttons'] else None
+        """
+        keyboard = ReplyKeyboardMarkup(
+            keyboard=[
+                [KeyboardButton(text='/ciao. ' + b['title'])]
+                for b in x['buttons']
+            ]
+        ) if x['buttons'] else None
+        """
+        bot.sendMessage(chat_id=chat_id, text=text, reply_markup=inline_keyboard)
+
 
 def start():
     global bot
@@ -50,12 +54,6 @@ def start():
 
 def execute(message):
     parsed_message = extractor.parse(message)
-    result = caller.run_action_from_parsed_message(parsed_message)
-    print('messages:\n'
-          '* {}'.format(result.get('messages')))
-    buttons = result.get('buttons')
-    if buttons:
-        print('buttons:')
-        for b in buttons:
-            print('* {} => {}'.format(b['title'], b['payload']))
-    return result
+    response = caller.run_action_from_parsed_message(parsed_message)
+    print(response.get_printable_string())
+    return response

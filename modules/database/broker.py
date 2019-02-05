@@ -72,7 +72,7 @@ def query_find(in_table_name, attributes):
         if not a.get('operator'):
             a['operator'] = '='
 
-    query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns, attributes[0]['letter'])  # will be 'a'
+    query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns, 'a')  # ugly but correct
     query_string += " FROM " + get_FROM_query_string(attributes, in_table_name)
     query_string += " WHERE "
     where_join_string = get_WHERE_JOIN_query_string(attributes)

@@ -7,6 +7,26 @@
 - find [customer](el) that [ordered](attr) [Motorcycle](word)
 - find [customer](el) that [ordered](attr) [Something Cool](word)
 - find [customer](el) [located in](attr) [London](word)
+- find [employee](el) that [work in](attr) [Italy](word) 
+- find [employee](el) [John](word)
+- find [employee](el) that [work in](attr) [Milan](word)
+- find [employee](el) [Philip](word)
+- find [employee](el) that [work in](attr) [Paris](word)
+
+## intent:filter_el_by_attr
+- filter [customer](el) [Mark](word)
+- filter [customer](el) [with contact](attr) [Peter Parker](word)
+- filter [customer](el) [with contact](attr) [Mark](word)
+- filter [customer](el) that [paid](attr) [<](num_op) [1223](num)€
+- filter [customer](el) that [reported to](attr) [James Brown](word)
+- filter [customer](el) that [ordered](attr) [Motorcycle](word)
+- filter [customer](el) that [ordered](attr) [Something Cool](word)
+- filter [customer](el) [located in](attr) [London](word)
+- filter [employee](el) that [work in](attr) [Italy](word) 
+- filter [employee](el) [John](word)
+- filter [employee](el) that [work in](attr) [Milan](word)
+- filter [employee](el) [Philip](word)
+- filter [employee](el) that [work in](attr) [Paris](word)
 
 ## intent:cross_rel
 - [works in office](rel)

@@ -17,13 +17,9 @@ def console_input():
             break
 
         parsed_message = extractor.parse(message)
-        result = caller.run_action_from_parsed_message(parsed_message)
+        response = caller.run_action_from_parsed_message(parsed_message)
 
-        print(result.get('messages'))
-        buttons = result.get('buttons')
-        if buttons:
-            for b in buttons:
-                print('{} => {}'.format(b['title'], b['payload']))
+        print(response.get_printable_string())
 
 
 if __name__ == '__main__':

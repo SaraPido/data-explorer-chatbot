@@ -183,7 +183,9 @@ class TestBroker(TestCase):
     def test_execute_query_find(self):
         b.load_db_schema()
         b.connect()
-        res = b.query_find('customers', self.customer_element['attributes'])
+        attr = self.customer_element['attributes'][5]
+        attr['value'] = 'Peter'
+        res = b.query_find('customers', [attr])
         print(res['query']['q_string'])
         print(res['value'])
 
