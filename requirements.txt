@@ -3,4 +3,4 @@ nltk
 mysql-connector>=2.1.6
 telepot
 nested-lookup
-tensorflow==1.10.0
+tensorflow==1.11.0
