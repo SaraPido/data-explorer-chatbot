@@ -77,6 +77,7 @@ if __name__ == '__main__':
                 {"name": "ner_crf"},
                 {"name": "ner_synonyms"},
                 {"name": "intent_classifier_sklearn"}]
+    pipeline = "tensorflow_embedding"
     trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": pipeline,
                                                                      "language": NLU_CONFIG_LANGUAGE}))
     trainer.train(training_data)

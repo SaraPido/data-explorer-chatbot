@@ -91,6 +91,28 @@ def handle_element_selection(element, position):
     return False
 
 
+def compute_ordered_entity_list(entities):
+    ordered_entities = []
+    d = {}
+
+    for e in entities[::-1]:  # reverse order
+
+        if e['entity'] == nlu.ENTITY_WORD:
+            d = {'type': 'word', 'value': e['value']}
+        elif e['entity'] == nlu.ENTITY_NUMBER:
+            d = {'type': 'num', 'value': e['value']}
+        elif e['entity'] == 'attr' and d:  # nlu.ENTITY_ATTRIBUTE
+            a = e['value']
+            oe = {'attribute': a}
+            oe.update(d)
+            ordered_entities.append(oe)
+
+    if not ordered_entities and d:
+        ordered_entities.append(d)
+
+    return ordered_entities
+
+
 # ACTIONS
 
 def action_start(entities, response):
@@ -99,34 +121,28 @@ def action_start(entities, response):
 
 
 def action_find_element_by_attribute(entities, response):
+    element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
+    ordered_entities = compute_ordered_entity_list(entities)
 
-    # todo handle case no element is extracted
-    extracted_element_name = extract_single_entity_value(entities, nlu.ENTITY_ELEMENT)
-    element_name = handle_element_name_similarity(extracted_element_name)
+    if element_name and ordered_entities:
 
-    # todo: handle similary also for attributes...
-
-    # >----
-    # TODO: the complex case will consider multiple attributes
-    attrss = extract_entities(entities, 'attr') # nlu.ENTITY_ATTRIBUTE
-    words = extract_entities(entities, nlu.ENTITY_WORD)
-    nums = extract_entities(entities, nlu.ENTITY_NUMBER)
-    attr = attrss[0]['value'] if attrss else None
-    word = words[0]['value'] if words else None
-    num = nums[0]['value'] if nums else None
-    # ----<
-
-    if element_name:
         attributes = []
-        for a in resolver.extract_attributes(element_name):
-            # if the attribute is the one extracted
-            if a.get('keyword') == attr:  # this also considers the case the attribute is "", i.e. None
-                if a.get('type') == 'word' and word:
-                    a['value'] = word
-                    attributes.append(a)
-                elif a.get('type') == 'num' and num:
-                    a['value'] = num
-                    attributes.append(a)
+
+        for oe in ordered_entities:
+            if oe.get('attribute'):
+                attribute_name = handle_similarity(oe['attribute'],
+                                                   [a['keyword']
+                                                    for a in resolver.extract_attributes_with_keyword(element_name)])
+                if attribute_name:
+                    attr = resolver.get_attribute_by_name(element_name, attribute_name)
+                    if attr.get('type') == oe.get('type'):
+                        attr['value'] = oe.get('value')
+                        attributes.append(attr)
+            else:
+                attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
+                if attr:
+                    attr['value'] = oe.get('value')
+                    attributes.append(attr)
 
         element = resolver.query_find(element_name, attributes)
 

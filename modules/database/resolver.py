@@ -37,14 +37,38 @@ def extract_show_columns(element_name):
     return e.get('show_columns') if e else None
 
 
-def extract_attributes(element_name):
+def extract_relations(element_name):
+    e = get_element(element_name)
+    return e.get('relations') if e else None
+
+
+def extract_all_attributes(element_name):
     e = get_element(element_name)
     return e.get('attributes') if e else None
 
 
-def extract_relations(element_name):
-    e = get_element(element_name)
-    return e.get('relations') if e else None
+def extract_attributes_with_keyword(element_name):
+    attributes = extract_all_attributes(element_name)
+    if attributes:
+        return [a for a in attributes if a.get('keyword')]
+    return None
+
+
+def get_attribute_by_name(element_name, attribute_name):
+    attributes = extract_attributes_with_keyword(element_name)
+    for a in attributes:
+        if a.get('keyword') == attribute_name:
+            return a
+    return None
+
+
+def get_attribute_without_keyword_by_type(element_name, attribute_type):
+    attributes = [a for a in extract_all_attributes(element_name)
+                  if a not in extract_attributes_with_keyword(element_name)]
+    for a in attributes:
+        if a.get('type') == attribute_type:
+            return a
+    return None
 
 
 def query_find(element_name, attributes):

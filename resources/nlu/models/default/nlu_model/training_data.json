@@ -302,6 +302,276 @@
         "text": "find employee that work in Paris"
       },
       {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "customer",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 20,
+            "value": "Mark",
+            "entity": "word"
+          }
+        ],
+        "text": "filter customer Mark"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 19,
+            "value": "with contact",
+            "entity": "attr"
+          },
+          {
+            "start": 20,
+            "end": 32,
+            "value": "Peter Parker",
+            "entity": "word"
+          }
+        ],
+        "text": "filter with contact Peter Parker"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "customer",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 28,
+            "value": "with contact",
+            "entity": "attr"
+          },
+          {
+            "start": 29,
+            "end": 33,
+            "value": "Mark",
+            "entity": "word"
+          }
+        ],
+        "text": "filter customer with contact Mark"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 21,
+            "end": 25,
+            "value": "paid",
+            "entity": "attr"
+          },
+          {
+            "start": 26,
+            "end": 27,
+            "value": "<",
+            "entity": "num_op"
+          },
+          {
+            "start": 28,
+            "end": 32,
+            "value": "1223",
+            "entity": "num"
+          }
+        ],
+        "text": "filter the ones that paid < 1223€"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "customer",
+            "entity": "el"
+          },
+          {
+            "start": 21,
+            "end": 32,
+            "value": "reported to",
+            "entity": "attr"
+          },
+          {
+            "start": 33,
+            "end": 44,
+            "value": "James Brown",
+            "entity": "word"
+          }
+        ],
+        "text": "filter customer that reported to James Brown"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 16,
+            "end": 23,
+            "value": "ordered",
+            "entity": "attr"
+          },
+          {
+            "start": 24,
+            "end": 34,
+            "value": "Motorcycle",
+            "entity": "word"
+          }
+        ],
+        "text": "filter the ones ordered Motorcycle"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "customer",
+            "entity": "el"
+          },
+          {
+            "start": 21,
+            "end": 28,
+            "value": "ordered",
+            "entity": "attr"
+          },
+          {
+            "start": 29,
+            "end": 43,
+            "value": "Something Cool",
+            "entity": "word"
+          }
+        ],
+        "text": "filter customer that ordered Something Cool"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 17,
+            "value": "located in",
+            "entity": "attr"
+          },
+          {
+            "start": 18,
+            "end": 24,
+            "value": "London",
+            "entity": "word"
+          }
+        ],
+        "text": "filter located in London"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 21,
+            "end": 28,
+            "value": "work in",
+            "entity": "attr"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "Italy",
+            "entity": "word"
+          }
+        ],
+        "text": "filter employee that work in Italy"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "John",
+            "entity": "word"
+          }
+        ],
+        "text": "filter John"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 21,
+            "end": 28,
+            "value": "work in",
+            "entity": "attr"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "Milan",
+            "entity": "word"
+          }
+        ],
+        "text": "filter employee that work in Milan"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 16,
+            "end": 22,
+            "value": "Philip",
+            "entity": "word"
+          }
+        ],
+        "text": "filter employee Philip"
+      },
+      {
+        "intent": "filter_el_by_attr",
+        "entities": [
+          {
+            "start": 7,
+            "end": 15,
+            "value": "employee",
+            "entity": "el"
+          },
+          {
+            "start": 21,
+            "end": 28,
+            "value": "work in",
+            "entity": "attr"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "Paris",
+            "entity": "word"
+          }
+        ],
+        "text": "filter employee that work in Paris"
+      },
+      {
         "intent": "cross_rel",
         "entities": [
           {

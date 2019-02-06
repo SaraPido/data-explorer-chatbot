@@ -24,7 +24,7 @@ class TestBroker(TestCase):
         "show_columns": ["customerName"],
         "attributes": [
             {
-                "keyword": "_",
+                "keyword": "",
                 "type": "word",
                 "columns": ["customerName"]
             },
@@ -183,7 +183,7 @@ class TestBroker(TestCase):
     def test_execute_query_find(self):
         b.load_db_schema()
         b.connect()
-        attr = self.customer_element['attributes'][5]
+        attr = self.customer_element['attributes'][0]
         attr['value'] = 'Peter'
         res = b.query_find('customers', [attr])
         print(res['query']['q_string'])
