@@ -1,7 +1,7 @@
 import telepot
 from telepot.loop import MessageLoop
 
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
 from modules import extractor, caller
 
@@ -22,11 +22,14 @@ def on_callback_query(msg):
 
 
 def respond(chat_id, msg):
-    global last_sent_message
 
-    response = execute(msg)
+    parsed_message = extractor.parse(msg)
+    response = caller.run_action_from_parsed_message(parsed_message, "TELEGRAM_"+str(chat_id))
 
-    for i, x in enumerate(response.get_telegram_format()):
+    # just for debugging
+    print(response.get_printable_string())
+
+    for x in response.get_telegram_format():
         text = x['message']
         inline_keyboard = InlineKeyboardMarkup(
             inline_keyboard=[
@@ -51,9 +54,3 @@ def start():
     MessageLoop(bot, {'chat': on_chat_message,
                       'callback_query': on_callback_query}).run_as_thread()
 
-
-def execute(message):
-    parsed_message = extractor.parse(message)
-    response = caller.run_action_from_parsed_message(parsed_message)
-    print(response.get_printable_string())
-    return response

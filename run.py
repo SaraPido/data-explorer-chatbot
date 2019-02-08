@@ -3,9 +3,10 @@ import warnings
 
 from time import sleep
 
-from modules import connectors, extractor, caller
+from modules import extractor, caller
+from modules.connectors import telegram
 from modules.database import resolver, broker
-from modules.settings import LOG_PATH
+from modules.settings import LOG_DIR_PATH_AND_SEP
 
 
 def console_input():
@@ -26,9 +27,10 @@ if __name__ == '__main__':
 
     warnings.filterwarnings('ignore')
 
-    with open(LOG_PATH, 'w'):
+    log_path = LOG_DIR_PATH_AND_SEP + 'sherbot.txt'
+    with open(log_path, 'w'):
         pass
-    logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
+    logging.basicConfig(filename=log_path, level=logging.INFO)
 
     logging.info('Starting the bot...')
 
@@ -39,7 +41,7 @@ if __name__ == '__main__':
 
     logging.info('Bot successfully started!')
 
-    connectors.start()
+    telegram.start()
     #console_input()
     while 1:
         sleep(100)

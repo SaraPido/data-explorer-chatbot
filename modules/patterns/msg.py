@@ -1,3 +1,5 @@
+from typing import List
+
 from modules.database import resolver
 
 HI_THERE = 'Hi there explorator!\n' \
@@ -10,17 +12,31 @@ N_RESULTS_FOUND_PATTERN = 'Et voilà! I found {} results!'
 SELECT_FOR_INFO = 'Select the one you are interested in:'
 INTRODUCE_ELEMENT_TO_SHOW_PATTERN = 'Here is what I know about this {}:'
 EMPTY_CONTEXT_LIST = 'What are we talking about? No element has been registered yet!'
-SHOW_CURRENT_ACTION_NAME_CONTEXT_PATTERN = '{}'  # todo?
 CONTEXT_LIST_RESET = 'The context has been reset!'
 SHOW_CONTEXT_INFO = 'Click a button to go back in the context\n' \
                     'Currently the context of the conversation is the following:'
 
 
-def ELEMENT_ATTRIBUTES_FUNCTION(element):
+def element_attributes(element):
     msg = '{}\n'.format(element['element_name'].upper())
     # taking only first value
     msg += '\n'.join(['- {0}: {1}'.format(k, v) for k, v in element['value'][0].items()])
     return msg
+
+
+def find_element_action_name(element_name, ordered_entities):
+    stringified_entities = []
+    for oe in ordered_entities:
+        se = '"'
+        if oe.get('attribute'):
+            se += oe['attribute'] + ' '
+        se += str(oe['value']) + '"'
+        stringified_entities.append(se)
+    return '[Finding by attributes] {}'.format(element_name, ' ,'.join(stringified_entities))
+
+# ------
+
+# ------
 
 
 def LIST_OF_ELEMENTS_FUNCTION(element):

@@ -70,16 +70,22 @@ if __name__ == '__main__':
                 '"' + NLU_MODEL_PATH + '"')
     logging.info('Training the NLU model...')
     training_data = nlu_train.load_data(NLU_DATA_PATH)
-    pipeline = [{"name": "nlp_spacy"},
-                {"name": "tokenizer_spacy"},
-                {"name": "intent_entity_featurizer_regex"},
-                {"name": "intent_featurizer_spacy"},
-                {"name": "ner_crf"},
-                {"name": "ner_synonyms"},
-                {"name": "intent_classifier_sklearn"}]
-    pipeline = "tensorflow_embedding"
-    trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": pipeline,
+    trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": NLU_CONFIG_PIPELINE,
                                                                      "language": NLU_CONFIG_LANGUAGE}))
     trainer.train(training_data)
     model_directory = trainer.persist(NLU_MODEL_DIR_PATH, fixed_model_name='nlu_model')
     logging.info('NLU model completely trained!')
+
+
+"""
+complex pipeline:
+
+pipeline = [{"name": "nlp_spacy"},
+            {"name": "tokenizer_spacy"},
+            {"name": "intent_entity_featurizer_regex"},
+            {"name": "intent_featurizer_spacy"},
+            {"name": "ner_crf"},
+            {"name": "ner_synonyms"},
+            {"name": "intent_classifier_sklearn"}]
+            
+"""

@@ -26,7 +26,7 @@ while file_path_list[-1] != 'sherbot':
 
 DIR_PATH = os.sep.join(file_path_list)
 
-LOG_PATH = file_sep.join([DIR_PATH, 'log.txt'])
+LOG_DIR_PATH_AND_SEP = file_sep.join([DIR_PATH, 'logs']) + file_sep
 NLU_DATA_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'data']) + file_sep + 'nlu_data_' + abc + '.md'
 NLU_MODEL_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models', 'default', 'nlu_model'])
 NLU_MODEL_DIR_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models'])
@@ -44,5 +44,5 @@ DATABASE_NAME = db_name
 
 # nlu
 
-NLU_CONFIG_PIPELINE = "spacy_sklearn"  # "tensorflow_embedding"
+NLU_CONFIG_PIPELINE = "tensorflow_embedding"  # "spacy_sklearn"
 NLU_CONFIG_LANGUAGE = "en"

@@ -2,7 +2,6 @@ import logging
 
 from nltk import edit_distance
 from modules.database import resolver
-from modules import context
 from modules import patterns
 from modules.patterns import btn, msg, nlu
 
@@ -71,8 +70,7 @@ def handle_quantity_found_element(response, element):
         response.add_message(msg.N_RESULTS_FOUND_PATTERN.format(element['real_value_length']))
 
 
-def handle_element_selection(element, position):
-
+def handle_element_selection(element, position, context):
     if 0 < position <= len(element['value']):  # element['real_value_length']:
         # copying the dictionary
         selected_element = dict(element)
@@ -82,8 +80,8 @@ def handle_element_selection(element, position):
 
         selected_element['query'] = None
         selected_element['real_value_length'] = 1
-        selected_element['action_description'] = 'Selected' + element['element_name'] + \
-                                                 ' at position ' + str(position)
+        selected_element['action_name'] = resolver.get_element_show_string(selected_element['element_name'],
+                                                                           selected_element['value'][0])
 
         context.append_element(selected_element)
         return True
@@ -115,12 +113,12 @@ def compute_ordered_entity_list(entities):
 
 # ACTIONS
 
-def action_start(entities, response):
+def action_start(entities, response, context):
     response.add_message(msg.HI_THERE)
     response.add_buttons(btn.get_start_buttons())
 
 
-def action_find_element_by_attribute(entities, response):
+def action_find_element_by_attribute(entities, response, context):
     element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
     ordered_entities = compute_ordered_entity_list(entities)
 
@@ -150,13 +148,13 @@ def action_find_element_by_attribute(entities, response):
 
             handle_show_element(element)
 
-            element['action_description'] = 'TODO for find'
+            element['action_name'] = msg.find_element_action_name(element_name, ordered_entities)
 
             context.append_element(element)
 
             handle_quantity_found_element(response, element)
 
-            view_context_element(entities, response, just_appended=True)
+            view_context_element(entities, response, context, just_appended=True)
 
         else:
             response.add_message(msg.NOTHING_FOUND)
@@ -165,13 +163,12 @@ def action_find_element_by_attribute(entities, response):
         response.add_message(msg.ERROR)
 
 
-def action_filter_element_by_attribute(entities, response):
+def action_filter_element_by_attribute(entities, response, context):
     # todo: define its behavior
     pass
 
 
-def action_cross_relation(entities, response):
-
+def action_cross_relation(entities, response, context):
     element = context.get_last_element()
 
     # todo handle case no element is extracted
@@ -183,24 +180,25 @@ def action_cross_relation(entities, response):
         # control if there is ONLY an element in context_list
         if element['real_value_length'] == 1:
 
-            element = resolver.query_join(element, relation_name)
+            result_element = resolver.query_join(element, relation_name)
 
-            if element['value']:
-                element['action_description'] = 'TODO for join'
+            if result_element['value']:
 
-                handle_show_element(element)
+                result_element['action_name'] = '[Relation] {}'.format(element['element_name'], relation_name)
 
-                context.append_element(element)
+                handle_show_element(result_element)
 
-                handle_quantity_found_element(response, element)
+                context.append_element(result_element)
 
-                view_context_element(entities, response, just_appended=True)
+                handle_quantity_found_element(response, result_element)
+
+                view_context_element(entities, response, context, just_appended=True)
 
             else:
                 response.add_message(msg.NOTHING_FOUND)
 
 
-def action_show_relations(entities, response):
+def action_show_relations(entities, response, context):
     element = context.get_last_element()
     if element:
         response.add_message('If you want more information, I can tell you:')
@@ -211,7 +209,7 @@ def action_show_relations(entities, response):
 
 # SELECT ACTIONS
 
-def action_select_element_by_position(entities, response):
+def action_select_element_by_position(entities, response, context):
     pos = extract_single_entity_value(entities, nlu.ENTITY_POSITION)
 
     if pos:
@@ -224,12 +222,12 @@ def action_select_element_by_position(entities, response):
 
             if element['real_value_length'] == 1:
                 response.add_message('There is only one element!\n')
-                view_context_element(entities, response)
+                view_context_element(entities, response, context)
 
             else:
-                if handle_element_selection(element, position):
+                if handle_element_selection(element, position, context):
                     handle_show_element(element)
-                    view_context_element(entities, response)
+                    view_context_element(entities, response, context)
                 else:
                     response.add_message('Error! Out of range selection!')
 
@@ -240,20 +238,20 @@ def action_select_element_by_position(entities, response):
         response.add_message(msg.ERROR)
 
 
-def view_context_element(entities, response, just_appended=False):
+def view_context_element(entities, response, context, just_appended=False):
     element = context.get_last_element()
 
     if element:
         if element['real_value_length'] == 1:
             response.add_message(msg.INTRODUCE_ELEMENT_TO_SHOW_PATTERN.format(element['element_name']))
-            response.add_message(msg.ELEMENT_ATTRIBUTES_FUNCTION(element))
-            action_show_relations(entities, response)
+            response.add_message(msg.element_attributes(element))
+            action_show_relations(entities, response, context)
         else:
             if just_appended:
                 response.add_message(msg.SELECT_FOR_INFO)
-            response.add_message('Shown results from {} to {} of {}'.format(element['show']['from']+1,
-                                                                      element['show']['to'],
-                                                                      element['real_value_length']))
+            response.add_message('Shown results from {} to {} of {}'.format(element['show']['from'] + 1,
+                                                                            element['show']['to'],
+                                                                            element['real_value_length']))
             response.add_buttons(btn.get_buttons_select_element(element))
             if element['show']['to'] < element['real_value_length']:
                 response.add_button(btn.get_button_show_more())
@@ -261,58 +259,67 @@ def view_context_element(entities, response, just_appended=False):
         response.add_message(msg.EMPTY_CONTEXT_LIST)
 
 
-def action_show_more(entities, response):
+def action_show_more(entities, response, context):
     element = context.get_last_element()
 
     if element:
         if element['show']['to'] < element['real_value_length']:
             element['show']['from'] = element['show']['from'] + LIMIT
             element['show']['to'] = min(element['real_value_length'], element['show']['to'] + LIMIT)
-            view_context_element(entities, response)
+            view_context_element(entities, response, context)
         else:
             response.add_message(msg.ERROR)  # should not happen
 
 
-def action_show_context(entities, response):
-    action_name_list = context.get_action_name_list()
+def action_show_context(entities, response, context):
+    context_list = context.get_context_list()
 
-    if action_name_list:
+    if context_list:
 
-        # removing the last element
-        action_name = action_name_list.pop()
         response.add_message(msg.SHOW_CONTEXT_INFO)
-        response.add_message(msg.SHOW_CURRENT_ACTION_NAME_CONTEXT_PATTERN.format(action_name))
-        response.add_buttons(btn.get_buttons_go_back_to_context_position(action_name_list))
+
+        for i, el in enumerate(context_list[::-1]):
+
+            if el['real_value_length'] == 1:
+                result = resolver.get_element_show_string(el['element_name'], el['value'][0])
+                response.add_button(btn.get_button_go_back_to_context_position(
+                    '[{}] {}'.format(el['element_name'], result), i))
+            # else:
+                # result = 'Multiple results'
+            # response.add_message('[{}] {}'.format(el['element_name'], result))
+            # response.add_button(btn.get_button_go_back_to_context_position(el['action_name'], i))
+
+        response.add_button(btn.get_button_reset_context())
 
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
 
 
-def action_go_back_to_context_position(entities, response):
+def action_go_back_to_context_position(entities, response, context):
     pos = extract_single_entity_value(entities, nlu.ENTITY_POSITION)
 
     if pos:
         position = int(pos[:-2])
 
         # if context is not empty
-        if context.get_action_name_list():
+        if context.get_context_list():
 
             if position == nlu.VALUE_POSITION_RESET_CONTEXT:
                 context.reset_context_list()
                 response.add_message(msg.CONTEXT_LIST_RESET)
 
-            elif position - 1 < len(context.get_action_name_list()):
+            elif position - 1 < len(context.get_context_list()):
                 context.go_back_to_position(position)
-                view_context_element(entities, response)
+                view_context_element(entities, response, context)
 
             else:
                 # todo the selection is wrong, maybe create a message for this
-                action_show_context(entities, response)
+                action_show_context(entities, response, context)
         else:
             response.add_message(msg.EMPTY_CONTEXT_LIST)
 
     else:
-        action_show_context(entities, response)
+        action_show_context(entities, response, context)
 
 
 # EXECUTION
@@ -330,12 +337,12 @@ intents_to_action_functions = {
 }
 
 
-def execute_action_from_intent_name(intent_name, entities):
+def execute_action_from_intent_name(intent_name, entities, context):
     action_function = intents_to_action_functions.get(intent_name)
     if action_function:
         logger.info('Executing action: "' + action_function.__name__ + '"')
         response = patterns.Response()
-        action_function(entities, response)
+        action_function(entities, response, context)
         return response
     else:
         logger.info('Action related to intent "' + intent_name + '" NOT FOUND')

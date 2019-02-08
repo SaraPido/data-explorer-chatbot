@@ -21,16 +21,8 @@ def get_buttons_element_relations(element_name):
 
 def get_buttons_select_element(element):
     buttons = []
-    show_columns = resolver.extract_show_columns(element['element_name'])
     for i in range(element['show']['from'], element['show']['to']):
-        title = ''
-        for sh in show_columns:
-            title += sh['keyword'] + ': ' if sh.get('keyword') else ''
-            title += ' '.join(str(element['value'][i][x]) for x in sh['columns'])
-
-        title = ', '.join((sh['keyword'] + ': ' if sh.get('keyword') else '')
-                          + ' '.join(str(element['value'][i][x]) for x in sh['columns'])
-                          for sh in show_columns)
+        title = resolver.get_element_show_string(element['element_name'], element['value'][i])
         payload = extract_payload(nlu.INTENT_SELECT_ELEMENT_BY_POSITION,
                                   [nlu.ENTITY_POSITION, str(i+1)+'xx'])  # the action removes the first 2 letters
         buttons.append({'title': title, 'payload': payload})
@@ -43,18 +35,17 @@ def get_button_show_more():
     return {'title': title, 'payload': payload}
 
 
-def get_buttons_go_back_to_context_position(action_name_list):
+def get_button_reset_context():
     payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
                               [nlu.ENTITY_POSITION, str(nlu.VALUE_POSITION_RESET_CONTEXT)+'xx'])
-    buttons = []
-    buttons.insert(0, {'title': 'RESET context ', 'payload': payload})
-    for i, action_name in enumerate(action_name_list):
-        title = action_name
-        payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
-                                  [nlu.ENTITY_POSITION, str(i+1)+'xx'])  # position plus 1 + xx (st, nd, rd, th)
-        # prepending
-        buttons.insert(0, {'title': title, 'payload': payload})
-    return buttons
+    return {'title': 'RESET context ', 'payload': payload}
+
+
+def get_button_go_back_to_context_position(action_name, pos):
+    title = action_name
+    payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
+                              [nlu.ENTITY_POSITION, str(pos+1)+'xx'])  # position plus 1 + xx (st, nd, rd, th)
+    return {'title': title, 'payload': payload}
 
 
 # helper
