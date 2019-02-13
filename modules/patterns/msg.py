@@ -1,5 +1,3 @@
-from typing import List
-
 from modules.database import resolver
 
 HI_THERE = 'Hi there explorator!\n' \
@@ -11,10 +9,9 @@ ONE_RESULT_FOUND = 'Et voilà! I found 1 result!'
 N_RESULTS_FOUND_PATTERN = 'Et voilà! I found {} results!'
 SELECT_FOR_INFO = 'Select the one you are interested in:'
 INTRODUCE_ELEMENT_TO_SHOW_PATTERN = 'Here is what I know about this {}:'
-EMPTY_CONTEXT_LIST = 'What are we talking about? No element has been registered yet!'
-CONTEXT_LIST_RESET = 'The context has been reset!'
-SHOW_CONTEXT_INFO = 'Click a button to go back in the context\n' \
-                    'Currently the context of the conversation is the following:'
+EMPTY_CONTEXT_LIST = 'I am sorry, but your conversation history is empty!'
+CONTEXT_LIST_RESET = 'The history has been reset!'
+SHOW_CONTEXT_INFO = 'Click a button to go back in the history!'
 
 
 def element_attributes(element):

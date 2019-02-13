@@ -74,9 +74,21 @@
 
 ## intent:show_context
 - show the context
+- show me the history
+- history
 - the context
 - context
 - view context
+
+## intent:start
+- help me
+- start
+- do something
+- what do you have to show me
+- show me something
+- hello there!
+- hi
+- hello
 
 ## intent:go_back_to_context_pos
 - go back to [first](pos)

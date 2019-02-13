@@ -35,6 +35,8 @@ DB_SCHEMA_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_s
 
 # settings
 
+ELEMENT_VISU_LIMIT = 5
+
 #db
 
 DATABASE_USER = 'root'

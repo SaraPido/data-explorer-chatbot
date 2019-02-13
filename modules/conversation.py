@@ -1,7 +1,8 @@
 import logging
+import os
 from logging import handlers
 
-from modules.settings import LOG_DIR_PATH_AND_SEP
+from modules.settings import LOG_DIR_PATH_AND_SEP, ELEMENT_VISU_LIMIT
 
 """
 {
@@ -61,8 +62,10 @@ class Context:
 
     def __init__(self, chat_id):
         self.context_list = []
+        self.show_indexes = {'from': 0, 'to': 0}
         self.logger = logging.Logger(__name__, logging.INFO)
-        log_handler = handlers.RotatingFileHandler(LOG_DIR_PATH_AND_SEP + str(chat_id) + '.txt', maxBytes=500)
+        self.log_path = LOG_DIR_PATH_AND_SEP + str(chat_id) + '.txt'
+        log_handler = handlers.RotatingFileHandler(self.log_path, maxBytes=500)
         log_handler.setLevel(logging.INFO)
         self.logger.addHandler(log_handler)
 
@@ -98,15 +101,19 @@ class Context:
         """
 
         self.context_list.append(element)
+        self.handle_show_last_element()
         self.logger.info(' ')
         self.logger.info(' *** Element ' + element['element_name'] + ' has been added to the context_list ***')
         self.update_log()
 
+    def handle_show_last_element(self):
+        element = self.context_list[-1]
+        if element['real_value_length'] > 1:
+            element['show'] = {'from': 0, 'to': min(ELEMENT_VISU_LIMIT, element['real_value_length'])}
+
     def go_back_to_position(self, position):
         del self.context_list[position:]
-        # todo check correctness
-        if self.context_list[position-1].get('show'):
-            del self.context_list[position-1]['show']
+        self.handle_show_last_element()
 
     def get_context_list(self):
         return self.context_list
@@ -131,4 +138,8 @@ class Context:
             if el.get('show'):
                 self.logger.info(sep + 'showing from {} to {}'.format(el['show']['from'], el['show']['to']))
             self.logger.info(' ')
+
+    def delete_log(self):
+        if os.path.isfile(self.log_path):
+            os.remove(self.log_path)
 

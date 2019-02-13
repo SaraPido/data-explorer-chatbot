@@ -4,11 +4,11 @@ from nltk import edit_distance
 from modules.database import resolver
 from modules import patterns
 from modules.patterns import btn, msg, nlu
+from modules.settings import ELEMENT_VISU_LIMIT
 
 logger = logging.getLogger(__name__)
 
 ELEMENT_SIMILARITY_DISTANCE_THRESHOLD = 3
-LIMIT = 5
 
 
 # Helpers
@@ -59,10 +59,6 @@ def handle_similarity(keyword, keyword_list):
     return winner
 
 
-def handle_show_element(element):
-    element['show'] = {'from': 0, 'to': min(LIMIT, element['real_value_length'])}
-
-
 def handle_quantity_found_element(response, element):
     if element['real_value_length'] == 1:
         response.add_message(msg.ONE_RESULT_FOUND)
@@ -80,8 +76,7 @@ def handle_element_selection(element, position, context):
 
         selected_element['query'] = None
         selected_element['real_value_length'] = 1
-        selected_element['action_name'] = resolver.get_element_show_string(selected_element['element_name'],
-                                                                           selected_element['value'][0])
+        selected_element['action_name'] = '..selected from:'
 
         context.append_element(selected_element)
         return True
@@ -127,6 +122,8 @@ def action_find_element_by_attribute(entities, response, context):
         attributes = []
 
         for oe in ordered_entities:
+
+            # todo it gave error: Generate error in case of not-extracted element
             if oe.get('attribute'):
                 attribute_name = handle_similarity(oe['attribute'],
                                                    [a['keyword']
@@ -146,9 +143,8 @@ def action_find_element_by_attribute(entities, response, context):
 
         if element['value']:
 
-            handle_show_element(element)
-
-            element['action_name'] = msg.find_element_action_name(element_name, ordered_entities)
+            element['action_name'] = '...found with attribute(s) "{}".'.format(', '.join(
+                ('{} '.format(a.get('keyword') if a.get('keyword') else '') + str(a['value'])) for a in attributes))
 
             context.append_element(element)
 
@@ -184,9 +180,8 @@ def action_cross_relation(entities, response, context):
 
             if result_element['value']:
 
-                result_element['action_name'] = '[Relation] {}'.format(element['element_name'], relation_name)
-
-                handle_show_element(result_element)
+                result_element['action_name'] = '...reached with the relation "{}", from {}:'\
+                    .format(relation_name, element['element_name'])
 
                 context.append_element(result_element)
 
@@ -226,7 +221,6 @@ def action_select_element_by_position(entities, response, context):
 
             else:
                 if handle_element_selection(element, position, context):
-                    handle_show_element(element)
                     view_context_element(entities, response, context)
                 else:
                     response.add_message('Error! Out of range selection!')
@@ -259,13 +253,13 @@ def view_context_element(entities, response, context, just_appended=False):
         response.add_message(msg.EMPTY_CONTEXT_LIST)
 
 
-def action_show_more(entities, response, context):
+def action_show_more_elements(entities, response, context):
     element = context.get_last_element()
 
     if element:
         if element['show']['to'] < element['real_value_length']:
-            element['show']['from'] = element['show']['from'] + LIMIT
-            element['show']['to'] = min(element['real_value_length'], element['show']['to'] + LIMIT)
+            element['show']['from'] = element['show']['from'] + ELEMENT_VISU_LIMIT
+            element['show']['to'] = min(element['real_value_length'], element['show']['to'] + ELEMENT_VISU_LIMIT)
             view_context_element(entities, response, context)
         else:
             response.add_message(msg.ERROR)  # should not happen
@@ -278,21 +272,27 @@ def action_show_context(entities, response, context):
 
         response.add_message(msg.SHOW_CONTEXT_INFO)
 
+        m = 'Currently you are viewing'
+        m += ' {}:'.format(context_list[-1]['element_name']) if context_list[-1]['real_value_length'] == 1 else ':'
+        response.add_message(m)
+
         for i, el in enumerate(context_list[::-1]):
 
             if el['real_value_length'] == 1:
-                result = resolver.get_element_show_string(el['element_name'], el['value'][0])
-                response.add_button(btn.get_button_go_back_to_context_position(
-                    '[{}] {}'.format(el['element_name'], result), i))
-            # else:
-                # result = 'Multiple results'
-            # response.add_message('[{}] {}'.format(el['element_name'], result))
-            # response.add_button(btn.get_button_go_back_to_context_position(el['action_name'], i))
+                result = '{}'.format(resolver.get_element_show_string(el['element_name'], el['value'][0]))
+            else:
+                result = 'a list of type "{}"'.format(el['element_name'])
+            response.add_button(btn.get_button_go_back_to_context_position(result, i))
+            response.add_message(el['action_name'])
 
         response.add_button(btn.get_button_reset_context())
 
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
+
+
+def action_show_more_context(entities, response, context):
+    pass
 
 
 def action_go_back_to_context_position(entities, response, context):
@@ -330,10 +330,11 @@ intents_to_action_functions = {
     nlu.INTENT_FILTER_ELEMENT_BY_ATTRIBUTE: action_filter_element_by_attribute,
     nlu.INTENT_CROSS_RELATION: action_cross_relation,
     nlu.INTENT_SHOW_RELATIONS: action_show_relations,
-    nlu.INTENT_SHOW_MORE: action_show_more,
+    nlu.INTENT_SHOW_MORE_ELEMENTS: action_show_more_elements,
     nlu.INTENT_SELECT_ELEMENT_BY_POSITION: action_select_element_by_position,
-    nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION: action_go_back_to_context_position,
-    nlu.INTENT_SHOW_CONTEXT: action_show_context
+    nlu.INTENT_SHOW_CONTEXT: action_show_context,
+    nlu.INTENT_SHOW_MORE_CONTEXT: action_show_more_context,
+    nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION: action_go_back_to_context_position
 }
 
 

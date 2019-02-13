@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     warnings.filterwarnings('ignore')
 
-    log_path = LOG_DIR_PATH_AND_SEP + 'sherbot.txt'
+    log_path = LOG_DIR_PATH_AND_SEP + 'sherbot.log'
     with open(log_path, 'w'):
         pass
     logging.basicConfig(filename=log_path, level=logging.INFO)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     logging.info('Bot successfully started!')
 
     telegram.start()
-    #console_input()
+    # console_input()
     while 1:
         sleep(100)
 

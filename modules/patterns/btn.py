@@ -31,7 +31,7 @@ def get_buttons_select_element(element):
 
 def get_button_show_more():
     title = '- SHOW MORE -'
-    payload = extract_payload(nlu.INTENT_SHOW_MORE)
+    payload = extract_payload(nlu.INTENT_SHOW_MORE_ELEMENTS)
     return {'title': title, 'payload': payload}
 
 

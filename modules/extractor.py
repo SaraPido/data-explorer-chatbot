@@ -67,7 +67,7 @@ def parse(message):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logging.info('NLU model:\n'
-                '"' + NLU_MODEL_PATH + '"')
+                 '"' + NLU_MODEL_PATH + '"')
     logging.info('Training the NLU model...')
     training_data = nlu_train.load_data(NLU_DATA_PATH)
     trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": NLU_CONFIG_PIPELINE,

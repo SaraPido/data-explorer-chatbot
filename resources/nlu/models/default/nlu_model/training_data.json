@@ -701,6 +701,14 @@
       },
       {
         "intent": "show_context",
+        "text": "show me the history"
+      },
+      {
+        "intent": "show_context",
+        "text": "history"
+      },
+      {
+        "intent": "show_context",
         "text": "the context"
       },
       {
@@ -710,6 +718,38 @@
       {
         "intent": "show_context",
         "text": "view context"
+      },
+      {
+        "intent": "start",
+        "text": "help me"
+      },
+      {
+        "intent": "start",
+        "text": "start"
+      },
+      {
+        "intent": "start",
+        "text": "do something"
+      },
+      {
+        "intent": "start",
+        "text": "what do you have to show me"
+      },
+      {
+        "intent": "start",
+        "text": "show me something"
+      },
+      {
+        "intent": "start",
+        "text": "hello there!"
+      },
+      {
+        "intent": "start",
+        "text": "hi"
+      },
+      {
+        "intent": "start",
+        "text": "hello"
       },
       {
         "intent": "go_back_to_context_pos",
