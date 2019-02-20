@@ -97,3 +97,4 @@ def query_join(element, relation_name):
     result_element = broker.query_join(element, relation)
     result_element['element_name'] = relation['element_name']
     return result_element
+

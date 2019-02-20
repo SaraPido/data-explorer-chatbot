@@ -65,6 +65,7 @@ def parse(message):
 
 
 if __name__ == '__main__':
+
     logging.basicConfig(level=logging.INFO)
     logging.info('NLU model:\n'
                  '"' + NLU_MODEL_PATH + '"')
@@ -87,5 +88,11 @@ pipeline = [{"name": "nlp_spacy"},
             {"name": "ner_crf"},
             {"name": "ner_synonyms"},
             {"name": "intent_classifier_sklearn"}]
+            
+pipeline = [{"name": "tokenizer_whitespace"},
+            {"name": "ner_crf"},
+            {"name": "ner_synonyms"},
+            {"name": "intent_featurizer_count_vectors"},
+            {"name": "intent_classifier_tensorflow_embedding"}]
             
 """

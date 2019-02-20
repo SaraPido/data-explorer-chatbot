@@ -1,5 +1,6 @@
 import logging
 import warnings
+from pprint import pprint
 
 from time import sleep
 
@@ -18,7 +19,8 @@ def console_input():
             break
 
         parsed_message = extractor.parse(message)
-        response = caller.run_action_from_parsed_message(parsed_message)
+
+        response = caller.run_action_from_parsed_message(parsed_message, '-1')
 
         print(response.get_printable_string())
 

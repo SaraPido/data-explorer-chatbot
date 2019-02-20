@@ -5,64 +5,3292 @@
         "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 5,
-            "end": 13,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 14,
             "end": 18,
-            "value": "Mark",
-            "entity": "word"
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_5",
+            "start": 29,
+            "value": "reported to"
+          },
+          {
+            "end": 53,
+            "entity": "word_1_5",
+            "start": 41,
+            "value": "John Belushi"
           }
         ],
-        "text": "find customer Mark"
+        "text": "are there customer that have reported to John Belushi"
       },
       {
         "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 5,
-            "end": 13,
-            "value": "customer",
-            "entity": "el"
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
           },
           {
-            "start": 14,
-            "end": 26,
-            "value": "with contact",
-            "entity": "attr"
+            "end": 29,
+            "entity": "attr_1_2",
+            "start": 19,
+            "value": "located in"
           },
           {
-            "start": 27,
-            "end": 39,
-            "value": "Peter Parker",
-            "entity": "word"
+            "end": 35,
+            "entity": "word_1_2",
+            "start": 30,
+            "value": "Milan"
           }
         ],
-        "text": "find customer with contact Peter Parker"
+        "text": "are there customer located in Milan"
       },
       {
         "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 5,
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_1",
+            "start": 16,
+            "value": "with contact"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_1",
+            "start": 29,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_3",
+            "start": 21,
+            "value": "paid"
+          },
+          {
+            "end": 29,
+            "entity": "num_1_3",
+            "start": 26,
+            "value": "123"
+          }
+        ],
+        "text": "search customer that paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_4",
+            "start": 21,
+            "value": "ordered"
+          },
+          {
+            "end": 66,
+            "entity": "word_1_4",
+            "start": 29,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "search customer that ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "American Souvenirs Inc"
+          }
+        ],
+        "text": "are there customer American Souvenirs Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Daedalus Designs Imports"
+          }
+        ],
+        "text": "look for customer Daedalus Designs Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
             "end": 13,
-            "value": "customer",
-            "entity": "el"
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
           },
           {
+            "end": 24,
+            "entity": "attr_1_3",
+            "start": 20,
+            "value": "paid"
+          },
+          {
+            "end": 28,
+            "entity": "num_1_3",
+            "start": 25,
+            "value": "123"
+          }
+        ],
+        "text": "find customer which paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_5",
+            "start": 21,
+            "value": "reported to"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_5",
+            "start": 33,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer that reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 49,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "are there customer that with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_2",
+            "start": 20,
+            "value": "located in"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_2",
+            "start": 31,
+            "value": "Milan"
+          }
+        ],
+        "text": "find customer which located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_4",
+            "start": 26,
+            "value": "ordered"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_4",
+            "start": 34,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "search customer that have ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Atelier graphique"
+          }
+        ],
+        "text": "are there customer Atelier graphique"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "attr_1_5",
+            "start": 26,
+            "value": "reported to"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_5",
+            "start": 38,
+            "value": "Peter"
+          }
+        ],
+        "text": "search customer that have reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 34,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "67472"
+          }
+        ],
+        "text": "are there customer that paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_1",
+            "start": 16,
+            "value": "with contact"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_1",
+            "start": 29,
+            "value": "Peter"
+          }
+        ],
+        "text": "search customer with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_0",
             "start": 14,
-            "end": 26,
-            "value": "with contact",
-            "entity": "attr"
+            "value": "Danish Wholesale Imports"
+          }
+        ],
+        "text": "find customer Danish Wholesale Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
           },
           {
+            "end": 26,
+            "entity": "attr_1_4",
+            "start": 19,
+            "value": "ordered"
+          },
+          {
+            "end": 64,
+            "entity": "word_1_4",
             "start": 27,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "find customer that ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_2",
+            "start": 24,
+            "value": "located in"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_2",
+            "start": 35,
+            "value": "Italy"
+          }
+        ],
+        "text": "find customer that have located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Euro+ Shopping Channel"
+          }
+        ],
+        "text": "look for customer Euro+ Shopping Channel"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Mark"
+          }
+        ],
+        "text": "find customer that have with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_5",
+            "start": 19,
+            "value": "reported to"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_5",
+            "start": 31,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer that reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 24,
+            "entity": "attr_1_3",
+            "start": 20,
+            "value": "paid"
+          },
+          {
             "end": 31,
-            "value": "Mark",
-            "entity": "word"
+            "entity": "num_1_3",
+            "start": 25,
+            "value": "162.32"
+          }
+        ],
+        "text": "find customer which paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Saveley & Henriot, Co"
+          }
+        ],
+        "text": "look for customer Saveley & Henriot, Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_5",
+            "start": 14,
+            "value": "reported to"
+          },
+          {
+            "end": 31,
+            "entity": "word_1_5",
+            "start": 26,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_3",
+            "start": 22,
+            "value": "paid"
+          },
+          {
+            "end": 33,
+            "entity": "num_1_3",
+            "start": 27,
+            "value": "162.32"
+          }
+        ],
+        "text": "search customer which paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_2",
+            "start": 21,
+            "value": "located in"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_2",
+            "start": 32,
+            "value": "Milan"
+          }
+        ],
+        "text": "search customer that located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_4",
+            "start": 18,
+            "value": "ordered"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_4",
+            "start": 26,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "look for customer ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Technics Stores Inc"
+          }
+        ],
+        "text": "are there customer Technics Stores Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Dragon Souveniers, Ltd"
+          }
+        ],
+        "text": "find customer Dragon Souveniers, Ltd"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_5",
+            "start": 20,
+            "value": "reported to"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_5",
+            "start": 32,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer which reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 35,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "162.32"
+          }
+        ],
+        "text": "look for customer which paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "attr_1_1",
+            "start": 26,
+            "value": "with contact"
+          },
+          {
+            "end": 51,
+            "entity": "word_1_1",
+            "start": 39,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer that have with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_2",
+            "start": 23,
+            "value": "located in"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_2",
+            "start": 34,
+            "value": "France"
+          }
+        ],
+        "text": "look for customer that located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_4",
+            "start": 19,
+            "value": "ordered"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_4",
+            "start": 27,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "find customer that ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Signal Gift Stores"
+          }
+        ],
+        "text": "search customer Signal Gift Stores"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_1",
+            "start": 23,
+            "value": "with contact"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_1",
+            "start": 36,
+            "value": "Mark"
+          }
+        ],
+        "text": "look for customer that with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 20,
+            "entity": "attr_1_3",
+            "start": 16,
+            "value": "paid"
+          },
+          {
+            "end": 25,
+            "entity": "num_1_3",
+            "start": 21,
+            "value": "3452"
+          }
+        ],
+        "text": "search customer paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_5",
+            "start": 22,
+            "value": "reported to"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_5",
+            "start": 34,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer which reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Atelier graphique"
+          }
+        ],
+        "text": "search customer Atelier graphique"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_4",
+            "start": 19,
+            "value": "ordered"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_4",
+            "start": 27,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "are there customer ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_2",
+            "start": 24,
+            "value": "located in"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_2",
+            "start": 35,
+            "value": "France"
+          }
+        ],
+        "text": "find customer that have located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Herkku Gifts"
+          }
+        ],
+        "text": "are there customer Herkku Gifts"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Mark"
+          }
+        ],
+        "text": "find customer that have reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_3",
+            "start": 29,
+            "value": "paid"
+          },
+          {
+            "end": 38,
+            "entity": "num_1_3",
+            "start": 34,
+            "value": "3452"
+          }
+        ],
+        "text": "are there customer that have paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_1",
+            "start": 23,
+            "value": "with contact"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_1",
+            "start": 36,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer that with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Blauer See Auto Co"
+          }
+        ],
+        "text": "are there customer Blauer See Auto Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_3",
+            "start": 28,
+            "value": "paid"
+          },
+          {
+            "end": 39,
+            "entity": "num_1_3",
+            "start": 33,
+            "value": "162.32"
+          }
+        ],
+        "text": "look for customer that have paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer which reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Mark"
+          }
+        ],
+        "text": "look for customer which with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 24,
+            "entity": "attr_1_2",
+            "start": 14,
+            "value": "located in"
+          },
+          {
+            "end": 30,
+            "entity": "word_1_2",
+            "start": 25,
+            "value": "Italy"
+          }
+        ],
+        "text": "find customer located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_4",
+            "start": 22,
+            "value": "ordered"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_4",
+            "start": 30,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "search customer which ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Diecast Classics Inc"
+          }
+        ],
+        "text": "search customer Diecast Classics Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "attr_1_1",
+            "start": 25,
+            "value": "with contact"
+          },
+          {
+            "end": 50,
+            "entity": "word_1_1",
+            "start": 38,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "are there customer which with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_5",
+            "start": 16,
+            "value": "reported to"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_5",
+            "start": 28,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_3",
+            "start": 28,
+            "value": "paid"
+          },
+          {
+            "end": 38,
+            "entity": "num_1_3",
+            "start": 33,
+            "value": "67472"
+          }
+        ],
+        "text": "look for customer that have paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Blauer See Auto Co"
+          }
+        ],
+        "text": "search customer Blauer See Auto Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_2",
+            "start": 22,
+            "value": "located in"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_2",
+            "start": 33,
+            "value": "Milan"
+          }
+        ],
+        "text": "search customer which located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_5",
+            "start": 22,
+            "value": "reported to"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_5",
+            "start": 34,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer which reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_3",
+            "start": 26,
+            "value": "paid"
+          },
+          {
+            "end": 35,
+            "entity": "num_1_3",
+            "start": 31,
+            "value": "3452"
+          }
+        ],
+        "text": "search customer that have paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "attr_1_1",
+            "start": 29,
+            "value": "with contact"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_1",
+            "start": 42,
+            "value": "Mark"
+          }
+        ],
+        "text": "are there customer that have with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Signal Gift Stores"
+          }
+        ],
+        "text": "look for customer Signal Gift Stores"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_2",
+            "start": 26,
+            "value": "located in"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_2",
+            "start": 37,
+            "value": "France"
+          }
+        ],
+        "text": "search customer that have located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_4",
+            "start": 20,
+            "value": "ordered"
+          },
+          {
+            "end": 65,
+            "entity": "word_1_4",
+            "start": 28,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "find customer which ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_1",
+            "start": 23,
+            "value": "with contact"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_1",
+            "start": 36,
+            "value": "Peter"
+          }
+        ],
+        "text": "look for customer that with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_5",
+            "start": 28,
+            "value": "reported to"
+          },
+          {
+            "end": 52,
+            "entity": "word_1_5",
+            "start": 40,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer that have reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_3",
+            "start": 22,
+            "value": "paid"
+          },
+          {
+            "end": 31,
+            "entity": "num_1_3",
+            "start": 27,
+            "value": "3452"
+          }
+        ],
+        "text": "search customer which paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Australian Collectors Co"
+          }
+        ],
+        "text": "search customer Australian Collectors Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Atelier graphique"
+          }
+        ],
+        "text": "look for customer Atelier graphique"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_5",
+            "start": 14,
+            "value": "reported to"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_5",
+            "start": 26,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "find customer reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 49,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "find customer that have with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Euro+ Shopping Channel"
+          }
+        ],
+        "text": "search customer Euro+ Shopping Channel"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_5",
+            "start": 21,
+            "value": "reported to"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_5",
+            "start": 33,
+            "value": "Peter"
+          }
+        ],
+        "text": "search customer that reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 49,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer which with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_3",
+            "start": 29,
+            "value": "paid"
+          },
+          {
+            "end": 40,
+            "entity": "num_1_3",
+            "start": 34,
+            "value": "162.32"
+          }
+        ],
+        "text": "are there customer that have paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Danish Wholesale Imports"
+          }
+        ],
+        "text": "are there customer Danish Wholesale Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_4",
+            "start": 22,
+            "value": "ordered"
+          },
+          {
+            "end": 67,
+            "entity": "word_1_4",
+            "start": 30,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "search customer which ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_2",
+            "start": 29,
+            "value": "located in"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_2",
+            "start": 40,
+            "value": "Italy"
+          }
+        ],
+        "text": "are there customer that have located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Havel & Zbyszek Co"
+          }
+        ],
+        "text": "are there customer Havel & Zbyszek Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_3",
+            "start": 25,
+            "value": "paid"
+          },
+          {
+            "end": 34,
+            "entity": "num_1_3",
+            "start": 30,
+            "value": "3452"
+          }
+        ],
+        "text": "are there customer which paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_1",
+            "start": 16,
+            "value": "with contact"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_1",
+            "start": 29,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Handji Gifts& Co"
+          }
+        ],
+        "text": "are there customer Handji Gifts& Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_4",
+            "start": 18,
+            "value": "ordered"
+          },
+          {
+            "end": 63,
+            "entity": "word_1_4",
+            "start": 26,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "look for customer ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_2",
+            "start": 29,
+            "value": "located in"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_2",
+            "start": 40,
+            "value": "France"
+          }
+        ],
+        "text": "are there customer that have located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_5",
+            "start": 28,
+            "value": "reported to"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_5",
+            "start": 40,
+            "value": "Mark"
+          }
+        ],
+        "text": "look for customer that have reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_3",
+            "start": 19,
+            "value": "paid"
+          },
+          {
+            "end": 27,
+            "entity": "num_1_3",
+            "start": 24,
+            "value": "123"
+          }
+        ],
+        "text": "find customer that paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Daedalus Designs Imports"
+          }
+        ],
+        "text": "are there customer Daedalus Designs Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_2",
+            "start": 22,
+            "value": "located in"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_2",
+            "start": 33,
+            "value": "France"
+          }
+        ],
+        "text": "search customer which located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "La Rochelle Gifts"
+          }
+        ],
+        "text": "find customer La Rochelle Gifts"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_1",
+            "start": 18,
+            "value": "with contact"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_1",
+            "start": 31,
+            "value": "Mark"
+          }
+        ],
+        "text": "look for customer with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_3",
+            "start": 26,
+            "value": "paid"
+          },
+          {
+            "end": 34,
+            "entity": "num_1_3",
+            "start": 31,
+            "value": "123"
+          }
+        ],
+        "text": "search customer that have paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_5",
+            "start": 19,
+            "value": "reported to"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_5",
+            "start": 31,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_3",
+            "start": 23,
+            "value": "paid"
+          },
+          {
+            "end": 34,
+            "entity": "num_1_3",
+            "start": 28,
+            "value": "162.32"
+          }
+        ],
+        "text": "look for customer that paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_5",
+            "start": 25,
+            "value": "reported to"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_5",
+            "start": 37,
+            "value": "Mark"
+          }
+        ],
+        "text": "are there customer which reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_1",
+            "start": 19,
+            "value": "with contact"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_1",
+            "start": 32,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "are there customer with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "are there customer that ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Handji Gifts& Co"
+          }
+        ],
+        "text": "search customer Handji Gifts& Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_3",
+            "start": 19,
+            "value": "paid"
+          },
+          {
+            "end": 27,
+            "entity": "num_1_3",
+            "start": 24,
+            "value": "123"
+          }
+        ],
+        "text": "are there customer paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_1",
+            "start": 19,
+            "value": "with contact"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_1",
+            "start": 32,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_5",
+            "start": 20,
+            "value": "reported to"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_5",
+            "start": 32,
+            "value": "Mark"
+          }
+        ],
+        "text": "find customer which reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Blauer See Auto Co"
+          }
+        ],
+        "text": "find customer Blauer See Auto Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_4",
+            "start": 23,
+            "value": "ordered"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_4",
+            "start": 31,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "look for customer that ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Saveley & Henriot, Co"
+          }
+        ],
+        "text": "search customer Saveley & Henriot, Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "attr_1_5",
+            "start": 26,
+            "value": "reported to"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_5",
+            "start": 38,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer that have reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_1",
+            "start": 20,
+            "value": "with contact"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_1",
+            "start": 33,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer which with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Porto Imports Co"
+          }
+        ],
+        "text": "are there customer Porto Imports Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 24,
+            "entity": "attr_1_2",
+            "start": 14,
+            "value": "located in"
+          },
+          {
+            "end": 30,
+            "entity": "word_1_2",
+            "start": 25,
+            "value": "Milan"
+          }
+        ],
+        "text": "find customer located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 35,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "162.32"
+          }
+        ],
+        "text": "find customer that have paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_1",
+            "start": 28,
+            "value": "with contact"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_1",
+            "start": 41,
+            "value": "Mark"
+          }
+        ],
+        "text": "look for customer that have with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_5",
+            "start": 29,
+            "value": "reported to"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_5",
+            "start": 41,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer that have reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 21,
+            "entity": "attr_1_4",
+            "start": 14,
+            "value": "ordered"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_4",
+            "start": 22,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "find customer ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Havel & Zbyszek Co"
+          }
+        ],
+        "text": "search customer Havel & Zbyszek Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_5",
+            "start": 14,
+            "value": "reported to"
+          },
+          {
+            "end": 30,
+            "entity": "word_1_5",
+            "start": 26,
+            "value": "Mark"
+          }
+        ],
+        "text": "find customer reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_3",
+            "start": 29,
+            "value": "paid"
+          },
+          {
+            "end": 37,
+            "entity": "num_1_3",
+            "start": 34,
+            "value": "123"
+          }
+        ],
+        "text": "are there customer that have paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_2",
+            "start": 25,
+            "value": "located in"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_2",
+            "start": 36,
+            "value": "Italy"
+          }
+        ],
+        "text": "are there customer which located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer that have reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_3",
+            "start": 26,
+            "value": "paid"
+          },
+          {
+            "end": 37,
+            "entity": "num_1_3",
+            "start": 31,
+            "value": "162.32"
+          }
+        ],
+        "text": "search customer that have paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 49,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer which with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "attr_1_2",
+            "start": 28,
+            "value": "located in"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_2",
+            "start": 39,
+            "value": "Milan"
+          }
+        ],
+        "text": "look for customer that have located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_4",
+            "start": 26,
+            "value": "ordered"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_4",
+            "start": 34,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "search customer that have ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer that have reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer that with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_3",
+            "start": 25,
+            "value": "paid"
+          },
+          {
+            "end": 36,
+            "entity": "num_1_3",
+            "start": 30,
+            "value": "162.32"
+          }
+        ],
+        "text": "are there customer which paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_1",
+            "start": 20,
+            "value": "with contact"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_1",
+            "start": 33,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "find customer which with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_2",
+            "start": 19,
+            "value": "located in"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_2",
+            "start": 30,
+            "value": "France"
+          }
+        ],
+        "text": "are there customer located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_5",
+            "start": 16,
+            "value": "reported to"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_5",
+            "start": 28,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 24,
+            "entity": "attr_1_3",
+            "start": 20,
+            "value": "paid"
+          },
+          {
+            "end": 29,
+            "entity": "num_1_3",
+            "start": 25,
+            "value": "3452"
+          }
+        ],
+        "text": "find customer which paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "find customer that have ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_1",
+            "start": 28,
+            "value": "with contact"
+          },
+          {
+            "end": 53,
+            "entity": "word_1_1",
+            "start": 41,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer that have with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_5",
+            "start": 20,
+            "value": "reported to"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_5",
+            "start": 32,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "find customer which reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_2",
+            "start": 19,
+            "value": "located in"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_2",
+            "start": 30,
+            "value": "Milan"
+          }
+        ],
+        "text": "find customer that located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Volvo Model Replicas, Co"
+          }
+        ],
+        "text": "are there customer Volvo Model Replicas, Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 20,
+            "entity": "attr_1_3",
+            "start": 16,
+            "value": "paid"
+          },
+          {
+            "end": 27,
+            "entity": "num_1_3",
+            "start": 21,
+            "value": "162.32"
+          }
+        ],
+        "text": "search customer paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_2",
+            "start": 16,
+            "value": "located in"
+          },
+          {
+            "end": 33,
+            "entity": "word_1_2",
+            "start": 27,
+            "value": "France"
+          }
+        ],
+        "text": "search customer located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "attr_1_1",
+            "start": 26,
+            "value": "with contact"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_1",
+            "start": 39,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer that have with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_5",
+            "start": 16,
+            "value": "reported to"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_5",
+            "start": 28,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Land of Toys Inc"
+          }
+        ],
+        "text": "search customer Land of Toys Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 20,
+            "entity": "attr_1_3",
+            "start": 16,
+            "value": "paid"
+          },
+          {
+            "end": 26,
+            "entity": "num_1_3",
+            "start": 21,
+            "value": "67472"
+          }
+        ],
+        "text": "search customer paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_2",
+            "start": 18,
+            "value": "located in"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_2",
+            "start": 29,
+            "value": "Milan"
+          }
+        ],
+        "text": "look for customer located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_5",
+            "start": 19,
+            "value": "reported to"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_5",
+            "start": 31,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer that reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_1",
+            "start": 22,
+            "value": "with contact"
+          },
+          {
+            "end": 47,
+            "entity": "word_1_1",
+            "start": 35,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer which with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Mini Wheels Co"
+          }
+        ],
+        "text": "are there customer Mini Wheels Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_2",
+            "start": 29,
+            "value": "located in"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_2",
+            "start": 40,
+            "value": "Milan"
+          }
+        ],
+        "text": "are there customer that have located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_3",
+            "start": 23,
+            "value": "paid"
+          },
+          {
+            "end": 33,
+            "entity": "num_1_3",
+            "start": 28,
+            "value": "67472"
+          }
+        ],
+        "text": "look for customer that paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_1",
+            "start": 14,
+            "value": "with contact"
+          },
+          {
+            "end": 31,
+            "entity": "word_1_1",
+            "start": 27,
+            "value": "Mark"
           }
         ],
         "text": "find customer with contact Mark"
@@ -71,669 +3299,3491 @@
         "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 5,
             "end": 13,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 19,
-            "end": 23,
-            "value": "paid",
-            "entity": "attr"
-          },
-          {
-            "start": 24,
-            "end": 25,
-            "value": "<",
-            "entity": "num_op"
-          },
-          {
-            "start": 26,
-            "end": 30,
-            "value": "1223",
-            "entity": "num"
-          }
-        ],
-        "text": "find customer that paid < 1223€"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
+            "entity": "el_1",
             "start": 5,
-            "end": 13,
-            "value": "customer",
-            "entity": "el"
+            "value": "customer"
           },
           {
-            "start": 19,
-            "end": 30,
-            "value": "reported to",
-            "entity": "attr"
-          },
-          {
-            "start": 31,
-            "end": 42,
-            "value": "James Brown",
-            "entity": "word"
-          }
-        ],
-        "text": "find customer that reported to James Brown"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 19,
-            "end": 26,
-            "value": "ordered",
-            "entity": "attr"
-          },
-          {
-            "start": 27,
-            "end": 37,
-            "value": "Motorcycle",
-            "entity": "word"
-          }
-        ],
-        "text": "find customer that ordered Motorcycle"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 19,
-            "end": 26,
-            "value": "ordered",
-            "entity": "attr"
-          },
-          {
-            "start": 27,
-            "end": 41,
-            "value": "Something Cool",
-            "entity": "word"
-          }
-        ],
-        "text": "find customer that ordered Something Cool"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 14,
-            "end": 24,
-            "value": "located in",
-            "entity": "attr"
-          },
-          {
-            "start": 25,
             "end": 31,
-            "value": "London",
-            "entity": "word"
-          }
-        ],
-        "text": "find customer located in London"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 19,
-            "end": 26,
-            "value": "work in",
-            "entity": "attr"
-          },
-          {
-            "start": 27,
-            "end": 32,
-            "value": "Italy",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee that work in Italy"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 14,
-            "end": 18,
-            "value": "John",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee John"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 19,
-            "end": 26,
-            "value": "work in",
-            "entity": "attr"
-          },
-          {
-            "start": 27,
-            "end": 32,
-            "value": "Milan",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee that work in Milan"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 14,
-            "end": 20,
-            "value": "Philip",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee Philip"
-      },
-      {
-        "intent": "find_el_by_attr",
-        "entities": [
-          {
-            "start": 5,
-            "end": 13,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 19,
-            "end": 26,
-            "value": "work in",
-            "entity": "attr"
-          },
-          {
-            "start": 27,
-            "end": 32,
-            "value": "Paris",
-            "entity": "word"
-          }
-        ],
-        "text": "find employee that work in Paris"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 15,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 16,
-            "end": 20,
-            "value": "Mark",
-            "entity": "word"
-          }
-        ],
-        "text": "filter customer Mark"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 19,
-            "value": "with contact",
-            "entity": "attr"
-          },
-          {
-            "start": 20,
-            "end": 32,
-            "value": "Peter Parker",
-            "entity": "word"
-          }
-        ],
-        "text": "filter with contact Peter Parker"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 15,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 16,
-            "end": 28,
-            "value": "with contact",
-            "entity": "attr"
-          },
-          {
-            "start": 29,
-            "end": 33,
-            "value": "Mark",
-            "entity": "word"
-          }
-        ],
-        "text": "filter customer with contact Mark"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 21,
-            "end": 25,
-            "value": "paid",
-            "entity": "attr"
-          },
-          {
-            "start": 26,
-            "end": 27,
-            "value": "<",
-            "entity": "num_op"
-          },
-          {
-            "start": 28,
-            "end": 32,
-            "value": "1223",
-            "entity": "num"
-          }
-        ],
-        "text": "filter the ones that paid < 1223€"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 15,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 21,
-            "end": 32,
-            "value": "reported to",
-            "entity": "attr"
-          },
-          {
-            "start": 33,
-            "end": 44,
-            "value": "James Brown",
-            "entity": "word"
-          }
-        ],
-        "text": "filter customer that reported to James Brown"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 16,
-            "end": 23,
-            "value": "ordered",
-            "entity": "attr"
-          },
-          {
+            "entity": "attr_1_4",
             "start": 24,
-            "end": 34,
-            "value": "Motorcycle",
-            "entity": "word"
+            "value": "ordered"
+          },
+          {
+            "end": 69,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "1969 Harley Davidson Ultimate Chopper"
           }
         ],
-        "text": "filter the ones ordered Motorcycle"
+        "text": "find customer that have ordered 1969 Harley Davidson Ultimate Chopper"
       },
       {
-        "intent": "filter_el_by_attr",
+        "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 7,
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_3",
+            "start": 19,
+            "value": "paid"
+          },
+          {
+            "end": 30,
+            "entity": "num_1_3",
+            "start": 24,
+            "value": "162.32"
+          }
+        ],
+        "text": "are there customer paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
             "end": 15,
-            "value": "customer",
-            "entity": "el"
-          },
-          {
-            "start": 21,
-            "end": 28,
-            "value": "ordered",
-            "entity": "attr"
-          },
-          {
-            "start": 29,
-            "end": 43,
-            "value": "Something Cool",
-            "entity": "word"
-          }
-        ],
-        "text": "filter customer that ordered Something Cool"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
+            "entity": "el_1",
             "start": 7,
-            "end": 17,
-            "value": "located in",
-            "entity": "attr"
+            "value": "customer"
           },
           {
-            "start": 18,
-            "end": 24,
-            "value": "London",
-            "entity": "word"
-          }
-        ],
-        "text": "filter located in London"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 15,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 21,
-            "end": 28,
-            "value": "work in",
-            "entity": "attr"
-          },
-          {
-            "start": 29,
-            "end": 34,
-            "value": "Italy",
-            "entity": "word"
-          }
-        ],
-        "text": "filter employee that work in Italy"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 11,
-            "value": "John",
-            "entity": "word"
-          }
-        ],
-        "text": "filter John"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 15,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
-            "start": 21,
-            "end": 28,
-            "value": "work in",
-            "entity": "attr"
-          },
-          {
-            "start": 29,
-            "end": 34,
-            "value": "Milan",
-            "entity": "word"
-          }
-        ],
-        "text": "filter employee that work in Milan"
-      },
-      {
-        "intent": "filter_el_by_attr",
-        "entities": [
-          {
-            "start": 7,
-            "end": 15,
-            "value": "employee",
-            "entity": "el"
-          },
-          {
+            "end": 38,
+            "entity": "word_1_0",
             "start": 16,
-            "end": 22,
-            "value": "Philip",
-            "entity": "word"
+            "value": "American Souvenirs Inc"
           }
         ],
-        "text": "filter employee Philip"
+        "text": "search customer American Souvenirs Inc"
       },
       {
-        "intent": "filter_el_by_attr",
+        "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 7,
-            "end": 15,
-            "value": "employee",
-            "entity": "el"
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
           },
           {
-            "start": 21,
-            "end": 28,
-            "value": "work in",
-            "entity": "attr"
+            "end": 37,
+            "entity": "attr_1_1",
+            "start": 25,
+            "value": "with contact"
           },
           {
-            "start": 29,
-            "end": 34,
-            "value": "Paris",
-            "entity": "word"
+            "end": 42,
+            "entity": "word_1_1",
+            "start": 38,
+            "value": "Mark"
           }
         ],
-        "text": "filter employee that work in Paris"
+        "text": "are there customer which with contact Mark"
       },
       {
-        "intent": "cross_rel",
+        "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 0,
-            "end": 15,
-            "value": "works in office",
-            "entity": "rel"
-          }
-        ],
-        "text": "works in office"
-      },
-      {
-        "intent": "cross_rel",
-        "entities": [
-          {
-            "start": 0,
-            "end": 28,
-            "value": "related sales representative",
-            "entity": "rel"
-          }
-        ],
-        "text": "related sales representative"
-      },
-      {
-        "intent": "cross_rel",
-        "entities": [
-          {
-            "start": 0,
-            "end": 11,
-            "value": "orders made",
-            "entity": "rel"
-          }
-        ],
-        "text": "orders made"
-      },
-      {
-        "intent": "show_rel",
-        "text": "show me the relations"
-      },
-      {
-        "intent": "show_rel",
-        "text": "its relations"
-      },
-      {
-        "intent": "show_rel",
-        "text": "view relations"
-      },
-      {
-        "intent": "show_rel",
-        "text": "relations"
-      },
-      {
-        "intent": "select_el_by_pos",
-        "entities": [
-          {
-            "start": 7,
-            "end": 12,
-            "value": "first",
-            "entity": "pos"
-          }
-        ],
-        "text": "select first row"
-      },
-      {
-        "intent": "select_el_by_pos",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "second",
-            "entity": "pos"
-          }
-        ],
-        "text": "second row"
-      },
-      {
-        "intent": "select_el_by_pos",
-        "entities": [
-          {
-            "start": 7,
-            "end": 12,
-            "value": "third",
-            "entity": "pos"
-          }
-        ],
-        "text": "select third"
-      },
-      {
-        "intent": "select_el_by_pos",
-        "entities": [
-          {
-            "start": 7,
             "end": 13,
-            "value": "fourth",
-            "entity": "pos"
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 34,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "67472"
           }
         ],
-        "text": "select fourth"
+        "text": "find customer that have paid 67472"
       },
       {
-        "intent": "select_el_by_pos",
+        "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 11,
-            "end": 14,
-            "value": "2nd",
-            "entity": "pos"
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_4",
+            "start": 28,
+            "value": "ordered"
+          },
+          {
+            "end": 73,
+            "entity": "word_1_4",
+            "start": 36,
+            "value": "1969 Harley Davidson Ultimate Chopper"
           }
         ],
-        "text": "select the 2nd row"
+        "text": "look for customer that have ordered 1969 Harley Davidson Ultimate Chopper"
       },
       {
-        "intent": "select_el_by_pos",
+        "intent": "find_el_by_attr",
         "entities": [
           {
-            "start": 11,
-            "end": 16,
-            "value": "fifth",
-            "entity": "pos"
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Herkku Gifts"
           }
         ],
-        "text": "select the fifth"
+        "text": "find customer Herkku Gifts"
       },
       {
-        "intent": "show_context",
-        "text": "show the context"
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 18,
+            "entity": "attr_1_3",
+            "start": 14,
+            "value": "paid"
+          },
+          {
+            "end": 25,
+            "entity": "num_1_3",
+            "start": 19,
+            "value": "162.32"
+          }
+        ],
+        "text": "find customer paid 162.32"
       },
       {
-        "intent": "show_context",
-        "text": "show me the history"
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_1",
+            "start": 14,
+            "value": "with contact"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_1",
+            "start": 27,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer with contact John Belushi"
       },
       {
-        "intent": "show_context",
-        "text": "history"
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_2",
+            "start": 23,
+            "value": "located in"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_2",
+            "start": 34,
+            "value": "Italy"
+          }
+        ],
+        "text": "look for customer that located in Italy"
       },
       {
-        "intent": "show_context",
-        "text": "the context"
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_5",
+            "start": 19,
+            "value": "reported to"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_5",
+            "start": 31,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "are there customer reported to Peter Parker"
       },
       {
-        "intent": "show_context",
-        "text": "context"
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Daedalus Designs Imports"
+          }
+        ],
+        "text": "find customer Daedalus Designs Imports"
       },
       {
-        "intent": "show_context",
-        "text": "view context"
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "look for customer which ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Muscle Machine Inc"
+          }
+        ],
+        "text": "find customer Muscle Machine Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_1",
+            "start": 28,
+            "value": "with contact"
+          },
+          {
+            "end": 53,
+            "entity": "word_1_1",
+            "start": 41,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer that have with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Signal Gift Stores"
+          }
+        ],
+        "text": "find customer Signal Gift Stores"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_3",
+            "start": 21,
+            "value": "paid"
+          },
+          {
+            "end": 30,
+            "entity": "num_1_3",
+            "start": 26,
+            "value": "3452"
+          }
+        ],
+        "text": "search customer that paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Technics Stores Inc"
+          }
+        ],
+        "text": "look for customer Technics Stores Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "La Rochelle Gifts"
+          }
+        ],
+        "text": "look for customer La Rochelle Gifts"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_5",
+            "start": 29,
+            "value": "reported to"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_5",
+            "start": 41,
+            "value": "Mark"
+          }
+        ],
+        "text": "are there customer that have reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 32,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "123"
+          }
+        ],
+        "text": "are there customer that paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_2",
+            "start": 19,
+            "value": "located in"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_2",
+            "start": 30,
+            "value": "Italy"
+          }
+        ],
+        "text": "are there customer located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_1",
+            "start": 22,
+            "value": "with contact"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_1",
+            "start": 35,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer which with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Dragon Souveniers, Ltd"
+          }
+        ],
+        "text": "look for customer Dragon Souveniers, Ltd"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_2",
+            "start": 23,
+            "value": "located in"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_2",
+            "start": 34,
+            "value": "Milan"
+          }
+        ],
+        "text": "look for customer that located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 34,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "67472"
+          }
+        ],
+        "text": "look for customer which paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_1",
+            "start": 21,
+            "value": "with contact"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_1",
+            "start": 34,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer that with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_3",
+            "start": 19,
+            "value": "paid"
+          },
+          {
+            "end": 29,
+            "entity": "num_1_3",
+            "start": 24,
+            "value": "67472"
+          }
+        ],
+        "text": "find customer that paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "find customer that have ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "attr_1_1",
+            "start": 29,
+            "value": "with contact"
+          },
+          {
+            "end": 54,
+            "entity": "word_1_1",
+            "start": 42,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "are there customer that have with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_2",
+            "start": 19,
+            "value": "located in"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_2",
+            "start": 30,
+            "value": "France"
+          }
+        ],
+        "text": "find customer that located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 33,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "3452"
+          }
+        ],
+        "text": "look for customer which paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_1",
+            "start": 28,
+            "value": "with contact"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_1",
+            "start": 41,
+            "value": "Peter"
+          }
+        ],
+        "text": "look for customer that have with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Dragon Souveniers, Ltd"
+          }
+        ],
+        "text": "search customer Dragon Souveniers, Ltd"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_4",
+            "start": 18,
+            "value": "ordered"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_4",
+            "start": 26,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "look for customer ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_2",
+            "start": 26,
+            "value": "located in"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_2",
+            "start": 37,
+            "value": "Milan"
+          }
+        ],
+        "text": "search customer that have located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Baane Mini Imports"
+          }
+        ],
+        "text": "are there customer Baane Mini Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "attr_1_1",
+            "start": 29,
+            "value": "with contact"
+          },
+          {
+            "end": 47,
+            "entity": "word_1_1",
+            "start": 42,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer that have with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Mini Gifts Distributors Ltd"
+          }
+        ],
+        "text": "search customer Mini Gifts Distributors Ltd"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "look for customer which ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_5",
+            "start": 28,
+            "value": "reported to"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_5",
+            "start": 40,
+            "value": "Peter"
+          }
+        ],
+        "text": "look for customer that have reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_3",
+            "start": 25,
+            "value": "paid"
+          },
+          {
+            "end": 33,
+            "entity": "num_1_3",
+            "start": 30,
+            "value": "123"
+          }
+        ],
+        "text": "are there customer which paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Technics Stores Inc"
+          }
+        ],
+        "text": "search customer Technics Stores Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_5",
+            "start": 18,
+            "value": "reported to"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_5",
+            "start": 30,
+            "value": "Mark"
+          }
+        ],
+        "text": "look for customer reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_2",
+            "start": 18,
+            "value": "located in"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_2",
+            "start": 29,
+            "value": "Italy"
+          }
+        ],
+        "text": "look for customer located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Muscle Machine Inc"
+          }
+        ],
+        "text": "search customer Muscle Machine Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 49,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "are there customer that with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_3",
+            "start": 23,
+            "value": "paid"
+          },
+          {
+            "end": 32,
+            "entity": "num_1_3",
+            "start": 28,
+            "value": "3452"
+          }
+        ],
+        "text": "look for customer that paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Euro+ Shopping Channel"
+          }
+        ],
+        "text": "are there customer Euro+ Shopping Channel"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_4",
+            "start": 23,
+            "value": "ordered"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_4",
+            "start": 31,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "look for customer that ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Mark"
+          }
+        ],
+        "text": "are there customer that with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer which reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 18,
+            "entity": "attr_1_3",
+            "start": 14,
+            "value": "paid"
+          },
+          {
+            "end": 22,
+            "entity": "num_1_3",
+            "start": 19,
+            "value": "123"
+          }
+        ],
+        "text": "find customer paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_4",
+            "start": 19,
+            "value": "ordered"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_4",
+            "start": 27,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "find customer that ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_2",
+            "start": 24,
+            "value": "located in"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_2",
+            "start": 35,
+            "value": "France"
+          }
+        ],
+        "text": "look for customer which located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_1",
+            "start": 22,
+            "value": "with contact"
+          },
+          {
+            "end": 47,
+            "entity": "word_1_1",
+            "start": 35,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer which with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_5",
+            "start": 25,
+            "value": "reported to"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_5",
+            "start": 37,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer which reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_2",
+            "start": 24,
+            "value": "located in"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_2",
+            "start": 35,
+            "value": "Italy"
+          }
+        ],
+        "text": "look for customer which located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_4",
+            "start": 29,
+            "value": "ordered"
+          },
+          {
+            "end": 51,
+            "entity": "word_1_4",
+            "start": 37,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "are there customer that have ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Mini Wheels Co"
+          }
+        ],
+        "text": "find customer Mini Wheels Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer that reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Daedalus Designs Imports"
+          }
+        ],
+        "text": "search customer Daedalus Designs Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_1",
+            "start": 20,
+            "value": "with contact"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_1",
+            "start": 33,
+            "value": "Mark"
+          }
+        ],
+        "text": "find customer which with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_2",
+            "start": 20,
+            "value": "located in"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_2",
+            "start": 31,
+            "value": "Italy"
+          }
+        ],
+        "text": "find customer which located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 69,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "look for customer which ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "attr_1_1",
+            "start": 25,
+            "value": "with contact"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_1",
+            "start": 38,
+            "value": "Peter"
+          }
+        ],
+        "text": "are there customer which with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "Herkku Gifts"
+          }
+        ],
+        "text": "search customer Herkku Gifts"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_2",
+            "start": 24,
+            "value": "located in"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_2",
+            "start": 35,
+            "value": "Milan"
+          }
+        ],
+        "text": "find customer that have located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_4",
+            "start": 25,
+            "value": "ordered"
+          },
+          {
+            "end": 47,
+            "entity": "word_1_4",
+            "start": 33,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "are there customer which ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Danish Wholesale Imports"
+          }
+        ],
+        "text": "look for customer Danish Wholesale Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Mark"
+          }
+        ],
+        "text": "are there customer that reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Dragon Souveniers, Ltd"
+          }
+        ],
+        "text": "are there customer Dragon Souveniers, Ltd"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_1",
+            "start": 19,
+            "value": "with contact"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_1",
+            "start": 32,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer that with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_5",
+            "start": 21,
+            "value": "reported to"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_5",
+            "start": 33,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer that reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Land of Toys Inc"
+          }
+        ],
+        "text": "are there customer Land of Toys Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_4",
+            "start": 29,
+            "value": "ordered"
+          },
+          {
+            "end": 74,
+            "entity": "word_1_4",
+            "start": 37,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "are there customer that have ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_1",
+            "start": 18,
+            "value": "with contact"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_1",
+            "start": 31,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 24,
+            "entity": "attr_1_3",
+            "start": 20,
+            "value": "paid"
+          },
+          {
+            "end": 30,
+            "entity": "num_1_3",
+            "start": 25,
+            "value": "67472"
+          }
+        ],
+        "text": "find customer which paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Porto Imports Co"
+          }
+        ],
+        "text": "find customer Porto Imports Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_2",
+            "start": 24,
+            "value": "located in"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_2",
+            "start": 35,
+            "value": "Italy"
+          }
+        ],
+        "text": "are there customer that located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_4",
+            "start": 21,
+            "value": "ordered"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_4",
+            "start": 29,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "search customer that ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_1",
+            "start": 20,
+            "value": "with contact"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_1",
+            "start": 33,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer which with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_2",
+            "start": 22,
+            "value": "located in"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_2",
+            "start": 33,
+            "value": "Italy"
+          }
+        ],
+        "text": "search customer which located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_4",
+            "start": 22,
+            "value": "ordered"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_4",
+            "start": 30,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "search customer which ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_5",
+            "start": 22,
+            "value": "reported to"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_5",
+            "start": 34,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer which reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Mini Gifts Distributors Ltd"
+          }
+        ],
+        "text": "find customer Mini Gifts Distributors Ltd"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_1",
+            "start": 19,
+            "value": "with contact"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_1",
+            "start": 32,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer that with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 35,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "162.32"
+          }
+        ],
+        "text": "are there customer that paid 162.32"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Diecast Classics Inc"
+          }
+        ],
+        "text": "are there customer Diecast Classics Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 32,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "123"
+          }
+        ],
+        "text": "look for customer which paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_4",
+            "start": 24,
+            "value": "ordered"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_4",
+            "start": 32,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "are there customer that ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_2",
+            "start": 16,
+            "value": "located in"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_2",
+            "start": 27,
+            "value": "Milan"
+          }
+        ],
+        "text": "search customer located in Milan"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_5",
+            "start": 16,
+            "value": "reported to"
+          },
+          {
+            "end": 33,
+            "entity": "word_1_5",
+            "start": 28,
+            "value": "Peter"
+          }
+        ],
+        "text": "search customer reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_3",
+            "start": 26,
+            "value": "paid"
+          },
+          {
+            "end": 36,
+            "entity": "num_1_3",
+            "start": 31,
+            "value": "67472"
+          }
+        ],
+        "text": "search customer that have paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Mini Wheels Co"
+          }
+        ],
+        "text": "look for customer Mini Wheels Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "are there customer that reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 41,
+            "entity": "attr_1_1",
+            "start": 29,
+            "value": "with contact"
+          },
+          {
+            "end": 54,
+            "entity": "word_1_1",
+            "start": 42,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "are there customer that have with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_3",
+            "start": 21,
+            "value": "paid"
+          },
+          {
+            "end": 31,
+            "entity": "num_1_3",
+            "start": 26,
+            "value": "67472"
+          }
+        ],
+        "text": "search customer that paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_1",
+            "start": 18,
+            "value": "with contact"
+          },
+          {
+            "end": 43,
+            "entity": "word_1_1",
+            "start": 31,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_5",
+            "start": 18,
+            "value": "reported to"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_5",
+            "start": 30,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_3",
+            "start": 22,
+            "value": "paid"
+          },
+          {
+            "end": 32,
+            "entity": "num_1_3",
+            "start": 27,
+            "value": "67472"
+          }
+        ],
+        "text": "search customer which paid 67472"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "attr_1_2",
+            "start": 28,
+            "value": "located in"
+          },
+          {
+            "end": 44,
+            "entity": "word_1_2",
+            "start": 39,
+            "value": "Italy"
+          }
+        ],
+        "text": "look for customer that have located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_1",
+            "start": 19,
+            "value": "with contact"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_1",
+            "start": 32,
+            "value": "Mark"
+          }
+        ],
+        "text": "are there customer with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_1",
+            "start": 18,
+            "value": "with contact"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_1",
+            "start": 31,
+            "value": "Peter"
+          }
+        ],
+        "text": "look for customer with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Euro+ Shopping Channel"
+          }
+        ],
+        "text": "find customer Euro+ Shopping Channel"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_4",
+            "start": 28,
+            "value": "ordered"
+          },
+          {
+            "end": 50,
+            "entity": "word_1_4",
+            "start": 36,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "look for customer that have ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_3",
+            "start": 23,
+            "value": "paid"
+          },
+          {
+            "end": 31,
+            "entity": "num_1_3",
+            "start": 28,
+            "value": "123"
+          }
+        ],
+        "text": "look for customer that paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 29,
+            "entity": "attr_1_5",
+            "start": 18,
+            "value": "reported to"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_5",
+            "start": 30,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "look for customer reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Diecast Classics Inc"
+          }
+        ],
+        "text": "find customer Diecast Classics Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_3",
+            "start": 28,
+            "value": "paid"
+          },
+          {
+            "end": 36,
+            "entity": "num_1_3",
+            "start": 33,
+            "value": "123"
+          }
+        ],
+        "text": "look for customer that have paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_1",
+            "start": 14,
+            "value": "with contact"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_1",
+            "start": 27,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "attr_1_2",
+            "start": 20,
+            "value": "located in"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_2",
+            "start": 31,
+            "value": "France"
+          }
+        ],
+        "text": "find customer which located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_1",
+            "start": 22,
+            "value": "with contact"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_1",
+            "start": 35,
+            "value": "Peter"
+          }
+        ],
+        "text": "search customer which with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_3",
+            "start": 24,
+            "value": "paid"
+          },
+          {
+            "end": 33,
+            "entity": "num_1_3",
+            "start": 29,
+            "value": "3452"
+          }
+        ],
+        "text": "find customer that have paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_2",
+            "start": 26,
+            "value": "located in"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_2",
+            "start": 37,
+            "value": "Italy"
+          }
+        ],
+        "text": "search customer that have located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "attr_1_5",
+            "start": 29,
+            "value": "reported to"
+          },
+          {
+            "end": 53,
+            "entity": "word_1_5",
+            "start": 41,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "are there customer that have reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Handji Gifts& Co"
+          }
+        ],
+        "text": "look for customer Handji Gifts& Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "attr_1_2",
+            "start": 28,
+            "value": "located in"
+          },
+          {
+            "end": 45,
+            "entity": "word_1_2",
+            "start": 39,
+            "value": "France"
+          }
+        ],
+        "text": "look for customer that have located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Baane Mini Imports"
+          }
+        ],
+        "text": "find customer Baane Mini Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_5",
+            "start": 23,
+            "value": "reported to"
+          },
+          {
+            "end": 47,
+            "entity": "word_1_5",
+            "start": 35,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer that reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer that have with contact Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_5",
+            "start": 22,
+            "value": "reported to"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_5",
+            "start": 34,
+            "value": "Peter"
+          }
+        ],
+        "text": "search customer which reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "attr_1_1",
+            "start": 24,
+            "value": "with contact"
+          },
+          {
+            "end": 49,
+            "entity": "word_1_1",
+            "start": 37,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer that have with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_2",
+            "start": 25,
+            "value": "located in"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_2",
+            "start": 36,
+            "value": "France"
+          }
+        ],
+        "text": "are there customer which located in France"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Signal Gift Stores"
+          }
+        ],
+        "text": "are there customer Signal Gift Stores"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Muscle Machine Inc"
+          }
+        ],
+        "text": "look for customer Muscle Machine Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Baane Mini Imports"
+          }
+        ],
+        "text": "look for customer Baane Mini Imports"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "American Souvenirs Inc"
+          }
+        ],
+        "text": "find customer American Souvenirs Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_4",
+            "start": 25,
+            "value": "ordered"
+          },
+          {
+            "end": 47,
+            "entity": "word_1_4",
+            "start": 33,
+            "value": "1958 Setra Bus"
+          }
+        ],
+        "text": "are there customer which ordered 1958 Setra Bus"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 35,
+            "entity": "attr_1_5",
+            "start": 24,
+            "value": "reported to"
+          },
+          {
+            "end": 48,
+            "entity": "word_1_5",
+            "start": 36,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "find customer that have reported to Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Atelier graphique"
+          }
+        ],
+        "text": "find customer Atelier graphique"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 32,
+            "entity": "attr_1_5",
+            "start": 21,
+            "value": "reported to"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_5",
+            "start": 33,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer that reported to Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 28,
+            "entity": "attr_1_1",
+            "start": 16,
+            "value": "with contact"
+          },
+          {
+            "end": 33,
+            "entity": "word_1_1",
+            "start": 29,
+            "value": "Mark"
+          }
+        ],
+        "text": "search customer with contact Mark"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 18,
+            "entity": "attr_1_3",
+            "start": 14,
+            "value": "paid"
+          },
+          {
+            "end": 23,
+            "entity": "num_1_3",
+            "start": 19,
+            "value": "3452"
+          }
+        ],
+        "text": "find customer paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_4",
+            "start": 16,
+            "value": "ordered"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_4",
+            "start": 24,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "search customer ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_0",
+            "start": 19,
+            "value": "Saveley & Henriot, Co"
+          }
+        ],
+        "text": "are there customer Saveley & Henriot, Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 34,
+            "entity": "attr_1_5",
+            "start": 23,
+            "value": "reported to"
+          },
+          {
+            "end": 40,
+            "entity": "word_1_5",
+            "start": 35,
+            "value": "Peter"
+          }
+        ],
+        "text": "look for customer that reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 21,
+            "entity": "attr_1_4",
+            "start": 14,
+            "value": "ordered"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_4",
+            "start": 22,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "find customer ordered P-51-D Mustang"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "word_1_0",
+            "start": 14,
+            "value": "Land of Toys Inc"
+          }
+        ],
+        "text": "find customer Land of Toys Inc"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 20,
+            "entity": "attr_1_3",
+            "start": 16,
+            "value": "paid"
+          },
+          {
+            "end": 24,
+            "entity": "num_1_3",
+            "start": 21,
+            "value": "123"
+          }
+        ],
+        "text": "search customer paid 123"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 25,
+            "entity": "attr_1_5",
+            "start": 14,
+            "value": "reported to"
+          },
+          {
+            "end": 38,
+            "entity": "word_1_5",
+            "start": 26,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "find customer reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 38,
+            "entity": "attr_1_1",
+            "start": 26,
+            "value": "with contact"
+          },
+          {
+            "end": 51,
+            "entity": "word_1_1",
+            "start": 39,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "search customer that have with contact John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_4",
+            "start": 26,
+            "value": "ordered"
+          },
+          {
+            "end": 71,
+            "entity": "word_1_4",
+            "start": 34,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "search customer that have ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Blauer See Auto Co"
+          }
+        ],
+        "text": "look for customer Blauer See Auto Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_2",
+            "start": 16,
+            "value": "located in"
+          },
+          {
+            "end": 32,
+            "entity": "word_1_2",
+            "start": 27,
+            "value": "Italy"
+          }
+        ],
+        "text": "search customer located in Italy"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 26,
+            "entity": "attr_1_1",
+            "start": 14,
+            "value": "with contact"
+          },
+          {
+            "end": 39,
+            "entity": "word_1_1",
+            "start": 27,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "find customer with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 30,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Herkku Gifts"
+          }
+        ],
+        "text": "look for customer Herkku Gifts"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "word_1_0",
+            "start": 16,
+            "value": "La Rochelle Gifts"
+          }
+        ],
+        "text": "search customer La Rochelle Gifts"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 39,
+            "entity": "attr_1_5",
+            "start": 28,
+            "value": "reported to"
+          },
+          {
+            "end": 52,
+            "entity": "word_1_5",
+            "start": 40,
+            "value": "John Belushi"
+          }
+        ],
+        "text": "look for customer that have reported to John Belushi"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 17,
+            "entity": "el_1",
+            "start": 9,
+            "value": "customer"
+          },
+          {
+            "end": 36,
+            "entity": "word_1_0",
+            "start": 18,
+            "value": "Havel & Zbyszek Co"
+          }
+        ],
+        "text": "look for customer Havel & Zbyszek Co"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_4",
+            "start": 16,
+            "value": "ordered"
+          },
+          {
+            "end": 61,
+            "entity": "word_1_4",
+            "start": 24,
+            "value": "1969 Harley Davidson Ultimate Chopper"
+          }
+        ],
+        "text": "search customer ordered 1969 Harley Davidson Ultimate Chopper"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 15,
+            "entity": "el_1",
+            "start": 7,
+            "value": "customer"
+          },
+          {
+            "end": 33,
+            "entity": "attr_1_1",
+            "start": 21,
+            "value": "with contact"
+          },
+          {
+            "end": 46,
+            "entity": "word_1_1",
+            "start": 34,
+            "value": "Peter Parker"
+          }
+        ],
+        "text": "search customer that with contact Peter Parker"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 31,
+            "entity": "attr_1_5",
+            "start": 20,
+            "value": "reported to"
+          },
+          {
+            "end": 37,
+            "entity": "word_1_5",
+            "start": 32,
+            "value": "Peter"
+          }
+        ],
+        "text": "find customer which reported to Peter"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 18,
+            "entity": "el_1",
+            "start": 10,
+            "value": "customer"
+          },
+          {
+            "end": 23,
+            "entity": "attr_1_3",
+            "start": 19,
+            "value": "paid"
+          },
+          {
+            "end": 28,
+            "entity": "num_1_3",
+            "start": 24,
+            "value": "3452"
+          }
+        ],
+        "text": "are there customer paid 3452"
+      },
+      {
+        "intent": "find_el_by_attr",
+        "entities": [
+          {
+            "end": 13,
+            "entity": "el_1",
+            "start": 5,
+            "value": "customer"
+          },
+          {
+            "end": 27,
+            "entity": "attr_1_4",
+            "start": 20,
+            "value": "ordered"
+          },
+          {
+            "end": 42,
+            "entity": "word_1_4",
+            "start": 28,
+            "value": "P-51-D Mustang"
+          }
+        ],
+        "text": "find customer which ordered P-51-D Mustang"
       },
       {
         "intent": "start",
-        "text": "help me"
-      },
-      {
-        "intent": "start",
-        "text": "start"
-      },
-      {
-        "intent": "start",
-        "text": "do something"
-      },
-      {
-        "intent": "start",
-        "text": "what do you have to show me"
+        "text": "augh! start"
       },
       {
         "intent": "start",
@@ -741,7 +6791,23 @@
       },
       {
         "intent": "start",
-        "text": "hello there!"
+        "text": "hello"
+      },
+      {
+        "intent": "start",
+        "text": "start"
+      },
+      {
+        "intent": "start",
+        "text": "help me"
+      },
+      {
+        "intent": "start",
+        "text": "hi start"
+      },
+      {
+        "intent": "start",
+        "text": "hi help me"
       },
       {
         "intent": "start",
@@ -749,139 +6815,15 @@
       },
       {
         "intent": "start",
-        "text": "hello"
+        "text": "augh! show me something"
       },
       {
-        "intent": "go_back_to_context_pos",
-        "entities": [
-          {
-            "start": 11,
-            "end": 16,
-            "value": "first",
-            "entity": "pos"
-          }
-        ],
-        "text": "go back to first"
-      },
-      {
-        "intent": "go_back_to_context_pos",
-        "entities": [
-          {
-            "start": 11,
-            "end": 17,
-            "value": "second",
-            "entity": "pos"
-          }
-        ],
-        "text": "go back to second"
-      },
-      {
-        "intent": "go_back_to_context_pos",
-        "text": "go back"
+        "intent": "start",
+        "text": "hello there start"
       }
     ],
-    "regex_features": [
-      {
-        "name": "num",
-        "pattern": "[1-9][0-9]*"
-      }
-    ],
-    "lookup_tables": [
-      {
-        "name": "el",
-        "elements": [
-          "customer",
-          "employee",
-          "office",
-          "product",
-          "product line",
-          "payment",
-          "order"
-        ]
-      },
-      {
-        "name": "rel",
-        "elements": [
-          "something"
-        ]
-      },
-      {
-        "name": "word",
-        "elements": [
-          "Nicola",
-          "Giorgio",
-          "Vittorio",
-          "Albert",
-          "1923 Moto Guzzi",
-          "Car Models",
-          "Florian",
-          "Car",
-          "Ferrari",
-          "Moto Guzzi",
-          "Mario"
-        ]
-      }
-    ],
-    "entity_synonyms": [
-      {
-        "value": "1st",
-        "synonyms": [
-          "first",
-          "1"
-        ]
-      },
-      {
-        "value": "2nd",
-        "synonyms": [
-          "second",
-          "2"
-        ]
-      },
-      {
-        "value": "3rd",
-        "synonyms": [
-          "third",
-          "3"
-        ]
-      },
-      {
-        "value": "4th",
-        "synonyms": [
-          "fourth",
-          "4"
-        ]
-      },
-      {
-        "value": "5th",
-        "synonyms": [
-          "fifth",
-          "5"
-        ]
-      },
-      {
-        "value": ">",
-        "synonyms": [
-          "greater than",
-          "greater",
-          "bigger"
-        ]
-      },
-      {
-        "value": "<",
-        "synonyms": [
-          "lower than",
-          "lower",
-          "smaller"
-        ]
-      },
-      {
-        "value": "=",
-        "synonyms": [
-          "equal to",
-          "equal",
-          "exactly"
-        ]
-      }
-    ]
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": []
   }
 }

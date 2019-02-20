@@ -27,7 +27,7 @@ def respond(chat_id, msg):
     response = caller.run_action_from_parsed_message(parsed_message, "TELEGRAM_"+str(chat_id))
 
     # just for debugging
-    print(response.get_printable_string())
+    # print(response.get_printable_string())
 
     for x in response.get_telegram_format():
         text = x['message']

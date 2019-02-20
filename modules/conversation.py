@@ -2,7 +2,7 @@ import logging
 import os
 from logging import handlers
 
-from modules.settings import LOG_DIR_PATH_AND_SEP, ELEMENT_VISU_LIMIT
+from modules.settings import LOG_DIR_PATH_AND_SEP, ELEMENT_VISU_LIMIT, CONTEXT_VISU_LIMIT
 
 """
 {
@@ -62,12 +62,14 @@ class Context:
 
     def __init__(self, chat_id):
         self.context_list = []
-        self.show_indexes = {'from': 0, 'to': 0}
+        self.reset_show_context_list = True
+        self.context_list_indices = {'from': 0, 'to': 0}
+        self.reset_show_last_element = True
         self.logger = logging.Logger(__name__, logging.INFO)
-        self.log_path = LOG_DIR_PATH_AND_SEP + str(chat_id) + '.txt'
-        log_handler = handlers.RotatingFileHandler(self.log_path, maxBytes=500)
-        log_handler.setLevel(logging.INFO)
-        self.logger.addHandler(log_handler)
+        # self.log_path = LOG_DIR_PATH_AND_SEP + str(chat_id) + '.txt'
+        # log_handler = handlers.RotatingFileHandler(self.log_path, maxBytes=500)
+        # log_handler.setLevel(logging.INFO)
+        # self.logger.addHandler(log_handler)
 
     def reset_context_list(self):
         del self.context_list[:]
@@ -84,10 +86,15 @@ class Context:
         """
         return self.context_list[-1] if self.context_list else None
 
+    def view_last_element(self):
+        if self.reset_show_last_element:
+            self.show_last_element_from_start()
+        self.reset_show_last_element = True
+        return self.get_last_element()
+
     def append_element(self, element):
         # NEW feature: deletes the element of the same type and all its predecessor
         # the search is limited to the context excluding the last element
-
         """ NEW FEATURE HERE
         index = -1
         for i, el in enumerate(self.context_list):
@@ -101,22 +108,32 @@ class Context:
         """
 
         self.context_list.append(element)
-        self.handle_show_last_element()
+        self.show_last_element_from_start()
         self.logger.info(' ')
         self.logger.info(' *** Element ' + element['element_name'] + ' has been added to the context_list ***')
         self.update_log()
 
-    def handle_show_last_element(self):
+    def show_last_element_from_start(self):
         element = self.context_list[-1]
         if element['real_value_length'] > 1:
             element['show'] = {'from': 0, 'to': min(ELEMENT_VISU_LIMIT, element['real_value_length'])}
 
     def go_back_to_position(self, position):
         del self.context_list[position:]
-        self.handle_show_last_element()
+        self.show_last_element_from_start()
 
     def get_context_list(self):
         return self.context_list
+
+    def view_context_list(self):
+        if self.reset_show_context_list:
+            self.show_context_list_from_start()
+        self.reset_show_context_list = True
+        return self.get_context_list()
+
+    def show_context_list_from_start(self):
+        self.context_list_indices['from'] = max(len(self.context_list) - CONTEXT_VISU_LIMIT, 0)
+        self.context_list_indices['to'] = len(self.context_list)
 
     def update_log(self):
         """
@@ -138,8 +155,4 @@ class Context:
             if el.get('show'):
                 self.logger.info(sep + 'showing from {} to {}'.format(el['show']['from'], el['show']['to']))
             self.logger.info(' ')
-
-    def delete_log(self):
-        if os.path.isfile(self.log_path):
-            os.remove(self.log_path)
 

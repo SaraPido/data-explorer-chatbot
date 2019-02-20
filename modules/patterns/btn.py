@@ -29,16 +29,27 @@ def get_buttons_select_element(element):
     return buttons
 
 
-def get_button_show_more():
+def get_button_show_more_element():
     title = '- SHOW MORE -'
     payload = extract_payload(nlu.INTENT_SHOW_MORE_ELEMENTS)
+    return {'title': title, 'payload': payload}
+
+
+def get_button_show_more_context():
+    title = '- SHOW MORE HISTORY -'
+    payload = extract_payload(nlu.INTENT_SHOW_MORE_CONTEXT)
+    return {'title': title, 'payload': payload}
+
+
+def get_button_view_context_element(title):
+    payload = extract_payload(nlu.VIEW_CONTEXT_ELEMENT)
     return {'title': title, 'payload': payload}
 
 
 def get_button_reset_context():
     payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
                               [nlu.ENTITY_POSITION, str(nlu.VALUE_POSITION_RESET_CONTEXT)+'xx'])
-    return {'title': 'RESET context ', 'payload': payload}
+    return {'title': '- Reset the HISTORY -', 'payload': payload}
 
 
 def get_button_go_back_to_context_position(action_name, pos):

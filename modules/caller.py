@@ -4,13 +4,7 @@ import threading
 
 from modules import conversation
 from modules.actions import executors
-
-logger = logging.getLogger(__name__)
-
-# todo: make it better
-INTENT_THRESHOLD = 0.4
-
-CONTEXT_PERSISTENCE_SECONDS = 60 * 10  # 10 minutes
+from modules.settings import INTENT_CONFIDENCE_THRESHOLD, CONTEXT_PERSISTENCE_SECONDS
 
 context_dict = {}
 
@@ -24,16 +18,17 @@ def run_action_from_parsed_message(parsed_message, chat_id):
 
     entities = parsed_message.get('entities')
 
-    if intent_confidence >= INTENT_THRESHOLD:
-        context = get_context(chat_id)
-        return executors.execute_action_from_intent_name(intent_name, entities, context)
-    else:
-        return executors.execute_fallback()
+    if intent_confidence < INTENT_CONFIDENCE_THRESHOLD:
+        intent_name = None
+
+    context = get_context(chat_id)
+
+    return executors.execute_action_from_intent_name(intent_name, entities, context)
 
 
 def get_context(chat_id):
 
-    # lock.acquire()
+    lock.acquire()
 
     check_timestamps()
 
@@ -51,18 +46,17 @@ def get_context(chat_id):
 
         # schedule_delete_event(chat_id)
 
-    # lock.release()
+    lock.release()
 
     return context
 
 
 def check_timestamps():
 
-    max_age = datetime.datetime.now() - datetime.timedelta(seconds=CONTEXT_PERSISTENCE_SECONDS)
+    max_age = datetime.datetime.now() - datetime.timedelta(CONTEXT_PERSISTENCE_SECONDS)
 
     for k, v in list(context_dict.items()):
         if v['timestamp'] < max_age:
-            v['context'].delete_log()
             del context_dict[k]
 
 

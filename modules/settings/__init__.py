@@ -27,7 +27,7 @@ while file_path_list[-1] != 'sherbot':
 DIR_PATH = os.sep.join(file_path_list)
 
 LOG_DIR_PATH_AND_SEP = file_sep.join([DIR_PATH, 'logs']) + file_sep
-NLU_DATA_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'data']) + file_sep + 'nlu_data_' + abc + '.md'
+NLU_DATA_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'chatito']) + file_sep + 'train.json'  # , 'data']) + file_sep + 'nlu_data_' + abc + '.md'
 NLU_MODEL_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models', 'default', 'nlu_model'])
 NLU_MODEL_DIR_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models'])
 DB_CONCEPT_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_concept_' + abc + '.json'
@@ -35,7 +35,13 @@ DB_SCHEMA_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_s
 
 # settings
 
+INTENT_CONFIDENCE_THRESHOLD = 0.4
+ELEMENT_SIMILARITY_DISTANCE_THRESHOLD = 3
 ELEMENT_VISU_LIMIT = 5
+CONTEXT_VISU_LIMIT = 3
+
+CONTEXT_PERSISTENCE_SECONDS = 5 * 60
+
 
 #db
 

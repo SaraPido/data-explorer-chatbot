@@ -300,7 +300,14 @@
       {
         "keyword": "made by",
         "element_name": "customer",
-        "by": []
+        "by": [
+          {
+            "from_table_name": "payments",
+            "from_columns": ["customerNumber"],
+            "to_table_name": "customers",
+            "to_columns": ["customerNumber"]
+          }
+        ]
       }
     ]
   },

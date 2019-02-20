@@ -81,6 +81,9 @@ def query_find(in_table_name, attributes):
 
     values = []
     for a in attributes:
+        # TODO AAA review this part: using "LIKE" for words
+        if a['type'] == 'word':
+            a['value'] = '%'+a['value']+'%'
         values.extend([a['value']] * len(a['columns']))
     tup = tuple(values)
     rows = execute_query_select(query_string, tup)
@@ -106,7 +109,7 @@ def query_join(element, relation):
 
     label_attributes([relation])
 
-    query_string = "SELECT " + get_SELECT_query_string(to_columns, relation['letter'])
+    query_string = "SELECT DISTINCT " + get_SELECT_query_string(to_columns, relation['letter'])
     query_string += " FROM " + get_FROM_query_string([relation])
     query_string += " WHERE " + get_WHERE_JOIN_query_string([relation])
     query_string += " AND " + get_WHERE_ATTRIBUTES_query_string([relation], join=True)
@@ -179,6 +182,11 @@ def get_WHERE_ATTRIBUTES_query_string(attributes, join=False):
     attr_string_list = []
     for a in attributes:
         attr = "( "
+
+        # TODO AAA review this part: using "LIKE" for words
+        if a['type'] == 'word':
+            a['operator'] = 'LIKE'
+
         attr += " OR ".join(["{}.{} {} %s".format(a['letter'] if not join else 'a', # not so pretty
                                                   col,
                                                   a['operator'])
@@ -187,82 +195,3 @@ def get_WHERE_ATTRIBUTES_query_string(attributes, join=False):
         attr_string_list.append(attr)
     return " AND ".join(attr_string_list)
 
-
-"""
-
-def find_on_value(value_column_list, value, operator='=', *table_names):
-    tables = get_tables_dict(table_names)
-
-    query_string = "SELECT DISTINCT " + get_select_tables_query_string([tables[0]])
-    query_string += " FROM " + get_from_tables_query_string(tables)
-    query_string += " WHERE "
-    where_tables_pair = get_where_tables_pair_query_string(tables)
-    query_string += where_tables_pair + " AND " if where_tables_pair else ""
-    query_string += get_where_on_value_query_string(tables[-1], value_column_list, operator)
-
-    tup = tuple([value] * len(value_column_list))
-    rows = execute_query_select(query_string, tup)
-    return get_dictionary_result(query_string, tup, rows, tables)
-
-
-def join_from_element(element, *table_names):
-    tables = get_tables_dict(table_names)
-
-    query_string = "SELECT " + get_select_tables_query_string(tables[::-1][:-1])
-    query_string += " FROM " + get_from_tables_query_string(tables)
-    query_string += " WHERE "
-    where_tables_pair = get_where_tables_pair_query_string(tables)
-    query_string += where_tables_pair + " AND " if where_tables_pair else ""
-    query_string += get_where_on_primary_query_string(tables[0], element)
-
-    tup = tuple([element[primary] for primary in tables[0]['schema']['primary_key_list']])
-    rows = execute_query_select(query_string, tup)
-    return get_dictionary_result(query_string, tup, rows, tables[::-1])
-
-"""
-
-
-"""
-for a in attributes:
-    # todo review for self-relations...
-    join_tables = []
-    if a.get('table_name') != table_name:
-        join_tables.extend([t for t in tables if t['table_name'] == table_name])
-        if a.get('by_table_names'):
-            join_tables.extend([t for t in tables if t['table_name'] in a['by_table_names']])
-        join_tables.extend([t for t in tables if t['table_name'] == a['table_name']])
-    for i, t in enumerate(join_tables):
-        if i < len(join_tables) - 1:
-            pair_string_list.extend(["{}.{}={}.{}".format(t['letter'], p[0], join_tables[i+1]['letter'], p[1])
-                                     for p in
-                                     get_paired_reference_key_list(t, join_tables[i+1])])
-return " AND ".join(pair_string_list)
-"""
-
-
-"""
-
-def get_where_on_value_query_string(single_table, value_column_list, operator):
-    return " OR ".join(["{}.{} {} %s".format(single_table['letter'], v_col, operator) for v_col in value_column_list])
-
-
-def get_where_on_primary_query_string(single_table, element):
-    return " AND ".join(['{}.{}=%s'.format(single_table['letter'], primary, element[primary])
-                         for primary in single_table['schema']['primary_key_list']])
-
-
-def get_paired_reference_key_list(from_table, to_table):
-    from_table_name = from_table['table_name']
-    to_table_name = to_table['table_name']
-    from_schema = from_table['schema']
-    to_schema = to_table['schema']
-    from_references = from_schema['references']
-    to_references = to_schema['references']
-    if from_references:
-        if from_references.get(to_table_name):
-            return zip(from_references[to_table_name]['foreign_key_list'], from_references[to_table_name]['reference_key_list'])
-    if to_references:
-        if to_references.get(from_table_name):
-            return zip(to_references[from_table_name]['reference_key_list'], to_references[from_table_name]['foreign_key_list'])
-    return None
-"""

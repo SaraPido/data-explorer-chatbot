@@ -11,7 +11,7 @@ SELECT_FOR_INFO = 'Select the one you are interested in:'
 INTRODUCE_ELEMENT_TO_SHOW_PATTERN = 'Here is what I know about this {}:'
 EMPTY_CONTEXT_LIST = 'I am sorry, but your conversation history is empty!'
 CONTEXT_LIST_RESET = 'The history has been reset!'
-SHOW_CONTEXT_INFO = 'Click a button to go back in the history!'
+SHOW_CONTEXT_INFO = 'Click a button to go back in the HISTORY!'
 
 
 def element_attributes(element):
