@@ -22,6 +22,14 @@ def load_db_concept():
     logger.info('Database concept file has been loaded!')
 
 
+def get_all_primary_element_names():
+    res = []
+    for e in db_concept:
+        if e.get('type') == 'primary':
+            res.append(e.get('element_name'))
+    return res
+
+
 def get_all_primary_element_names_and_aliases():
     res = []
     for e in db_concept:

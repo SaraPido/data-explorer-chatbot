@@ -69,7 +69,7 @@ if __name__ == "__main__":
                 text = ""
 
                 if a.get('keyword'):
-                    text += "~[that?] @[attr_{}_{}] ".format(idx_e, idx_a)
+                    text += "@[attr_{}_{}] ".format(idx_e, idx_a)
 
                     if a.get('type') == 'num':  # use nlu.ENTITY_ATTR?
                         text += '@[op_num?] '

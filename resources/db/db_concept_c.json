@@ -27,7 +27,7 @@
         "columns": ["city", "state", "country"]
       },
       {
-        "keyword": "paid",
+        "keyword": "that paid",
         "type": "num",
         "columns": ["amount"],
         "by": [
@@ -40,7 +40,7 @@
         ]
       },
       {
-        "keyword": "ordered",
+        "keyword": "that ordered",
         "type": "word",
         "columns": ["productName"],
         "by": [
@@ -65,7 +65,7 @@
         ]
       },
       {
-        "keyword": "reported to",
+        "keyword": "that reported to",
         "type": "word",
         "columns": ["lastName", "firstName"],
         "by": [
@@ -169,7 +169,7 @@
         "columns": ["lastName"]
       },
       {
-        "keyword": "work in",
+        "keyword": "that work in",
         "type": "word",
         "columns": ["city", "country"],
         "by": [
@@ -236,7 +236,7 @@
       {
         "keyword": "with address",
         "type": "word",
-        "columns": ["addressLine1"]
+        "columns": ["city", "addressLine1"]
       },
       {
         "keyword": "located in",
@@ -420,7 +420,7 @@
         "columns": ["productName"]
       },
       {
-        "keyword": "product line",
+        "keyword": "of product line",
         "type": "word",
         "columns": ["productLine"],
         "by": [

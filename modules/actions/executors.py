@@ -156,7 +156,8 @@ def add_selected_element_to_context(element, position, context):
 
 def action_start(entities, response, context):
     response.add_message(msg.HI_THERE)
-    response.add_buttons(btn.get_start_buttons())
+    response.add_message(msg.DISPLAY_EXAMPLES)
+    response.add_message(msg.find_examples())
 
 
 def action_find_element_by_attribute(entities, response, context):

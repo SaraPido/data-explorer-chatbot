@@ -1,7 +1,10 @@
+import random
+
 from modules.database import resolver
 
-HI_THERE = 'Hi there explorator!\n' \
-           'Here is a few examples of what you can ask me:'
+HI_THERE = 'Hi there! Let me introduce myself...\n'\
+           'I am a chatbot for Data Exploration and I will help you during the navigation of a relational database.\n'
+DISPLAY_EXAMPLES = 'Here some examples of what you can ask me:'
 ERROR = 'Sorry, I did not get that! :('
 FINDING_ELEMENT = 'Let me check...'
 NOTHING_FOUND = 'Nothing has been found, I am sorry!'
@@ -30,6 +33,24 @@ def find_element_action_name(element_name, ordered_entities):
         se += str(oe['value']) + '"'
         stringified_entities.append(se)
     return '[Finding by attributes] {}'.format(element_name, ' ,'.join(stringified_entities))
+
+
+def find_examples():
+    message = ""
+    elements = resolver.get_all_primary_element_names()
+    elements = random.sample(population=elements, k=min(len(elements), 3))  # 3 is the max number of elements to make examples
+    for e in elements:
+        attributes = resolver.extract_attributes_with_keyword(e)
+        if attributes:  # will be deleted when all elements will have at least 1 attribute
+            attributes = random.sample(population=attributes, k=min(len(attributes), 2))  # 3 is the max number of attributes per element
+            for a in attributes:
+                message += "> Find {} ".format(e)
+                if a.get('keyword'):
+                    message += "{} ".format(a['keyword'])
+                if a.get('type') == 'num':
+                    message += "more than " if random.randint(0, 1) else "less than "
+                message += " ... \n"
+    return message
 
 # ------
 
