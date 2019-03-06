@@ -22,7 +22,7 @@ ENTITY_RELATED_ELEMENT_NAME = 'rel_el'
 ENTITY_BY_ELEMENT_NAME = 'by'
 ENTITY_WORD = 'word'
 ENTITY_NUMBER = 'num'
-ENTITY_OPERATOR = 'op'
+ENTITY_OPERATOR_NUMBER = 'op_num'
 ENTITY_POSITION = 'pos'
 
 VALUE_POSITION_RESET_CONTEXT = -1  # going back to position -1 means deleting the context

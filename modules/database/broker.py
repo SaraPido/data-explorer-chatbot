@@ -1,3 +1,4 @@
+import copy
 import json
 import logging
 import string
@@ -47,7 +48,7 @@ def execute_query_select(query, t=None):
     return cursor.fetchall()
 
 
-def get_dictionary_result(q_string, q_tuple, rows, columns):
+def get_dictionary_result(q_string, q_tuple, rows, columns, attributes):
     query = {'q_string': q_string, 'q_tuple': q_tuple}
 
     value = list(map(lambda r: dict(zip(columns, r)), rows))
@@ -55,7 +56,11 @@ def get_dictionary_result(q_string, q_tuple, rows, columns):
     # if there is a "by element"
     # todo: consider the case  of "by_value".. -> what if I want to select more?
 
-    return {'query': query, 'value': value, 'by_value': [], 'real_value_length': len(value)}
+    return {'query': query,
+            'value': value,
+            'by_value': [],
+            'real_value_length': len(value),
+            'attributes': attributes}
 
 
 def get_table_schema_from_name(table_name):
@@ -72,7 +77,7 @@ def query_find(in_table_name, attributes):
         if not a.get('operator'):
             a['operator'] = '='
 
-    query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns, 'a')  # ugly but correct
+    query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns)  # ugly but correct
     query_string += " FROM " + get_FROM_query_string(attributes, in_table_name)
     query_string += " WHERE "
     where_join_string = get_WHERE_JOIN_query_string(attributes)
@@ -81,13 +86,18 @@ def query_find(in_table_name, attributes):
 
     values = []
     for a in attributes:
-        # TODO AAA review this part: using "LIKE" for words
-        if a['type'] == 'word':
-            a['value'] = '%'+a['value']+'%'
-        values.extend([a['value']] * len(a['columns']))
+        # if 'a' is a REAL conversational attribute
+        if a.get('value'):
+            val = str(a['value'])
+            if a['op'] == 'LIKE':
+                val = '%'+val+'%'
+            values.extend([val] * len(a['columns']))
+        # if 'a' is a mocked relation
+        elif a.get('join_values'):
+            values.extend(a['join_values'])
     tup = tuple(values)
     rows = execute_query_select(query_string, tup)
-    return get_dictionary_result(query_string, tup, rows, columns)
+    return get_dictionary_result(query_string, tup, rows, columns, attributes)
 
 
 def query_join(element, relation):
@@ -101,23 +111,34 @@ def query_join(element, relation):
 
     from_schema = get_table_schema_from_name(from_table_name)
     primary_columns = from_schema['primary_key_list']
-    primary_values = [element['value'][0][x] for x in primary_columns]
+    relation['join_values'] = [element['value'][0][x] for x in primary_columns]
 
-    relation['operator'] = '='
+    relation['op'] = '='
 
     relation['columns'] = primary_columns
 
+    relation = get_reverse_relation(copy.deepcopy(relation))  # HERE I REVERT THE RELATION to standardize with the attributes
+
     label_attributes([relation])
 
-    query_string = "SELECT DISTINCT " + get_SELECT_query_string(to_columns, relation['letter'])
+    query_string = "SELECT DISTINCT " + get_SELECT_query_string(to_columns)
     query_string += " FROM " + get_FROM_query_string([relation])
     query_string += " WHERE " + get_WHERE_JOIN_query_string([relation])
-    query_string += " AND " + get_WHERE_ATTRIBUTES_query_string([relation], join=True)
+    query_string += " AND " + get_WHERE_ATTRIBUTES_query_string([relation])
 
-    tup = tuple(primary_values)
+    tup = tuple(relation['join_values'])
     rows = execute_query_select(query_string, tup)
-    return get_dictionary_result(query_string, tup, rows, to_columns)
+    return get_dictionary_result(query_string, tup, rows, to_columns, [relation])  # mocking the relation as attribute
 
+
+def get_reverse_relation(relation):
+    if relation.get('by'):
+        relation['by'].reverse()  # reverting the list like a boss
+        # here I swap like a boss
+        for r in relation['by']:
+            r['to_table_name'], r['from_table_name'] = r['from_table_name'], r['to_table_name']
+            r['to_columns'], r['from_columns'] = r['from_columns'], r['to_columns']
+    return relation
 
 # query helper
 
@@ -142,11 +163,10 @@ def label_attributes(attributes):
 
 # query creators
 
-def get_SELECT_query_string(columns, letter):
-    # todo: what if I want to select more?
+def get_SELECT_query_string(columns):
     col_string_list = []
     for col in columns:
-        col_string_list.append("{}.{}".format(letter, col))
+        col_string_list.append("a.{}".format(col))
     return ", ".join(col_string_list)
 
 
@@ -178,20 +198,15 @@ def get_WHERE_JOIN_query_string(attributes):
     return " AND ".join(join_string_list)
 
 
-def get_WHERE_ATTRIBUTES_query_string(attributes, join=False):
+def get_WHERE_ATTRIBUTES_query_string(attributes):
     attr_string_list = []
     for a in attributes:
         attr = "( "
 
-        # TODO AAA review this part: using "LIKE" for words
-        if a['type'] == 'word':
-            a['operator'] = 'LIKE'
-
-        attr += " OR ".join(["{}.{} {} %s".format(a['letter'] if not join else 'a', # not so pretty
+        attr += " OR ".join(["{}.{} {} %s".format(a['letter'],  # not so pretty
                                                   col,
-                                                  a['operator'])
+                                                  a['op'])
                              for col in a['columns']])
         attr += " )"
         attr_string_list.append(attr)
     return " AND ".join(attr_string_list)
-

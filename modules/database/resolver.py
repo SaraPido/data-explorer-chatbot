@@ -22,8 +22,19 @@ def load_db_concept():
     logger.info('Database concept file has been loaded!')
 
 
-def get_all_element_names():
-    return [e.get('element_name') for e in db_concept]
+def get_all_primary_element_names_and_aliases():
+    res = []
+    for e in db_concept:
+        if e.get('type') == 'primary':
+            res.extend([e.get('element_name')] + e.get('aliases', []))
+    return res
+
+
+def get_element_name_from_possible_alias(element_or_alias_name):
+    for e in db_concept:
+        if e.get('element_name') == element_or_alias_name or element_or_alias_name in e.get('aliases', []):
+            return e.get('element_name')
+    return None
 
 
 def extract_element(element_name):
@@ -82,7 +93,6 @@ def get_element_show_string(element_name, element_value):
 def query_find(element_name, attributes):
     e = extract_element(element_name)
     table_name = e.get('table_name')
-    # todo: operator should be put in the executor phase, now in broker there is the control
     result_element = broker.query_find(table_name, attributes)
     result_element['element_name'] = element_name
     return result_element

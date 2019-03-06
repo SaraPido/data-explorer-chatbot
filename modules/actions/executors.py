@@ -1,5 +1,6 @@
 import copy
 import logging
+import re
 
 from modules import commons
 from modules.database import resolver
@@ -29,23 +30,40 @@ def extract_single_entity_value(entities, entity_name):
 
 def compute_ordered_entity_list(entities):
     ordered_entities = []
-    d = {}
 
-    for e in entities[::-1]:  # reverse order
+    for e in entities[::-1]:
 
-        if e['entity'].startswith(nlu.ENTITY_WORD):
-            d = {'type': 'word', 'value': e['value']}
-        elif e['entity'].startswith(nlu.ENTITY_NUMBER):
-            d = {'type': 'num', 'value': e['value']}
-        elif e['entity'].startswith(nlu.ENTITY_ATTRIBUTE) and d:
-            a = e['value']
-            oe = {'attribute': a}
-            oe.update(d)
+        ty = None
+        op = '='  # the control of the presence of the OP is made here!
+        match = re.match("(\w+)_\d_(\d)", e['entity'])
+        if match:
+            what = match.group(1)
+            if what == nlu.ENTITY_WORD:
+                ty = 'word'
+                maybe_op = next((a['value'] for a in entities if a['entity'].startswith('op_word')), None)
+                if maybe_op and maybe_op.endswith('ne'):
+                    op = '<>'
+                else:
+                    op = 'LIKE'  # TODO: here forcing the "word" to be LIKE and not equal, in case
+            elif what == nlu.ENTITY_NUMBER:
+                ty = 'num'
+                maybe_op = next((a['value'] for a in entities if a['entity'].startswith('op_num')), None)
+                if maybe_op:
+                    if maybe_op.endswith('lt'):
+                        op = '<'
+                    elif maybe_op.endswith('eq'):
+                        op = '='
+                    elif maybe_op.endswith('gt'):
+                        op = '>'
+
+        if ty:
+            oe = {'type': ty, 'op': op, 'value': e['value']}
+            attr = next((a['value'] for a in entities if re.match("attr_\d_\d", a['entity'])), None)
+            if attr:
+                oe['attribute'] = attr
             ordered_entities.append(oe)
 
-    if not ordered_entities and d:
-        ordered_entities.append(d)
-
+    print(ordered_entities)
     return ordered_entities
 
 
@@ -57,6 +75,7 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities):
     for oe in ordered_entities:
 
         # todo it gave error: Generate error in case of not-extracted element
+        # if the entity has an attribute, i.e. if it not implied
         if oe.get('attribute'):
             keyword_list = [a['keyword'] for a in resolver.extract_attributes_with_keyword(element_name)]
             attribute_name = commons.extract_similar_value(oe['attribute'],
@@ -67,12 +86,18 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities):
                 attr = resolver.get_attribute_by_name(element_name, attribute_name)
                 if attr.get('type') == oe.get('type'):
                     attr['value'] = oe.get('value')
+                    attr['op'] = oe.get('op', '=')  # should not happen
                     attributes.append(attr)
 
+            else:  # if it has an attribute but is not recognized
+                return []  # something unwanted just happened -> attribute extracted but not matched
+
+        # if the entity does not have an attribute
         else:
             attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
             if attr:
                 attr['value'] = oe.get('value')
+                attr['op'] = oe.get('op', '=')
                 attributes.append(attr)
 
     return attributes
@@ -81,10 +106,13 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities):
 # SIMILARITY HANDLERS
 
 def handle_element_name_similarity(element_name_received):
-    all_elements_names = resolver.get_all_element_names()
-    return commons.extract_similar_value(element_name_received,
-                                         all_elements_names,
-                                         ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
+    all_elements_names = resolver.get_all_primary_element_names_and_aliases()
+    similar = commons.extract_similar_value(element_name_received,
+                                            all_elements_names,
+                                            ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
+    if similar:
+        return resolver.get_element_name_from_possible_alias(similar)
+    return None
 
 
 def handle_element_relations_similarity(element_name, relation_name_received):
@@ -137,16 +165,19 @@ def action_find_element_by_attribute(entities, response, context):
 
     if element_name and ordered_entities:
         attributes = get_attributes_from_ordered_entities(element_name, ordered_entities)
-        element = resolver.query_find(element_name, attributes)
-        if element['value']:
-            element['action_name'] = '...found with attribute(s) "{}".'.format(', '.join(
-                ('{} '.format(a.get('keyword')) if a.get('keyword') else '') + str(a['value']) for a in attributes))
-            context.append_element(element)
-            handle_response_for_quantity_found_element(response, element)
-            action_view_context_element(entities, response, context)
+        if attributes:
+            element = resolver.query_find(element_name, attributes)
+            if element['value']:
+                element['action_name'] = '...found with attribute(s) "{}".'.format(', '.join(
+                    ('{} '.format(a.get('keyword')) if a.get('keyword') else '') + str(a['value']) for a in attributes))
+                context.append_element(element)
+                handle_response_for_quantity_found_element(response, element)
+                action_view_context_element(entities, response, context)
 
+            else:
+                response.add_message(msg.NOTHING_FOUND)
         else:
-            response.add_message(msg.NOTHING_FOUND)
+            response.add_message(msg.ERROR)
 
     else:
         response.add_message(msg.ERROR)
@@ -156,26 +187,30 @@ def action_filter_element_by_attribute(entities, response, context):
     element = context.get_last_element()
 
     if element:
+
         if element['real_value_length'] > 1:
             ordered_entities = compute_ordered_entity_list(entities)
             attributes = get_attributes_from_ordered_entities(element['element_name'], ordered_entities)
+
             if attributes:
-                result_element = {'value': [], 'element_name': element['element_name'], }
-                for v in element['value']:
-                    # 'all' (outside) to satisfy all attributes, assuming there is an "AND"
-                    if all(any(a['value'] == v[col] for col in a['columns']) for a in attributes):
-                        result_element['value'].append(copy.deepcopy(v))
-                result_element['real_value_length'] = len(result_element['value'])
-                if result_element['real_value_length']:
-                    handle_response_for_quantity_found_element(response, result_element)
+                all_attributes = copy.deepcopy(attributes)
+                # here down union of attributes
+                all_attributes += copy.deepcopy(element['attributes']) if element.get('attributes') else []
+                result_element = resolver.query_find(element['element_name'], all_attributes)
+
+                if result_element['value']:
                     result_element['action_name'] = '...by filtering with attribute(s) "{}":'.format(', '.join(
                         ('{} '.format(a.get('keyword')) if a.get('keyword') else '') + str(a['value']) for a in
                         attributes))
                     context.append_element(result_element)
+                    handle_response_for_quantity_found_element(response, result_element)
                     action_view_context_element(entities, response, context)
 
                 else:
                     response.add_message(msg.NOTHING_FOUND)
+
+            else:
+                response.add_message(msg.ERROR)
 
         else:
             response.add_message('Filtering is not possible now...')

@@ -1,3 +1,4 @@
+import copy
 import logging
 import os
 from logging import handlers
@@ -66,10 +67,10 @@ class Context:
         self.context_list_indices = {'from': 0, 'to': 0}
         self.reset_show_last_element = True
         self.logger = logging.Logger(__name__, logging.INFO)
-        # self.log_path = LOG_DIR_PATH_AND_SEP + str(chat_id) + '.txt'
-        # log_handler = handlers.RotatingFileHandler(self.log_path, maxBytes=500)
-        # log_handler.setLevel(logging.INFO)
-        # self.logger.addHandler(log_handler)
+        self.log_path = LOG_DIR_PATH_AND_SEP + 'context.log'  # str(chat_id) + '.txt'
+        log_handler = handlers.RotatingFileHandler(self.log_path, maxBytes=500)
+        log_handler.setLevel(logging.INFO)
+        self.logger.addHandler(log_handler)
 
     def reset_context_list(self):
         del self.context_list[:]
@@ -107,7 +108,7 @@ class Context:
                 self.context_list.pop(0)
         """
 
-        self.context_list.append(element)
+        self.context_list.append(copy.deepcopy(element))  # deep copying here
         self.show_last_element_from_start()
         self.logger.info(' ')
         self.logger.info(' *** Element ' + element['element_name'] + ' has been added to the context_list ***')
@@ -154,5 +155,9 @@ class Context:
                 self.logger.info(sep + '- ' + str(obj))
             if el.get('show'):
                 self.logger.info(sep + 'showing from {} to {}'.format(el['show']['from'], el['show']['to']))
+            self.logger.info('attributes')
+            if el.get('attributes'):
+                for i, obj in enumerate(el['attributes']):
+                    self.logger.info(sep + '- ' + str(obj))
             self.logger.info(' ')
 

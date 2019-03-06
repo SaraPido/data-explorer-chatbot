@@ -1,0 +1,103 @@
+// CONTEXT
+
+%[show_context]('training': '20', 'testing': '20')
+    ~[show?] ~[the?] ~[context]
+
+~[show]
+    show
+    view
+    show me
+    display
+
+~[the]
+    the
+
+~[context]
+    conversation history
+    history
+    context
+    past selections
+
+
+// START
+
+%[start]('training': '20', 'testing': '20')
+    ~[hello]
+    ~[hello?] ~[help]
+    ~[hello?] ~[_start]
+
+~[hello]
+    hi
+    hello there
+    hello
+    hey there
+    hey
+
+~[help]
+    i need help
+    help me
+    help
+
+~[_start]
+    start now
+    start
+    do something
+
+
+// HELPER
+
+~[find]
+    find
+    are there
+    search
+    look for
+
+~[filter]
+    filter
+    show only
+    give me only
+    only
+
+~[those]
+    those
+    the ones
+
+~[that]
+    that
+    that have
+    which
+
+@[op_num]
+    ~[op_num_lt]
+    ~[op_num_eq]
+    ~[op_num_gt]
+
+~[op_num_lt]
+    less than
+    lower than
+    lower
+    smaller
+
+~[op_num_eq]
+    equal to
+    equal
+    exactly
+
+~[op_num_gt]
+    greater than
+    greater
+    bigger
+    more than
+
+//@[op_word]
+//    ~[op_word_ne]
+//    ~[op_word_lk]
+
+//~[op_word_lk] # for the moment not used
+//    like
+//    similar to
+
+//~[op_word_ne]
+//    unlike
+//    different from
+//    distinct

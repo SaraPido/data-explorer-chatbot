@@ -1,0 +1,627 @@
+// CONTEXT
+
+%[show_context]('training': '20', 'testing': '20')
+    ~[show?] ~[the?] ~[context]
+
+~[show]
+    show
+    view
+    show me
+    display
+
+~[the]
+    the
+
+~[context]
+    conversation history
+    history
+    context
+    past selections
+
+
+// START
+
+%[start]('training': '20', 'testing': '20')
+    ~[hello]
+    ~[hello?] ~[help]
+    ~[hello?] ~[_start]
+
+~[hello]
+    hi
+    hello there
+    hello
+    hey there
+    hey
+
+~[help]
+    i need help
+    help me
+    help
+
+~[_start]
+    start now
+    start
+    do something
+
+
+// HELPER
+
+~[find]
+    find
+    are there
+    search
+    look for
+
+~[filter]
+    filter
+    show only
+    give me only
+    only
+
+~[those]
+    those
+    the ones
+
+~[that]
+    that
+    that have
+    which
+
+@[op_num]
+    ~[op_num_lt]
+    ~[op_num_eq]
+    ~[op_num_gt]
+
+~[op_num_lt]
+    less than
+    lower than
+    lower
+    smaller
+
+~[op_num_eq]
+    equal to
+    equal
+    exactly
+
+~[op_num_gt]
+    greater than
+    greater
+    bigger
+    more than
+
+//@[op_word]
+//    ~[op_word_ne]
+//    ~[op_word_lk]
+
+//~[op_word_lk] # for the moment not used
+//    like
+//    similar to
+
+//~[op_word_ne]
+//    unlike
+//    different from
+//    distinct
+@[el_1]
+    customer
+    customers
+    client
+    clients
+
+@[el_2]
+    employee
+    employees
+    worker
+    workers
+
+@[el_3]
+    office
+    offices
+
+@[el_4]
+    product line
+    brand
+    brands
+
+@[el_5]
+    product
+    products
+
+
+@[attr_1_2]
+    with contact
+
+@[attr_1_3]
+    located in
+
+@[attr_1_4]
+    paid
+
+@[attr_1_5]
+    ordered
+
+@[attr_1_6]
+    reported to
+
+@[attr_2_2]
+    with first name
+
+@[attr_2_3]
+    with last name
+
+@[attr_2_4]
+    work in
+
+@[attr_3_1]
+    with address
+
+@[attr_3_2]
+    located in
+
+@[attr_3_3]
+    of
+
+@[attr_5_2]
+    product line
+
+@[attr_5_3]
+    ordered by
+
+
+@[word_1_1]
+    Atelier
+    Signal Gift
+    Collectors
+    Gifts
+    Imports
+    Distributors Ltd
+    Co
+    Auto
+    Co
+    of
+    Euro+ Shopping
+    Replicas
+    Wholesale Imports
+    &
+    Souveniers, Ltd
+    Muscle Machine Inc
+    Inc
+    Inc
+    Co
+    Gifts
+
+@[word_1_2]
+    Schmitt
+    King
+    Ferguson
+    Labrune
+    Bergulfsen
+    Nelson
+    Piestrzeniewicz
+    Keitel
+    Murphy
+    Lee
+    Freyre
+    Berglund
+    Petersen
+    Saveley
+    Natividad
+    Young
+    Leong
+    Hashimoto
+    Victorino
+    Oeztan
+    Carine
+    Jean
+    Peter
+    Janine
+    Jonas
+    Susan
+    Zbyszek
+    Roland
+    Julie
+    Kwai
+    Diego
+    Christina
+    Jytte
+    Mary
+    Eric
+    Jeff
+    Kelvin
+    Juri
+    Wendy
+    Veysel
+
+@[word_1_3]
+    Nantes
+    Vegas
+    Melbourne
+    Nantes
+    Stavern
+    San
+    Warszawa
+    Frankfurt
+    San Francisco
+    NYC
+    Madrid
+    Luleå
+    Kobenhavn
+    Lyon
+    Singapore
+    NYC
+    Allentown
+    Burlingame
+    Singapore
+    Bergen
+    NV
+    Victoria
+    CA
+    CA
+    NY
+    NY
+    PA
+    CA
+    France
+    USA
+    Australia
+    France
+    Norway
+    USA
+    Poland
+    Germany
+    USA
+    USA
+    Spain
+    Sweden
+    Denmark
+    France
+    Singapore
+    USA
+    USA
+    USA
+    Singapore
+    Norway
+
+@[num_1_4]
+    6066.78
+    14571.44
+    1676.14
+    14191.12
+    32641.98
+    33347.88
+    45864.03
+    82261.22
+    7565.08
+    44894.74
+    19501.82
+    47924.19
+    49523.67
+    50218.95
+    1491.38
+    17876.32
+    34638.14
+    101244.59
+    85410.87
+    11044.30
+
+@[word_1_5]
+    1969
+    1300
+    Moto Guzzi 1100i
+    2003 Harley-Davidson Eagle
+    Alfa Romeo GTA
+    LanciaA Delta 16V
+    1968 Ford
+    2001 Ferrari
+    Bus
+    2002 Suzuki
+    Corvair
+    Dodge
+    1969 Ford
+    1970 Plymouth Hemi
+    1957 Chevy
+    Charger
+    Truck
+    1993 Mazda
+    1937 Lincoln Berline
+    1936 Mercedes-Benz 500K
+
+@[word_1_6]
+    Murphy
+    Patterson
+    Firrelli
+    Patterson
+    Bondur
+    Bow
+    Jennings
+    Thompson
+    Firrelli
+    Patterson
+    Tseng
+    Vanauf
+    Bondur
+    Hernandez
+    Castillo
+    Bott
+    Jones
+    Fixter
+    Marsh
+    King
+    Diane
+    Mary
+    Jeff
+    William
+    Gerard
+    Anthony
+    Leslie
+    Leslie
+    Julie
+    Steve
+    Yue
+    George
+    Loui
+    Gerard
+    Pamela
+    Larry
+    Barry
+    Andy
+    Peter
+    Tom
+
+@[word_2_1]
+    Murphy
+    Patterson
+    Firrelli
+    Patterson
+    Bondur
+    Bow
+    Jennings
+    Thompson
+    Firrelli
+    Patterson
+    Tseng
+    Vanauf
+    Bondur
+    Hernandez
+    Castillo
+    Bott
+    Jones
+    Fixter
+    Marsh
+    King
+    Diane
+    Mary
+    Jeff
+    William
+    Gerard
+    Anthony
+    Leslie
+    Leslie
+    Julie
+    Steve
+    Yue
+    George
+    Loui
+    Gerard
+    Pamela
+    Larry
+    Barry
+    Andy
+    Peter
+    Tom
+
+@[word_2_2]
+    Diane
+    Mary
+    Jeff
+    William
+    Gerard
+    Anthony
+    Leslie
+    Leslie
+    Julie
+    Steve
+    Yue
+    George
+    Loui
+    Gerard
+    Pamela
+    Larry
+    Barry
+    Andy
+    Peter
+    Tom
+
+@[word_2_3]
+    Murphy
+    Patterson
+    Firrelli
+    Patterson
+    Bondur
+    Bow
+    Jennings
+    Thompson
+    Firrelli
+    Patterson
+    Tseng
+    Vanauf
+    Bondur
+    Hernandez
+    Castillo
+    Bott
+    Jones
+    Fixter
+    Marsh
+    King
+
+@[word_2_4]
+    San Francisco
+    Boston
+    NYC
+    Paris
+    Tokyo
+    Sydney
+    London
+    USA
+    USA
+    USA
+    France
+    Japan
+    Australia
+    UK
+
+@[word_3_1]
+    Street
+    Court
+    Street
+    Jouffroy
+    4-1 Kioicho
+    Avenue
+    Broad Street
+
+@[word_3_2]
+    Francisco
+    Boston
+    NYC
+    Paris
+    Tokyo
+    Sydney
+    London
+    USA
+    USA
+    USA
+    France
+    Japan
+    Australia
+    UK
+
+@[word_3_3]
+    Murphy
+    Patterson
+    Firrelli
+    Patterson
+    Bondur
+    Bow
+    Jennings
+    Thompson
+    Firrelli
+    Patterson
+    Tseng
+    Vanauf
+    Bondur
+    Hernandez
+    Castillo
+    Bott
+    Jones
+    Fixter
+    Marsh
+    King
+    Diane
+    Mary
+    Jeff
+    William
+    Gerard
+    Anthony
+    Leslie
+    Leslie
+    Julie
+    Steve
+    Foon
+    George
+    Loui
+    Gerard
+    Pamela
+    Larry
+    Barry
+    Andy
+    Peter
+    Tom
+
+@[word_5_1]
+    Chopper
+    Alpine Renault 1300
+    Moto
+    2003 Harley-Davidson
+    Alfa Romeo GTA
+    LanciaA Delta 16V
+    Mustang
+    Ferrari
+    Setra
+    2002
+    1969 Corvair Monza
+    1968
+    1969
+    Plymouth
+    1957 Chevy Pickup
+    1969
+    Pickup
+    1993
+    Lincoln
+    Special Roadster
+
+@[word_5_2]
+    Classic
+    Motorcycles
+    Planes
+    Ships
+    Trains
+    Trucks
+    Cars
+
+@[word_5_3]
+    graphique
+    Signal Gift Stores
+    Co
+    Gifts
+    Mini Imports
+    Ltd
+    & Zbyszek
+    Blauer See Auto
+    Co
+    Toys Inc
+    Shopping Channel
+    Replicas
+    Wholesale
+    Co
+    Dragon Souveniers
+    Machine Inc
+    Inc
+    Stores
+    Handji
+    Gifts
+
+
+%[find_el_by_attr]('training': '400', 'testing': '200')
+    ~[find] @[el_1] @[word_1_1]
+    ~[find] @[el_1] ~[that?] @[attr_1_2] @[word_1_2]
+    ~[find] @[el_1] ~[that?] @[attr_1_3] @[word_1_3]
+    ~[find] @[el_1] ~[that?] @[attr_1_4] @[op_num?] @[num_1_4]
+    ~[find] @[el_1] ~[that?] @[attr_1_5] @[word_1_5]
+    ~[find] @[el_1] ~[that?] @[attr_1_6] @[word_1_6]
+    ~[find] @[el_2] @[word_2_1]
+    ~[find] @[el_2] ~[that?] @[attr_2_2] @[word_2_2]
+    ~[find] @[el_2] ~[that?] @[attr_2_3] @[word_2_3]
+    ~[find] @[el_2] ~[that?] @[attr_2_4] @[word_2_4]
+    ~[find] @[el_3] ~[that?] @[attr_3_1] @[word_3_1]
+    ~[find] @[el_3] ~[that?] @[attr_3_2] @[word_3_2]
+    ~[find] @[el_3] ~[that?] @[attr_3_3] @[word_3_3]
+    ~[find] @[el_5] @[word_5_1]
+    ~[find] @[el_5] ~[that?] @[attr_5_2] @[word_5_2]
+    ~[find] @[el_5] ~[that?] @[attr_5_3] @[word_5_3]
+
+%[filter_el_by_attr]('training': '400', 'testing': '200')
+    ~[filter] ~[those?] @[word_1_1]
+    ~[filter] ~[those?] ~[that?] @[attr_1_2] @[word_1_2]
+    ~[filter] ~[those?] ~[that?] @[attr_1_3] @[word_1_3]
+    ~[filter] ~[those?] ~[that?] @[attr_1_4] @[op_num?] @[num_1_4]
+    ~[filter] ~[those?] ~[that?] @[attr_1_5] @[word_1_5]
+    ~[filter] ~[those?] ~[that?] @[attr_1_6] @[word_1_6]
+    ~[filter] ~[those?] @[word_2_1]
+    ~[filter] ~[those?] ~[that?] @[attr_2_2] @[word_2_2]
+    ~[filter] ~[those?] ~[that?] @[attr_2_3] @[word_2_3]
+    ~[filter] ~[those?] ~[that?] @[attr_2_4] @[word_2_4]
+    ~[filter] ~[those?] ~[that?] @[attr_3_1] @[word_3_1]
+    ~[filter] ~[those?] ~[that?] @[attr_3_2] @[word_3_2]
+    ~[filter] ~[those?] ~[that?] @[attr_3_3] @[word_3_3]
+    ~[filter] ~[those?] @[word_5_1]
+    ~[filter] ~[those?] ~[that?] @[attr_5_2] @[word_5_2]
+    ~[filter] ~[those?] ~[that?] @[attr_5_3] @[word_5_3]
