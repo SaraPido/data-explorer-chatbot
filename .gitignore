@@ -1,2 +1,7 @@
 .DS_Store
 __pycache__
+
+rasa_dataset_testing.json
+rasa_dataset_training.json
+node_modules/
+evaluation/
