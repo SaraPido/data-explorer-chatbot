@@ -4,7 +4,7 @@ This module takes in input the mapping (concept) of the db and generates the cha
 import random
 
 from modules.database import resolver, broker
-from modules.settings import CHATITO_TEMPLATE_PATH, CHATITO_MODEL_PATH
+from settings import CHATITO_TEMPLATE_PATH, CHATITO_MODEL_PATH
 
 if __name__ == "__main__":
 
@@ -14,27 +14,40 @@ if __name__ == "__main__":
     broker.load_db_schema()
     broker.connect()
 
-    whole_text_find = "%[find_el_by_attr]('training': '400', 'testing': '200')\n"
-    whole_text_filter = "%[filter_el_by_attr]('training': '400', 'testing': '200')\n"
+    whole_text_more_info_find = ""
+    whole_text_more_info_filter = ""
+    whole_text_find = ""
+    whole_text_filter = ""
 
     whole_element_text = ""
     whole_attribute_text = ""
     whole_example_type_text = ""
 
     idx_e = 1
+    idx_e_alias = 0
+    idx_tot = 0
+
     for e in db_concept:
+        idx_tot += 1
 
         if e.get('type') == 'primary':
+
+            whole_text_more_info_find += "    ~[show?] ~[more_info_find] @[el_{}]\n".format(idx_e)
+            whole_text_more_info_filter += "    ~[show?] ~[more_info_filter] @[el_{}]\n".format(idx_e)
 
             element_text = "@[el_{}]\n" \
                            "    ".format(idx_e)
             element_text += "\n    ".join([e.get('element_name')] + e.get('aliases', []))
             whole_element_text += element_text + "\n\n"
 
+            idx_e_alias += 1 + len(e.get('aliases', []))
+
             idx_a = 1
             for a in e.get('attributes', []):
+                idx_tot += 1
 
                 if a.get('keyword'):
+
                     attribute_text = "@[attr_{}_{}]\n" \
                                      "    {}".format(idx_e, idx_a, a.get('keyword'))
                     whole_attribute_text += attribute_text + "\n\n"
@@ -50,6 +63,7 @@ if __name__ == "__main__":
                     if res:
                         for r in res[:20]:  # max 20 examples each
                             if r[0]:
+                                idx_tot += 1
                                 str_list = str(r[0]).split()
 
                                 from_idx = random.randint(0, len(str_list) - 1)
@@ -83,8 +97,25 @@ if __name__ == "__main__":
 
             idx_e += 1
 
-    final_text = whole_element_text + "\n" + whole_attribute_text + "\n" + whole_example_type_text + "\n" + \
-                 whole_text_find + "\n" + whole_text_filter
+    idx_tot = min(idx_tot, 400)  # max training set
+
+    #  prepending here...
+
+    whole_text_more_info_find = "%[more_info_find]('training': '{}', 'testing': '{}')\n{}"\
+        .format(idx_e_alias*2 - idx_e_alias*2 // 5, idx_e_alias*2 // 5, whole_text_more_info_find)  # 1:4 proportion
+
+    whole_text_more_info_filter = "%[more_info_filter]('training': '{}', 'testing': '{}')\n{}" \
+        .format(idx_e_alias*2 - idx_e_alias*2 // 5, idx_e_alias*2 // 5, whole_text_more_info_filter)  # 1:4 proportion
+
+    whole_text_find = "%[find_el_by_attr]('training': '{}', 'testing': '{}')\n{}" \
+        .format(idx_tot - idx_tot // 5, idx_tot // 5, whole_text_find)  # 1:4 proportion
+
+    whole_text_filter = "%[filter_el_by_attr]('training': '{}', 'testing': '{}')\n{}"\
+        .format(idx_tot - idx_tot // 5, idx_tot // 5, whole_text_filter)  # 1:4 proportion
+
+    final_text = "\n" + "\n".join([whole_element_text, whole_attribute_text, whole_example_type_text,
+                                   whole_text_find, whole_text_filter,
+                                   whole_text_more_info_find, whole_text_more_info_filter])
 
     with open(CHATITO_TEMPLATE_PATH, 'r') as f:
         template = f.read()

@@ -2,7 +2,7 @@ import logging
 import json
 
 from modules.database import broker
-from modules.settings import DB_CONCEPT_PATH
+from settings import DB_CONCEPT_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +36,11 @@ def get_all_primary_element_names_and_aliases():
         if e.get('type') == 'primary':
             res.extend([e.get('element_name')] + e.get('aliases', []))
     return res
+
+
+def get_element_aliases(element_name):
+    element = extract_element(element_name)
+    return element.get('aliases', [])
 
 
 def get_element_name_from_possible_alias(element_or_alias_name):

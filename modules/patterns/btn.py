@@ -2,12 +2,6 @@ from modules.patterns import nlu
 from modules.database import resolver
 
 
-def get_start_buttons():
-    return [{'title': 'Find customers located in Milan', 'payload': 'find customer located in Milan'},
-            {'title': 'Find employees that work in Paris', 'payload': 'find employees that work in Paris'},
-            {'title': 'Again?', 'payload': '/start'}]
-
-
 def get_buttons_element_relations(element_name):
     relations = resolver.extract_relations(element_name)
     buttons = []
@@ -17,6 +11,10 @@ def get_buttons_element_relations(element_name):
                                  [nlu.ENTITY_RELATION, rel['keyword']])
         buttons.append({'title': title, 'payload': payload})
     return buttons
+
+
+def get_button_filter_hints():
+    return {'title': 'FILTER HINTS', 'payload': extract_payload(nlu.INTENT_MORE_INFO_FILTER)}
 
 
 def get_buttons_select_element(element):
@@ -49,7 +47,7 @@ def get_button_view_context_element(title):
 def get_button_reset_context():
     payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
                               [nlu.ENTITY_POSITION, str(nlu.VALUE_POSITION_RESET_CONTEXT)+'xx'])
-    return {'title': '- Reset the HISTORY -', 'payload': payload}
+    return {'title': '- RESET HISTORY -', 'payload': payload}
 
 
 def get_button_go_back_to_context_position(action_name, pos):

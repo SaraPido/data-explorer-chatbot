@@ -7,6 +7,10 @@ class Response:
         self.response_list.append({'type': 'message',
                                    'value': message})
 
+    def add_messages(self, messages):
+        for m in messages:
+            self.add_message(m)
+
     def add_button(self, button):
         self.response_list.append({'type': 'button',
                                    'value': button})
@@ -16,14 +20,14 @@ class Response:
             self.add_button(b)
 
     def get_printable_string(self):
-        s = '- - -\n'
+        string_list = []
         for r in self.response_list:
             if r['type'] == 'message':
-                s += r['value']
+                string_list.append('- {}'.format(r['value']))
             else:
-                s += '* {} => {}'.format(r['value']['title'], r['value']['payload'])
-            s += '\n'
-        return s + '- - -'
+                string_list.append('[B] {} => {}'.format(r['value']['title'],
+                                                         r['value']['payload']))
+        return '\n'.join(string_list)
 
     def get_telegram_format(self):
         result_list = []

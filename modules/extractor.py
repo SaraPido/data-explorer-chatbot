@@ -1,7 +1,7 @@
 import logging
 
 from rasa_nlu import model as nlu_model
-from modules.settings import NLU_MODEL_PATH
+from settings import NLU_MODEL_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +25,7 @@ def parse(message):
         'entities': [
             {'value': 'Nicola', 'entity': 'word'}
         ]
+        'original_message': 'find the teacher Nicola'
     }
     :param message: the message to be converted
     :return: the dictionary representing the interpretation
@@ -55,6 +56,8 @@ def parse(message):
             del e['end'], e['confidence'], e['extractor']
             if e.get('processors'):
                 del e['processors']
+
+    parsed_message['original_message'] = message
 
     logger.info('Parsed message: {}'.format(parsed_message))
     return parsed_message

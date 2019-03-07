@@ -5,7 +5,7 @@ import string
 
 from mysql import connector
 
-from modules.settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST
+from settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, QUERY_LIMIT
 
 logger = logging.getLogger(__name__)
 
@@ -37,8 +37,9 @@ def load_db_schema():
 
 
 def execute_query_select(query, t=None):
-    # TODO: in order to have a debug working quickly
-    query += ' LIMIT 100'
+    # HERE FORCING THE LIMIT OF THE QUERY
+    if QUERY_LIMIT:
+        query += ' LIMIT 100'
     logger.info('Executing query...')
     logger.info('Query: "{}"'.format(query))
     if t:
@@ -53,12 +54,8 @@ def get_dictionary_result(q_string, q_tuple, rows, columns, attributes):
 
     value = list(map(lambda r: dict(zip(columns, r)), rows))
 
-    # if there is a "by element"
-    # todo: consider the case  of "by_value".. -> what if I want to select more?
-
     return {'query': query,
             'value': value,
-            'by_value': [],
             'real_value_length': len(value),
             'attributes': attributes}
 

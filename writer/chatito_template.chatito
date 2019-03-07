@@ -7,6 +7,8 @@
     show
     view
     show me
+    tell
+    tell me
     display
 
 ~[the]
@@ -95,3 +97,16 @@
 //    unlike
 //    different from
 //    distinct
+
+~[more_info_find]
+    more info about
+    about
+    info about
+    more info about
+
+~[more_info_filter]
+    how can I filter
+    how to filter
+    more info on filtering
+    filter
+    to filter

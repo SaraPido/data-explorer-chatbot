@@ -1,3 +1,40 @@
+// SELECT BY NUMBER
+
+%[sel_by_num]('training': '20', 'testing': '20')
+    ~[select?] ~[position] @[num]
+
+~[select]
+    pick
+    take
+    select
+
+~[position]
+    at position
+    number
+    pos
+
+@[num]
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+    16
+
+
+~[the]
+    the
+
 // CONTEXT
 
 %[show_context]('training': '20', 'testing': '20')
@@ -7,10 +44,9 @@
     show
     view
     show me
+    tell
+    tell me
     display
-
-~[the]
-    the
 
 ~[context]
     conversation history
@@ -62,31 +98,25 @@
     those
     the ones
 
-~[that]
-    that
-    that have
-    which
+//~[that]
+//    that
+//    that have
+//    which
 
 @[op_num]
     ~[op_num_lt]
-    ~[op_num_eq]
     ~[op_num_gt]
+//    ~[op_num_eq]
 
 ~[op_num_lt]
     less than
-    lower than
-    lower
-    smaller
 
-~[op_num_eq]
-    equal to
-    equal
-    exactly
+//~[op_num_eq]
+//    equal to
+//    equal
+//    exactly
 
 ~[op_num_gt]
-    greater than
-    greater
-    bigger
     more than
 
 //@[op_word]
@@ -101,6 +131,20 @@
 //    unlike
 //    different from
 //    distinct
+
+~[more_info_find]
+    more info about
+    about
+    info about
+    more info about
+
+~[more_info_filter]
+    how can I filter
+    how to filter
+    more info on filtering
+    filter
+    to filter
+
 @[el_1]
     customer
     customers
@@ -134,13 +178,13 @@
     located in
 
 @[attr_1_4]
-    paid
+    that paid
 
 @[attr_1_5]
-    ordered
+    that ordered
 
 @[attr_1_6]
-    reported to
+    that reported to
 
 @[attr_2_2]
     with first name
@@ -149,7 +193,7 @@
     with last name
 
 @[attr_2_4]
-    work in
+    that work in
 
 @[attr_3_1]
     with address
@@ -161,7 +205,7 @@
     of
 
 @[attr_5_2]
-    product line
+    of product line
 
 @[attr_5_3]
     ordered by
@@ -170,22 +214,22 @@
 @[word_1_1]
     Atelier
     Signal Gift
-    Collectors
-    Gifts
-    Imports
-    Distributors Ltd
+    Collectors, Co
+    La
+    Mini Imports
+    Gifts Distributors
+    Havel & Zbyszek
     Co
-    Auto
+    Mini Wheels
+    Land of
+    Shopping
+    Volvo Model
+    Wholesale
     Co
-    of
-    Euro+ Shopping
-    Replicas
-    Wholesale Imports
-    &
-    Souveniers, Ltd
-    Muscle Machine Inc
+    Ltd
+    Machine
     Inc
-    Inc
+    Technics Stores
     Co
     Gifts
 
@@ -237,10 +281,10 @@
     Melbourne
     Nantes
     Stavern
-    San
+    Rafael
     Warszawa
     Frankfurt
-    San Francisco
+    Francisco
     NYC
     Madrid
     Luleå
@@ -304,26 +348,26 @@
     11044.30
 
 @[word_1_5]
-    1969
-    1300
-    Moto Guzzi 1100i
-    2003 Harley-Davidson Eagle
-    Alfa Romeo GTA
-    LanciaA Delta 16V
-    1968 Ford
-    2001 Ferrari
-    Bus
+    Chopper
+    Alpine Renault
+    Moto
+    Eagle Drag
+    GTA
+    Delta 16V
+    Ford
+    Ferrari
+    1958
     2002 Suzuki
     Corvair
-    Dodge
-    1969 Ford
-    1970 Plymouth Hemi
-    1957 Chevy
+    Charger
+    Falcon
+    1970 Plymouth Hemi Cuda
+    1957
     Charger
     Truck
-    1993 Mazda
-    1937 Lincoln Berline
-    1936 Mercedes-Benz 500K
+    1993
+    Lincoln Berline
+    Special
 
 @[word_1_6]
     Murphy
@@ -356,7 +400,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon
     George
     Loui
     Gerard
@@ -470,13 +514,20 @@
     UK
 
 @[word_3_1]
-    Street
-    Court
-    Street
-    Jouffroy
-    4-1 Kioicho
+    San
+    Boston
+    NYC
+    Paris
+    Tokyo
+    Sydney
+    London
+    Market Street
+    Place
+    53rd Street
+    D'abbans
+    Kioicho
     Avenue
-    Broad Street
+    Street
 
 @[word_3_2]
     Francisco
@@ -525,7 +576,7 @@
     Leslie
     Julie
     Steve
-    Foon
+    Yue
     George
     Loui
     Gerard
@@ -537,26 +588,26 @@
     Tom
 
 @[word_5_1]
-    Chopper
-    Alpine Renault 1300
-    Moto
-    2003 Harley-Davidson
-    Alfa Romeo GTA
-    LanciaA Delta 16V
-    Mustang
-    Ferrari
-    Setra
-    2002
-    1969 Corvair Monza
-    1968
+    Ultimate
+    Alpine Renault
+    1996 Moto Guzzi
+    Drag Bike
+    1972
+    1962 LanciaA Delta 16V
+    1968 Ford
+    2001 Ferrari
+    1958
+    XREO
     1969
-    Plymouth
-    1957 Chevy Pickup
-    1969
-    Pickup
+    1968 Dodge
+    1969 Ford Falcon
+    1970 Plymouth Hemi
+    1957
+    1969 Dodge Charger
+    Pickup Truck
     1993
-    Lincoln
-    Special Roadster
+    Berline
+    1936
 
 @[word_5_2]
     Classic
@@ -564,64 +615,78 @@
     Planes
     Ships
     Trains
-    Trucks
-    Cars
+    Buses
+    Vintage Cars
 
 @[word_5_3]
     graphique
-    Signal Gift Stores
+    Gift Stores
     Co
     Gifts
-    Mini Imports
-    Ltd
+    Imports
+    Distributors
     & Zbyszek
-    Blauer See Auto
     Co
-    Toys Inc
-    Shopping Channel
-    Replicas
-    Wholesale
-    Co
-    Dragon Souveniers
-    Machine Inc
+    Wheels Co
+    Toys
+    Channel
+    Replicas, Co
+    Imports
+    &
+    Ltd
+    Muscle Machine Inc
+    Diecast Classics
     Inc
-    Stores
-    Handji
-    Gifts
+    Handji Gifts& Co
+    Herkku Gifts
 
 
-%[find_el_by_attr]('training': '400', 'testing': '200')
+%[find_el_by_attr]('training': '320', 'testing': '80')
     ~[find] @[el_1] @[word_1_1]
-    ~[find] @[el_1] ~[that?] @[attr_1_2] @[word_1_2]
-    ~[find] @[el_1] ~[that?] @[attr_1_3] @[word_1_3]
-    ~[find] @[el_1] ~[that?] @[attr_1_4] @[op_num?] @[num_1_4]
-    ~[find] @[el_1] ~[that?] @[attr_1_5] @[word_1_5]
-    ~[find] @[el_1] ~[that?] @[attr_1_6] @[word_1_6]
+    ~[find] @[el_1] @[attr_1_2] @[word_1_2]
+    ~[find] @[el_1] @[attr_1_3] @[word_1_3]
+    ~[find] @[el_1] @[attr_1_4] @[op_num?] @[num_1_4]
+    ~[find] @[el_1] @[attr_1_5] @[word_1_5]
+    ~[find] @[el_1] @[attr_1_6] @[word_1_6]
     ~[find] @[el_2] @[word_2_1]
-    ~[find] @[el_2] ~[that?] @[attr_2_2] @[word_2_2]
-    ~[find] @[el_2] ~[that?] @[attr_2_3] @[word_2_3]
-    ~[find] @[el_2] ~[that?] @[attr_2_4] @[word_2_4]
-    ~[find] @[el_3] ~[that?] @[attr_3_1] @[word_3_1]
-    ~[find] @[el_3] ~[that?] @[attr_3_2] @[word_3_2]
-    ~[find] @[el_3] ~[that?] @[attr_3_3] @[word_3_3]
+    ~[find] @[el_2] @[attr_2_2] @[word_2_2]
+    ~[find] @[el_2] @[attr_2_3] @[word_2_3]
+    ~[find] @[el_2] @[attr_2_4] @[word_2_4]
+    ~[find] @[el_3] @[attr_3_1] @[word_3_1]
+    ~[find] @[el_3] @[attr_3_2] @[word_3_2]
+    ~[find] @[el_3] @[attr_3_3] @[word_3_3]
     ~[find] @[el_5] @[word_5_1]
-    ~[find] @[el_5] ~[that?] @[attr_5_2] @[word_5_2]
-    ~[find] @[el_5] ~[that?] @[attr_5_3] @[word_5_3]
+    ~[find] @[el_5] @[attr_5_2] @[word_5_2]
+    ~[find] @[el_5] @[attr_5_3] @[word_5_3]
 
-%[filter_el_by_attr]('training': '400', 'testing': '200')
+%[filter_el_by_attr]('training': '320', 'testing': '80')
     ~[filter] ~[those?] @[word_1_1]
-    ~[filter] ~[those?] ~[that?] @[attr_1_2] @[word_1_2]
-    ~[filter] ~[those?] ~[that?] @[attr_1_3] @[word_1_3]
-    ~[filter] ~[those?] ~[that?] @[attr_1_4] @[op_num?] @[num_1_4]
-    ~[filter] ~[those?] ~[that?] @[attr_1_5] @[word_1_5]
-    ~[filter] ~[those?] ~[that?] @[attr_1_6] @[word_1_6]
+    ~[filter] ~[those?] @[attr_1_2] @[word_1_2]
+    ~[filter] ~[those?] @[attr_1_3] @[word_1_3]
+    ~[filter] ~[those?] @[attr_1_4] @[op_num?] @[num_1_4]
+    ~[filter] ~[those?] @[attr_1_5] @[word_1_5]
+    ~[filter] ~[those?] @[attr_1_6] @[word_1_6]
     ~[filter] ~[those?] @[word_2_1]
-    ~[filter] ~[those?] ~[that?] @[attr_2_2] @[word_2_2]
-    ~[filter] ~[those?] ~[that?] @[attr_2_3] @[word_2_3]
-    ~[filter] ~[those?] ~[that?] @[attr_2_4] @[word_2_4]
-    ~[filter] ~[those?] ~[that?] @[attr_3_1] @[word_3_1]
-    ~[filter] ~[those?] ~[that?] @[attr_3_2] @[word_3_2]
-    ~[filter] ~[those?] ~[that?] @[attr_3_3] @[word_3_3]
+    ~[filter] ~[those?] @[attr_2_2] @[word_2_2]
+    ~[filter] ~[those?] @[attr_2_3] @[word_2_3]
+    ~[filter] ~[those?] @[attr_2_4] @[word_2_4]
+    ~[filter] ~[those?] @[attr_3_1] @[word_3_1]
+    ~[filter] ~[those?] @[attr_3_2] @[word_3_2]
+    ~[filter] ~[those?] @[attr_3_3] @[word_3_3]
     ~[filter] ~[those?] @[word_5_1]
-    ~[filter] ~[those?] ~[that?] @[attr_5_2] @[word_5_2]
-    ~[filter] ~[those?] ~[that?] @[attr_5_3] @[word_5_3]
+    ~[filter] ~[those?] @[attr_5_2] @[word_5_2]
+    ~[filter] ~[those?] @[attr_5_3] @[word_5_3]
+
+%[more_info_find]('training': '24', 'testing': '6')
+    ~[show?] ~[more_info_find] @[el_1]
+    ~[show?] ~[more_info_find] @[el_2]
+    ~[show?] ~[more_info_find] @[el_3]
+    ~[show?] ~[more_info_find] @[el_4]
+    ~[show?] ~[more_info_find] @[el_5]
+
+%[more_info_filter]('training': '24', 'testing': '6')
+    ~[show?] ~[more_info_filter] @[el_1]
+    ~[show?] ~[more_info_filter] @[el_2]
+    ~[show?] ~[more_info_filter] @[el_3]
+    ~[show?] ~[more_info_filter] @[el_4]
+    ~[show?] ~[more_info_filter] @[el_5]

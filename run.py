@@ -7,7 +7,7 @@ from time import sleep
 from modules import extractor, caller
 from modules.connectors import telegram
 from modules.database import resolver, broker
-from modules.settings import LOG_DIR_PATH_AND_SEP
+from settings import LOG_DIR_PATH_AND_SEP
 
 
 def console_input():

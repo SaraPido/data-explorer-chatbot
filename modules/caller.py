@@ -1,10 +1,10 @@
-import logging
 import datetime
 import threading
+from pprint import pformat
 
 from modules import conversation
-from modules.actions import executors
-from modules.settings import INTENT_CONFIDENCE_THRESHOLD, CONTEXT_PERSISTENCE_SECONDS
+from modules import actions
+from settings import INTENT_CONFIDENCE_THRESHOLD, CONTEXT_PERSISTENCE_SECONDS
 
 context_dict = {}
 
@@ -23,7 +23,15 @@ def run_action_from_parsed_message(parsed_message, chat_id):
 
     context = get_context(chat_id)
 
-    return executors.execute_action_from_intent_name(intent_name, entities, context)
+    context.log('New message received!\n'
+                'Original message: {}\n'
+                'Intent matched: {}\n'
+                'Entities:\n'
+                '{}'.format(parsed_message['original_message'],
+                            intent_name,
+                            pformat(entities)))
+
+    return actions.execute_action_from_intent_name(intent_name, entities, context)
 
 
 def get_context(chat_id):
@@ -53,10 +61,11 @@ def get_context(chat_id):
 
 def check_timestamps():
 
-    max_age = datetime.datetime.now() - datetime.timedelta(CONTEXT_PERSISTENCE_SECONDS)
+    max_age = datetime.datetime.now() - datetime.timedelta(seconds=CONTEXT_PERSISTENCE_SECONDS)
 
     for k, v in list(context_dict.items()):
         if v['timestamp'] < max_age:
+            context_dict[k]['context'].log('The previous context expired at datetime: {}'.format(max_age))
             del context_dict[k]
 
 

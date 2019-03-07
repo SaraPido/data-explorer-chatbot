@@ -1,9 +1,11 @@
 INTENT_START = 'start'
+INTENT_MORE_INFO_FIND = 'more_info_find'
+INTENT_MORE_INFO_FILTER = 'more_info_filter'
 
 INTENT_CROSS_RELATION = 'cross_rel'
 INTENT_SHOW_RELATIONS = 'show_rel'
 INTENT_SHOW_MORE_ELEMENTS = 'show_more_el'
-INTENT_SELECT_ELEMENT_BY_POSITION = 'select_el_by_pos'
+INTENT_SELECT_ELEMENT_BY_POSITION = 'sel_by_pos'
 INTENT_FIND_ELEMENT_BY_ATTRIBUTE = 'find_el_by_attr'
 INTENT_FILTER_ELEMENT_BY_ATTRIBUTE = 'filter_el_by_attr'
 
@@ -23,6 +25,6 @@ ENTITY_BY_ELEMENT_NAME = 'by'
 ENTITY_WORD = 'word'
 ENTITY_NUMBER = 'num'
 ENTITY_OPERATOR_NUMBER = 'op_num'
-ENTITY_POSITION = 'pos'
+ENTITY_POSITION = 'num'
 
 VALUE_POSITION_RESET_CONTEXT = -1  # going back to position -1 means deleting the context
