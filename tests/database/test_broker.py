@@ -182,7 +182,7 @@ class TestBroker(TestCase):
 
     def test_execute_query_find(self):
         b.load_db_schema()
-        b.connect()
+        b.test_connection()
         attr = self.customer_element['attributes'][0]
         attr['value'] = 'Peter'
         res = b.query_find('customers', [attr])
@@ -191,7 +191,7 @@ class TestBroker(TestCase):
 
     def test_execute_query_join(self):
         b.load_db_schema()
-        b.connect()
+        b.test_connection()
         res = b.query_join(self.customer_in_context, self.customer_element['relations'][1])
         print(res['query']['q_string'])
         print(res['value'])

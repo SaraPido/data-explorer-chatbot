@@ -11,22 +11,27 @@ from settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASS
 logger = logging.getLogger(__name__)
 
 db_schema = None
-connection = None
+
+
+def test_connection():
+    logger.info('Database:\n'
+                '"' + DATABASE_NAME + '"')
+    logger.info('Testing connection with the database...')
+    connection = connect()
+    logger.info('Connection succeeded! Closing connection...')
+    disconnect(connection)
+    logger.info('Connection closed.')
 
 
 def connect():
-    global connection
-    logger.info('Database:\n'
-                '"' + DATABASE_NAME + '"')
-    logger.info('Connecting to the database...')
+    return connector.connect(user=DATABASE_USER,
+                             password=DATABASE_PASSWORD,
+                             host=DATABASE_HOST,
+                             database=DATABASE_NAME)
 
-    connection = connector.connect(user=DATABASE_USER,
-                                   password=DATABASE_PASSWORD,
-                                   host=DATABASE_HOST,
-                                   database=DATABASE_NAME)
 
-    logger.info('Connection succeeded!')
-    # cnx.close()
+def disconnect(connection):
+    connection.close()
 
 
 def load_db_schema():
@@ -47,9 +52,14 @@ def execute_query_select(query, t=None):
     logger.info('Query: "{}"'.format(query))
     if t:
         logger.info('Tuple: {}'.format(t))
+
+    connection = connect()
     cursor = connection.cursor()
     cursor.execute(query, t)
-    return cursor.fetchall()
+    rows = cursor.fetchall()
+    cursor.close()
+    disconnect(connection)
+    return rows
 
 
 def get_dictionary_result(q_string, q_tuple, rows, columns, attributes):

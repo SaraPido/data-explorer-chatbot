@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     resolver.load_db_concept()
     broker.load_db_schema()
-    broker.connect()
+    broker.test_connection()
     extractor.load_model()
 
     logging.info('Bot successfully started!')

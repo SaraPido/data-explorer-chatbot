@@ -12,7 +12,7 @@ if __name__ == "__main__":
     db_concept = resolver.db_concept
 
     broker.load_db_schema()
-    broker.connect()
+    broker.test_connection()
 
     whole_text_more_info_find = ""
     whole_text_more_info_filter = ""
