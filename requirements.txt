@@ -5,3 +5,5 @@ telepot
 nested-lookup
 tensorflow==1.10.0
 rasa_nlu~=0.14.3
+
+psycopg2

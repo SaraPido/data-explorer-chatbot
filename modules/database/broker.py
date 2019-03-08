@@ -1,6 +1,7 @@
 import copy
 import json
 import logging
+import os
 import string
 
 from mysql import connector
@@ -18,10 +19,20 @@ def connect():
     logger.info('Database:\n'
                 '"' + DATABASE_NAME + '"')
     logger.info('Connecting to the database...')
-    connection = connector.connect(user=DATABASE_USER,
-                                   password=DATABASE_PASSWORD,
-                                   host=DATABASE_HOST,
-                                   database=DATABASE_NAME)
+
+    ON_HEROKU = os.environ['ON_HEROKU']  # check if in Heroku
+
+    if ON_HEROKU:
+        connection = connector.connect(user='dataexplorerbot',
+                                       password='piDataexplorerbot',
+                                       host='93.43.227.1',
+                                       database=DATABASE_NAME)
+    else:
+        connection = connector.connect(user=DATABASE_USER,
+                                       password=DATABASE_PASSWORD,
+                                       host=DATABASE_HOST,
+                                       database=DATABASE_NAME)
+
     logger.info('Connection succeeded!')
     # cnx.close()
 
