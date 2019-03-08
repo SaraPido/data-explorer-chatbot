@@ -21,7 +21,10 @@ db_name = select_dict[select][1]
 
 # files
 
-while file_path_list[-1] != 'sherbot':
+
+root = 'app' if os.environ['ON_HEROKU'] else 'sherbot'
+
+while file_path_list[-1] != 'root':
     del file_path_list[-1]
 
 DIR_PATH = os.sep.join(file_path_list)

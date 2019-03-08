@@ -20,9 +20,7 @@ def connect():
                 '"' + DATABASE_NAME + '"')
     logger.info('Connecting to the database...')
 
-    ON_HEROKU = os.environ['ON_HEROKU']  # check if in Heroku
-
-    if ON_HEROKU:
+    if os.environ['ON_HEROKU']:
         connection = connector.connect(user='dataexplorerbot',
                                        password='piDataexplorerbot',
                                        host='93.43.227.1',
