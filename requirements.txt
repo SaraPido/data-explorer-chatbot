@@ -4,5 +4,6 @@ mysql-connector>=2.1.6
 telepot
 nested-lookup
 tensorflow
+sklearn_crfsuite
 rasa_nlu~=0.14.3
 
