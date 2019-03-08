@@ -20,16 +20,10 @@ def connect():
                 '"' + DATABASE_NAME + '"')
     logger.info('Connecting to the database...')
 
-    if os.environ.get('ON_HEROKU'):
-        connection = connector.connect(user='dataexplorerbot',
-                                       password='piDataexplorerbot',
-                                       host='93.43.227.1',
-                                       database=DATABASE_NAME)
-    else:
-        connection = connector.connect(user=DATABASE_USER,
-                                       password=DATABASE_PASSWORD,
-                                       host=DATABASE_HOST,
-                                       database=DATABASE_NAME)
+    connection = connector.connect(user=DATABASE_USER,
+                                   password=DATABASE_PASSWORD,
+                                   host=DATABASE_HOST,
+                                   database=DATABASE_NAME)
 
     logger.info('Connection succeeded!')
     # cnx.close()

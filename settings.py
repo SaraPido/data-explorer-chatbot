@@ -21,10 +21,7 @@ db_name = select_dict[select][1]
 
 # files
 
-
-root = 'app' if os.environ.get('ON_HEROKU') else 'sherbot'
-
-while file_path_list[-1] != root:
+while file_path_list[-1] != 'sherbot':
     del file_path_list[-1]
 
 DIR_PATH = os.sep.join(file_path_list)
@@ -53,10 +50,12 @@ QUERY_LIMIT = 100  # 0 for no limit
 
 #db
 
-DATABASE_USER = 'root'
-DATABASE_PASSWORD = 'admin'
-DATABASE_HOST = '127.0.0.1'
-DATABASE_NAME = db_name
+remote = True if os.environ.get('PYTHONANYWHERE_SITE') else False
+
+DATABASE_USER = 'nicolacastaldo' if remote else 'root'
+DATABASE_PASSWORD = 'dataexplorerbot' if remote else 'admin'
+DATABASE_HOST = 'nicolacastaldo.mysql.pythonanywhere-services.com' if remote else '127.0.0.1'
+DATABASE_NAME = 'nicolacastaldo$classicmodels' if remote else db_name
 
 # nlu
 
