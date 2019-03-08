@@ -1,1 +1,1 @@
-web: python run.py
+release: python run.py
