@@ -20,7 +20,7 @@ def connect():
                 '"' + DATABASE_NAME + '"')
     logger.info('Connecting to the database...')
 
-    if os.environ['ON_HEROKU']:
+    if os.environ.get('ON_HEROKU'):
         connection = connector.connect(user='dataexplorerbot',
                                        password='piDataexplorerbot',
                                        host='93.43.227.1',

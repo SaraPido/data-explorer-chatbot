@@ -22,7 +22,7 @@ db_name = select_dict[select][1]
 # files
 
 
-root = 'app' if os.environ['ON_HEROKU'] else 'sherbot'
+root = 'app' if os.environ.get('ON_HEROKU') else 'sherbot'
 
 while file_path_list[-1] != root:
     del file_path_list[-1]
