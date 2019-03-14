@@ -4,6 +4,7 @@ import logging
 import os
 import string
 
+from pprint import pprint
 from mysql import connector
 
 from settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, QUERY_LIMIT
@@ -94,12 +95,15 @@ def query_find(in_table_name, attributes):
     query_string += where_join_string + " AND " if where_join_string else ""
     query_string += get_WHERE_ATTRIBUTES_query_string(attributes)
 
+    pprint(attributes)
+    pprint(query_string)
+
     values = []
     for a in attributes:
         # if 'a' is a REAL conversational attribute
         if a.get('value'):
             val = str(a['value'])
-            if a['op'] == 'LIKE':
+            if a['operator'] == 'LIKE':
                 val = '%'+val+'%'
             values.extend([val] * len(a['columns']))
         # if 'a' is a mocked relation
@@ -123,7 +127,7 @@ def query_join(element, relation):
     primary_columns = from_schema['primary_key_list']
     relation['join_values'] = [element['value'][0][x] for x in primary_columns]
 
-    relation['op'] = '='
+    relation['operator'] = '='
 
     relation['columns'] = primary_columns
 
@@ -215,7 +219,7 @@ def get_WHERE_ATTRIBUTES_query_string(attributes):
 
         attr += " OR ".join(["{}.{} {} %s".format(a['letter'],  # not so pretty
                                                   col,
-                                                  a['op'])
+                                                  a['operator'])
                              for col in a['columns']])
         attr += " )"
         attr_string_list.append(attr)

@@ -57,7 +57,7 @@ def compute_ordered_entity_list(entities):
                         op = '>'
 
         if ty:
-            oe = {'type': ty, 'op': op, 'value': e['value']}
+            oe = {'type': ty, 'operator': op, 'value': e['value']}
             attr = next((a['value'] for a in entities if re.match("attr_\d_\d", a['entity'])), None)
             if attr:
                 oe['attribute'] = attr
@@ -84,7 +84,7 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities):
                 attr = resolver.get_attribute_by_name(element_name, attribute_name)
                 if attr.get('type') == oe.get('type'):
                     attr['value'] = oe.get('value')
-                    attr['op'] = oe.get('op', '=')  # should not happen
+                    attr['operator'] = oe.get('operator', '=')  # should not happen
                     attributes.append(attr)
 
             else:  # if it has an attribute but is not recognized
@@ -95,7 +95,7 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities):
             attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
             if attr:
                 attr['value'] = oe.get('value')
-                attr['op'] = oe.get('op', '=')
+                attr['operator'] = oe.get('operator', '=')
                 attributes.append(attr)
 
     return attributes
@@ -103,7 +103,7 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities):
 
 def get_attributes_string(attributes):
     return ', '.join(('{} '.format(a.get('keyword')) if a.get('keyword') else '')
-                              + ('{} '.format(a.get('op')) if a.get('type') == 'num' else '')
+                              + ('{} '.format(a.get('operator')) if a.get('type') == 'num' else '')
                               + str(a['value']) for a in attributes)
 
 
