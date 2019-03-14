@@ -1,6 +1,7 @@
 import copy
 import logging
 import re
+from pprint import pprint
 
 from modules import commons
 from modules.database import resolver
@@ -62,7 +63,7 @@ def compute_ordered_entity_list(entities):
             if attr:
                 oe['attribute'] = attr
             ordered_entities.append(oe)
-
+    pprint(ordered_entities)
     return ordered_entities
 
 

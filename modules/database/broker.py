@@ -154,6 +154,7 @@ def get_reverse_relation(relation):
             r['to_columns'], r['from_columns'] = r['from_columns'], r['to_columns']
     return relation
 
+
 # query helper
 
 def label_attributes(attributes):
