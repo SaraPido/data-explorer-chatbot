@@ -39,15 +39,19 @@
 
 // START
 
-%[start]('training': '30', 'testing': '10')
+%[start]('training': '40', 'testing': '10')
     ~[hello]
     ~[hello?] ~[help]
     ~[hello?] ~[_start]
 
 ~[hello]
     hi
+    Hi
+    HI
+    hI
     hello there
     hello
+    Hello
     hey there
     hey
 
@@ -186,25 +190,25 @@
 
 @[word_1_1]
     graphique
-    Stores
-    Australian Collectors
+    Signal Gift Stores
+    Collectors
     Gifts
-    Mini Imports
-    Ltd
-    &
+    Baane
+    Distributors
+    & Zbyszek
+    Blauer See
     Co
+    Toys
+    Channel
+    Volvo Model
+    Wholesale
     Co
+    Dragon Souveniers
+    Muscle Machine Inc
     Inc
-    Shopping Channel
-    Co
-    Wholesale Imports
-    & Henriot
-    Souveniers
-    Machine
-    Classics
     Stores
     Gifts&
-    Gifts
+    Herkku Gifts
 
 @[word_1_2]
     Schmitt
@@ -250,14 +254,14 @@
 
 @[word_1_3]
     Nantes
-    Las
+    Vegas
     Melbourne
     Nantes
     Stavern
-    San Rafael
+    Rafael
     Warszawa
     Frankfurt
-    San Francisco
+    Francisco
     NYC
     Madrid
     Luleå
@@ -321,26 +325,26 @@
     11044.30
 
 @[word_1_5]
-    Ultimate Chopper
-    1952 Alpine
-    Guzzi 1100i
-    Bike
-    Romeo
-    Delta
-    Ford
-    Ferrari
-    Bus
-    2002 Suzuki
-    Monza
-    Dodge
+    Ultimate
+    1300
+    Guzzi
+    Drag
+    GTA
+    LanciaA
+    Ford Mustang
+    Ferrari Enzo
+    Setra
+    Suzuki XREO
+    1969 Corvair
+    1968 Dodge
     Ford Falcon
-    1970
-    Chevy Pickup
-    Dodge Charger
+    Plymouth Hemi
+    1957 Chevy Pickup
+    Charger
     1940 Ford Pickup
     RX-7
-    Berline
-    Special
+    Lincoln
+    Mercedes-Benz
 
 @[word_1_6]
     Murphy
@@ -373,7 +377,7 @@
     Leslie
     Julie
     Steve
-    Foon Yue
+    Foon
     George
     Loui
     Gerard
@@ -415,7 +419,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon
     George
     Loui
     Gerard
@@ -437,7 +441,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon Yue
     George
     Loui
     Gerard
@@ -471,7 +475,7 @@
     King
 
 @[word_2_4]
-    San Francisco
+    Francisco
     Boston
     NYC
     Paris
@@ -487,18 +491,18 @@
     UK
 
 @[word_3_1]
-    San Francisco
+    Francisco
     Boston
     NYC
     Paris
     Tokyo
     Sydney
     London
-    Street
-    Place
-    53rd Street
-    D'abbans
-    Kioicho
+    Market
+    Court Place
+    523 East 53rd Street
+    Jouffroy
+    4-1 Kioicho
     Avenue
     Broad Street
 
@@ -549,7 +553,7 @@
     Leslie
     Julie
     Steve
-    Foon Yue
+    Yue
     George
     Loui
     Gerard
@@ -561,88 +565,88 @@
     Tom
 
 @[word_4_1]
-    Classic
+    Classic Cars
     Motorcycles
     Planes
     Ships
     Trains
-    Trucks
-    Vintage Cars
+    Buses
+    Vintage
 
 @[word_4_2]
     Ultimate Chopper
-    1300
-    Guzzi 1100i
-    Eagle Drag Bike
-    GTA
-    LanciaA Delta 16V
+    1952 Alpine
+    1996
+    2003 Harley-Davidson
+    1972 Alfa
+    Delta
     Mustang
-    2001 Ferrari
+    Enzo
     Setra Bus
-    2002
-    Corvair
-    Dodge Charger
+    Suzuki XREO
+    Corvair Monza
+    Charger
     Falcon
-    1970 Plymouth Hemi Cuda
-    Chevy
-    Dodge Charger
-    Ford
-    Mazda RX-7
-    1937 Lincoln Berline
-    Mercedes-Benz 500K Special Roadster
+    Hemi
+    Pickup
+    Charger
+    Truck
+    RX-7
+    1937
+    1936
 
 @[word_5_1]
-    1969
-    1300
-    1996
-    Bike
-    Romeo GTA
-    LanciaA Delta
-    1968
-    Enzo
-    Setra
-    XREO
-    1969 Corvair
+    Davidson Ultimate
+    Renault
+    1996 Moto Guzzi 1100i
+    2003 Harley-Davidson Eagle Drag
+    Alfa Romeo
+    1962 LanciaA Delta
+    Mustang
+    2001
+    Setra Bus
+    2002 Suzuki XREO
+    Monza
     Charger
-    Ford Falcon
-    Hemi Cuda
-    Pickup
-    1969 Dodge Charger
+    1969 Ford Falcon
+    Plymouth Hemi
+    Chevy
+    Charger
     Truck
     RX-7
     Berline
     Special Roadster
 
 @[word_5_2]
-    Cars
+    Classic
     Motorcycles
     Planes
     Ships
     Trains
-    Trucks
-    Vintage
+    Trucks and Buses
+    Vintage Cars
 
 @[word_5_3]
-    graphique
-    Stores
-    Collectors, Co
-    La
-    Imports
-    Mini
-    Zbyszek Co
-    Co
-    Wheels
-    Toys Inc
-    Shopping Channel
-    Replicas
-    Danish
-    Saveley & Henriot, Co
-    Dragon
-    Machine Inc
-    Classics Inc
-    Technics
-    Co
+    Atelier graphique
+    Signal
+    Australian Collectors, Co
     Gifts
+    Mini Imports
+    Ltd
+    & Zbyszek Co
+    Blauer See Auto, Co
+    Mini Wheels Co
+    of
+    Euro+ Shopping
+    Co
+    Wholesale
+    Henriot
+    Souveniers
+    Muscle
+    Diecast Classics
+    Stores
+    Co
+    Herkku Gifts
 
 
 %[find_el_by_attr]('training': '320', 'testing': '80')

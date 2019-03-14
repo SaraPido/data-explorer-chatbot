@@ -39,15 +39,19 @@
 
 // START
 
-%[start]('training': '30', 'testing': '10')
+%[start]('training': '40', 'testing': '10')
     ~[hello]
     ~[hello?] ~[help]
     ~[hello?] ~[_start]
 
 ~[hello]
     hi
+    Hi
+    HI
+    hI
     hello there
     hello
+    Hello
     hey there
     hey
 
