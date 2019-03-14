@@ -64,7 +64,6 @@ def compute_ordered_entity_list(entities):
             if attr:
                 oe['attribute'] = attr
             ordered_entities.append(oe)
-    pprint(ordered_entities)
     return ordered_entities
 
 

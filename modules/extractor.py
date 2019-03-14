@@ -50,7 +50,6 @@ def parse(message):
         parsed_message['entities'] = entities
     else:
         parsed_message = inter.parse(message)
-        print(parsed_message)
         del parsed_message['intent_ranking'], parsed_message['text']
         for e in parsed_message.get('entities'):
             # del e['start']
