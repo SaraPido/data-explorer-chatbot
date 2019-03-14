@@ -86,19 +86,7 @@
 //    which
 
 @[op_num]
-    ~[op_num_lt]
-    ~[op_num_gt]
-//    ~[op_num_eq]
-
-~[op_num_lt]
     less than
-
-//~[op_num_eq]
-//    equal to
-//    equal
-//    exactly
-
-~[op_num_gt]
     more than
 
 //@[op_word]
@@ -197,26 +185,26 @@
 
 
 @[word_1_1]
-    Atelier graphique
-    Signal Gift
+    graphique
+    Stores
     Australian Collectors
     Gifts
     Mini Imports
-    Gifts
-    Zbyszek Co
-    Auto, Co
+    Ltd
+    &
     Co
-    Toys Inc
+    Co
+    Inc
     Shopping Channel
-    Volvo
-    Imports
-    Saveley & Henriot
+    Co
+    Wholesale Imports
+    & Henriot
     Souveniers
-    Muscle Machine Inc
-    Diecast Classics
+    Machine
+    Classics
     Stores
     Gifts&
-    Herkku Gifts
+    Gifts
 
 @[word_1_2]
     Schmitt
@@ -266,10 +254,10 @@
     Melbourne
     Nantes
     Stavern
-    Rafael
+    San Rafael
     Warszawa
     Frankfurt
-    Francisco
+    San Francisco
     NYC
     Madrid
     Luleå
@@ -333,26 +321,26 @@
     11044.30
 
 @[word_1_5]
-    Davidson
-    1300
+    Ultimate Chopper
+    1952 Alpine
     Guzzi 1100i
-    Drag Bike
-    GTA
-    Delta 16V
-    Ford Mustang
+    Bike
+    Romeo
+    Delta
+    Ford
     Ferrari
-    Setra Bus
-    XREO
+    Bus
+    2002 Suzuki
     Monza
-    Dodge Charger
-    1969 Ford Falcon
-    Cuda
-    1957
     Dodge
-    Truck
-    Mazda
+    Ford Falcon
+    1970
+    Chevy Pickup
+    Dodge Charger
+    1940 Ford Pickup
+    RX-7
     Berline
-    Mercedes-Benz 500K Special
+    Special
 
 @[word_1_6]
     Murphy
@@ -427,7 +415,7 @@
     Leslie
     Julie
     Steve
-    Foon Yue
+    Yue
     George
     Loui
     Gerard
@@ -483,7 +471,7 @@
     King
 
 @[word_2_4]
-    Francisco
+    San Francisco
     Boston
     NYC
     Paris
@@ -499,23 +487,23 @@
     UK
 
 @[word_3_1]
-    Francisco
+    San Francisco
     Boston
     NYC
     Paris
     Tokyo
     Sydney
     London
-    100 Market Street
-    1550 Court Place
     Street
+    Place
+    53rd Street
     D'abbans
-    4-1
+    Kioicho
     Avenue
-    Street
+    Broad Street
 
 @[word_3_2]
-    Francisco
+    San
     Boston
     NYC
     Paris
@@ -561,7 +549,7 @@
     Leslie
     Julie
     Steve
-    Foon
+    Foon Yue
     George
     Loui
     Gerard
@@ -573,57 +561,57 @@
     Tom
 
 @[word_4_1]
-    Classic Cars
+    Classic
     Motorcycles
     Planes
     Ships
     Trains
-    and
+    Trucks
     Vintage Cars
 
 @[word_4_2]
-    Harley Davidson Ultimate Chopper
-    Renault 1300
-    1100i
+    Ultimate Chopper
+    1300
+    Guzzi 1100i
     Eagle Drag Bike
     GTA
-    1962 LanciaA Delta 16V
+    LanciaA Delta 16V
     Mustang
-    Ferrari
-    1958 Setra
-    XREO
-    Monza
-    Charger
-    Ford
-    Plymouth Hemi
-    Pickup
-    Charger
-    1940 Ford Pickup
-    Mazda
-    Lincoln
-    1936
-
-@[word_5_1]
-    Davidson Ultimate Chopper
-    1952 Alpine
-    Guzzi
-    Drag
-    Alfa Romeo
-    16V
-    Ford Mustang
-    Ferrari Enzo
-    Bus
-    Suzuki
-    Monza
-    Charger
-    1969 Ford
-    Cuda
+    2001 Ferrari
+    Setra Bus
+    2002
+    Corvair
+    Dodge Charger
+    Falcon
+    1970 Plymouth Hemi Cuda
     Chevy
     Dodge Charger
-    Pickup Truck
-    RX-7
-    Lincoln Berline
+    Ford
+    Mazda RX-7
+    1937 Lincoln Berline
     Mercedes-Benz 500K Special Roadster
+
+@[word_5_1]
+    1969
+    1300
+    1996
+    Bike
+    Romeo GTA
+    LanciaA Delta
+    1968
+    Enzo
+    Setra
+    XREO
+    1969 Corvair
+    Charger
+    Ford Falcon
+    Hemi Cuda
+    Pickup
+    1969 Dodge Charger
+    Truck
+    RX-7
+    Berline
+    Special Roadster
 
 @[word_5_2]
     Cars
@@ -632,27 +620,27 @@
     Ships
     Trains
     Trucks
-    Cars
+    Vintage
 
 @[word_5_3]
-    Atelier graphique
-    Gift Stores
+    graphique
+    Stores
+    Collectors, Co
+    La
+    Imports
+    Mini
+    Zbyszek Co
     Co
-    Rochelle Gifts
-    Baane Mini Imports
-    Mini Gifts Distributors Ltd
-    Havel & Zbyszek Co
-    Blauer See
-    Wheels Co
+    Wheels
     Toys Inc
     Shopping Channel
-    Model Replicas, Co
-    Imports
-    Henriot, Co
+    Replicas
+    Danish
+    Saveley & Henriot, Co
     Dragon
-    Inc
-    Inc
-    Stores Inc
+    Machine Inc
+    Classics Inc
+    Technics
     Co
     Gifts
 

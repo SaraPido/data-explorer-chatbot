@@ -32,8 +32,6 @@ def extract_single_entity_value(entities, entity_name):
 def compute_ordered_entity_list(entities):
     ordered_entities = []
 
-    pprint(entities)
-
     for e in entities[::-1]:
 
         ty = None
@@ -51,13 +49,14 @@ def compute_ordered_entity_list(entities):
             elif what == nlu.ENTITY_NUMBER:
                 ty = 'num'
                 maybe_op = next((a['value'] for a in entities if a['entity'].startswith('op_num')), None)
+                maybe_op = commons.extract_similar_value(maybe_op, ['less than', 'more than'], 6)
                 if maybe_op:
-                    if maybe_op.endswith('lt'):
+                    if maybe_op == 'less than':
                         op = '<'
-                    elif maybe_op.endswith('eq'):
-                        op = '='
-                    elif maybe_op.endswith('gt'):
+                    elif maybe_op == 'more than':
                         op = '>'
+                else:
+                    op = '='
 
         if ty:
             oe = {'type': ty, 'operator': op, 'value': e['value']}

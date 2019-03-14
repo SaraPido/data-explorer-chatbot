@@ -86,19 +86,7 @@
 //    which
 
 @[op_num]
-    ~[op_num_lt]
-    ~[op_num_gt]
-//    ~[op_num_eq]
-
-~[op_num_lt]
     less than
-
-//~[op_num_eq]
-//    equal to
-//    equal
-//    exactly
-
-~[op_num_gt]
     more than
 
 //@[op_word]

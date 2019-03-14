@@ -95,9 +95,6 @@ def query_find(in_table_name, attributes):
     query_string += where_join_string + " AND " if where_join_string else ""
     query_string += get_WHERE_ATTRIBUTES_query_string(attributes)
 
-    pprint(attributes)
-    pprint(query_string)
-
     values = []
     for a in attributes:
         # if 'a' is a REAL conversational attribute
