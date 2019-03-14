@@ -40,7 +40,7 @@
         ]
       },
       {
-        "keyword": "that ordered",
+        "keyword": "that bought",
         "type": "word",
         "columns": ["productName"],
         "by": [
@@ -116,7 +116,7 @@
         ]
       },
       {
-        "keyword": "products ordered",
+        "keyword": "products bought",
         "element_name": "product",
         "by": [
           {
@@ -305,7 +305,7 @@
     ],
     "relations": [
       {
-        "keyword": "made by costumer",
+        "keyword": "made by",
         "element_name": "customer",
         "by": [
           {
@@ -381,6 +381,24 @@
       }
     ],
     "attributes": [
+      {
+        "keyword": "",
+        "type": "word",
+        "columns": ["productLine"]
+      },
+      {
+        "keyword": "of product",
+        "type": "word",
+        "columns": ["productName"],
+        "by": [
+          {
+            "from_table_name": "productlines",
+            "from_columns": ["productLine"],
+            "to_table_name": "products",
+            "to_columns": ["productLine"]
+          }
+        ]
+      }
 
     ],
     "relations": [
@@ -409,7 +427,7 @@
         "columns": ["productName"]
       },
       {
-        "keyword": "line",
+        "keyword": "of product line",
         "columns": ["productLine"]
       }
     ],

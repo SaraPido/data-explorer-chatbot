@@ -163,7 +163,7 @@
     that paid
 
 @[attr_1_5]
-    that ordered
+    that bought
 
 @[attr_1_6]
     that reported to
@@ -186,6 +186,9 @@
 @[attr_3_3]
     of
 
+@[attr_4_2]
+    of product
+
 @[attr_5_2]
     of product line
 
@@ -194,25 +197,25 @@
 
 
 @[word_1_1]
-    Atelier
+    graphique
     Stores
-    Co
+    Collectors
     Gifts
     Mini Imports
-    Ltd
-    Zbyszek
-    Blauer See Auto
+    Gifts Distributors Ltd
+    &
+    Auto
     Co
-    Toys Inc
-    Euro+
-    Volvo
-    Imports
-    & Henriot
-    Dragon Souveniers
-    Inc
-    Diecast Classics
-    Stores
-    Gifts& Co
+    of Toys
+    Channel
+    Volvo Model Replicas, Co
+    Danish Wholesale Imports
+    Henriot, Co
+    Souveniers
+    Muscle Machine
+    Classics Inc
+    Technics
+    Handji Gifts& Co
     Gifts
 
 @[word_1_2]
@@ -259,14 +262,14 @@
 
 @[word_1_3]
     Nantes
-    Vegas
+    Las
     Melbourne
     Nantes
     Stavern
     Rafael
     Warszawa
     Frankfurt
-    San Francisco
+    San
     NYC
     Madrid
     Luleå
@@ -330,26 +333,26 @@
     11044.30
 
 @[word_1_5]
-    Ultimate Chopper
-    1952 Alpine Renault
-    Guzzi
+    Chopper
+    1300
+    Moto Guzzi 1100i
     Bike
-    GTA
-    LanciaA
-    Ford
+    Romeo
+    Delta 16V
+    1968
     2001 Ferrari Enzo
-    Setra Bus
-    XREO
+    Bus
+    2002
     Corvair Monza
     Charger
-    1969 Ford Falcon
-    1970 Plymouth Hemi
-    Pickup
-    1969
-    Truck
-    Mazda
-    Berline
-    Roadster
+    Falcon
+    Hemi
+    Chevy
+    1969 Dodge Charger
+    1940
+    1993 Mazda
+    Lincoln
+    1936 Mercedes-Benz 500K Special Roadster
 
 @[word_1_6]
     Murphy
@@ -382,7 +385,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon Yue
     George
     Loui
     Gerard
@@ -424,7 +427,7 @@
     Leslie
     Julie
     Steve
-    Foon Yue
+    Yue
     George
     Loui
     Gerard
@@ -446,7 +449,7 @@
     Leslie
     Julie
     Steve
-    Foon Yue
+    Foon
     George
     Loui
     Gerard
@@ -503,16 +506,16 @@
     Tokyo
     Sydney
     London
+    100
+    Court Place
     Street
-    Place
-    523
-    Rue Jouffroy
+    D'abbans
     Kioicho
-    Wentworth
+    Avenue
     Street
 
 @[word_3_2]
-    San
+    Francisco
     Boston
     NYC
     Paris
@@ -569,27 +572,58 @@
     Peter
     Tom
 
-@[word_5_1]
-    Harley Davidson Ultimate Chopper
-    Alpine
-    Moto Guzzi
-    Bike
-    GTA
-    1962 LanciaA
-    1968
-    Enzo
-    1958
+@[word_4_1]
+    Cars
+    Motorcycles
+    Planes
+    Ships
+    Trains
+    and Buses
+    Cars
+
+@[word_4_2]
+    Chopper
+    Renault 1300
+    Moto Guzzi 1100i
+    2003 Harley-Davidson Eagle Drag
+    1972 Alfa Romeo
+    LanciaA Delta 16V
+    1968 Ford
+    2001 Ferrari
+    1958 Setra
     Suzuki XREO
-    1969 Corvair Monza
-    1968 Dodge
-    Falcon
-    Cuda
-    Pickup
+    Corvair
     Charger
+    Falcon
+    Plymouth Hemi Cuda
+    Chevy Pickup
+    Charger
+    Pickup
+    Mazda RX-7
+    Lincoln Berline
+    Special Roadster
+
+@[word_5_1]
+    Chopper
+    Renault
+    1996 Moto Guzzi 1100i
+    Bike
+    Romeo
+    1962 LanciaA Delta
+    Ford Mustang
+    2001 Ferrari
+    Setra Bus
+    2002 Suzuki
+    Monza
+    Charger
+    Ford
+    Hemi
+    Chevy Pickup
+    Dodge
     Truck
-    1993 Mazda
-    1937 Lincoln
-    1936 Mercedes-Benz 500K Special
+    1993
+    1937
+    Mercedes-Benz 500K
 
 @[word_5_2]
     Cars
@@ -597,30 +631,30 @@
     Planes
     Ships
     Trains
-    Buses
-    Vintage Cars
+    Trucks
+    Vintage
 
 @[word_5_3]
-    Atelier graphique
-    Stores
+    Atelier
+    Gift Stores
     Co
-    Gifts
-    Baane
-    Gifts Distributors Ltd
-    &
-    Auto, Co
-    Mini Wheels Co
-    Land of Toys Inc
+    La Rochelle Gifts
+    Mini Imports
+    Distributors
+    & Zbyszek Co
+    Co
+    Co
+    Inc
     Shopping
     Model
-    Imports
+    Danish Wholesale
     Co
-    Souveniers
-    Machine
+    Dragon Souveniers, Ltd
     Inc
-    Stores
-    Co
-    Herkku
+    Inc
+    Inc
+    Handji Gifts& Co
+    Herkku Gifts
 
 
 %[find_el_by_attr]('training': '320', 'testing': '80')
@@ -637,6 +671,8 @@
     ~[find] @[el_3] @[attr_3_1] @[word_3_1]
     ~[find] @[el_3] @[attr_3_2] @[word_3_2]
     ~[find] @[el_3] @[attr_3_3] @[word_3_3]
+    ~[find] @[el_4] @[word_4_1]
+    ~[find] @[el_4] @[attr_4_2] @[word_4_2]
     ~[find] @[el_5] @[word_5_1]
     ~[find] @[el_5] @[attr_5_2] @[word_5_2]
     ~[find] @[el_5] @[attr_5_3] @[word_5_3]
@@ -655,6 +691,8 @@
     ~[filter] ~[those?] @[attr_3_1] @[word_3_1]
     ~[filter] ~[those?] @[attr_3_2] @[word_3_2]
     ~[filter] ~[those?] @[attr_3_3] @[word_3_3]
+    ~[filter] ~[those?] @[word_4_1]
+    ~[filter] ~[those?] @[attr_4_2] @[word_4_2]
     ~[filter] ~[those?] @[word_5_1]
     ~[filter] ~[those?] @[attr_5_2] @[word_5_2]
     ~[filter] ~[those?] @[attr_5_3] @[word_5_3]
