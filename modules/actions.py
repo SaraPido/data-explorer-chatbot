@@ -32,6 +32,8 @@ def extract_single_entity_value(entities, entity_name):
 def compute_ordered_entity_list(entities):
     ordered_entities = []
 
+    pprint(entities)
+
     for e in entities[::-1]:
 
         ty = None
