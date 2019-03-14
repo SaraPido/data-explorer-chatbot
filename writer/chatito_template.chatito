@@ -1,6 +1,6 @@
 // CONTEXT
 
-%[show_context]('training': '35', 'testing': '5')
+%[show_context]('training': '20', 'testing': '20')
     ~[show?] ~[the?] ~[context]
 
 ~[show]
@@ -39,7 +39,7 @@
 
 // START
 
-%[start]('training': '35', 'testing': '5')
+%[start]('training': '30', 'testing': '10')
     ~[hello]
     ~[hello?] ~[help]
     ~[hello?] ~[_start]

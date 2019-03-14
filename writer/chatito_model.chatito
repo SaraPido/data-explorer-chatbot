@@ -1,6 +1,6 @@
 // CONTEXT
 
-%[show_context]('training': '35', 'testing': '5')
+%[show_context]('training': '20', 'testing': '20')
     ~[show?] ~[the?] ~[context]
 
 ~[show]
@@ -39,7 +39,7 @@
 
 // START
 
-%[start]('training': '35', 'testing': '5')
+%[start]('training': '30', 'testing': '10')
     ~[hello]
     ~[hello?] ~[help]
     ~[hello?] ~[_start]
@@ -197,26 +197,26 @@
 
 
 @[word_1_1]
-    Atelier
-    Stores
+    Atelier graphique
+    Signal Gift
+    Australian Collectors
+    Gifts
+    Mini Imports
+    Gifts
+    Zbyszek Co
+    Auto, Co
     Co
-    La
-    Mini
-    Ltd
-    Havel &
-    Auto
-    Wheels
-    of Toys Inc
-    Euro+
-    Volvo Model
+    Toys Inc
+    Shopping Channel
+    Volvo
     Imports
-    Co
-    Dragon Souveniers, Ltd
-    Machine Inc
+    Saveley & Henriot
+    Souveniers
+    Muscle Machine Inc
     Diecast Classics
-    Stores Inc
-    Gifts& Co
-    Herkku
+    Stores
+    Gifts&
+    Herkku Gifts
 
 @[word_1_2]
     Schmitt
@@ -262,7 +262,7 @@
 
 @[word_1_3]
     Nantes
-    Vegas
+    Las
     Melbourne
     Nantes
     Stavern
@@ -333,26 +333,26 @@
     11044.30
 
 @[word_1_5]
-    1969 Harley
+    Davidson
     1300
-    Moto Guzzi 1100i
-    Drag
-    Alfa Romeo GTA
-    Delta
-    1968 Ford
-    Ferrari Enzo
-    Bus
+    Guzzi 1100i
+    Drag Bike
+    GTA
+    Delta 16V
+    Ford Mustang
+    Ferrari
+    Setra Bus
     XREO
-    1969 Corvair Monza
-    Charger
-    Falcon
-    Hemi Cuda
-    Pickup
-    1969
-    1940 Ford Pickup
-    1993 Mazda RX-7
-    1937
-    Special Roadster
+    Monza
+    Dodge Charger
+    1969 Ford Falcon
+    Cuda
+    1957
+    Dodge
+    Truck
+    Mazda
+    Berline
+    Mercedes-Benz 500K Special
 
 @[word_1_6]
     Murphy
@@ -385,7 +385,7 @@
     Leslie
     Julie
     Steve
-    Foon
+    Foon Yue
     George
     Loui
     Gerard
@@ -427,7 +427,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon Yue
     George
     Loui
     Gerard
@@ -483,7 +483,7 @@
     King
 
 @[word_2_4]
-    San Francisco
+    Francisco
     Boston
     NYC
     Paris
@@ -499,19 +499,19 @@
     UK
 
 @[word_3_1]
-    San
+    Francisco
     Boston
     NYC
     Paris
     Tokyo
     Sydney
     London
-    100 Market
-    1550
+    100 Market Street
+    1550 Court Place
     Street
-    Rue
-    Kioicho
-    5-11 Wentworth Avenue
+    D'abbans
+    4-1
+    Avenue
     Street
 
 @[word_3_2]
@@ -561,7 +561,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon
     George
     Loui
     Gerard
@@ -573,57 +573,57 @@
     Tom
 
 @[word_4_1]
-    Classic
+    Classic Cars
     Motorcycles
     Planes
     Ships
     Trains
-    and Buses
-    Cars
+    and
+    Vintage Cars
 
 @[word_4_2]
-    Ultimate
+    Harley Davidson Ultimate Chopper
     Renault 1300
-    1996
-    Eagle Drag
+    1100i
+    Eagle Drag Bike
     GTA
-    1962 LanciaA
-    Ford
+    1962 LanciaA Delta 16V
+    Mustang
     Ferrari
-    Setra
+    1958 Setra
     XREO
     Monza
-    1968
-    Falcon
-    Plymouth Hemi Cuda
-    1957 Chevy
-    Dodge
-    1940 Ford
-    RX-7
-    Berline
-    Special Roadster
-
-@[word_5_1]
-    Harley Davidson Ultimate
-    1300
-    Moto Guzzi
-    Bike
-    1972 Alfa
-    LanciaA
-    Mustang
-    2001 Ferrari Enzo
-    Setra
-    Suzuki XREO
-    Monza
     Charger
-    Falcon
-    Plymouth
-    Chevy
+    Ford
+    Plymouth Hemi
+    Pickup
     Charger
     1940 Ford Pickup
-    RX-7
+    Mazda
     Lincoln
-    Roadster
+    1936
+
+@[word_5_1]
+    Davidson Ultimate Chopper
+    1952 Alpine
+    Guzzi
+    Drag
+    Alfa Romeo
+    16V
+    Ford Mustang
+    Ferrari Enzo
+    Bus
+    Suzuki
+    Monza
+    Charger
+    1969 Ford
+    Cuda
+    Chevy
+    Dodge Charger
+    Pickup Truck
+    RX-7
+    Lincoln Berline
+    Mercedes-Benz 500K Special Roadster
 
 @[word_5_2]
     Cars
@@ -631,30 +631,30 @@
     Planes
     Ships
     Trains
-    and Buses
-    Vintage
+    Trucks
+    Cars
 
 @[word_5_3]
-    graphique
-    Stores
+    Atelier graphique
+    Gift Stores
     Co
-    Gifts
-    Imports
+    Rochelle Gifts
+    Baane Mini Imports
     Mini Gifts Distributors Ltd
-    Co
-    Blauer See Auto, Co
+    Havel & Zbyszek Co
+    Blauer See
     Wheels Co
-    of
-    Shopping
+    Toys Inc
+    Shopping Channel
     Model Replicas, Co
     Imports
-    Co
-    Souveniers
+    Henriot, Co
+    Dragon
     Inc
-    Diecast
-    Stores
-    Gifts& Co
-    Herkku Gifts
+    Inc
+    Stores Inc
+    Co
+    Gifts
 
 
 %[find_el_by_attr]('training': '320', 'testing': '80')
