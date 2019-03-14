@@ -22,7 +22,7 @@ def get_buttons_select_element(element):
     for i in range(element['show']['from'], element['show']['to']):
         title = resolver.get_element_show_string(element['element_name'], element['value'][i])
         payload = extract_payload(nlu.INTENT_SELECT_ELEMENT_BY_POSITION,
-                                  [nlu.ENTITY_POSITION, str(i+1)+'xx'])  # the action removes the first 2 letters
+                                  [nlu.ENTITY_POSITION, str(i+1)])
         buttons.append({'title': title, 'payload': payload})
     return buttons
 
@@ -46,15 +46,22 @@ def get_button_view_context_element(title):
 
 def get_button_reset_context():
     payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
-                              [nlu.ENTITY_POSITION, str(nlu.VALUE_POSITION_RESET_CONTEXT)+'xx'])
+                              [nlu.ENTITY_POSITION, str(nlu.VALUE_POSITION_RESET_CONTEXT)])
     return {'title': '- RESET HISTORY -', 'payload': payload}
 
 
 def get_button_go_back_to_context_position(action_name, pos):
     title = action_name
     payload = extract_payload(nlu.INTENT_GO_BACK_TO_CONTEXT_POSITION,
-                              [nlu.ENTITY_POSITION, str(pos+1)+'xx'])  # position plus 1 + xx (st, nd, rd, th)
+                              [nlu.ENTITY_POSITION, str(pos)])
     return {'title': title, 'payload': payload}
+
+
+def get_buttons_help():
+    buttons = [{'title': 'Help on ELEMENTS', 'payload': extract_payload(nlu.INTENT_HELP_ELEMENTS)},
+               {'title': 'Help on HISTORY', 'payload': extract_payload(nlu.INTENT_HELP_HISTORY)},
+               {'title': 'Help on GOING BACK', 'payload': extract_payload(nlu.INTENT_HELP_GO_BACK)}]
+    return buttons
 
 
 # helper

@@ -1,4 +1,9 @@
 INTENT_START = 'start'
+
+INTENT_HELP_ELEMENTS = 'help_elements'
+INTENT_HELP_HISTORY = 'help_history'
+INTENT_HELP_GO_BACK = 'help_go_back'
+
 INTENT_MORE_INFO_FIND = 'more_info_find'
 INTENT_MORE_INFO_FILTER = 'more_info_filter'
 
@@ -25,6 +30,6 @@ ENTITY_BY_ELEMENT_NAME = 'by'
 ENTITY_WORD = 'word'
 ENTITY_NUMBER = 'num'
 ENTITY_OPERATOR_NUMBER = 'op_num'
-ENTITY_POSITION = 'num'
+ENTITY_POSITION = 'pos'
 
-VALUE_POSITION_RESET_CONTEXT = -1  # going back to position -1 means deleting the context
+VALUE_POSITION_RESET_CONTEXT = -111  # going back to position -111 means deleting the context

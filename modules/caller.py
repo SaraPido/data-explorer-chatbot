@@ -65,7 +65,6 @@ def check_timestamps():
 
     for k, v in list(context_dict.items()):
         if v['timestamp'] < max_age:
-            context_dict[k]['context'].log('The previous context expired at datetime: {}'.format(max_age))
             del context_dict[k]
 
 

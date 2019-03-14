@@ -3,6 +3,8 @@ import logging
 import pprint
 from logging import handlers
 
+from modules.database import resolver
+from modules.patterns import msg, btn
 from settings import LOG_DIR_PATH_AND_SEP, ELEMENT_VISU_LIMIT, CONTEXT_VISU_LIMIT, CONTEXT_MAX_LENGTH
 
 """
@@ -123,7 +125,7 @@ class Context:
     def __init__(self, chat_id):
         self.context_list = []
         self.reset_show_context_list = True
-        self.context_list_indices = {'from': 0, 'to': 0}
+        self.context_list_indices = {'up': 0, 'down': 0}
         self.reset_show_last_element = True
         self.logger = logging.Logger(__name__, logging.INFO)
         self.log_path = LOG_DIR_PATH_AND_SEP + 'context_' + str(chat_id) + '.log'
@@ -204,8 +206,8 @@ class Context:
         return self.get_context_list()
 
     def show_context_list_from_start(self):
-        self.context_list_indices['from'] = max(len(self.context_list) - CONTEXT_VISU_LIMIT, 0)
-        self.context_list_indices['to'] = len(self.context_list)
+        self.context_list_indices['up'] = len(self.context_list)
+        self.context_list_indices['down'] = max(len(self.context_list) - CONTEXT_VISU_LIMIT, 0)
 
     def log_context(self):
         """
@@ -213,9 +215,19 @@ class Context:
         """
         string_log = 'The context of the conversation at this moment' \
                      ' is {} element(s) long:\n'.format(len(self.context_list))
-        for el in self.context_list:
+        for i, el in enumerate(self.context_list):
+            string_log += 'POSITION {}:'.format(i+1)
+            if i == len(self.context_list)-1:
+                el_mod = copy.deepcopy(el)
+                if el_mod.get('real_value_length', 0) > 1:
+                    el_mod['show']['to'] = el_mod['real_value_length']
+                    el_mod['value'] = [b['title'] for b in btn.get_buttons_select_element(el_mod)]
+            else:
+                el_mod = {'action_name': copy.deepcopy(el['action_name']),
+                          'element_name': copy.deepcopy(el['element_name']),
+                          'real_value_length': copy.deepcopy(el['real_value_length'])}
             string_log += '\n' \
-                          '{}'.format(pprint.pformat(el))
+                          '{}\n'.format(pprint.pformat(el_mod))
 
         self.log(string_log)
 

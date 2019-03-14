@@ -20,6 +20,22 @@
     context
     past selections
 
+%[go_back_to_context_pos]('training': '6', 'testing': '2')
+    ~[please?] ~[back]
+    ~[please?] ~[return]
+
+~[back]
+    back
+    return
+    backward
+
+~[return]
+    return
+    undo
+
+~[please]
+    please
+
 
 // START
 

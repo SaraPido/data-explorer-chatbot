@@ -46,5 +46,5 @@ if __name__ == '__main__':
     telegram.start()
     # console_input()
     while 1:
-        sleep(100)
+        sleep(200)
 

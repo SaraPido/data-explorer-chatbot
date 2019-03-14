@@ -129,12 +129,13 @@ def handle_element_relations_similarity(element_name, relation_name_received):
 
 # RESPONSE HANDLERS
 
-def handle_response_for_quantity_found_element(response, element):
+def handle_response_for_quantity_found_element(response, element, context):
     if element['real_value_length'] == 1:
         response.add_message(msg.ONE_RESULT_FOUND)
     else:
         response.add_message(msg.N_RESULTS_FOUND_PATTERN.format(element['real_value_length']))
-        if element.get('action_type') != 'filter':  # IF IT IS THE RESULT OF A FILTERING
+        if element.get('action_type') != 'filter' and \
+                element.get('element_name') in resolver.get_all_primary_element_names():
             response.add_message(msg.REMEMBER_FILTER)
             response.add_button(btn.get_button_filter_hints())
 
@@ -164,8 +165,20 @@ def add_selected_element_to_context(element, position, context):
 
 def action_start(entities, response, context):
     response.add_message(msg.HI_THERE)
-    response.add_messages(msg.element_names_examples())
+    response.add_buttons(btn.get_buttons_help())
+
+
+def action_help_elements(entities, response, context):
+    response.add_message(msg.element_names_examples())
+    response.add_message(msg.element_names_info_examples())
+
+
+def action_help_history(entities, response, context):
     response.add_message(msg.REMEMBER_HISTORY)
+
+
+def action_help_go_back(entities, response, context):
+    response.add_message(msg.REMEMBER_GO_BACK)
 
 
 def action_more_info_find(entities, response, context):
@@ -173,43 +186,49 @@ def action_more_info_find(entities, response, context):
     if element_name:
         response.add_message(msg.find_element_examples(element_name))
     else:
-        response.add_message(msg.ERROR)
+        response.add_message('I am sorry, I understood that you want more info, but not on what...')
+        response.add_message(msg.element_names_info_examples())
 
 
 def action_more_info_filter(entities, response, context):
     element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
     if element_name:
-        response.add_message(msg.find_element_examples(element_name))
+        response.add_message(msg.filter_element_examples(element_name))
     else:
         element = context.get_last_element()
         if element and element['real_value_length'] > 1:
             response.add_message(msg.filter_element_examples(element['element_name']))
         else:
-            response.add_message(msg.ERROR)
+            response.add_message('I am sorry, but there is nothing to filter... You\'d better tell on which element.\n'
+                                 'Try, for instance, with "how to filter {}"'
+                                 .format(resolver.get_all_primary_element_names()[0]))
 
 
 def action_find_element_by_attribute(entities, response, context):
     element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
     ordered_entities = compute_ordered_entity_list(entities)
 
-    if element_name and ordered_entities:
-        attributes = get_attributes_from_ordered_entities(element_name, ordered_entities)
+    if element_name:
+        attributes = get_attributes_from_ordered_entities(element_name, ordered_entities) if ordered_entities else []
         if attributes:
             element = resolver.query_find(element_name, attributes)
             if element['value']:
                 element['action_name'] = '...found with attribute(s) "{}"'.format(get_attributes_string(attributes))
                 element['action_type'] = 'find'
                 context.append_element(element)
-                handle_response_for_quantity_found_element(response, element)
+                handle_response_for_quantity_found_element(response, element, context)
                 action_view_context_element(entities, response, context)
 
             else:
                 response.add_message(msg.NOTHING_FOUND)
         else:
-            response.add_message(msg.ERROR)
+            response.add_message('Ok so you want to find some elements of type {}, but you should '
+                                 'tell me something more, otherwise I can\'t help you explore!'.format(element_name))
+            response.add_message(msg.find_element_examples(element_name))
 
     else:
-        response.add_message(msg.ERROR)
+        response.add_message('I guess you want to find something, but I did not understand what!\n')
+        response.add_message(msg.element_names_examples())
 
 
 def action_filter_element_by_attribute(entities, response, context):
@@ -232,17 +251,18 @@ def action_filter_element_by_attribute(entities, response, context):
                                                     '"{}":'.format(get_attributes_string(attributes))
                     result_element['action_type'] = 'filter'
                     context.append_element(result_element)
-                    handle_response_for_quantity_found_element(response, result_element)
+                    handle_response_for_quantity_found_element(response, result_element, context)
                     action_view_context_element(entities, response, context)
 
                 else:
                     response.add_message(msg.NOTHING_FOUND)
 
             else:
-                response.add_message(msg.ERROR)
+                response.add_message('Ok so you want to filter on the elements of the')
+                action_more_info_filter(entities, response, context)
 
         else:
-            response.add_message('Filtering is not possible now...')
+            response.add_message('Filtering is not possible now, there is only one element under to view!')
 
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
@@ -251,32 +271,35 @@ def action_filter_element_by_attribute(entities, response, context):
 def action_cross_relation(entities, response, context):
     element = context.get_last_element()
 
-    # todo LAST handle case no element is extracted, you have the error if a
-    #  selection is made (correctly) but the context is empty
-    extracted_relation_name = extract_entities(entities, nlu.ENTITY_RELATION)[0]['value']
-    relation_name = handle_element_relations_similarity(element['element_name'], extracted_relation_name)
+    if element:
 
-    if element and relation_name:
+        extracted_relation_name = extract_single_entity_value(entities, nlu.ENTITY_RELATION)
+        relation_name = handle_element_relations_similarity(element['element_name'], extracted_relation_name)
 
-        # control if there is ONLY an element in context_list
-        if element['real_value_length'] == 1:
+        if relation_name:
 
-            result_element = resolver.query_join(element, relation_name)
+            # control if there is ONLY an element in context_list
+            if element['real_value_length'] == 1:
 
-            if result_element['value']:
+                result_element = resolver.query_join(element, relation_name)
 
-                result_element['action_name'] = '...reached with the relation "{}", from {}:' \
-                    .format(relation_name, element['element_name'])
-                result_element['action_type'] = 'cross'
+                if result_element['value']:
 
-                context.append_element(result_element)
+                    result_element['action_name'] = '...reached with the relation "{}", from {}:' \
+                        .format(relation_name, element['element_name'])
+                    result_element['action_type'] = 'cross'
 
-                handle_response_for_quantity_found_element(response, result_element)
+                    context.append_element(result_element)
 
-                action_view_context_element(entities, response, context)
+                    handle_response_for_quantity_found_element(response, result_element, context)
 
-            else:
-                response.add_message(msg.NOTHING_FOUND)
+                    action_view_context_element(entities, response, context)
+
+                else:
+                    response.add_message(msg.NOTHING_FOUND)
+
+    else:
+        response.add_message(msg.ERROR)
 
 
 def action_show_relations(entities, response, context):
@@ -293,7 +316,7 @@ def action_select_element_by_position(entities, response, context):
 
     if pos:
         # attention, I suppose "position" is in the form "1st", "2nd", ...
-        position = int(pos[:-2])
+        position = int(pos)
 
         element = context.get_last_element()
 
@@ -324,10 +347,19 @@ def action_view_context_element(entities, response, context):
         if element['real_value_length'] == 1:
             response.add_message(msg.INTRODUCE_ELEMENT_TO_SHOW_PATTERN.format(element['element_name']))
             response.add_message(msg.element_attributes(element))
-            action_show_relations(entities, response, context)
+            if element.get('element_name') not in resolver.get_all_primary_element_names():  # IF OF TYPE SECONDARY
+                response.add_message('If you want to go back, just click the following button')
+                response.add_button(btn.get_button_go_back_to_context_position('Go back!',
+                                                                               len(context.get_context_list()) - 1))
+            else:
+                action_show_relations(entities, response, context)
         else:
             if element['show']['from'] == 0:
-                response.add_message(msg.SELECT_FOR_INFO)
+                if element.get('element_name') not in resolver.get_all_primary_element_names():  # IF OF TYPE SECONDARY
+                    response.add_message('If you want to go back, just click the following button')
+                    response.add_button(btn.get_button_go_back_to_context_position('Go back!',
+                                                                                   len(context.get_context_list()) - 1))
+                response.add_message(msg.SELECT_FOR_INFO_PATTERN.format(element.get('element_name')))
             response.add_message('Shown results from {} to {} of {}'.format(element['show']['from'] + 1,
                                                                             element['show']['to'],
                                                                             element['real_value_length']))
@@ -350,9 +382,9 @@ def action_show_more_elements(entities, response, context):
             context.reset_show_last_element = False
             action_view_context_element(entities, response, context)
         else:
-            response.add_message(msg.ERROR)  # should not happen
+            response.add_message('I am sorry, but there is nothing to show more...')
     else:
-        response.add_message(msg.ERROR)
+        response.add_message('I am sorry, but there is nothing to show more...')
 
 
 def action_show_context(entities, response, context):
@@ -360,17 +392,17 @@ def action_show_context(entities, response, context):
 
     if context_list:
 
-        from_v = context.context_list_indices['from']
-        to_v = context.context_list_indices['to']
+        up = context.context_list_indices['up']
+        down = context.context_list_indices['down']
 
-        for i, el in enumerate(context_list[from_v:to_v][::-1]):
+        for i, el in enumerate(context_list[down:up][::-1]):
 
             if el['real_value_length'] == 1:
                 result = '{}'.format(resolver.get_element_show_string(el['element_name'], el['value'][0]))
             else:
                 result = 'a list of type "{}"'.format(el['element_name'])
 
-            if to_v == len(context_list) and not i:  # the very first one
+            if up == len(context_list) and i == 0:  # the very first one
                 response.add_message(msg.REMEMBER_RESET_HISTORY)
                 response.add_button(btn.get_button_reset_context())
                 m = 'Currently you are viewing'
@@ -378,17 +410,17 @@ def action_show_context(entities, response, context):
                     if context_list[-1]['real_value_length'] == 1 else ':'
                 response.add_message(m)
                 response.add_button(btn.get_button_view_context_element(result))
-            else:
-                if not i:  # the first ones, in a "show more" list
-                    # adding the last action name of the previous "set" of actions
-                    response.add_message(context_list[to_v]['action_name'])
-                response.add_button(btn.get_button_go_back_to_context_position(result, len(context_list) - i - 1))
 
-            if i != to_v - from_v - 1 \
-                    or not from_v and el['action_type'] == 'find':
+            else:
+                if i == 0:  # the first ones, in a "show more" list
+                    # adding the last action name of the previous "set" of actions
+                    response.add_message(context_list[up]['action_name'])
+                response.add_button(btn.get_button_go_back_to_context_position(result, up-i))
+
+            if i != up - down - 1 or down == 0 and el['action_type'] == 'find':
                 response.add_message(el['action_name'])
 
-        if from_v:
+        if down != 0:
             response.add_button(btn.get_button_show_more_context())
 
     else:
@@ -399,49 +431,53 @@ def action_show_more_context(entities, response, context):
     context_list = context.get_context_list()
 
     if context_list:
-        if context.context_list_indices['from']:  # if it is not 0
-            context.context_list_indices['from'] = max(context.context_list_indices['from'] - CONTEXT_VISU_LIMIT, 0)
-            context.context_list_indices['to'] = context.context_list_indices['to'] - CONTEXT_VISU_LIMIT
+        if context.context_list_indices['down'] != 0:  # if it is not 0
+            context.context_list_indices['down'] = max(context.context_list_indices['down'] - CONTEXT_VISU_LIMIT, 0)
+            context.context_list_indices['up'] = context.context_list_indices['up'] - CONTEXT_VISU_LIMIT
             context.reset_show_context_list = False
             action_show_context(entities, response, context)
         else:
-            response.add_message(msg.ERROR)  # should not happen
+            response.add_message('I am sorry, but there is nothing to show more...')
     else:
-        response.add_message(msg.ERROR)  # should not happen
+        response.add_message('I am sorry, but there is nothing to show more...')
 
 
 def action_go_back_to_context_position(entities, response, context):
     pos = extract_single_entity_value(entities, nlu.ENTITY_POSITION)
 
-    if pos:
-        position = int(pos[:-2])
+    # if context is not empty
+    if context.get_context_list():
 
-        # if context is not empty
-        if context.get_context_list():
+        length = len(context.get_context_list())
 
-            if position == nlu.VALUE_POSITION_RESET_CONTEXT:
-                context.reset_context_list()
-                response.add_message(msg.CONTEXT_LIST_RESET)
+        position = int(pos) if pos else (length - 1)
+        # if no position is extracted, set the value to go back only once
 
-            elif position - 1 < len(context.get_context_list()):
-                context.go_back_to_position(position)
-                response.add_message('Ok, now resuming your history... DONE!')
-                action_view_context_element(entities, response, context)
+        if position == nlu.VALUE_POSITION_RESET_CONTEXT or \
+                len(context.get_context_list()) == 1 and position == 0:  # if the list is one el long and no entity pos
+            context.reset_context_list()
+            response.add_message(msg.CONTEXT_LIST_RESET)
 
-            else:
-                # the selection is wrong, but since we have buttons this possibility does not happen
-                action_show_context(entities, response, context)
+        elif position - 1 < length:
+            context.go_back_to_position(position)
+            response.add_message('Ok, now resuming your history of {} position{}... DONE!'
+                                 .format(length - position, "s" if length - position > 1 else ""))
+            action_view_context_element(entities, response, context)
+
         else:
-            response.add_message(msg.EMPTY_CONTEXT_LIST)
-
+            # wrong selection
+            action_show_context(entities, response, context)
     else:
-        action_show_context(entities, response, context)
+        response.add_message(msg.EMPTY_CONTEXT_LIST)
 
 
 # EXECUTION
 
 intents_to_action_functions = {
     nlu.INTENT_START: action_start,
+    nlu.INTENT_HELP_ELEMENTS: action_help_elements,
+    nlu.INTENT_HELP_HISTORY: action_help_history,
+    nlu.INTENT_HELP_GO_BACK: action_help_go_back,
     nlu.INTENT_MORE_INFO_FIND: action_more_info_find,
     nlu.INTENT_MORE_INFO_FILTER: action_more_info_filter,
     nlu.INTENT_FIND_ELEMENT_BY_ATTRIBUTE: action_find_element_by_attribute,
@@ -467,5 +503,9 @@ def execute_action_from_intent_name(intent_name, entities, context):
         context.log('Executing fallback action')
         response.add_message(msg.ERROR)
     context.log('Response will be:\n'
-                '{}'.format(response.get_printable_string()))
+                '\n'
+                '{}\n'
+                '\n'
+                '- - - - - -'.format(response.get_printable_string()))
+
     return response

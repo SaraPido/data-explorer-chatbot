@@ -20,6 +20,22 @@
     context
     past selections
 
+%[go_back_to_context_pos]('training': '6', 'testing': '2')
+    ~[please?] ~[back]
+    ~[please?] ~[return]
+
+~[back]
+    back
+    return
+    backward
+
+~[return]
+    return
+    undo
+
+~[please]
+    please
+
 
 // START
 
@@ -178,26 +194,26 @@
 
 
 @[word_1_1]
-    graphique
+    Atelier
     Stores
-    Australian Collectors, Co
-    La Rochelle
-    Mini
-    Gifts Distributors
-    Zbyszek
-    Auto
-    Wheels Co
-    Toys
-    Channel
-    Model
-    Danish
     Co
+    Gifts
+    Mini Imports
     Ltd
-    Muscle Machine Inc
+    Zbyszek
+    Blauer See Auto
+    Co
+    Toys Inc
+    Euro+
+    Volvo
+    Imports
+    & Henriot
+    Dragon Souveniers
+    Inc
     Diecast Classics
-    Stores Inc
+    Stores
     Gifts& Co
-    Herkku
+    Gifts
 
 @[word_1_2]
     Schmitt
@@ -250,7 +266,7 @@
     Rafael
     Warszawa
     Frankfurt
-    Francisco
+    San Francisco
     NYC
     Madrid
     Luleå
@@ -314,25 +330,25 @@
     11044.30
 
 @[word_1_5]
-    Harley Davidson
-    1300
-    1100i
-    Drag
-    1972
-    1962 LanciaA
-    Mustang
-    2001
+    Ultimate Chopper
+    1952 Alpine Renault
+    Guzzi
+    Bike
+    GTA
+    LanciaA
+    Ford
+    2001 Ferrari Enzo
     Setra Bus
-    Suzuki XREO
-    Monza
-    1968 Dodge
-    1969 Ford Falcon
-    1970 Plymouth
-    Chevy
+    XREO
+    Corvair Monza
     Charger
+    1969 Ford Falcon
+    1970 Plymouth Hemi
+    Pickup
+    1969
     Truck
-    1993
-    Lincoln Berline
+    Mazda
+    Berline
     Roadster
 
 @[word_1_6]
@@ -408,7 +424,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon Yue
     George
     Loui
     Gerard
@@ -430,7 +446,7 @@
     Leslie
     Julie
     Steve
-    Yue
+    Foon Yue
     George
     Loui
     Gerard
@@ -487,16 +503,16 @@
     Tokyo
     Sydney
     London
-    100 Market
-    Place
     Street
-    43 Rue Jouffroy
+    Place
+    523
+    Rue Jouffroy
     Kioicho
-    Avenue
-    25 Old Broad
+    Wentworth
+    Street
 
 @[word_3_2]
-    Francisco
+    San
     Boston
     NYC
     Paris
@@ -542,7 +558,7 @@
     Leslie
     Julie
     Steve
-    Foon
+    Yue
     George
     Loui
     Gerard
@@ -554,26 +570,26 @@
     Tom
 
 @[word_5_1]
-    Chopper
-    Alpine Renault 1300
+    Harley Davidson Ultimate Chopper
+    Alpine
     Moto Guzzi
-    Eagle Drag
-    Romeo
-    Delta 16V
-    Ford
-    2001
-    1958 Setra Bus
-    XREO
-    Corvair
+    Bike
+    GTA
+    1962 LanciaA
+    1968
+    Enzo
+    1958
+    Suzuki XREO
+    1969 Corvair Monza
     1968 Dodge
-    Ford
+    Falcon
     Cuda
-    Chevy
-    1969 Dodge
+    Pickup
+    Charger
     Truck
-    RX-7
-    Lincoln
-    Special
+    1993 Mazda
+    1937 Lincoln
+    1936 Mercedes-Benz 500K Special
 
 @[word_5_2]
     Cars
@@ -582,29 +598,29 @@
     Ships
     Trains
     Buses
-    Vintage
+    Vintage Cars
 
 @[word_5_3]
-    graphique
+    Atelier graphique
     Stores
-    Collectors
-    La
+    Co
+    Gifts
+    Baane
+    Gifts Distributors Ltd
+    &
+    Auto, Co
+    Mini Wheels Co
+    Land of Toys Inc
+    Shopping
+    Model
     Imports
-    Gifts
-    & Zbyszek Co
-    Blauer See Auto
     Co
-    of Toys Inc
-    Shopping Channel
-    Co
-    Danish Wholesale Imports
-    Henriot
     Souveniers
+    Machine
     Inc
-    Diecast
-    Stores Inc
-    Gifts&
-    Gifts
+    Stores
+    Co
+    Herkku
 
 
 %[find_el_by_attr]('training': '320', 'testing': '80')

@@ -3,18 +3,22 @@ import random
 from modules.database import resolver
 
 HI_THERE = 'Hi there! Let me introduce myself...\n'\
-           'I am a chatbot for Data Exploration and I will help you during the navigation of a relational database.\n'
-REMEMBER_HISTORY = "Remember that you can always check the history of the conversation, you just have to ask for it! " \
-                   "For instance you can try with:\n" \
-                   "- show me the history\n" \
+           'I am a chatbot for Data Exploration and I will help you during the navigation of a relational database.'
+REMEMBER_HISTORY = "You can always check the history of the conversation, just ask!\n " \
+                   "For instance you can try with: \"show me the history\" or maybe just \"history\".\n" \
                    "I will help you to go back in the past, if you want, or just reset it completely."
+REMEMBER_GO_BACK = "If you did something wrong, DON'T PANIC!\n" \
+                   "By simply telling me something like \"go back\" or \"undo\" you can jump to the " \
+                   "previous element of your history.\n" \
+                   "This might be a shortcut when you want to make little rollbacks, " \
+                   "without accessing all your history."
 ERROR = 'Sorry, I did not get that! :('
 FINDING_ELEMENT = 'Let me check...'
 NOTHING_FOUND = 'Nothing has been found, I am sorry!'
 ONE_RESULT_FOUND = 'Et voilà! I found 1 result!'
 N_RESULTS_FOUND_PATTERN = 'Et voilà! I found {} results!'
 REMEMBER_FILTER = 'Remember that you can always filter them, click the following button to get some hints...'
-SELECT_FOR_INFO = 'Select the one you are interested in:'
+SELECT_FOR_INFO_PATTERN = 'Select the element of type {} you are interested in.'
 INTRODUCE_ELEMENT_TO_SHOW_PATTERN = 'Here is what I know about this {}:'
 EMPTY_CONTEXT_LIST = 'I am sorry, but your conversation history is empty!'
 CONTEXT_LIST_RESET = 'The history has been reset!'
@@ -49,11 +53,16 @@ def find_element_action_name(element_name, ordered_entities):
 
 def element_names_examples():
     elements = resolver.get_all_primary_element_names()
-    message_1 = 'Currently I understand phrases related to some elements, which are: '
-    message_1 += ', '.join(elements) + '.\n'
-    message_2 = 'To begin with, you can ask me more information about a specific one. For example you can try with:\n'
-    message_2 += '- tell me more about {}'.format(elements[0])
-    return [message_1, message_2]
+    message = 'Currently I understand phrases related to some elements, which are: '
+    message += ', '.join(elements) + '.'
+    return message
+
+
+def element_names_info_examples():
+    elements = resolver.get_all_primary_element_names()
+    message = 'You can ask me more information about a specific element. For example you can try with:\n'
+    message += '- tell me more about {}'.format(elements[0])
+    return message
 
 
 def find_element_examples(element_name):

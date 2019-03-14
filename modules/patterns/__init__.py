@@ -23,7 +23,7 @@ class Response:
         string_list = []
         for r in self.response_list:
             if r['type'] == 'message':
-                string_list.append('- {}'.format(r['value']))
+                string_list.append('> {}'.format(r['value']))
             else:
                 string_list.append('[B] {} => {}'.format(r['value']['title'],
                                                          r['value']['payload']))
