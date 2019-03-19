@@ -259,7 +259,6 @@ def action_filter_element_by_attribute(entities, response, context):
                     response.add_message(msg.NOTHING_FOUND)
 
             else:
-                response.add_message('Ok so you want to filter on the elements of the')
                 action_more_info_filter(entities, response, context)
 
         else:

@@ -4,8 +4,7 @@ from telepot.loop import MessageLoop
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
 from modules import extractor, caller
-
-TOKEN = "710759393:AAGcrq2gkBd84qa-apwS9quMd5QK0knfWTM"  # '609526959:AAGSGD4czhnJigcsv1QM2WUA2BMBqlw4ho0'
+from settings import TOKEN_TELEGRAM
 
 
 # on any simple message
@@ -50,7 +49,7 @@ def respond(chat_id, msg):
 
 def start():
     global bot
-    bot = telepot.Bot(TOKEN)
+    bot = telepot.Bot(TOKEN_TELEGRAM)
     MessageLoop(bot, {'chat': on_chat_message,
                       'callback_query': on_callback_query}).run_as_thread()
 

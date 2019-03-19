@@ -10,9 +10,8 @@ file_sep = os.sep
 select = 'classicmodels'
 
 select_dict = {
-    'employees': ['a', 'employees'],
-    'school': ['b', 'rasa_db'],
-    'classicmodels': ['c', 'classicmodels']
+    'teachers': ['b', 'teachers', '797397572:AAEV1MfR28lTzPsom_2qO2-goJSCKzQZ5d0'],
+    'classicmodels': ['c', 'classicmodels', '710759393:AAGcrq2gkBd84qa-apwS9quMd5QK0knfWTM']
 }
 
 abc = select_dict[select][0]
@@ -37,6 +36,8 @@ CHATITO_TEMPLATE_PATH = file_sep.join([DIR_PATH, 'writer', 'chatito_template.cha
 CHATITO_MODEL_PATH = file_sep.join([DIR_PATH, 'writer', 'chatito_model.chatito'])
 
 # settings
+
+TOKEN_TELEGRAM = select_dict[select][2]
 
 INTENT_CONFIDENCE_THRESHOLD = 0.4
 ELEMENT_SIMILARITY_DISTANCE_THRESHOLD = 3

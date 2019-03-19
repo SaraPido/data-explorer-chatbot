@@ -276,7 +276,7 @@
   {
     "element_name":"order",
     "aliases": ["orders"],
-    "type": "secondary",
+    "type": "primary",
     "table_name": "orders",
     "show_columns":[
       {
@@ -299,6 +299,25 @@
             "from_columns": ["customerNumber"],
             "to_table_name": "customers",
             "to_columns": ["customerNumber"]
+          }
+        ]
+      },
+      {
+        "keyword": "with product",
+        "type": "word",
+        "columns": ["productName"],
+        "by": [
+          {
+            "from_table_name": "orders",
+            "from_columns": ["orderNumber"],
+            "to_table_name": "orderdetails",
+            "to_columns": ["orderNumber"]
+          },
+          {
+            "from_table_name": "orderdetails",
+            "from_columns": ["productCode"],
+            "to_table_name": "products",
+            "to_columns": ["productCode"]
           }
         ]
       }
@@ -451,7 +470,7 @@
         ]
       },
       {
-        "keyword": "ordered by",
+        "keyword": "bought by",
         "type": "word",
         "columns": ["customerName"],
         "by": [
@@ -509,7 +528,7 @@
         ]
       },
       {
-        "keyword": "ordered by",
+        "keyword": "bought by",
         "element_name": "customer",
         "by": [
           {
