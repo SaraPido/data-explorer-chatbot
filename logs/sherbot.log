@@ -1,0 +1,43 @@
+INFO:root:Starting the bot...
+INFO:modules.database.resolver:Database concept file:
+"/Users/Nicola/thesis/sherbot/resources/db/db_concept_c.json"
+INFO:modules.database.resolver:Loading database concept file...
+INFO:modules.database.resolver:Database concept file has been loaded!
+INFO:modules.database.broker:Database schema file:
+"/Users/Nicola/thesis/sherbot/resources/db/db_schema_c.json"
+INFO:modules.database.broker:Loading database schema file...
+INFO:modules.database.broker:Database schema file has been loaded!
+INFO:modules.database.broker:Database:
+"classicmodels"
+INFO:modules.database.broker:Testing connection with the database...
+INFO:modules.database.broker:Connection succeeded! Closing connection...
+INFO:modules.database.broker:Connection closed.
+INFO:modules.extractor:NLU model:
+"/Users/Nicola/thesis/sherbot/resources/nlu/models/default/nlu_model"
+INFO:modules.extractor:Loading the NLU model WITHOUT training...
+INFO:tensorflow:Restoring parameters from /Users/Nicola/thesis/sherbot/resources/nlu/models/default/nlu_model/intent_classifier_tensorflow_embedding.ckpt
+INFO:modules.extractor:NLU model loaded!
+INFO:root:Bot successfully started!
+INFO:modules.extractor:Message to parse: "hi"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'start', 'confidence': 0.9810478687286377}, 'entities': [], 'original_message': 'hi'}
+INFO:modules.extractor:Message to parse: "/help_elements"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'help_elements', 'confidence': 1}, 'entities': [], 'original_message': 'help_elements'}
+INFO:modules.extractor:Message to parse: "tell me more about customer"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'more_info_find', 'confidence': 0.9563616514205933}, 'entities': [{'start': 19, 'value': 'customer', 'entity': 'el_1'}], 'original_message': 'tell me more about customer'}
+INFO:modules.extractor:Message to parse: "Find customer with contact John"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9685200452804565}, 'entities': [{'start': 5, 'value': 'customer', 'entity': 'el_1'}, {'start': 14, 'value': 'with contact', 'entity': 'attr_1_2'}, {'start': 27, 'value': 'John', 'entity': 'word_1_2'}], 'original_message': 'Find customer with contact John'}
+INFO:modules.database.broker:Executing query...
+INFO:modules.database.broker:Query: "SELECT DISTINCT a.customerNumber, a.customerName, a.contactLastName, a.contactFirstName, a.phone, a.addressLine1, a.addressLine2, a.city, a.state, a.postalCode, a.country, a.salesRepEmployeeNumber, a.creditLimit FROM customers a WHERE ( a.contactLastName LIKE %s OR a.contactFirstName LIKE %s ) LIMIT 100"
+INFO:modules.database.broker:Tuple: ('%John%', '%John%')
+INFO:modules.extractor:Message to parse: "Find customer with contact Peter"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9690359830856323}, 'entities': [{'start': 5, 'value': 'customer', 'entity': 'el_1'}, {'start': 14, 'value': 'with contact', 'entity': 'attr_1_2'}, {'start': 27, 'value': 'Peter', 'entity': 'word_1_2'}], 'original_message': 'Find customer with contact Peter'}
+INFO:modules.database.broker:Executing query...
+INFO:modules.database.broker:Query: "SELECT DISTINCT a.customerNumber, a.customerName, a.contactLastName, a.contactFirstName, a.phone, a.addressLine1, a.addressLine2, a.city, a.state, a.postalCode, a.country, a.salesRepEmployeeNumber, a.creditLimit FROM customers a WHERE ( a.contactLastName LIKE %s OR a.contactFirstName LIKE %s ) LIMIT 100"
+INFO:modules.database.broker:Tuple: ('%Peter%', '%Peter%')
+INFO:modules.extractor:Message to parse: "/sel_by_pos{"pos":"2"}"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'sel_by_pos', 'confidence': 1}, 'entities': [{'entity': 'pos', 'value': '2', 'start': 1}], 'original_message': 'sel_by_pos{"pos":"2"}'}
+INFO:modules.extractor:Message to parse: "/cross_rel{"rel":"related sales representative"}"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'cross_rel', 'confidence': 1}, 'entities': [{'entity': 'rel', 'value': 'related sales representative', 'start': 1}], 'original_message': 'cross_rel{"rel":"related sales representative"}'}
+INFO:modules.database.broker:Executing query...
+INFO:modules.database.broker:Query: "SELECT DISTINCT a.employeeNumber, a.lastName, a.firstName, a.extension, a.email, a.officeCode, a.reportsTo, a.jobTitle FROM employees a, customers b WHERE a.employeeNumber=b.salesRepEmployeeNumber AND ( b.customerNumber = %s ) LIMIT 100"
+INFO:modules.database.broker:Tuple: (145,)
