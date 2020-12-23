@@ -1,5 +1,6 @@
 .DS_Store
 __pycache__
+.idea
 
 chatito_model.chatito
 
@@ -7,6 +8,3 @@ rasa_dataset_testing.json
 rasa_dataset_training.json
 node_modules/
 evaluation/
-
-somefolder/
-!somefolder/.keep
