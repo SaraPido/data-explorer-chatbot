@@ -1,7 +1,8 @@
 import logging
 
-from rasa_nlu import training_data as nlu_train
-from rasa_nlu import model as nlu_model
+from rasa.nlu import training_data as nlu_train
+from rasa.nlu import model as nlu_model
+from rasa.nlu import config
 from settings import NLU_MODEL_DIR_PATH, NLU_CONFIG_PIPELINE, NLU_CONFIG_LANGUAGE, NLU_DATA_PATH, NLU_MODEL_PATH
 
 if __name__ == '__main__':
@@ -10,7 +11,7 @@ if __name__ == '__main__':
                  '"' + NLU_MODEL_PATH + '"')
     logging.info('Training the NLU model...')
     training_data = nlu_train.load_data(NLU_DATA_PATH)
-    trainer = nlu_model.Trainer(nlu_model.config.RasaNLUModelConfig({"pipeline": NLU_CONFIG_PIPELINE,
+    trainer = nlu_model.Trainer(config.RasaNLUModelConfig({"pipeline": NLU_CONFIG_PIPELINE,
                                                                      "language": NLU_CONFIG_LANGUAGE}))
     trainer.train(training_data)
     model_directory = trainer.persist(NLU_MODEL_DIR_PATH, fixed_model_name='nlu_model')

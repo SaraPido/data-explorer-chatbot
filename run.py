@@ -5,7 +5,7 @@ from pprint import pprint
 from time import sleep
 
 from modules import extractor, caller
-from modules.connectors import telegram
+from modules.connectors import telegram, webchat
 from modules.database import resolver, broker
 from settings import LOG_DIR_PATH_AND_SEP
 
@@ -43,8 +43,9 @@ if __name__ == '__main__':
 
     logging.info('Bot successfully started!')
 
-    telegram.start()
-    # console_input()
+    webchat.start()
+    #telegram.start()
+    #console_input()
     while 1:
         sleep(500)
 

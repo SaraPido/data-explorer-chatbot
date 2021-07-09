@@ -38,7 +38,7 @@ def parse_schema_file():
 
     # with open('../../resources/db/employees.sql') as f:
     #with open('../../resources/db/rasa_db.sql') as f:
-    with open('../../resources/db/mysqlsampledatabase.sql') as f:
+    with open('../../resources/db/virus.sql') as f:
         raw = f.read()
 
     for s in sqlparse.split(raw):
@@ -78,7 +78,7 @@ def parse_schema_file():
                 # for fp in table_dict['foreign_property_list']:
                 #   print('{} - {}'.format(table_dict['table_name'], fp['reference_table_name']))
 
-    with open('../../resources/db/db_schema_c.json', 'w') as f:
+    with open('../../resources/db/db_schema_d.json', 'w') as f:
         json.dump(schema, f, indent=2)
 
 
@@ -95,7 +95,7 @@ def ask_number(choices, default=0):
 
 
 def create_concept_file():
-    with open('../../resources/db/db_schema_c.json') as f:
+    with open('../../resources/db/db_schema_d.json') as f:
         schema = json.load(f)
 
     concept = {}
@@ -110,7 +110,7 @@ def create_concept_file():
         chosen_type = ask_number(types)
         concept[name] = {'type': chosen_type, 'table_name': table_name}
 
-    with open('../../resources/db/db_concept_c.json', 'w') as f:
+    with open('../../resources/db/db_concept_d.json', 'w') as f:
         json.dump(concept, f, indent=2)
 
 

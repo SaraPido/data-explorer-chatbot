@@ -6,6 +6,7 @@ import string
 
 from pprint import pprint
 from mysql import connector
+from modules.database import resolver
 
 from settings import DATABASE_NAME, DB_SCHEMA_PATH, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, QUERY_LIMIT
 
@@ -28,7 +29,8 @@ def connect():
     return connector.connect(user=DATABASE_USER,
                              password=DATABASE_PASSWORD,
                              host=DATABASE_HOST,
-                             database=DATABASE_NAME)
+                             database=DATABASE_NAME,
+                             auth_plugin='mysql_native_password')
 
 
 def disconnect(connection):

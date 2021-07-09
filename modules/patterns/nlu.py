@@ -14,6 +14,9 @@ INTENT_SELECT_ELEMENT_BY_POSITION = 'sel_by_pos'
 INTENT_FIND_ELEMENT_BY_ATTRIBUTE = 'find_el_by_attr'
 INTENT_FILTER_ELEMENT_BY_ATTRIBUTE = 'filter_el_by_attr'
 
+INTENT_ORDER_BY = 'order_by'
+INTENT_ORDER_BY_ATTRIBUTE = 'order_by_attribute'
+
 VIEW_CONTEXT_ELEMENT = 'view_context_el'
 INTENT_SHOW_CONTEXT = 'show_context'
 INTENT_SHOW_MORE_CONTEXT = 'show_more_context'

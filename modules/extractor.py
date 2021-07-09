@@ -1,6 +1,6 @@
 import logging
 
-from rasa_nlu import model as nlu_model
+from rasa.nlu import model as nlu_model
 from settings import NLU_MODEL_PATH
 
 logger = logging.getLogger(__name__)

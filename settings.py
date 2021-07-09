@@ -7,11 +7,12 @@ file_sep = os.sep
 
 # selector
 
-select = 'classicmodels'
+select = 'virus'
 
 select_dict = {
     'teachers': ['b', 'teachers', '797397572:AAEV1MfR28lTzPsom_2qO2-goJSCKzQZ5d0'],
-    'classicmodels': ['c', 'classicmodels', '710759393:AAGcrq2gkBd84qa-apwS9quMd5QK0knfWTM']
+    'classicmodels': ['c', 'classicmodels', '710759393:AAGcrq2gkBd84qa-apwS9quMd5QK0knfWTM'],
+    'virus': ['d', 'virus', '710759393:AAGcrq2gkBd84qa-apwS9quMd5QK0knfWTM']
 }
 
 abc = select_dict[select][0]
@@ -20,14 +21,14 @@ db_name = select_dict[select][1]
 
 # files
 
-while file_path_list[-1] != 'sherbot':
+while file_path_list[-1] != 'data-explorer-chatbot':
     del file_path_list[-1]
 
 DIR_PATH = os.sep.join(file_path_list)
 
 LOG_DIR_PATH_AND_SEP = file_sep.join([DIR_PATH, 'logs']) + file_sep
 NLU_DATA_PATH = file_sep.join([DIR_PATH, 'writer']) + file_sep + 'rasa_dataset_training.json'
-NLU_MODEL_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models', 'default', 'nlu_model'])
+NLU_MODEL_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models', 'nlu_model'])
 NLU_MODEL_DIR_PATH = file_sep.join([DIR_PATH, 'resources', 'nlu', 'models'])
 DB_CONCEPT_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_concept_' + abc + '.json'
 DB_SCHEMA_PATH = file_sep.join([DIR_PATH, 'resources', 'db']) + file_sep + 'db_schema_' + abc + '.json'
@@ -54,7 +55,7 @@ QUERY_LIMIT = 100  # 0 for no limit
 remote = True if os.environ.get('PYTHONANYWHERE_SITE') else False
 
 DATABASE_USER = 'nicolacastaldo' if remote else 'root'
-DATABASE_PASSWORD = 'dataexplorerbot' if remote else 'admin'
+DATABASE_PASSWORD = 'dataexplorerbot' if remote else '12345678'
 DATABASE_HOST = 'nicolacastaldo.mysql.pythonanywhere-services.com' if remote else '127.0.0.1'
 DATABASE_NAME = 'nicolacastaldo$classicmodels' if remote else db_name
 

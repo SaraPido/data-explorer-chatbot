@@ -33,7 +33,6 @@ def compute_ordered_entity_list(entities):
     ordered_entities = []
 
     for e in entities[::-1]:
-
         ty = None
         op = '='  # the control of the presence of the OP is made here!
         match = re.match("(\w+)_\d_(\d)", e['entity'])
@@ -147,48 +146,77 @@ def is_selection_valid(element, position):
     return 0 < position <= len(element['value'])  # element['real_value_length']:
 
 
-def add_selected_element_to_context(element, position, context):
-    # copying the dictionary
-    selected_element = dict(element)
-
-    # I must save it as a list
-    selected_element['value'] = [element['value'][position - 1]]
-
-    selected_element['query'] = None
-    selected_element['real_value_length'] = 1
-    selected_element['action_name'] = '..selected from:'
-    selected_element['action_type'] = 'select'
-
-    context.append_element(selected_element)
-
+# SOSTITUITA CON METODO IN CONTEXT ADD_SELECTED_ELEMENT
+# def add_selected_element_to_context(element, position, context):
+#     print('add_selected_element_to_context ', element, position, context)
+#     # copying the dictionary
+#     print(type(element))
+#     if type(element) is dict:
+#         selected_element = element#dict(element)
+#     else:
+#         selected_element = {}
+#     print('selected_element ', selected_element)
+#     # I must save it as a list
+#     if 'value' in element:
+#         selected_element['value'] = [element['value'][position - 1]]
+#     else:
+#         selected_element['value'] = element
+#     selected_element['query'] = None
+#     selected_element['real_value_length'] = 1
+#     selected_element['action_name'] = '..selected from:'
+#     selected_element['action_type'] = 'select'
+#     print('selected_element ', selected_element)
+#     context.append_element(selected_element)
+#     print('context ', context)
 
 # ACTIONS
 
-def action_start(entities, response, context):
-    response.add_message(msg.HI_THERE)
-    response.add_buttons(btn.get_buttons_help())
-
+def action_start(entities, response, context, add = True):
+    print('action_start', entities, response, context, add)
+    start_message = msg.HI_THERE + "\n" + msg.element_names_examples()
+    response.add_message(start_message)
+    #response.add_button(btn.get_buttons_help())
+    response.add_buttons(btn.get_buttons_tell_me_more())
+    print('added message and button')
+    #response.add_buttons(btn.get_buttons_tell_me_more())
+    #response.add_message(msg.HI_THERE)
+    #response.add_buttons(btn.get_buttons_help())
+    if add:
+        context.add_selected_element("start", entities)
+    else:
+        response.add_button(btn.get_button_help_on_elements())
+        response.add_button(btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+        response.add_button(btn.get_button_history())
+    print('finish')
 
 def action_help_elements(entities, response, context):
     response.add_message(msg.element_names_examples())
     response.add_message(msg.element_names_info_examples())
+    #response.add_buttons(btn.get_buttons_help())
 
 
 def action_help_history(entities, response, context):
     response.add_message(msg.REMEMBER_HISTORY)
+    #response.add_button(btn.get_button_help_on_elements())
 
 
 def action_help_go_back(entities, response, context):
     response.add_message(msg.REMEMBER_GO_BACK)
+    #response.add_button(btn.get_button_help_on_elements())
 
 
 def action_more_info_find(entities, response, context):
     element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
     if element_name:
         response.add_message(msg.find_element_examples(element_name))
+        #response.add_button(btn.get_button_show_more_examples(element_name))
     else:
         response.add_message('I am sorry, I understood that you want more info, but not on what...')
         response.add_message(msg.element_names_info_examples())
+    #response.add_button(btn.get_button_help_on_elements())
+    # response.add_message('Remember that you can always go back, just click the button')
+    #response.add_button(btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+    #response.add_button(btn.get_button_history())
 
 
 def action_more_info_filter(entities, response, context):
@@ -203,7 +231,10 @@ def action_more_info_filter(entities, response, context):
             response.add_message('I am sorry, but there is nothing to filter... You\'d better tell on which element.\n'
                                  'Try, for instance, with "how to filter {}"'
                                  .format(resolver.get_all_primary_element_names()[0]))
-
+    response.add_button(btn.get_button_help_on_elements())
+    # response.add_message('Remember that you can always go back, just click the button')
+    response.add_button(btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+    response.add_button(btn.get_button_history())
 
 def action_find_element_by_attribute(entities, response, context):
     element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
@@ -222,14 +253,29 @@ def action_find_element_by_attribute(entities, response, context):
 
             else:
                 response.add_message(msg.NOTHING_FOUND)
+                response.add_button(btn.get_button_help_on_elements())
+                # response.add_message('Remember that you can always go back, just click the button')
+                response.add_button(
+                    btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+                response.add_button(btn.get_button_history())
         else:
             response.add_message('Ok so you want to find some elements of type {}, but you should '
                                  'tell me something more, otherwise I can\'t help you explore!'.format(element_name))
             response.add_message(msg.find_element_examples(element_name))
+            response.add_button(btn.get_button_help_on_elements())
+            # response.add_message('Remember that you can always go back, just click the button')
+            response.add_button(
+                btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+            response.add_button(btn.get_button_history())
 
     else:
         response.add_message('I guess you want to find something, but I did not understand what!\n')
         response.add_message(msg.element_names_examples())
+        response.add_button(btn.get_button_help_on_elements())
+        # response.add_message('Remember that you can always go back, just click the button')
+        response.add_button(
+            btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+        response.add_button(btn.get_button_history())
 
 
 def action_filter_element_by_attribute(entities, response, context):
@@ -257,12 +303,23 @@ def action_filter_element_by_attribute(entities, response, context):
 
                 else:
                     response.add_message(msg.NOTHING_FOUND)
+                    response.add_button(btn.get_button_help_on_elements())
+                    # response.add_message('Remember that you can always go back, just click the button')
+                    response.add_button(
+                        btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+                    response.add_button(btn.get_button_history())
 
             else:
+                response.add_message("I didn't understand for what do you want to filter by\n")
                 action_more_info_filter(entities, response, context)
 
         else:
             response.add_message('Filtering is not possible now, there is only one element under to view!')
+            response.add_button(btn.get_button_help_on_elements())
+            # response.add_message('Remember that you can always go back, just click the button')
+            response.add_button(
+                btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+            response.add_button(btn.get_button_history())
 
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
@@ -297,16 +354,23 @@ def action_cross_relation(entities, response, context):
 
                 else:
                     response.add_message(msg.NOTHING_FOUND)
+                    response.add_button(btn.get_button_help_on_elements())
+                    response.add_button(btn.get_button_view_context_element('- GO BACK TO THE CONCEPT! -'))
+                    # response.add_message('Remember that you can always go back, just click the button')
+                    response.add_button(btn.get_button_history())
 
     else:
         response.add_message(msg.ERROR)
+        response.add_button(btn.get_button_help_on_elements())
 
 
 def action_show_relations(entities, response, context):
     element = context.get_last_element()
     if element:
+        #buttons = btn.get_buttons_element_relations(element['element_name'])
         response.add_message('If you want more information, I can tell you:')
         response.add_buttons(btn.get_buttons_element_relations(element['element_name']))
+        #response.add_buttons(buttons)
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
 
@@ -328,16 +392,29 @@ def action_select_element_by_position(entities, response, context):
 
             else:
                 if is_selection_valid(element, position):
-                    add_selected_element_to_context(element, position, context)
+                    context.add_selected_element(element, position)
                     action_view_context_element(entities, response, context)
                 else:
                     response.add_message('Error! Out of range selection!')
+                    response.add_button(btn.get_button_help_on_elements())
+                    response.add_button(
+                        btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+                    response.add_button(btn.get_button_history())
 
         else:
             response.add_message(msg.EMPTY_CONTEXT_LIST)
+            response.add_button(btn.get_button_help_on_elements())
+            response.add_button(
+                btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+            response.add_button(btn.get_button_history())
 
     else:
         response.add_message(msg.ERROR)
+        response.add_button(btn.get_button_help_on_elements())
+        # response.add_message('Remember that you can always go back, just click the button')
+        response.add_button(
+            btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+        response.add_button(btn.get_button_history())
 
 
 def action_view_context_element(entities, response, context):
@@ -368,8 +445,12 @@ def action_view_context_element(entities, response, context):
             response.add_buttons(btn.get_buttons_select_element(element))
             if element['show']['to'] < element['real_value_length']:
                 response.add_button(btn.get_button_show_more_element())
+            response.add_button(btn.get_button_order_by())
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
+    response.add_button(btn.get_button_help_on_elements())
+    response.add_button(btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+    response.add_button(btn.get_button_history())
 
 
 def action_show_more_elements(entities, response, context):
@@ -438,8 +519,18 @@ def action_show_more_context(entities, response, context):
             action_show_context(entities, response, context)
         else:
             response.add_message('I am sorry, but there is nothing to show more...')
+            response.add_button(btn.get_button_help_on_elements())
+            # response.add_message('Remember that you can always go back, just click the button')
+            response.add_button(
+                btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+            response.add_button(btn.get_button_history())
     else:
         response.add_message('I am sorry, but there is nothing to show more...')
+        response.add_button(btn.get_button_help_on_elements())
+        # response.add_message('Remember that you can always go back, just click the button')
+        response.add_button(
+            btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+        response.add_button(btn.get_button_history())
 
 
 def action_go_back_to_context_position(entities, response, context):
@@ -470,6 +561,36 @@ def action_go_back_to_context_position(entities, response, context):
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
 
+def action_order_by(entities, response, context):
+    print('action_order_by')
+    element = context.get_last_element()
+    print('element ', element)
+    if element:
+        value = element['value']
+        element_name = element['element_name']
+        value_attributes = value[0] #take first element
+        response.add_message('Choose the property you want to order')
+        #response.add_button(btn.get_button_help_on_elements())
+        response.add_buttons(btn.get_buttons_order_by_attribute(value_attributes,element_name))
+    else:
+        #response.add_button(btn.get_button_help_on_elements())
+        response.add_message('I am sorry, but there is nothing to order...')
+    response.add_button(btn.get_button_help_on_elements())
+    response.add_button(btn.get_button_history())
+    response.add_button(btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+
+def action_order_by_attribute(entities, response, context):
+    print('action_order_by_attribute')
+    attribute_to_order_by = extract_single_entity_value(entities, nlu.ENTITY_POSITION)
+    element = context.get_last_element()
+    print('attribute ', attribute_to_order_by)
+    print('element ', element)
+    value = element['value']
+    value = sorted(value, key=lambda k: (k[attribute_to_order_by] is None, k[attribute_to_order_by])) # All None element are put in the end
+    element['value'] = value
+    context.reset_show_last_element = False
+    action_view_context_element(entities, response, context)
+
 
 # EXECUTION
 
@@ -484,6 +605,8 @@ intents_to_action_functions = {
     nlu.INTENT_FILTER_ELEMENT_BY_ATTRIBUTE: action_filter_element_by_attribute,
     nlu.INTENT_CROSS_RELATION: action_cross_relation,
     nlu.INTENT_SHOW_RELATIONS: action_show_relations,
+    nlu.INTENT_ORDER_BY: action_order_by,
+    nlu.INTENT_ORDER_BY_ATTRIBUTE: action_order_by_attribute,
     nlu.INTENT_SHOW_MORE_ELEMENTS: action_show_more_elements,
     nlu.INTENT_SELECT_ELEMENT_BY_POSITION: action_select_element_by_position,
     nlu.VIEW_CONTEXT_ELEMENT: action_view_context_element,
@@ -494,18 +617,34 @@ intents_to_action_functions = {
 
 
 def execute_action_from_intent_name(intent_name, entities, context):
+    print('execute_action_from_intent_name')
     response = patterns.Response()
+    print('response ', response)
     action_function = intents_to_action_functions.get(intent_name)
+    print('action_function ', action_function)
     if action_function:
+        print('Calling action: {}'.format(action_function.__name__))
         context.log('Calling action: {}'.format(action_function.__name__))
         action_function(entities, response, context)
+        print('action function called')
     else:
+        print('Executing fallback action')
         context.log('Executing fallback action')
         response.add_message(msg.ERROR)
+        response.add_button(btn.get_button_help_on_elements())
+        response.add_button(
+            btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
+        response.add_button(btn.get_button_history())
+    print('before response will be')
     context.log('Response will be:\n'
                 '\n'
                 '{}\n'
                 '\n'
                 '- - - - - -'.format(response.get_printable_string()))
-
+    print('Response will be:\n'
+                '\n'
+                '{}\n'
+                '\n'
+                '- - - - - -'.format(response.get_printable_string()))
+    print('response ', response)
     return response

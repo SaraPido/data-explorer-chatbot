@@ -1,4 +1,6 @@
 import random
+import re
+import copy
 
 from modules.database import resolver
 
@@ -29,9 +31,23 @@ REMEMBER_RESET_HISTORY = 'If you want you can reset the history of the conversat
 def element_attributes(element):
     msg = '{}\n'.format(element['element_name'].upper())
     # taking only first value
-    msg += '\n'.join(['- {0}: {1}'.format(k, v) for k, v in element['value'][0].items()])
+    #msg += '\n'.join(['- {0}: {1}'.format(k, v) for k, v in element['value'][0].items()])
+    displayable_attributes = resolver.simulate_view(element['element_name'])
+    attribute_names = [i['attribute'] for i in displayable_attributes if 'attribute' in i]
+    displayed_names = [i['display'] for i in displayable_attributes if 'display' in i]
+    for k, v in element['value'][0].items():
+        if k in attribute_names:
+            i = attribute_names.index(k)
+            msg += '\n\n- {0}: {1}'.format(displayed_names[i], cleanhtml(str(v)))
+
     return msg
 
+
+def cleanhtml(raw_html):
+    raw_html = raw_html.replace('<br />', '\n')
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', raw_html)
+    return cleantext
 
 def element_list(element):
     msg = ''

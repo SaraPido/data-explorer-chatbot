@@ -12,17 +12,17 @@ lock = threading.Lock()
 
 
 def run_action_from_parsed_message(parsed_message, chat_id):
-
+    print('run_action_from_parsed_message ', parsed_message, chat_id)
     intent_confidence = parsed_message.get('intent').get('confidence')
     intent_name = parsed_message.get('intent').get('name')
 
     entities = parsed_message.get('entities')
-
+    print(intent_confidence, intent_name, entities)
     if intent_confidence < INTENT_CONFIDENCE_THRESHOLD:
         intent_name = None
 
     context = get_context(chat_id)
-
+    print('context ', context)
     context.log('New message received!\n'
                 'Original message: {}\n'
                 'Intent matched: {}\n'
@@ -30,7 +30,7 @@ def run_action_from_parsed_message(parsed_message, chat_id):
                 '{}'.format(parsed_message['original_message'],
                             intent_name,
                             pformat(entities)))
-
+    print('return run_action_from_parsed_message ', intent_name, entities, context)
     return actions.execute_action_from_intent_name(intent_name, entities, context)
 
 

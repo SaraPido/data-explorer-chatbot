@@ -172,22 +172,27 @@ class Context:
             for i in range(index + 1):
                 self.context_list.pop(0)
         """
-
+        print('append_element ', element)
         self.context_list.append(copy.deepcopy(element))  # deep copying here
+        print('context_list ', self.context_list)
         self.show_last_element_from_start()
-        self.log('Element {} has been added to the context'.format(element['element_name']))
+        #self.log('Element {} has been added to the context'.format(element['element_name']))
+        #print('Element {} has been added to the context'.format(element['element_name']))
         # max length context
         if len(self.context_list) > CONTEXT_MAX_LENGTH:
+            print('here')
             del self.context_list[: len(self.context_list)-CONTEXT_MAX_LENGTH]
             self.log('Context length is exceeding maximum of {},'
                      ' I remove old elements'.format(CONTEXT_MAX_LENGTH))
-
-        self.log_context()
+        print('finish append')
+        #self.log_context()
 
     def show_last_element_from_start(self):
+        print('show_last_element_from_start')
         element = self.context_list[-1]
         if element['real_value_length'] > 1:
             element['show'] = {'from': 0, 'to': min(ELEMENT_VISU_LIMIT, element['real_value_length'])}
+        print('finish show last element from start')
 
     def go_back_to_position(self, position):
         del self.context_list[position:]
@@ -231,4 +236,18 @@ class Context:
         self.log(string_log)
 
     def log(self, string_log):
+        print('log')
         self.logger.info(string_log)
+        print('finish log')
+
+    def add_selected_element(self, name, entities):
+        selected_element = dict()
+        selected_element['value'] = "     "
+        selected_element['entities'] = entities
+        selected_element['query'] = None
+        selected_element['real_value_length'] = 777
+        selected_element['action_name'] = name
+        selected_element['action_type'] = name
+        selected_element['element_name'] = name
+        self.append_element(selected_element)
+
