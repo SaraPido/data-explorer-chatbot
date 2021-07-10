@@ -14,7 +14,7 @@
 **Train the model**
 - Change the file 'settings.py': put the name of the db of interest and the correct data such as 
         
-        'virus' : ['f', 'virus', '1046778538:AAF2CKzjxwzCu9fiDLgadBujYKuBKhgKmdE']
+        'virus' : ['d', 'virus', '1046778538:AAF2CKzjxwzCu9fiDLgadBujYKuBKhgKmdE']
  
   where 'f' is the letter used to save the db files, 'virus' is the name of the db and the last one is the key to use for Telegram (for now we skipped it)
 
