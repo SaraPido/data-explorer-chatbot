@@ -20,7 +20,7 @@
 
 - To generate the file chatito_model:
         
-        python -m translator
+        python -m modules.translator
   
 - To generate the training and testing files for Rasa:
         
@@ -28,7 +28,7 @@
   
 - To train the model:
         
-        cd .. && python -m trainer
+        cd .. && python -m modules.trainer
 
 **Launch the app**
 - To launch the app at 0.0.0.0:5080
