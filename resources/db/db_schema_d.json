@@ -1,0 +1,32 @@
+{
+  "mutation": {
+    "references": {}, 
+    "primary_key_list": [
+      "sequence_id", 
+      "protein", 
+      "position"
+    ], 
+    "column_list": [
+      "sequence_id", 
+      "protein", 
+      "position", 
+      "original", 
+      "alternative"
+    ]
+  }, 
+  "sequence": {
+    "references": {}, 
+    "primary_key_list": [
+      "sequence_id"
+    ], 
+    "column_list": [
+      "sequence_id", 
+      "lineage", 
+      "submission_date", 
+      "continent", 
+      "country", 
+      "region", 
+      "subregion"
+    ]
+  }
+}

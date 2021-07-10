@@ -1,0 +1,168 @@
+[
+  {
+    "element_name": "mutation",
+    "aliases": ["variant","substitution"],
+    "type": "secondary",
+    "table_name": "mutation",
+    "show_columns": [{
+                                "keyword": "protein",
+                                "columns": ["protein"]
+                        },
+    {
+                                "keyword": "in position",
+                                "columns": ["position"]
+                        }],
+    "category": [{
+                                "column": "protein",
+                                "alias": "protein",
+                                "keyword": "of the protein"
+                        },
+    {
+                                "column": "position",
+                                "alias": "place",
+                                "keyword": "in position"
+                        },
+      {
+                                "column": "original",
+                                "alias": "original",
+                                "keyword": "original"
+                        },
+      {
+                                "column": "alternative",
+                                "alias": "alternative",
+                                "keyword": "alternative"
+                        }
+
+
+    ],
+    "attributes": [{
+                                "keyword": "are in",
+                                "type": "word",
+                                "columns": ["protein"]
+                        },
+    {
+                                "keyword": "in position",
+                                "type": "num",
+                                "columns": ["position"]
+                        }],
+    "relations": []
+  },
+  {
+    "element_name": "sequence",
+    "aliases": [],
+    "type": "primary",
+    "table_name": "sequence",
+    "show_columns": [
+      {
+        "keyword": "",
+        "columns": [
+          "sequence_id"
+        ]
+      },
+      {
+        "keyword": "in lineage",
+        "columns": [
+          "lineage"
+        ]
+      },
+      {
+        "keyword": "from",
+        "columns": [
+          "continent",
+          "country",
+          "region",
+          "subregion"
+        ]
+      },
+      {
+        "keyword": "from",
+        "columns": [
+          "country",
+          "region",
+          "subregion"
+        ]
+      }
+    ],
+    "category": [
+      {
+        "column": "lineage",
+        "alias": "lineage",
+        "keyword": "in lineage"
+      },
+      {
+        "column": "country",
+        "alias": "country",
+        "keyword": "from"
+      },
+      {
+        "column": "sequence_id",
+        "alias": "protein",
+        "keyword": "protein"
+      }
+    ],
+    "attributes": [
+      {
+        "keyword": "",
+        "type": "word",
+        "columns": [
+          "sequence_id"
+        ]
+      },
+      {
+        "keyword": "in lineage",
+        "type": "word",
+        "columns": [
+          "lineage"
+        ]
+      },
+      {
+        "keyword": "from",
+        "type": "word",
+        "columns": [
+          "continent",
+          "country",
+          "region",
+          "subregion"
+        ]
+      },
+      {
+        "keyword": "from",
+        "type": "word",
+        "columns": [
+          "country",
+          "region",
+          "subregion"
+        ]
+      },
+      {
+        "keyword": "with mutation on protein",
+        "type": "word",
+        "columns": [
+          "protein"
+        ],
+        "by": [{"from_table_name": "sequence",
+                "from_columns": ["sequence_id"],
+                "to_table_name": "mutation",
+                "to_columns": ["sequence_id"]
+                }]
+      }
+    ],
+    "relations": [
+      {
+        "keyword": "mutations",
+        "element_name": "mutation",
+        "by": [
+          {
+            "from_table_name": "sequence",
+            "from_columns": [
+              "sequence_id"
+            ],
+            "to_table_name": "mutation",
+            "to_columns": [
+              "sequence_id"
+            ]
+          }
+        ]
+      }
+    ]
+  }]
