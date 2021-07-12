@@ -21,16 +21,29 @@ def get_button_history():
 
 
 def get_buttons_select_element(element):
+    print('\nget_buttons_select_element ', element)
     buttons = []
+    print('range(element[\'show\'][\'from\'], element[\'show\'][\'to\']) ', range(element['show']['from'], element['show']['to']))
     for i in range(element['show']['from'], element['show']['to']):
-        title = resolver.get_element_show_string(element['element_name'], element['value'][i])
+        print('element_name ', element['element_name'])
+        if type(element['element_name'])==dict:
+            print('i', i)
+            print('element value ',  element['element_name']['value'][i-1])
+
+            title = resolver.get_element_show_string(element['element_name'], element['element_name']['value'][i-1])
+        else:
+            title = resolver.get_element_show_string(element['element_name'], element['value'][i])
         payload = extract_payload(nlu.INTENT_SELECT_ELEMENT_BY_POSITION,
                                   [nlu.ENTITY_POSITION, str(i+1)])
+        print('title & payload   ', title, payload)
         buttons.append({'title': title, 'payload': payload})
+        print('buttons ', buttons)
+    print('buttons ', buttons)
     return buttons
 
 
 def get_button_show_more_element():
+    print('\nget_button_show_more_element')
     title = '- SHOW MORE -'
     payload = extract_payload(nlu.INTENT_SHOW_MORE_ELEMENTS)
     return {'title': title, 'payload': payload}
@@ -90,15 +103,20 @@ def get_buttons_order_by_attribute(element, element_name):
         buttons.append({'title' :title, 'payload': payload}) """
     displayable_attributes = resolver.simulate_view(element_name)
     print('displayable_attributes ', displayable_attributes)
-    attribute_names = [i['attribute'] for i in displayable_attributes if 'attribute' in i]
-    displayed_names = [i['display'] for i in displayable_attributes if 'display' in i]
-    print('attribute_names')
+    #attribute_names = [i['attribute'] for i in displayable_attributes if 'attribute' in i]
+    #displayed_names = [i['display'] for i in displayable_attributes if 'display' in i]
+    displayed_names = [i for i in displayable_attributes]
     for k, v in element.items():
-        if k in attribute_names:
+        #if k in attribute_names:
+        if True:
             title_payload = k
-            title_display = displayed_names[attribute_names.index(k)]
+            print('title_payload', title_payload)
+            #title_display = displayed_names[attribute_names.index(k)]
+            title_display = title_payload
             payload = extract_payload(nlu.INTENT_ORDER_BY_ATTRIBUTE, [nlu.ENTITY_POSITION, title_payload])
+            print('payload ', payload)
             buttons.append({'title' :title_display, 'payload': payload})
+    print('buttons ', buttons)
     return buttons
 
 

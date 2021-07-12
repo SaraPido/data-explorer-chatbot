@@ -365,8 +365,11 @@ def action_cross_relation(entities, response, context):
 
 
 def action_show_relations(entities, response, context):
+    print('\naction_show_relations ', entities, response, context)
     element = context.get_last_element()
+    print('element ', element)
     if element:
+
         #buttons = btn.get_buttons_element_relations(element['element_name'])
         response.add_message('If you want more information, I can tell you:')
         response.add_buttons(btn.get_buttons_element_relations(element['element_name']))
@@ -376,14 +379,15 @@ def action_show_relations(entities, response, context):
 
 
 def action_select_element_by_position(entities, response, context):
+    print('\naction_select_element_by_position')
     pos = extract_single_entity_value(entities, nlu.ENTITY_POSITION)
-
+    print('pos ', pos)
     if pos:
         # attention, I suppose "position" is in the form "1st", "2nd", ...
         position = int(pos)
 
         element = context.get_last_element()
-
+        print('element ', element)
         if element:
 
             if element['real_value_length'] == 1:
@@ -418,39 +422,52 @@ def action_select_element_by_position(entities, response, context):
 
 
 def action_view_context_element(entities, response, context):
+    print('\naction_view_context_element')
     element = context.view_last_element()
-
+    print('element ', element)
     if element:
         if element['real_value_length'] == 1:
             response.add_message(msg.INTRODUCE_ELEMENT_TO_SHOW_PATTERN.format(element['element_name']))
             response.add_message(msg.element_attributes(element))
+            print('entered if element[\'real_value_length\'] == 1')
             if element.get('element_name') not in resolver.get_all_primary_element_names():  # IF OF TYPE SECONDARY
                 response.add_message('If you want to go back, just click the following button')
                 response.add_button(btn.get_button_go_back_to_context_position('Go back!',
                                                                                len(context.get_context_list()) - 1))
+                print('entered element.get(\'element_name\') not in resolver.get_all_primary_element_names()')
             else:
                 action_show_relations(entities, response, context)
         else:
             if element['show']['from'] == 0:
+                print("\n if element['show']['from'] == 0: \n")
                 if element.get('element_name') not in resolver.get_all_primary_element_names():  # IF OF TYPE SECONDARY
+                    print("\nif element.get('element_name') not in resolver.get_all_primary_element_names():\n")
                     response.add_message('If you want to go back, just click the following button')
                     response.add_button(btn.get_button_go_back_to_context_position('Go back!',
                                                                                    len(context.get_context_list()) - 1))
+                print("element.get('element_name') ", element.get('element_name'))
                 response.add_message(msg.SELECT_FOR_INFO_PATTERN.format(element.get('element_name')))
+            print("element['show']['from'] + 1 ", element['show']['from'] + 1)
+            print("element['show']['to']", element['show']['to'])
+            print("element['real_value_length']", element['real_value_length'])
             response.add_message('Shown results from {} to {} of {}'.format(element['show']['from'] + 1,
                                                                             element['show']['to'],
                                                                             element['real_value_length']))
 
             #  response.add_message(msg.element_list(element))
             response.add_buttons(btn.get_buttons_select_element(element))
+            print('added select buttons ')
             if element['show']['to'] < element['real_value_length']:
+                print("element['show']['to'] < element['real_value_length']")
                 response.add_button(btn.get_button_show_more_element())
             response.add_button(btn.get_button_order_by())
+            print('added buttons action select by pos')
     else:
         response.add_message(msg.EMPTY_CONTEXT_LIST)
     response.add_button(btn.get_button_help_on_elements())
     response.add_button(btn.get_button_go_back_to_context_position('- GO BACK! -', len(context.get_context_list()) - 1))
     response.add_button(btn.get_button_history())
+    print('finish  action select by pos\n')
 
 
 def action_show_more_elements(entities, response, context):

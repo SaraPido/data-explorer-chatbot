@@ -58,7 +58,13 @@ def extract_element(element_name):
 
 
 def extract_show_columns(element_name):
-    e = extract_element(element_name)
+    print('extract_show_columns ', element_name)
+    if type(element_name)==dict:
+        e = extract_element(element_name['element_name'])
+    else:
+        e = extract_element(element_name)
+
+    print('e ', e)
     return e.get('show_columns') if e else None
 
 
@@ -97,7 +103,11 @@ def get_attribute_without_keyword_by_type(element_name, attribute_type):
 
 
 def get_element_show_string(element_name, element_value):
+    print('\nget_element_show_string ', element_name, element_value)
     show_columns = extract_show_columns(element_name)
+    print('show_columns ', show_columns)
+    print('element value ', element_value)
+    print(', '.join((sh['keyword'] + ': ' if sh.get('keyword') else '') + ' '.join(str(element_value[x]) for x in sh['columns']) for sh in show_columns)+'\n')
     return ', '.join((sh['keyword'] + ': ' if sh.get('keyword') else '')
                      + ' '.join(str(element_value[x]) for x in sh['columns'])
                      for sh in show_columns)
@@ -121,3 +131,13 @@ def query_join(element, relation_name):
     result_element['element_name'] = relation['element_name']
     return result_element
 
+
+def simulate_view(element_name):
+    print('\nsimulate_view resolver')
+    e = extract_element(element_name)
+    print('e ', e)
+    table_name = e.get('table_name')
+    print('table name ', table_name)
+    result_element = broker.simulate_view(table_name)
+    print('result_element', result_element)
+    return result_element

@@ -224,3 +224,16 @@ def get_WHERE_ATTRIBUTES_query_string(attributes):
         attr += " )"
         attr_string_list.append(attr)
     return " AND ".join(attr_string_list)
+
+
+def get_table_view_from_name(table_name):
+    return db_schema.get(table_name)  # may return None
+
+
+def simulate_view(table_name):
+    print('simulate_view broker ', table_name)
+    columns_dict = get_table_view_from_name(table_name)
+    print('columns_dict')
+    columns = columns_dict['column_list']
+    print('columns ', columns)
+    return columns

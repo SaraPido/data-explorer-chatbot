@@ -17,19 +17,13 @@ INFO:modules.extractor:NLU model:
 INFO:modules.extractor:Loading the NLU model WITHOUT training...
 INFO:modules.extractor:NLU model loaded!
 INFO:root:Bot successfully started!
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:02:58 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgB9aA8 HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:02:58 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgB9aAF&sid=bwm9ZrKCvIYy5oYWAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:02:58 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgB9aAG&sid=bwm9ZrKCvIYy5oYWAAAA HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:02:58 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgB9aAV.0&sid=bwm9ZrKCvIYy5oYWAAAA HTTP/1.1" 200 241 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:02:58 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgB9aAV&sid=bwm9ZrKCvIYy5oYWAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:02:58 +0000] "GET /socket.io/?EIO=4&transport=websocket&sid=bwm9ZrKCvIYy5oYWAAAA HTTP/1.1" 101 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "GET / HTTP/1.1" 200 6934 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "GET /static/db_concept.json HTTP/1.1" 200 72157 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgBAS96 HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgBAS9T&sid=ayGGlrQswe2o4Ap1AAAC HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgBAS9U&sid=ayGGlrQswe2o4Ap1AAAC HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgBAS9k&sid=ayGGlrQswe2o4Ap1AAAC HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgBAS9l&sid=ayGGlrQswe2o4Ap1AAAC HTTP/1.1" 200 241 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET / HTTP/1.1" 200 6934 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /static/db_concept.json HTTP/1.1" 200 72157 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgQ7daJ HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgQ7daU&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgQ7daV&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgQ7daZ&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgQ7daZ.0&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 297 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
 INFO:modules.extractor:Message to parse: "/start"
 INFO:modules.extractor:Parsed message: {'intent': {'name': 'start', 'confidence': 1}, 'entities': [], 'original_message': 'start'}
 INFO:modules.extractor:Message to parse: "/more_info_find{"el":"sequence"}"
@@ -39,47 +33,5 @@ INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'c
 INFO:modules.database.broker:Executing query...
 INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a WHERE ( a.lineage LIKE %s ) LIMIT 100"
 INFO:modules.database.broker:Tuple: ('%b1%',)
-INFO:modules.extractor:Message to parse: "/more_info_filter"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'more_info_filter', 'confidence': 1}, 'entities': [], 'original_message': 'more_info_filter'}
-INFO:modules.extractor:Message to parse: "filter those from europe"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'filter_el_by_attr', 'confidence': 0.9983454942703247}, 'entities': [{'start': 13, 'value': 'from', 'entity': 'attr_1_3'}, {'start': 18, 'value': 'europe', 'entity': 'word_1_3'}], 'original_message': 'filter those from europe'}
-INFO:modules.database.broker:Executing query...
-INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a WHERE ( a.continent LIKE %s OR a.country LIKE %s OR a.region LIKE %s OR a.subregion LIKE %s ) AND ( a.lineage LIKE %s ) LIMIT 100"
-INFO:modules.database.broker:Tuple: ('%europe%', '%europe%', '%europe%', '%europe%', '%b1%')
-INFO:modules.extractor:Message to parse: "/order_by"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'order_by', 'confidence': 1}, 'entities': [], 'original_message': 'order_by'}
-INFO:modules.extractor:Message to parse: "/help_elements"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'help_elements', 'confidence': 1}, 'entities': [], 'original_message': 'help_elements'}
-INFO:modules.extractor:Message to parse: "tell me more about sequence"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'more_info_find', 'confidence': 0.9608821272850037}, 'entities': [{'start': 19, 'value': 'sequence', 'entity': 'el_1'}], 'original_message': 'tell me more about sequence'}
-INFO:modules.extractor:Message to parse: "find sequence from Europe"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9990574717521667}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_1'}, {'start': 14, 'value': 'from', 'entity': 'attr_1_3'}, {'start': 19, 'value': 'Europe', 'entity': 'word_1_3'}], 'original_message': 'find sequence from Europe'}
-INFO:modules.database.broker:Executing query...
-INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a WHERE ( a.continent LIKE %s OR a.country LIKE %s OR a.region LIKE %s OR a.subregion LIKE %s ) LIMIT 100"
-INFO:modules.database.broker:Tuple: ('%Europe%', '%Europe%', '%Europe%', '%Europe%')
-INFO:modules.extractor:Message to parse: "/order_by"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'order_by', 'confidence': 1}, 'entities': [], 'original_message': 'order_by'}
-ERROR:asyncio:Task exception was never retrieved
-future: <Task finished coro=<AsyncServer._handle_event_internal() done, defined at /Users/sarapido/anaconda3/envs/data-explorer-chatbot2/lib/python3.7/site-packages/socketio/asyncio_server.py:502> exception=AttributeError("module 'modules.database.resolver' has no attribute 'simulate_view'")>
-Traceback (most recent call last):
-  File "/Users/sarapido/anaconda3/envs/data-explorer-chatbot2/lib/python3.7/site-packages/socketio/asyncio_server.py", line 504, in _handle_event_internal
-    r = await server._trigger_event(data[0], namespace, sid, *data[1:])
-  File "/Users/sarapido/anaconda3/envs/data-explorer-chatbot2/lib/python3.7/site-packages/socketio/asyncio_server.py", line 531, in _trigger_event
-    ret = await self.handlers[namespace][event](*args)
-  File "/Users/sarapido/Desktop/PHD/data-explorer-chatbot/modules/connectors/webchat.py", line 50, in handle_message
-    response = caller.run_action_from_parsed_message(parsed_message, str(sid))
-  File "/Users/sarapido/Desktop/PHD/data-explorer-chatbot/modules/caller.py", line 34, in run_action_from_parsed_message
-    return actions.execute_action_from_intent_name(intent_name, entities, context)
-  File "/Users/sarapido/Desktop/PHD/data-explorer-chatbot/modules/actions.py", line 628, in execute_action_from_intent_name
-    action_function(entities, response, context)
-  File "/Users/sarapido/Desktop/PHD/data-explorer-chatbot/modules/actions.py", line 574, in action_order_by
-    response.add_buttons(btn.get_buttons_order_by_attribute(value_attributes,element_name))
-  File "/Users/sarapido/Desktop/PHD/data-explorer-chatbot/modules/patterns/btn.py", line 90, in get_buttons_order_by_attribute
-    displayable_attributes = resolver.simulate_view(element_name)
-AttributeError: module 'modules.database.resolver' has no attribute 'simulate_view'
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:12:06:47 +0000] "GET /socket.io/?EIO=4&transport=websocket&sid=ayGGlrQswe2o4Ap1AAAC HTTP/1.1" 101 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:13:17:08 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgBQYTX HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:13:17:08 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgBQYZl&sid=ClksMS00J-C4kYB3AAAE HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:13:17:08 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgBQYZo&sid=ClksMS00J-C4kYB3AAAE HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:13:17:08 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgBQYaM&sid=ClksMS00J-C4kYB3AAAE HTTP/1.1" 200 241 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [09/Jul/2021:13:17:08 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgBQYaL&sid=ClksMS00J-C4kYB3AAAE HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:modules.extractor:Message to parse: "/sel_by_pos{"pos":"4"}"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'sel_by_pos', 'confidence': 1}, 'entities': [{'entity': 'pos', 'value': '4', 'start': 1}], 'original_message': 'sel_by_pos{"pos":"4"}'}
