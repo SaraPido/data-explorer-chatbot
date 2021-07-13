@@ -92,7 +92,7 @@ def find_element_examples(element_name):
         for a in attributes:
             message += "- Find {} ".format(random.choice(all_el_names))
             if a.get('keyword'):
-                message += "{} ".format(a['keyword'])
+                message += "{} ".format(random.choice(a['keyword']))
             if a.get('type') == 'num':
                 message += "more than / less than "
             message += "...\n"
@@ -111,7 +111,7 @@ def filter_element_examples(element_name):
         for a in attributes:
             message += "- Filter those "
             if a.get('keyword'):
-                message += "{} ".format(a['keyword'])
+                message += "{} ".format(random.choice(a['keyword']))
             if a.get('type') == 'num':
                 message += "more than " if random.randint(0, 1) else "less than "
             message += "...\n"

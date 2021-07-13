@@ -102,14 +102,14 @@
     ],
     "attributes": [
       {
-        "keyword": "{}",
+        "keyword": ["{}"],
         "type": "word",
         "columns": [
           "sequence_id"
         ]
       },
       {
-        "keyword": "in {} lineage",
+        "keyword": ["in {} lineage"],
         "type": "word",
         "columns": [
           "lineage"
