@@ -30,6 +30,7 @@ def extract_single_entity_value(entities, entity_name):
 
 
 def compute_ordered_entity_list(entities):
+    print('\ncompute_ordered_entity_list', entities)
     ordered_entities = []
 
     index_previous_attribute = None
@@ -43,7 +44,7 @@ def compute_ordered_entity_list(entities):
         #match = re.match("(\w+)_\d_(\d)", e['entity'])
         match = re.match("(\w+)_\d+_(\d+)|el_(columns)", e['entity'])
         print('match ', match)
-        if re.match("attr_\d+_\d+", entities[index - 1]['entity']):
+        if re.match("attr_\d+_\d+_\d+", entities[index - 1]['entity']):
             index_previous_attribute = entities[index - 1]
         elif entities[index - 1]['entity'].startswith('op_num'):
             index_previous_entity_number_op = entities[index - 1]
@@ -85,7 +86,7 @@ def compute_ordered_entity_list(entities):
                 if index2 == index+1:
                     if e2['entity'] == 'or':
                         oe['and_or'] = 'or'
-                    elif re.match('attr_\d+_\d+',e2['entity']) or e2['entity'] == 'and':
+                    elif re.match('attr_\d+_\d+_\d+',e2['entity']) or e2['entity'] == 'and':
                         oe['and_or'] = 'and'
             if ty == 'columns':
                 attr = next((a['value'] for a in entities if re.match("order_by", a['entity'])), None)
@@ -94,7 +95,8 @@ def compute_ordered_entity_list(entities):
                     attr = index_previous_attribute['value']
                 else:
                     attr = None
-            #attr = next((a['value'] for a in entities if re.match("attr_\d_\d", a['entity'])), None)
+
+            attr = next((a['value'] for a in entities if re.match("attr_\d+_\d+_\d+", a['entity'])), None)
             if attr:
                 oe['attribute'] = attr
             ordered_entities.append(oe)
@@ -105,11 +107,10 @@ def compute_ordered_entity_list(entities):
 # ATTRIBUTES HANDLERS
 
 def get_attributes_from_ordered_entities(element_name, ordered_entities, response):
-    print('get_attributes_from_ordered_entities')
+    print('get_attributes_from_ordered_entities ', element_name, ordered_entities, response)
     attributes = []
 
     for oe in ordered_entities:
-
         # if the entity has an attribute, i.e. if it not implied
         if oe.get('attribute'):
             order_by_alias = ['order by', 'ordered by', 'sort by', 'sorted by']

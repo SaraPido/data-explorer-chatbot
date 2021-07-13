@@ -82,6 +82,7 @@ def element_names_info_examples():
 
 
 def find_element_examples(element_name):
+    print('\nfind_element_examples')
     message = 'I am able to find elements of type {} in many different ways. ' \
               'Here some options, I hope they can fit your purposes!\n'.format(element_name)
 
@@ -91,10 +92,11 @@ def find_element_examples(element_name):
         for a in attributes:
             message += "- Find {} ".format(random.choice(all_el_names))
             if a.get('keyword'):
-                message += "{} ".format(a['keyword'])
+                message += "{} ".format(random.choice(a['keyword']))
             if a.get('type') == 'num':
                 message += "more than / less than "
             message += "...\n"
+            print(message)
 
     else:
         message = '- no attribute has been defined for {} yet -'.format(element_name)
@@ -109,7 +111,7 @@ def filter_element_examples(element_name):
         for a in attributes:
             message += "- Filter those "
             if a.get('keyword'):
-                message += "{} ".format(a['keyword'])
+                message += "{} ".format(random.choice(a['keyword']))
             if a.get('type') == 'num':
                 message += "more than " if random.randint(0, 1) else "less than "
             message += "...\n"
