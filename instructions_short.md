@@ -3,13 +3,12 @@
 - Do the dump (schema + data) of the mysql database
 - Save it in the folder 'resources/db'
 - To create the files 'db_concept' and 'db_schema':
-  - modify the file modules/database/parser_new.py such that it contains the name of the db and the correct letter for the names of the db files (e.g. db_concept_f.json)
+  - modify the file modules/database/parser.py such that it contains the name of the db and the correct letter for the names of the db files (e.g. db_concept_f.json)
         
-        python -m modules.database.parser_new
+        cd modules/database
+        python -m parser
         
 - Modify the two created files according to the data of your interest (for example in category you can put the columns that you want to group by)
-        
-- Create the files 'db_concept_s_**LETTER**.json' and 'db_view_**LETTER**.json' using the template of the others present in the folder 'resources/db'
 
 **Train the model**
 - Change the file 'settings.py': put the name of the db of interest and the correct data such as 

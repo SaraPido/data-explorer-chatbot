@@ -78,7 +78,7 @@ def parse_schema_file():
                 # for fp in table_dict['foreign_property_list']:
                 #   print('{} - {}'.format(table_dict['table_name'], fp['reference_table_name']))
 
-    with open('../../resources/db/db_schema_d.json', 'w') as f:
+    with open('../../resources/db/db_schema_e.json', 'w') as f:
         json.dump(schema, f, indent=2)
 
 
@@ -95,7 +95,7 @@ def ask_number(choices, default=0):
 
 
 def create_concept_file():
-    with open('../../resources/db/db_schema_d.json') as f:
+    with open('../../resources/db/db_schema_e.json') as f:
         schema = json.load(f)
 
     concept = {}
@@ -110,10 +110,38 @@ def create_concept_file():
         chosen_type = ask_number(types)
         concept[name] = {'type': chosen_type, 'table_name': table_name}
 
-    with open('../../resources/db/db_concept_d.json', 'w') as f:
+    with open('../../resources/db/db_concept_e.json', 'w') as f:
         json.dump(concept, f, indent=2)
 
+def create_concept_file2():
+    with open('../../resources/db/db_schema_e.json') as f:
+        schema = json.load(f)
+
+    concept = list()
+
+    for table_name in schema:
+        print('TABLE: {}'.format(table_name))
+
+        print('NAME?')
+        name = raw_input('(Default: {})\n'.format(table_name)) or table_name
+        types = ['primary', 'secondary', 'crossable']
+        print('TYPE?')
+        chosen_type = ask_number(types)
+        concept.append( {'element_name': name,
+                         'aliases':[],
+                         'type': chosen_type,
+                         'table_name': table_name,
+                         'show_columns': [
+
+                ],
+                "category": [],
+                "attributes": [],
+                "relations": []} )
+
+    with open('../../resources/db/db_concept_e.json', 'w') as f:
+        json.dump(concept, f, indent=2)
 
 if __name__ == '__main__':
     parse_schema_file()
     #create_concept_file()
+    create_concept_file2()
