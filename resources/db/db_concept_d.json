@@ -102,21 +102,21 @@
     ],
     "attributes": [
       {
-        "keyword": "",
+        "keyword": ["{}"],
         "type": "word",
         "columns": [
           "sequence_id"
         ]
       },
       {
-        "keyword": "in lineage",
+        "keyword": ["in {} lineage"],
         "type": "word",
         "columns": [
           "lineage"
         ]
       },
       {
-        "keyword": "from",
+        "keyword": ["from {}"],
         "type": "word",
         "columns": [
           "continent",
@@ -126,7 +126,7 @@
         ]
       },
       {
-        "keyword": "from",
+        "keyword": ["from {}"],
         "type": "word",
         "columns": [
           "country",
@@ -135,7 +135,7 @@
         ]
       },
       {
-        "keyword": "with mutation on protein",
+        "keyword": ["with mutation on protein {}"],
         "type": "word",
         "columns": [
           "protein"

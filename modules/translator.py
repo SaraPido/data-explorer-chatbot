@@ -48,14 +48,23 @@ if __name__ == "__main__":
 
                 if a.get('keyword'):
 
-                    attribute_text = "@[attr_{}_{}]\n" \
-                                     "    {}".format(idx_e, idx_a, a.get('keyword'))
-                    whole_attribute_text += attribute_text + "\n\n"
+                    id_kw = 1
+
+                    for kw in a.get('keyword'):
+
+                        attribute_text = "~[attr_{}_{}_{}]\n" \
+                                         "    {}".format(idx_e,
+                                                         idx_a,
+                                                         id_kw,
+                                                         kw.format("@[{}_{}_{}]".format(a.get('type'), idx_e, idx_a)))
+                        whole_attribute_text += attribute_text + "\n\n"
+                        id_kw += 1
+
 
                 example_type_text = "@[{}_{}_{}]\n".format(a.get('type'), idx_e, idx_a)
 
                 for col in a.get('columns', []):
-                    q_string = "SELECT {} FROM {}".format(col,
+                    q_string = "SELECT distinct {} FROM {}".format(col,
                                                           e.get('table_name')
                                                           if not a.get('by') else
                                                           a.get('by')[-1].get('to_table_name'))
@@ -83,15 +92,19 @@ if __name__ == "__main__":
                 text = ""
 
                 if a.get('keyword'):
-                    text += "@[attr_{}_{}] ".format(idx_e, idx_a)
 
-                    if a.get('type') == 'num':  # use nlu.ENTITY_ATTR?
-                        text += '@[op_num?] '
+                    id_kw = 1
+                    for kw in a.get('keyword'):
+                        text += "~[attr_{}_{}_{}] ".format(idx_e, idx_a,id_kw)
 
-                text += "@[{}_{}_{}]".format(a.get('type'), idx_e, idx_a)
+                        if a.get('type') == 'num':  # use nlu.ENTITY_ATTR?
+                            text += '@[op_num?] '
+                        id_kw += 1
 
-                whole_text_find += "    ~[find] @[el_{}] ".format(idx_e) + text + "\n"
-                whole_text_filter += "    ~[filter] ~[those?] " + text + "\n"
+                        #text += "@[{}_{}_{}]".format(a.get('type'), idx_e, idx_a)
+
+                        whole_text_find += "    ~[find] @[el_{}] ".format(idx_e) + text + "\n"
+                        whole_text_filter += "    ~[filter] ~[those?] " + text + "\n"
 
                 idx_a += 1
 
