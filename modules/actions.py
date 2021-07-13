@@ -32,10 +32,21 @@ def extract_single_entity_value(entities, entity_name):
 def compute_ordered_entity_list(entities):
     ordered_entities = []
 
-    for e in entities[::-1]:
+    index_previous_attribute = None
+    index_previous_entity_number_op = None
+
+    #for e in entities[::-1]:
+    for index, e in enumerate(entities):
+        print('index, e ', index, e)
         ty = None
         op = '='  # the control of the presence of the OP is made here!
-        match = re.match("(\w+)_\d_(\d)", e['entity'])
+        #match = re.match("(\w+)_\d_(\d)", e['entity'])
+        match = re.match("(\w+)_\d+_(\d+)|el_(columns)", e['entity'])
+        print('match ', match)
+        if re.match("attr_\d+_\d+", entities[index - 1]['entity']):
+            index_previous_attribute = entities[index - 1]
+        elif entities[index - 1]['entity'].startswith('op_num'):
+            index_previous_entity_number_op = entities[index - 1]
         if match:
             what = match.group(1)
             if what == nlu.ENTITY_WORD:
@@ -47,8 +58,15 @@ def compute_ordered_entity_list(entities):
                     op = 'LIKE'  # here forcing the attribute of type "word" to be LIKE and NOT equal
             elif what == nlu.ENTITY_NUMBER:
                 ty = 'num'
-                maybe_op = next((a['value'] for a in entities if a['entity'].startswith('op_num')), None)
+                #maybe_op = next((a['value'] for a in entities if a['entity'].startswith('op_num')), None)
+                #maybe_op = commons.extract_similar_value(maybe_op, ['less than', 'more than'], 6)
+
+                if index_previous_entity_number_op:
+                    maybe_op = index_previous_entity_number_op['value']
+                else:
+                    maybe_op = None
                 maybe_op = commons.extract_similar_value(maybe_op, ['less than', 'more than'], 6)
+
                 if maybe_op:
                     if maybe_op == 'less than':
                         op = '<'
@@ -57,49 +75,113 @@ def compute_ordered_entity_list(entities):
                 else:
                     op = '='
 
+            elif what == nlu.ENTITY_COLUMNS:
+                ty = 'columns'
+                op = 'ORDER BY'
+
         if ty:
             oe = {'type': ty, 'operator': op, 'value': e['value']}
-            attr = next((a['value'] for a in entities if re.match("attr_\d_\d", a['entity'])), None)
+            for index2, e2 in enumerate(entities):
+                if index2 == index+1:
+                    if e2['entity'] == 'or':
+                        oe['and_or'] = 'or'
+                    elif re.match('attr_\d+_\d+',e2['entity']) or e2['entity'] == 'and':
+                        oe['and_or'] = 'and'
+            if ty == 'columns':
+                attr = next((a['value'] for a in entities if re.match("order_by", a['entity'])), None)
+            else:
+                if index_previous_attribute:
+                    attr = index_previous_attribute['value']
+                else:
+                    attr = None
+            #attr = next((a['value'] for a in entities if re.match("attr_\d_\d", a['entity'])), None)
             if attr:
                 oe['attribute'] = attr
             ordered_entities.append(oe)
+    print('\ncompute_ordered_entity_list ', ordered_entities)
     return ordered_entities
 
 
 # ATTRIBUTES HANDLERS
 
-def get_attributes_from_ordered_entities(element_name, ordered_entities):
+def get_attributes_from_ordered_entities(element_name, ordered_entities, response):
+    print('get_attributes_from_ordered_entities')
     attributes = []
 
     for oe in ordered_entities:
 
         # if the entity has an attribute, i.e. if it not implied
         if oe.get('attribute'):
+            order_by_alias = ['order by', 'ordered by', 'sort by', 'sorted by']
             keyword_list = [a['keyword'] for a in resolver.extract_attributes_with_keyword(element_name)]
             attribute_name = commons.extract_similar_value(oe['attribute'],
                                                            keyword_list,
                                                            ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
-
+            for alias in order_by_alias:
+                keyword_list.append(alias)
             if attribute_name:
-                attr = resolver.get_attribute_by_name(element_name, attribute_name)
+                #attr = resolver.get_attribute_by_name(element_name, attribute_name)
+                #if attr.get('type') == oe.get('type'):
+                #    attr['value'] = oe.get('value')
+                #    attr['operator'] = oe.get('operator', '=')  # should not happen
+                #    attributes.append(attr)
+                new_attr = resolver.get_attribute_by_name(element_name, attribute_name)
+                print('new_attr', new_attr)
+                if new_attr:
+                    attr = new_attr.copy()
+                else:
+                    attr = None
+                if attr == None and attribute_name in order_by_alias:
+                    columns = oe['value']
+                    columns_element = handle_columns_name_similarity(element_name, columns)
+                    if columns_element:
+                        oe['value'] = columns_element
+                        attr = {'columns': [columns_element], 'keyword': 'order by', 'operator': 'ORDER BY',
+                                'type': 'columns', 'value': columns_element}
+                    else:
+                        response.add_message('Sorry, there is no attribute "' + columns + '" for ' + element_name)
+                        return []
                 if attr.get('type') == oe.get('type'):
                     attr['value'] = oe.get('value')
+                    if 'and_or' in oe:
+                        attr['and_or'] = oe.get('and_or')
                     attr['operator'] = oe.get('operator', '=')  # should not happen
                     attributes.append(attr)
-
             else:  # if it has an attribute but is not recognized
                 return []  # something unwanted just happened -> attribute extracted but not matched
 
         # if the entity does not have an attribute
         else:
-            attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
-            if attr:
+            #attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
+            #if attr:
+            #    attr['value'] = oe.get('value')
+            #    attr['operator'] = oe.get('operator', '=')
+           #     attributes.append(attr)
+            new_attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
+            if new_attr:
+                attr = new_attr.copy()
                 attr['value'] = oe.get('value')
+                if 'and_or' in oe:
+                    attr['and_or'] = oe.get('and_or')
                 attr['operator'] = oe.get('operator', '=')
                 attributes.append(attr)
-
+    print('\nget_attributes_from_ordered_entities ', attributes)
     return attributes
 
+def handle_columns_name_similarity(element_name_alias, columns_name_received):
+    displayable_attributes = resolver.simulate_view(element_name_alias)
+    attribute_names = [i['attribute'] for i in displayable_attributes if 'attribute' in i]
+    similar = commons.extract_similar_value(columns_name_received, attribute_names, ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
+    if similar:
+        return similar
+    else:
+        similar = commons.extract_similar_value(columns_name_received, attribute_names, ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
+        if similar:
+            for i in attribute_names:
+                if i['display'] is similar:
+                    return i['attribute']
+        else:
+            return None
 
 def get_attributes_string(attributes):
     return ', '.join(('{} '.format(a.get('keyword')) if a.get('keyword') else '')
@@ -237,13 +319,18 @@ def action_more_info_filter(entities, response, context):
     response.add_button(btn.get_button_history())
 
 def action_find_element_by_attribute(entities, response, context):
+    print('action_find_element_by_attribute ', entities, response, context)
     element_name = handle_element_name_similarity(extract_single_entity_value(entities, nlu.ENTITY_ELEMENT))
+    print('element_name ', element_name)
     ordered_entities = compute_ordered_entity_list(entities)
-
+    print('ordered_entities ', ordered_entities)
     if element_name:
-        attributes = get_attributes_from_ordered_entities(element_name, ordered_entities) if ordered_entities else []
+        print('element name ', element_name)
+        attributes = get_attributes_from_ordered_entities(element_name, ordered_entities, response) if ordered_entities else []
+        print('attributes ', attributes)
         if attributes:
             element = resolver.query_find(element_name, attributes)
+            print('element ', element)
             if element['value']:
                 element['action_name'] = '...found with attribute(s) "{}"'.format(get_attributes_string(attributes))
                 element['action_type'] = 'find'

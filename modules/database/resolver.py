@@ -107,17 +107,20 @@ def get_element_show_string(element_name, element_value):
     show_columns = extract_show_columns(element_name)
     print('show_columns ', show_columns)
     print('element value ', element_value)
-    print(', '.join((sh['keyword'] + ': ' if sh.get('keyword') else '') + ' '.join(str(element_value[x]) for x in sh['columns']) for sh in show_columns)+'\n')
+    print(', '.join((sh['keyword'] + ': ' if sh.get('keyword') else '') + ' '.join(str(element_value[x]) for x in sh['columns']) for sh in show_columns))
     return ', '.join((sh['keyword'] + ': ' if sh.get('keyword') else '')
                      + ' '.join(str(element_value[x]) for x in sh['columns'])
                      for sh in show_columns)
 
 
 def query_find(element_name, attributes):
+    print('query_find', element_name, attributes)
     e = extract_element(element_name)
     table_name = e.get('table_name')
+    print('table_name', table_name)
     result_element = broker.query_find(table_name, attributes)
     result_element['element_name'] = element_name
+    print('result_element', result_element)
     return result_element
 
 

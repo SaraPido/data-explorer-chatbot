@@ -81,7 +81,7 @@ def get_table_schema_from_name(table_name):
 
 
 def query_find(in_table_name, attributes):
-
+    print('broker query_find', in_table_name, attributes)
     columns = get_table_schema_from_name(in_table_name)['column_list']  # the schema has "list"
 
     label_attributes(attributes)
@@ -96,7 +96,8 @@ def query_find(in_table_name, attributes):
     where_join_string = get_WHERE_JOIN_query_string(attributes)
     query_string += where_join_string + " AND " if where_join_string else ""
     query_string += get_WHERE_ATTRIBUTES_query_string(attributes)
-
+    query_string = get_ORDER_BY_ATTRIBUTES_query_string(attributes, query_string, in_table_name)
+    print('query string ', query_string)
     values = []
     for a in attributes:
         # if 'a' is a REAL conversational attribute
@@ -112,6 +113,35 @@ def query_find(in_table_name, attributes):
     rows = execute_query_select(query_string, tup)
     return get_dictionary_result(query_string, tup, rows, columns, attributes)
 
+def get_ORDER_BY_ATTRIBUTES_query_string(attributes, query, in_table_name):
+    #attr_string_list = []
+    isOrder = False
+    tokens = [token for token in query.split(" ") if token != ""]
+    if tokens[-1] == 'AND' or tokens[-1] == 'OR': #check if there is a AND/OR before order by clause
+        del tokens[-1]
+    order_clause = " ".join(tokens)
+    for a in attributes:
+        if a['keyword'] == 'order by':
+            isOrder = True
+            order = " ".join(["{}.{}".format(a['from_table'], a['value'])])
+            #attr_string_list.append(order)
+            order_clause += ' ORDER BY '
+            order_clause += order
+    if not isOrder:
+        order_clause += get_ORDER_BY_SHOW_COLUMNS(in_table_name)
+    print('\nget_ORDER_BY_ATTRIBUTES_query_string')
+    print(order_clause)
+    return order_clause
+
+def get_ORDER_BY_SHOW_COLUMNS(in_table_name):
+    element_name = resolver.get_element_name_from_table_name(in_table_name)
+    default_order_columns = resolver.extract_show_columns(element_name)[0]['columns']
+    if default_order_columns:
+        order_clause = ' ORDER BY '
+        order_clause += ", ".join(["{}.{}".format(in_table_name, col) for col in default_order_columns])
+    print('\nget_ORDER_BY_SHOW_COLUMNS')
+    print(order_clause)
+    return order_clause
 
 def query_join(element, relation):
 
@@ -178,9 +208,12 @@ def label_attributes(attributes):
 # query creators
 
 def get_SELECT_query_string(columns):
+    print('get_SELECT_query_string', columns)
     col_string_list = []
     for col in columns:
+        print('col', col)
         col_string_list.append("a.{}".format(col))
+    print('col_string_list', col_string_list)
     return ", ".join(col_string_list)
 
 
@@ -200,19 +233,26 @@ def get_FROM_query_string(attributes, table_name=None):
 
 
 def get_WHERE_JOIN_query_string(attributes):
+    print('get_WHERE_JOIN_query_string ', attributes)
     join_string_list = []
     for a in attributes:
-        for rel in a.get('by', []):
-            # the lists must be equally long, obviously
-            for i in range(len(rel['from_columns'])):
-                join_string_list.append('{}.{}={}.{}'.format(rel['from_letter'],
-                                                             rel['from_columns'][i],
-                                                             rel['to_letter'],
-                                                             rel['to_columns'][i]))
+        if a.get('by', []):
+            for rel in a.get('by', []):
+                print('rel', rel)
+                # the lists must be equally long, obviously
+                for i in range(len(rel['from_columns'])):
+
+                    join_string_list.append('{}.{}={}.{}'.format(rel['from_letter'],
+                                                                 rel['from_columns'][i],
+                                                                 rel['to_letter'],
+                                                                 rel['to_columns'][i]))
+        else:
+            return None
     return " AND ".join(join_string_list)
 
 
 def get_WHERE_ATTRIBUTES_query_string(attributes):
+    print('get_WHERE_ATTRIBUTES_query_string ', attributes)
     attr_string_list = []
     for a in attributes:
         attr = "( "

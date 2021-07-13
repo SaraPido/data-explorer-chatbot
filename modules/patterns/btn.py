@@ -27,9 +27,6 @@ def get_buttons_select_element(element):
     for i in range(element['show']['from'], element['show']['to']):
         print('element_name ', element['element_name'])
         if type(element['element_name'])==dict:
-            print('i', i)
-            print('element value ',  element['element_name']['value'][i-1])
-
             title = resolver.get_element_show_string(element['element_name'], element['element_name']['value'][i-1])
         else:
             title = resolver.get_element_show_string(element['element_name'], element['value'][i])
