@@ -120,11 +120,16 @@ if __name__ == "__main__":
     whole_text_more_info_filter = "%[more_info_filter]('training': '{}', 'testing': '{}')\n{}" \
         .format(idx_e_alias*2 - idx_e_alias*2 // 5, idx_e_alias*2 // 5, whole_text_more_info_filter)  # 1:4 proportion
 
+
+    testing = idx_tot // 5
+    if testing==0:
+        testing=1
+
     whole_text_find = "%[find_el_by_attr]('training': '{}', 'testing': '{}')\n{}" \
-        .format(idx_tot - idx_tot // 5, idx_tot // 5, whole_text_find)  # 1:4 proportion
+        .format(idx_tot - idx_tot // 5, testing, whole_text_find)  # 1:4 proportion
 
     whole_text_filter = "%[filter_el_by_attr]('training': '{}', 'testing': '{}')\n{}"\
-        .format(idx_tot - idx_tot // 5, idx_tot // 5, whole_text_filter)  # 1:4 proportion
+        .format(idx_tot - idx_tot // 5, testing, whole_text_filter)  # 1:4 proportion
 
     final_text = "\n" + "\n".join([whole_element_text, whole_attribute_text, whole_example_type_text,
                                    whole_text_find, whole_text_filter,

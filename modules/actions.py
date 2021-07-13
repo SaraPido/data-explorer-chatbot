@@ -114,6 +114,7 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities, respons
         if oe.get('attribute'):
             order_by_alias = ['order by', 'ordered by', 'sort by', 'sorted by']
             keyword_list = [a['keyword'] for a in resolver.extract_attributes_with_keyword(element_name)]
+            print('keyword_list ', keyword_list)
             attribute_name = commons.extract_similar_value(oe['attribute'],
                                                            keyword_list,
                                                            ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)

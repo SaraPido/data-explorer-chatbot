@@ -131,11 +131,22 @@ def create_concept_file2():
                          'aliases':[],
                          'type': chosen_type,
                          'table_name': table_name,
-                         'show_columns': [
-
-                ],
-                "category": [],
-                "attributes": [],
+                         'show_columns': [{
+                                "keyword": "",
+                                "columns": [""]
+                        }],
+                "category": [{
+                                "column": "",
+                                "alias": "",
+                                "keyword": ""
+                        }],
+                "attributes": [{
+        "keyword": ["{}"],
+        "type": "",
+        "columns": [
+          ""
+        ]
+      }],
                 "relations": []} )
 
     with open('../../resources/db/db_concept_e.json', 'w') as f:

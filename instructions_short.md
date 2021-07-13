@@ -7,6 +7,7 @@
         
         cd modules/database
         python -m parser
+        cd ../..
         
 - Modify the two created files according to the data of your interest (for example in category you can put the columns that you want to group by)
 
