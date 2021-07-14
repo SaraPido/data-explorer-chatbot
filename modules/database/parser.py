@@ -141,6 +141,7 @@ def create_concept_file2():
                                 "keyword": ""
                         }],
                 "attributes": [{
+        "name":"",
         "keyword": ["{}"],
         "type": "",
         "columns": [
