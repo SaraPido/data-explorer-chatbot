@@ -236,9 +236,7 @@ class Context:
         self.log(string_log)
 
     def log(self, string_log):
-        print('log')
         self.logger.info(string_log)
-        print('finish log')
 
     def add_selected_element(self, name, entities):
         selected_element = dict()

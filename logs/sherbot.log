@@ -17,21 +17,43 @@ INFO:modules.extractor:NLU model:
 INFO:modules.extractor:Loading the NLU model WITHOUT training...
 INFO:modules.extractor:NLU model loaded!
 INFO:root:Bot successfully started!
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET / HTTP/1.1" 200 6934 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /static/db_concept.json HTTP/1.1" 200 72157 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgQ7daJ HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgQ7daU&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgQ7daV&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgQ7daZ&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
-INFO:aiohttp.access:127.0.0.1 [12/Jul/2021:09:48:46 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgQ7daZ.0&sid=pT16KaygqMU05j9xAAAA HTTP/1.1" 200 297 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgljbsX HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "POST /socket.io/?EIO=4&transport=polling&t=Ngljbsg&sid=dGTp2zxgN2FDvW4jAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "GET /socket.io/?EIO=4&transport=polling&t=Ngljbsg.0&sid=dGTp2zxgN2FDvW4jAAAA HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "POST /socket.io/?EIO=4&transport=polling&t=Ngljbsl&sid=dGTp2zxgN2FDvW4jAAAA HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "GET /socket.io/?EIO=4&transport=polling&t=Ngljbsl.0&sid=dGTp2zxgN2FDvW4jAAAA HTTP/1.1" 200 297 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "GET /socket.io/?EIO=4&transport=polling&t=Ngljbt0&sid=dGTp2zxgN2FDvW4jAAAA HTTP/1.1" 200 241 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:26:42 +0000] "GET /socket.io/?EIO=4&transport=websocket&sid=dGTp2zxgN2FDvW4jAAAA HTTP/1.1" 101 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "GET / HTTP/1.1" 200 6934 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "GET /static/db_concept.json HTTP/1.1" 200 72157 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgljxMS HTTP/1.1" 200 338 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgljxMo&sid=_H5_T_gmDGRwfaIcAAAC HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgljxMp&sid=_H5_T_gmDGRwfaIcAAAC HTTP/1.1" 200 273 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "POST /socket.io/?EIO=4&transport=polling&t=NgljxMv&sid=_H5_T_gmDGRwfaIcAAAC HTTP/1.1" 200 227 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+INFO:aiohttp.access:127.0.0.1 [16/Jul/2021:14:28:10 +0000] "GET /socket.io/?EIO=4&transport=polling&t=NgljxMv.0&sid=_H5_T_gmDGRwfaIcAAAC HTTP/1.1" 200 297 "http://0.0.0.0:5080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
 INFO:modules.extractor:Message to parse: "/start"
 INFO:modules.extractor:Parsed message: {'intent': {'name': 'start', 'confidence': 1}, 'entities': [], 'original_message': 'start'}
-INFO:modules.extractor:Message to parse: "/more_info_find{"el":"sequence"}"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'more_info_find', 'confidence': 1}, 'entities': [{'entity': 'el', 'value': 'sequence', 'start': 1}], 'original_message': 'more_info_find{"el":"sequence"}'}
-INFO:modules.extractor:Message to parse: "find sequence in lineage b1"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9989187717437744}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_1'}, {'start': 14, 'value': 'in lineage', 'entity': 'attr_1_2'}, {'start': 25, 'value': 'b1', 'entity': 'word_1_2'}], 'original_message': 'find sequence in lineage b1'}
+INFO:modules.extractor:Message to parse: "find sequence in b1 lineage"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9792443513870239}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_sequence'}, {'start': 17, 'value': 'b1', 'entity': 'word_sequence_lineage'}], 'original_message': 'find sequence in b1 lineage'}
 INFO:modules.database.broker:Executing query...
 INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a WHERE ( a.lineage LIKE %s ) LIMIT 100"
 INFO:modules.database.broker:Tuple: ('%b1%',)
-INFO:modules.extractor:Message to parse: "/sel_by_pos{"pos":"4"}"
-INFO:modules.extractor:Parsed message: {'intent': {'name': 'sel_by_pos', 'confidence': 1}, 'entities': [{'entity': 'pos', 'value': '4', 'start': 1}], 'original_message': 'sel_by_pos{"pos":"4"}'}
+INFO:modules.extractor:Message to parse: "find sequence from italy"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9499912261962891}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_sequence'}], 'original_message': 'find sequence from italy'}
+INFO:modules.extractor:Message to parse: "find sequence from Europe"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9900526404380798}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_sequence'}, {'start': 19, 'value': 'Europe', 'entity': 'word_sequence_continent'}], 'original_message': 'find sequence from Europe'}
+INFO:modules.database.broker:Executing query...
+INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a WHERE ( a.continent LIKE %s ) LIMIT 100"
+INFO:modules.database.broker:Tuple: ('%Europe%',)
+INFO:modules.extractor:Message to parse: "find sequence with mutation on proteinS"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9893547296524048}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_sequence'}], 'original_message': 'find sequence with mutation on proteinS'}
+INFO:modules.extractor:Message to parse: "find sequence with mutation on protein S"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.9927391409873962}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_sequence'}, {'start': 39, 'value': 'S', 'entity': 'word_mutation_protein'}], 'original_message': 'find sequence with mutation on protein S'}
+INFO:modules.database.broker:Executing query...
+INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a, mutation b WHERE a.sequence_id=b.sequence_id AND ( b.protein LIKE %s ) LIMIT 100"
+INFO:modules.database.broker:Tuple: ('%S%',)
+INFO:modules.extractor:Message to parse: "find sequence with mutation on protein N"
+INFO:modules.extractor:Parsed message: {'intent': {'name': 'find_el_by_attr', 'confidence': 0.993240237236023}, 'entities': [{'start': 5, 'value': 'sequence', 'entity': 'el_sequence'}, {'start': 39, 'value': 'N', 'entity': 'word_mutation_protein'}], 'original_message': 'find sequence with mutation on protein N'}
+INFO:modules.database.broker:Executing query...
+INFO:modules.database.broker:Query: "SELECT DISTINCT a.sequence_id, a.lineage, a.submission_date, a.continent, a.country, a.region, a.subregion FROM sequence a, mutation b WHERE a.sequence_id=b.sequence_id AND ( b.protein LIKE %s ) LIMIT 100"
+INFO:modules.database.broker:Tuple: ('%N%',)

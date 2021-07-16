@@ -81,23 +81,28 @@ def get_table_schema_from_name(table_name):
 
 
 def query_find(in_table_name, attributes):
-    print('broker query_find', in_table_name, attributes)
+    print('\nbroker query_find', in_table_name, attributes)
     columns = get_table_schema_from_name(in_table_name)['column_list']  # the schema has "list"
-
+    print('columns', columns)
     label_attributes(attributes)
-
+    print('attributes', attributes)
     for a in attributes:
         if not a.get('operator'):
             a['operator'] = '='
-
+    print('attributes', attributes)
     query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns)  # ugly but correct
+    print('query_string', query_string)
     query_string += " FROM " + get_FROM_query_string(attributes, in_table_name)
+    print('query_string', query_string)
     query_string += " WHERE "
     where_join_string = get_WHERE_JOIN_query_string(attributes)
+    print('query_string', query_string)
     query_string += where_join_string + " AND " if where_join_string else ""
+    print('query_string', query_string)
     query_string += get_WHERE_ATTRIBUTES_query_string(attributes)
-    query_string = get_ORDER_BY_ATTRIBUTES_query_string(attributes, query_string, in_table_name)
-    print('query string ', query_string)
+    print('query_string', query_string)
+    #query_string = get_ORDER_BY_ATTRIBUTES_query_string(attributes, query_string, in_table_name)
+    #print('query string ', query_string)
     values = []
     for a in attributes:
         # if 'a' is a REAL conversational attribute
@@ -109,8 +114,11 @@ def query_find(in_table_name, attributes):
         # if 'a' is a mocked relation
         elif a.get('join_values'):
             values.extend(a['join_values'])
+    print('query_string', query_string)
     tup = tuple(values)
+
     rows = execute_query_select(query_string, tup)
+    print('rows', rows)
     return get_dictionary_result(query_string, tup, rows, columns, attributes)
 
 def get_ORDER_BY_ATTRIBUTES_query_string(attributes, query, in_table_name):
