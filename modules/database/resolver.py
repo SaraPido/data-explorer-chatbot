@@ -87,10 +87,7 @@ def extract_attributes_with_keyword(element_name):
 
 def get_attribute_by_name(element_name, attribute_name):
     attributes = extract_attributes_with_keyword(element_name)
-    for a in attributes:
-        if a.get('keyword') == attribute_name:
-            return a
-    return None
+    return next((a for a in attributes if a.get('name')==attribute_name), None)
 
 
 def get_attribute_without_keyword_by_type(element_name, attribute_type):

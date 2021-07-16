@@ -36,11 +36,13 @@
 
     ],
     "attributes": [{
+                                "name" : "protein",
                                 "keyword": "are in",
                                 "type": "word",
                                 "columns": ["protein"]
                         },
     {
+                                "name" : "position",
                                 "keyword": "in position",
                                 "type": "num",
                                 "columns": ["position"]
@@ -102,6 +104,7 @@
     ],
     "attributes": [
       {
+        "name" : "id",
         "keyword": ["{}"],
         "type": "word",
         "columns": [
@@ -109,6 +112,7 @@
         ]
       },
       {
+        "name" : "lineage",
         "keyword": ["in {} lineage"],
         "type": "word",
         "columns": [
@@ -116,25 +120,31 @@
         ]
       },
       {
+        "name" : "continent",
         "keyword": ["from {}"],
         "type": "word",
         "columns": [
-          "continent",
-          "country",
-          "region",
-          "subregion"
+          "continent"
         ]
       },
       {
+        "name" : "country",
         "keyword": ["from {}"],
         "type": "word",
         "columns": [
-          "country",
-          "region",
-          "subregion"
+          "country"
         ]
       },
       {
+        "name" : "region",
+        "keyword": ["from {}"],
+        "type": "word",
+        "columns": [
+          "region"
+        ]
+      },
+      {
+        "name" : "protein",
         "keyword": ["with mutation on protein {}"],
         "type": "word",
         "columns": [

@@ -15,11 +15,7 @@ logger = logging.getLogger(__name__)
 # ENTITIES EXTRACTORS
 
 def extract_entities(entities, entity_name):
-    found = []
-    for e in entities:
-        if e.get('entity').startswith(entity_name):  # el_1 -> el, word_2_4 -> word
-            found.append(e)
-    return found
+    return [e for e in entities if e.get("entity").startswith(entity_name)]
 
 
 def extract_single_entity_value(entities, entity_name):
@@ -36,20 +32,23 @@ def compute_ordered_entity_list(entities):
     index_previous_attribute = None
     index_previous_entity_number_op = None
 
+    print("entities:", entities)
     #for e in entities[::-1]:
     for index, e in enumerate(entities):
         print('index, e ', index, e)
         ty = None
         op = '='  # the control of the presence of the OP is made here!
-        #match = re.match("(\w+)_\d_(\d)", e['entity'])
-        match = re.match("(\w+)_\d+_(\d+)|el_(columns)", e['entity'])
+        #castaldo: match = re.match("(\w+)_\d_(\d)", e['entity'])
+        #chatidea: match = re.match("(\w+)_\d+_(\d+)|el_(columns)", e['entity'])
+        match = re.match("(\w+)_.+", e['entity'])
         print('match ', match)
         if re.match("attr_\d+_\d+_\d+", entities[index - 1]['entity']):
             index_previous_attribute = entities[index - 1]
         elif entities[index - 1]['entity'].startswith('op_num'):
             index_previous_entity_number_op = entities[index - 1]
         if match:
-            what = match.group(1)
+            #castaldo: what = match.group(1)
+            what = match.string.strip().split("_")[0]
             if what == nlu.ENTITY_WORD:
                 ty = 'word'
                 maybe_op = next((a['value'] for a in entities if a['entity'].startswith('op_word')), None)
@@ -96,11 +95,15 @@ def compute_ordered_entity_list(entities):
                 else:
                     attr = None
 
-            attr = next((a['value'] for a in entities if re.match("attr_\d+_\d+_\d+", a['entity'])), None)
+            #this returns the keyword (???)
+            #attr = next((a['value'] for a in entities if re.match("attr_\d+_\d+_\d+", a['entity'])), None)
+
+            attr = match.string.strip().split("_")[-1]
+            tab_name = match.string.strip().split("_")[-2]
             if attr:
                 oe['attribute'] = attr
+                oe['table'] = tab_name
             ordered_entities.append(oe)
-    print('\ncompute_ordered_entity_list ', ordered_entities)
     return ordered_entities
 
 
@@ -115,12 +118,16 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities, respons
         if oe.get('attribute'):
             order_by_alias = ['order by', 'ordered by', 'sort by', 'sorted by']
             keyword_list = [a['keyword'] for a in resolver.extract_attributes_with_keyword(element_name)]
-            print('keyword_list ', keyword_list)
-            attribute_name = commons.extract_similar_value(oe['attribute'],
-                                                           keyword_list,
-                                                           ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
-            for alias in order_by_alias:
-                keyword_list.append(alias)
+            #print('keyword_list ', keyword_list)
+            #attribute_name = commons.extract_similar_value(oe['attribute'],
+            #                                               keyword_list,
+            #                                               ELEMENT_SIMILARITY_DISTANCE_THRESHOLD)
+
+            #pinoli: get attribute name from ordered_entities
+            attribute_name =oe.get("attribute")
+
+            #for alias in order_by_alias:
+            #    keyword_list.append(alias)
             if attribute_name:
                 #attr = resolver.get_attribute_by_name(element_name, attribute_name)
                 #if attr.get('type') == oe.get('type'):
@@ -128,7 +135,7 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities, respons
                 #    attr['operator'] = oe.get('operator', '=')  # should not happen
                 #    attributes.append(attr)
                 new_attr = resolver.get_attribute_by_name(element_name, attribute_name)
-                print('new_attr', new_attr)
+                print('new_attr', new_attr, "\n\n\n\n")
                 if new_attr:
                     attr = new_attr.copy()
                 else:
@@ -154,11 +161,6 @@ def get_attributes_from_ordered_entities(element_name, ordered_entities, respons
 
         # if the entity does not have an attribute
         else:
-            #attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
-            #if attr:
-            #    attr['value'] = oe.get('value')
-            #    attr['operator'] = oe.get('operator', '=')
-           #     attributes.append(attr)
             new_attr = resolver.get_attribute_without_keyword_by_type(element_name, oe.get('type'))
             if new_attr:
                 attr = new_attr.copy()
@@ -331,8 +333,9 @@ def action_find_element_by_attribute(entities, response, context):
         attributes = get_attributes_from_ordered_entities(element_name, ordered_entities, response) if ordered_entities else []
         print('attributes ', attributes)
         if attributes:
+            print("ATTRIBUTES TRUE\n\n")
             element = resolver.query_find(element_name, attributes)
-            print('element ', element)
+            print('\n\nelement ', element)
             if element['value']:
                 element['action_name'] = '...found with attribute(s) "{}"'.format(get_attributes_string(attributes))
                 element['action_type'] = 'find'
@@ -725,9 +728,7 @@ intents_to_action_functions = {
 def execute_action_from_intent_name(intent_name, entities, context):
     print('execute_action_from_intent_name')
     response = patterns.Response()
-    print('response ', response)
     action_function = intents_to_action_functions.get(intent_name)
-    print('action_function ', action_function)
     if action_function:
         print('Calling action: {}'.format(action_function.__name__))
         context.log('Calling action: {}'.format(action_function.__name__))

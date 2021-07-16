@@ -31,12 +31,13 @@ if __name__ == "__main__":
         idx_tot += 1
 
         if e.get('type') == 'primary':
+            tab_name_primary = e.get("table_name")
 
-            whole_text_more_info_find += "    ~[show?] ~[more_info_find] @[el_{}]\n".format(idx_e)
-            whole_text_more_info_filter += "    ~[show?] ~[more_info_filter] @[el_{}]\n".format(idx_e)
+            whole_text_more_info_find += f"    ~[show?] ~[more_info_find] @[el_{tab_name_primary}]\n"
+            whole_text_more_info_filter += f"    ~[show?] ~[more_info_filter] @[el_{tab_name_primary}]\n"
 
-            element_text = "@[el_{}]\n" \
-                           "    ".format(idx_e)
+            element_text = f"@[el_{tab_name_primary}]\n" \
+                           "    "
             element_text += "\n    ".join([e.get('element_name')] + e.get('aliases', []))
             whole_element_text += element_text + "\n\n"
 
@@ -44,6 +45,9 @@ if __name__ == "__main__":
 
             idx_a = 1
             for a in e.get('attributes', []):
+                att_name = a.get('name')
+                att_type = a.get('type')
+                tab_name = e.get("table_name") if not a.get('by') else a.get('by')[-1].get('to_table_name')
                 idx_tot += 1
 
                 if a.get('keyword'):
@@ -52,20 +56,19 @@ if __name__ == "__main__":
 
                     for kw in a.get('keyword'):
 
-                        attribute_text = "~[attr_{}_{}_{}]\n" \
-                                         "    {}".format(idx_e,
-                                                         idx_a,
-                                                         id_kw,
-                                                         kw.format("@[{}_{}_{}]".format(a.get('type'), idx_e, idx_a)))
+                        formated_kw = kw.format(f"@[{att_type}_{tab_name}_{att_name}]")
+
+                        attribute_text = f"~[attr_{tab_name}_{att_name}_{id_kw}]\n" \
+                                         f"    {formated_kw}"
                         whole_attribute_text += attribute_text + "\n\n"
                         id_kw += 1
 
 
-                example_type_text = "@[{}_{}_{}]\n".format(a.get('type'), idx_e, idx_a)
+                example_type_text = f"@[{att_type}_{tab_name}_{att_name}]\n"
 
                 for col in a.get('columns', []):
                     q_string = "SELECT distinct {} FROM {}".format(col,
-                                                          e.get('table_name')
+                                                          tab_name
                                                           if not a.get('by') else
                                                           a.get('by')[-1].get('to_table_name'))
                     res = list(broker.execute_query_select(q_string))
@@ -95,7 +98,7 @@ if __name__ == "__main__":
 
                     id_kw = 1
                     for kw in a.get('keyword'):
-                        text += "~[attr_{}_{}_{}] ".format(idx_e, idx_a,id_kw)
+                        text += f"~[attr_{tab_name}_{att_name}_{id_kw}] "
 
                         if a.get('type') == 'num':  # use nlu.ENTITY_ATTR?
                             text += '@[op_num?] '
@@ -103,7 +106,7 @@ if __name__ == "__main__":
 
                         #text += "@[{}_{}_{}]".format(a.get('type'), idx_e, idx_a)
 
-                        whole_text_find += "    ~[find] @[el_{}] ".format(idx_e) + text + "\n"
+                        whole_text_find += f"    ~[find] @[el_{tab_name_primary}] " + text + "\n"
                         whole_text_filter += "    ~[filter] ~[those?] " + text + "\n"
 
                 idx_a += 1
@@ -113,17 +116,16 @@ if __name__ == "__main__":
     idx_tot = min(idx_tot, 400)  # max training set
 
     #  prepending here...
+    testing = max(1, idx_e_alias*2 // 5)
 
     whole_text_more_info_find = "%[more_info_find]('training': '{}', 'testing': '{}')\n{}"\
-        .format(idx_e_alias*2 - idx_e_alias*2 // 5, idx_e_alias*2 // 5, whole_text_more_info_find)  # 1:4 proportion
+        .format(idx_e_alias*2 - idx_e_alias*2 // 5, testing, whole_text_more_info_find)  # 1:4 proportion
 
     whole_text_more_info_filter = "%[more_info_filter]('training': '{}', 'testing': '{}')\n{}" \
-        .format(idx_e_alias*2 - idx_e_alias*2 // 5, idx_e_alias*2 // 5, whole_text_more_info_filter)  # 1:4 proportion
+        .format(idx_e_alias*2 - idx_e_alias*2 // 5, testing, whole_text_more_info_filter)  # 1:4 proportion
 
 
-    testing = idx_tot // 5
-    if testing==0:
-        testing=1
+    testing = max(1, idx_tot // 5)
 
     whole_text_find = "%[find_el_by_attr]('training': '{}', 'testing': '{}')\n{}" \
         .format(idx_tot - idx_tot // 5, testing, whole_text_find)  # 1:4 proportion
