@@ -83,22 +83,15 @@ def get_table_schema_from_name(table_name):
 def query_find(in_table_name, attributes):
     print('\nbroker query_find', in_table_name, attributes)
     columns = get_table_schema_from_name(in_table_name)['column_list']  # the schema has "list"
-    print('columns', columns)
     label_attributes(attributes)
-    print('attributes', attributes)
     for a in attributes:
         if not a.get('operator'):
             a['operator'] = '='
-    print('attributes', attributes)
-    query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns)  # ugly but correct
-    print('query_string', query_string)
+    query_string = "SELECT DISTINCT " + get_SELECT_query_string(columns)  # ugly but correc
     query_string += " FROM " + get_FROM_query_string(attributes, in_table_name)
-    print('query_string', query_string)
     query_string += " WHERE "
     where_join_string = get_WHERE_JOIN_query_string(attributes)
-    print('query_string', query_string)
     query_string += where_join_string + " AND " if where_join_string else ""
-    print('query_string', query_string)
     query_string += get_WHERE_ATTRIBUTES_query_string(attributes)
     print('query_string', query_string)
     #query_string = get_ORDER_BY_ATTRIBUTES_query_string(attributes, query_string, in_table_name)
@@ -114,7 +107,6 @@ def query_find(in_table_name, attributes):
         # if 'a' is a mocked relation
         elif a.get('join_values'):
             values.extend(a['join_values'])
-    print('query_string', query_string)
     tup = tuple(values)
 
     rows = execute_query_select(query_string, tup)
@@ -195,20 +187,19 @@ def get_reverse_relation(relation):
 # query helper
 
 def label_attributes(attributes):
-    num2alpha = dict(zip(range(1, 27), string.ascii_lowercase))
-    i = 2  # the 'a' is taken by the first
+    i = 'b'  # the 'a' is taken by the first
     for a in attributes:
         if a.get('by'):
             for idx, rel in enumerate(a['by']):
                 if not idx:
                     rel['from_letter'] = 'a'
-                    rel['to_letter'] = num2alpha[i]
+                    rel['to_letter'] = i
                 else:
-                    rel['from_letter'] = num2alpha[i]
-                    rel['to_letter'] = num2alpha[i + 1]
-                    i += 1
+                    rel['from_letter'] = i
+                    rel['to_letter'] = chr(ord(i) + 1)
+                    i = chr(ord(i) + 1)
             a['letter'] = a['by'][-1]['to_letter']  # the last letter
-            i += 1
+            i = chr(ord(i) + 1)
         else:
             a['letter'] = 'a'
 
@@ -216,37 +207,27 @@ def label_attributes(attributes):
 # query creators
 
 def get_SELECT_query_string(columns):
-    print('get_SELECT_query_string', columns)
-    col_string_list = []
-    for col in columns:
-        print('col', col)
-        col_string_list.append("a.{}".format(col))
-    print('col_string_list', col_string_list)
-    return ", ".join(col_string_list)
+    return ", ".join([f'a.{col}' for col in columns])
 
 
 def get_FROM_query_string(attributes, table_name=None):
-    tab_string_list = []
+    tab_string_list = set()
     if table_name:
-        tab_string_list.append('{} a'.format(table_name))
+        tab_string_list.add(f'{table_name} a')
+
     for a in attributes:
         for rel in a.get('by', []):
-            from_tab_string = '{} {}'.format(rel['from_table_name'], rel['from_letter'])
-            if from_tab_string not in tab_string_list:
-                tab_string_list.append(from_tab_string)
-            to_tab_string = '{} {}'.format(rel['to_table_name'], rel['to_letter'])
-            if to_tab_string not in tab_string_list:
-                tab_string_list.append(to_tab_string)
+            tab_string_list.add(f"{rel['from_table_name']} {rel['from_letter']}")
+            tab_string_list.add(f"{rel['to_table_name']} {rel['to_letter']}")
+
     return ", ".join(tab_string_list)
 
 
 def get_WHERE_JOIN_query_string(attributes):
-    print('get_WHERE_JOIN_query_string ', attributes)
     join_string_list = []
     for a in attributes:
         if a.get('by', []):
             for rel in a.get('by', []):
-                print('rel', rel)
                 # the lists must be equally long, obviously
                 for i in range(len(rel['from_columns'])):
 
@@ -260,16 +241,9 @@ def get_WHERE_JOIN_query_string(attributes):
 
 
 def get_WHERE_ATTRIBUTES_query_string(attributes):
-    print('get_WHERE_ATTRIBUTES_query_string ', attributes)
     attr_string_list = []
     for a in attributes:
-        attr = "( "
-
-        attr += " OR ".join(["{}.{} {} %s".format(a['letter'],  # not so pretty
-                                                  col,
-                                                  a['operator'])
-                             for col in a['columns']])
-        attr += " )"
+        attr = "( " + " OR ".join([f"{a['letter']}.{col} {a['operator']} %s" for col in a['columns']]) + " )"
         attr_string_list.append(attr)
     return " AND ".join(attr_string_list)
 

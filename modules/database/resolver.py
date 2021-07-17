@@ -111,10 +111,8 @@ def get_element_show_string(element_name, element_value):
 
 
 def query_find(element_name, attributes):
-    print('query_find', element_name, attributes)
     e = extract_element(element_name)
     table_name = e.get('table_name')
-    print('table_name', table_name)
     result_element = broker.query_find(table_name, attributes)
     result_element['element_name'] = element_name
     print('result_element', result_element)
